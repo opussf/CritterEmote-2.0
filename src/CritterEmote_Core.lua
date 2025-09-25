@@ -74,31 +74,20 @@ end
 
 function CritterEmote.GetTargetPetsOwner()
 	-- this is probably misnamed, should probably be IsPetOwnedByPlayer() and return truthy values.  Though, returning the name would be true.
-	print("GetTargetPetsOwner()")
+	-- print("GetTargetPetsOwner()")
 	if UnitExists("target") and not UnitIsPlayer("target") then
 		local creatureType = UnitCreatureType("target")
-		print("creatureType: "..creatureType.."==?"..CritterEmote.L["Wild Pet"])
+		-- print("creatureType: "..creatureType.."==?"..CritterEmote.L["Wild Pet"])
+		-- print(CritterEmote.L["Wild Pet"], CritterEmote.L["Non-combat Pet"])
 		if creatureType == CritterEmote.L["Wild Pet"] or creatureType == CritterEmote.L["Non-combat Pet"] then
 			local tooltipData = C_TooltipInfo.GetUnit("target")
 			if tooltipData and tooltipData.lines then
 				for _, line in ipairs(tooltipData.lines) do
 					if line.leftText then
-						-- print(line.leftText)
 						if string.find(line.leftText, CritterEmote.playerName) then
+							-- this keeps it simple as a find, not a match, and keeps the text returned as the playername from GetUnitName
 							return CritterEmote.playerName
 						end
-
-						-- local owner = string.match(line.leftText, CritterEmote.L["^(.+)'s Companion"])  -- this allows better
-						-- print("Owner: >"..(owner or "nil").."<")
-						-- print((owner or "nil").."==?"..CritterEmote.playerName)
-						-- if owner == CritterEmote.playerName then
-						-- 	return owner
-						-- end
-					-- if line.leftText and line.leftText:find("Companion", -9, true) then
-					-- 	local owner = string.match(line.leftText, "[^']+")
-					-- 	if owner == CritterEmote.playerName then
-					-- 		return owner
-					-- 	end
 					end
 				end
 			end
