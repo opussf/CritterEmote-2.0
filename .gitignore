@@ -24,3 +24,9 @@ Thumbs.db  # Windows thumbnail cache
 
 # Ignore GitHub Codespaces & editor-specific files
 .codespaces/
+
+# build results
+target
+
+# coverage files
+coverage.xml
