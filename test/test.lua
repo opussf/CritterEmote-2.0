@@ -5,7 +5,7 @@ require "wowTest"
 test.outFileName = "testOut.xml"
 test.coberturaFileName = "../coverage.xml"
 
-ParseTOC( "../CritterEmote.toc" )
+ParseTOC( "../src/CritterEmote.toc" )
 
 function test.before()
 	chatLog = {}
