@@ -94,11 +94,6 @@
 				<include name="*.txt"/>
 			</fileset>
 		</copy>
-		<copy   todir="${package.dir}/collections" filtering="false">
-			<fileset dir="collections">
-				<include name="*"/>
-			</fileset>
-		</copy>
 		<zip 	destfile="${target.dir}/${project.zip}"
 				basedir="${working.dir}"
 				includes="${ant.project.name}/**"/>
@@ -132,7 +127,7 @@
 				<include name="Readme.txt"/>
 			</fileset>
 		</copy>
-		<chmod perm="ugo+x" dir="${addon.dir}" includes="INEED_Export.lua" />
+		<chmod perm="ugo+x" dir="${addon.dir}" includes="${ant.project.name}_Export.lua" />
 		<echo>Deployed ${version.number} locally</echo>
 	</target>
 
@@ -157,7 +152,7 @@
 		</fail>
 	</target>
 
-	<target name="curse" depends="package" description="Copy files to the local curseforge path">
+	<target name="curse" depends="package" description="Package to curse.dir">
 		<property name="curse.dir" location="${ant.project.name}-cf"/>
 		<exec executable="git" dir="${curse.dir}" failifexecutionfails="true" errorproperty="">
 			<arg line="reset --hard HEAD" />
