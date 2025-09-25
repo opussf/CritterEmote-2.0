@@ -14,4 +14,8 @@ function test.after()
 	test.dump(chatLog)
 end
 
+function test.test_do_emote_no_target()
+
+end
+
 test.run()

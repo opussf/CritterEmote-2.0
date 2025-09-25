@@ -4,7 +4,142 @@ CritterEmote.ADDONNAME = C_AddOns.GetAddOnMetadata( CritterEmote_SLUG, "Title" )
 CritterEmote.VERSION   = C_AddOns.GetAddOnMetadata( CritterEmote_SLUG, "Version" )
 CritterEmote.AUTHOR    = C_AddOns.GetAddOnMetadata( CritterEmote_SLUG, "Author" )
 
+CritterEmote.Colors = {
+	print = "|cff00ff00",
+	reset = "|r",
+}
 
+function CritterEmote.Print(msg, showName)
+	-- print to the chat frame
+	-- set showName to false to suppress the addon name printing
+	if (showName == nil) or (showName) then
+		msg = CritterEmote.Colors.print..CritterEmote.ADDONNAME.."> "..CritterEmote.Colors.reset..msg
+	end
+	DEFAULT_CHAT_FRAME:AddMessage( msg )
+end
+function CritterEmote.OnLoad()
+	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
+	CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
+	CritterEmoteFrame:RegisterEvent("CHAT_MSG_TEXT_EMOTE")
+	CritterEmoteFrame:RegisterEvent("CHAT_MSG_EMOTE")
+
+	SLASH_CRITTEREMOTE1 = "/ce"
+	SlashCmdList["CRITTEREMOTE"] = CritterEmote.SlashHandler
+	CritterEmote.playerName = GetUnitName("player", false)
+end
+function CritterEmote.LOADING_SCREEN_DISABLED()
+end
+function CritterEmote.CHAT_MSG_TEXT_EMOTE( a, b, c, d )
+	print( "Chat_msg_TEXT_EMOTE" )
+	print(a)
+	print(b)
+	print(c)
+	print(d)
+end
+function CritterEmote.CHAT_MSG_EMOTE( a, b, c, d )
+	print( "Chat_msg_EMOTE" )
+	print(a)
+	print(b)
+	print(c)
+	print(d)
+end
+function CritterEmote.OnEmote(emote, target)
+	print("OnEmote")
+	print(emote)
+	if target and #target < 1 then
+		print("TARGET and #TARGET < 1")
+		print(type(target))
+		print(string.format(">%s<", target))
+		local petowner = CritterEmote.GetTargetPetsOwner()
+		print("Returned petowner: >"..petowner.."<")
+	end
+end
+function CritterEmote.OnUpdate()
+end
+
+
+-- --      For secure func hook on DoEmote()
+-- local function CritterEmote.OnEmote(emote, target)
+--   CritterEmote_printDebug("Emote detected: ".. emote)
+--   if target and #target < 1 then
+--     local petowner = CritterEmote_GetTargetPetsOwner()
+--     if petowner then
+--       CritterEmote_printDebug("\tFound petowner : " .. petowner);
+--       if(petowner == UnitName("player") ) then
+--         CritterEmote_doEmote(emote,true);
+--       end
+--     end
+--   end
+-- end
+
+function CritterEmote.GetTargetPetsOwner()
+	-- this is probably misnamed, should probably be IsPetOwnedByPlayer() and return truthy values.  Though, returning the name would be true.
+	print("GetTargetPetsOwner()")
+	if UnitExists("target") and not UnitIsPlayer("target") then
+		local creatureType = UnitCreatureType("target")
+		print("creatureType: "..creatureType.."==?"..CritterEmote.L["Wild Pet"])
+		if creatureType == CritterEmote.L["Wild Pet"] or creatureType == CritterEmote.L["Non-combat Pet"] then
+			local tooltipData = C_TooltipInfo.GetUnit("target")
+			if tooltipData and tooltipData.lines then
+				for _, line in ipairs(tooltipData.lines) do
+					if line.leftText then
+						-- print(line.leftText)
+						if string.find(line.leftText, CritterEmote.playerName) then
+							return CritterEmote.playerName
+						end
+
+						-- local owner = string.match(line.leftText, CritterEmote.L["^(.+)'s Companion"])  -- this allows better
+						-- print("Owner: >"..(owner or "nil").."<")
+						-- print((owner or "nil").."==?"..CritterEmote.playerName)
+						-- if owner == CritterEmote.playerName then
+						-- 	return owner
+						-- end
+					-- if line.leftText and line.leftText:find("Companion", -9, true) then
+					-- 	local owner = string.match(line.leftText, "[^']+")
+					-- 	if owner == CritterEmote.playerName then
+					-- 		return owner
+					-- 	end
+					end
+				end
+			end
+		end
+	end
+	-- returning nothing is the same as returning nil.
+end
+
+
+-- Steps_Frame:RegisterEvent( "" )
+
+
+--     --Main load
+-- function CritterEmote_OnLoad ()
+
+--   --Stop the random number generator from doing the same thing every time
+--   local tval = math.random();
+--   tval = random();
+
+--   --Secure hook functions
+--         hooksecurefunc("DoEmote", CritterEmote_OnEmote);
+
+--         CritterEmoteFrame:RegisterEvent("ADDON_LOADED");
+--         CritterEmoteFrame:RegisterEvent("PLAYER_LOGOUT");
+--         CritterEmoteFrame:RegisterEvent("CHAT_MSG_EMOTE");
+--         CritterEmoteFrame:RegisterEvent("UNIT_PET")
+--         CritterEmoteFrame:RegisterEvent("PLAYER_TARGET_CHANGED")
+
+
+
+--         --Define Slash Commands
+--         SLASH_CRITTEREMOTE1 = "/ce";
+
+
+
+--         SlashCmdList["CRITTEREMOTE"] = CritterEmote_SlashHandler;
+
+--         --Update timer
+--         CritterEmote_SetUpdateInterval(30, 400);
+--         CritterEmote_Welcome();
+-- end
 
 -- -- Load Libraries & Modules
 -- local Response = CritterEmote_Response_enUS
@@ -143,7 +278,7 @@ CritterEmote.AUTHOR    = C_AddOns.GetAddOnMetadata( CritterEmote_SLUG, "Author" 
 --     local response = GetEmoteResponse(emote, petName)
 --     or GetEmoteResponse(emote, CritterEmote_GetActivePet(1))
 --     or GetTargetEmote()
-    
+
 --     if response then
 --         local formattedResponse = string.format("%s %s", petName, response)
 --         SendChatMessage(formattedResponse, "EMOTE")
