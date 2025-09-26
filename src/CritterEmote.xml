@@ -2,8 +2,8 @@
   <Frame name="CritterEmoteFrame">
     <Scripts>
       <OnLoad>CritterEmote.OnLoad()</OnLoad>
-      <OnUpdate>CritterEmote.OnUpdate()</OnUpdate>
-      <OnEvent>CritterEmote[event]( ... )</OnEvent>
+      <OnUpdate>CritterEmote.OnUpdate(elapsed)</OnUpdate>
+      <OnEvent>CritterEmote[event](...)</OnEvent>
     </Scripts>
   </Frame>
 </Ui> 

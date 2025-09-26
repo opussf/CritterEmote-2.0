@@ -24,7 +24,11 @@ CritterEmote_Variables.Categories = {
   Special = true,
   PVP = true,
 }
-
+CritterEmote_Variables.enabled = true
+CritterEmote_Variables.randomEnabled = true
+CritterEmote_Variables.baseInterval = 300
+CritterEmote_Variables.minRange = 30
+CritterEmote_Variables.maxRange = 400
 CritterEmote_Variables.logLevel = 3 -- ERROR
 
 
@@ -43,41 +47,40 @@ function CritterEmote.Log(level, msg)
 end
 --Any formating functions for displaying the emote
 function CritterEmote.DisplayEmote(message)
-        if (string.sub(UnitName("player"), string.len(UnitName("player"))) == "s") then
-                nameAdd = ' ';
-        else
-                nameAdd = ': ';
-        end
-        CritterEmote_EmoteToSend = nameAdd  .. message;
+	CritterEmote.Log(CritterEmote.Info, "DisplayEmote("..message..")")
+	local nameAdd = string.sub(CritterEmote.playerName, -1) == "s" and ' ' or ': '
+	CritterEmote.emoteToSend = nameAdd..message
 end
 function CritterEmote.OnLoad()
 	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
 	CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
-	CritterEmoteFrame:RegisterEvent("CHAT_MSG_TEXT_EMOTE")
-	CritterEmoteFrame:RegisterEvent("CHAT_MSG_EMOTE")
+	-- CritterEmoteFrame:RegisterEvent("CHAT_MSG_TEXT_EMOTE")
+	-- CritterEmoteFrame:RegisterEvent("CHAT_MSG_EMOTE")
 
 	SLASH_CRITTEREMOTE1 = "/ce"
 	SlashCmdList["CRITTEREMOTE"] = CritterEmote.SlashHandler
 	CritterEmote.playerName = UnitName("player", false)
+	CritterEmote.lastUpdate = 0
+	CritterEmote.updateInterval = CritterEmote.CreateUpdateInterval()
 end
 function CritterEmote.LOADING_SCREEN_DISABLED()
 end
 function CritterEmote.CHAT_MSG_TEXT_EMOTE( a, b, c, d )
 	print( "Chat_msg_TEXT_EMOTE" )
-	print(a)
-	print(b)
-	print(c)
-	print(d)
+	-- print(a)
+	-- print(b)
+	-- print(c)
+	-- print(d)
 end
 function CritterEmote.CHAT_MSG_EMOTE( a, b, c, d )
 	print( "Chat_msg_EMOTE" )
-	print(a)
-	print(b)
-	print(c)
-	print(d)
+	-- print(a)
+	-- print(b)
+	-- print(c)
+	-- print(d)
 end
 function CritterEmote.OnEmote(emote, target)
-	CritterEmote.Log(CritterEmote.Info, "OnEmote( "..emote..", "..(target or "nil").." ("..(target and #target or "nil")..")")
+	CritterEmote.Log(CritterEmote.Info, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
 	if target and #target < 1 then
 		if CritterEmote.GetTargetPetsOwner() then
 			-- since this returns truthy on if the pet is the player's, no reason to store a value.
@@ -87,26 +90,43 @@ function CritterEmote.OnEmote(emote, target)
 		end
 	end
 end
-function CritterEmote.OnUpdate()
+function CritterEmote.OnUpdate(elapsed)
+	if (CritterEmote_Variables.enabled) then
+		if CritterEmote.emoteToSend then
+			CritterEmote.emoteTimer = CritterEmote.emoteTimer and CritterEmote.emoteTimer + elapsed or elapsed
+			if CritterEmote.emoteTimer > 0.5 then
+				SendChatMessage(CritterEmote.emoteToSend, "EMOTE")
+				CritterEmote.emoteToSend = nil
+				CritterEmote.emoteTimer = nil
+			end
+		end
+		if (CritterEmote_Variables.randomEnabled) then
+			if (CritterEmote.lastUpdate + CritterEmote.updateInterval < time() and
+					not UnitAffectingCombat("player") ) then
+				CritterEmote.Log(CritterEmote.Info, "Random intercal time elapsed.")
+				CritterEmote.DoCritterEmote()
+			end
+		end
+	end
 end
 
 function CritterEmote.GetTargetPetsOwner()
 	-- this is probably misnamed, should probably be IsPetOwnedByPlayer() and return truthy values.  Though, returning the name would be true.
-	print("GetTargetPetsOwner()")
+	CritterEmote.Log(CritterEmote.Info, "Call to GetTargetPetsOwner()")
 	if UnitExists("target") and not UnitIsPlayer("target") then
 		local creatureType = UnitCreatureType("target")
-		print("creatureType: "..creatureType.."==?"..CritterEmote.L["Wild Pet"])
-		print(CritterEmote.L["Wild Pet"], CritterEmote.L["Non-combat Pet"])
+		-- print("creatureType: "..creatureType.."==?"..CritterEmote.L["Wild Pet"])
+		-- print(CritterEmote.L["Wild Pet"], CritterEmote.L["Non-combat Pet"])
 		if creatureType == CritterEmote.L["Wild Pet"] or creatureType == CritterEmote.L["Non-combat Pet"] then
 			local tooltipData = C_TooltipInfo.GetUnit("target")
 			if tooltipData and tooltipData.lines then
 				for _, line in ipairs(tooltipData.lines) do
 					if line.leftText then
-						print(line.leftText, CritterEmote.playerName)
-						print(string.find(line.leftText, CritterEmote.playerName))
+						-- print(line.leftText, CritterEmote.playerName)
+						-- print(string.find(line.leftText, CritterEmote.playerName))
 						if string.find(line.leftText, CritterEmote.playerName) then
 							-- this keeps it simple as a find, not a match, and keeps the text returned as the playername from GetUnitName
-							print("Return: "..CritterEmote.playerName)
+							CritterEmote.Log(CritterEmote.Info, "Pet belongs to player.")
 							return CritterEmote.playerName
 						end
 					end
@@ -125,42 +145,9 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 	if isEmote then
 		msg = CritterEmote.GetEmoteMessage(msg, petName, customName)
 	end
-	if petName then
+	if msg and petName then
 		CritterEmote.DisplayEmote((customName or petName).." "..msg)
 	end
-
-
-        -- local emo=nil;
-        -- local petName = CritterEmote_GetActivePet(nil);
-        -- local customName = CritterEmote_GetActivePet(1);
-        -- --local tableRef = CritterEmote.ResponseDb[petName][WOW BattlePet API]
-        -- if(petName ~= nil) then
-        --         if( doemote ) then
-        --                 emo = CritterEmote_GetEmoteMessage(msg,petName,customName);
-        --                 if(emo) then
-        --                 		if(customName) then
-        --                 			CritterEmote_DisplayEmote(customName .. " " .. emo);
-        --                 		else
-        --                         	CritterEmote_DisplayEmote(petName .. " " .. emo);
-        --                         end
-        --                 --else
-        --                 --      CritterEmote_DisplayEmote(petName .. " responds to your " .. msg .. ".");
-        --                 end
-        --         else
-        --                 if(type(msg) == "string") then
-        --                 		if(customName) then
-        --                         	CritterEmote_DisplayEmote(customName .. " " .. msg);
-        --                         else
-        --                             CritterEmote_DisplayEmote(petName .. " " .. msg);
-        --                         end
-        --                 else
-        --                         --Catch all should really never be here.
-        --                         CritterEmote_DisplayEmote(petName .. " moons you.");
-        --                 end
-        --         end
-        -- else
-        --         CritterEmote_Message("You do not have an active critter out.");
-        -- end
 end
 function CritterEmote.GetActivePet()
 	-- returns pet name and custom name.  Custom Name is nil if not given.
@@ -193,124 +180,16 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
 	end
 end
 function CritterEmote.GetRandomTableEntry(myTable)
-	return(myTable[random(1, #myTable)]);
+	if myTable and #myTable>0 then
+		return(myTable[random(1, #myTable)])
+	end
+end
+function CritterEmote.CreateUpdateInterval()
+	return CritterEmote_Variables.baseInterval +
+			random(CritterEmote_Variables.minRange, CritterEmote_Variables.maxRange)
 end
 
 
---[[
-bpid=C_PetJournal.GetSummonedPetGUID();
-bpt={C_PetJournal.GetPetInfoByPetID(bpid)};
-print(string.format("%s is a %s(%s)", bpt[8],PET_TYPE_SUFFIX[bpt[10] ],C_PetJournal.GetPetInfoBySpeciesID(bpt[1])))
-
-]]
-
-
--- --Searches the emote table for an appropriate emote
--- --msg = predefined emote type
--- --petName = the pet you have out
--- function CritterEmote_GetEmoteMessage(msg,petName,customName)
---   emo=nil;
---   emoT=nil;
---   tmp_table=nil;
---   search_name=nil;
---   emoPT = CritterEmote_TableSearch(CritterEmote_Personalities, petName);
---   if(emoPT == nil) then
---     emoPT = " " ; -- HACK to make sure table search is ok.
---   end
---   if(customName == nil ) then
---   	customName = " " ;
---   end
---   --See if pet exists in table
---   CritterEmote_printDebug("Call to GetEmoteMessage");
---   CritterEmote_printDebug(" Getting Emote Table for " .. msg);
---   emoT = CritterEmote_TableSearch(CritterEmote_ResponseDb, msg);
---   --Found emote table
---   if(emoT) then
---     CritterEmote_printDebug("  Found the table" .. msg);
---     emo=CritterEmote_TableSearch(emoT, customName)
---     if( emo ) then
---    		CritterEmote_printDebug("  Found custom name " .. customName);
---     	search_name=customName;
---     else
--- 	emo=CritterEmote_TableSearch(emoT, petName)
--- 	if( emo ) then
--- 		CritterEmote_printDebug("  Found pet name " .. petName);
--- 		search_name=petName;
--- 	else
--- 	emo=CritterEmote_TableSearch(emoT, emoPT)
--- 	if( emo ) then
--- 		CritterEmote_printDebug("  Found pet type " .. emoPT);
--- 		search_name=emoPT;
--- 	else
--- 	emo=CritterEmote_TableSearch(emoT, "default")
--- 	if( emo ) then
--- 		CritterEmote_printDebug("  Found default ");
--- 		search_name="default";
--- 	end
--- 	end
--- 	end
---     end
---     if(emo) then --Found the exact pet
---       --CritterEmote_printDebug("  Found pet: " .. petName);
---       for k, v in pairs(CritterEmote_Cats) do
---         if(v==true) then
---           CritterEmote_printDebug("    Searching for " .. k);
---           tmp_table = CritterEmote_TableSearch(emoT, search_name .. "_" .. k)
---           if(type(tmp_table) == "table" )  then
---             CritterEmote_printDebug("    Found " .. k);
---             emo = CE_array_concat(emo, tmp_table);
---           end
---         end
---       end
---       if( type(emo) == "table" ) then
---         CritterEmote_printDebug("Returning random entry for " .. search_name);
---         return CritterEmote_GetRandomTableEntry(emo);
---       end
---     end
---     CritterEmote_printDebug("Could not find table entry for ".. msg);
--- 	return nil;
---   end --ifemoT
---   CritterEmote_printDebug("Could not find table for ".. msg);
---   return nil;
--- end
-
-
-
-----------------------------------------------------------
-
-
--- Steps_Frame:RegisterEvent( "" )
-
-
---     --Main load
--- function CritterEmote_OnLoad ()
-
---   --Stop the random number generator from doing the same thing every time
---   local tval = math.random();
---   tval = random();
-
---   --Secure hook functions
---         hooksecurefunc("DoEmote", CritterEmote_OnEmote);
-
---         CritterEmoteFrame:RegisterEvent("ADDON_LOADED");
---         CritterEmoteFrame:RegisterEvent("PLAYER_LOGOUT");
---         CritterEmoteFrame:RegisterEvent("CHAT_MSG_EMOTE");
---         CritterEmoteFrame:RegisterEvent("UNIT_PET")
---         CritterEmoteFrame:RegisterEvent("PLAYER_TARGET_CHANGED")
-
-
-
---         --Define Slash Commands
---         SLASH_CRITTEREMOTE1 = "/ce";
-
-
-
---         SlashCmdList["CRITTEREMOTE"] = CritterEmote_SlashHandler;
-
---         --Update timer
---         CritterEmote_SetUpdateInterval(30, 400);
---         CritterEmote_Welcome();
--- end
 
 -- -- Load Libraries & Modules
 -- local Response = CritterEmote_Response_enUS
@@ -325,33 +204,6 @@ print(string.format("%s is a %s(%s)", bpt[8],PET_TYPE_SUFFIX[bpt[10] ],C_PetJour
 
 -- print("Debug: Response table:", Response)
 
--- -- Function to Handle Events
--- function CritterEmote_OnEvent(self, event, ...)
---     if event == "ADDON_LOADED" then
---         local addonName = ...
---         if addonName == "CritterEmote" then
---             print("|cff00ff00[CritterEmote]|r Initialized!")
---         end
---     elseif event == "PLAYER_LOGIN" then
---         print("|cff00ff00[CritterEmote]|r Ready!")
---     end
--- end
-
--- -- Function to Initialize the Main Addon Frame
--- function CritterEmote_OnLoad(self)
---     self:RegisterEvent("ADDON_LOADED")
---     self:RegisterEvent("PLAYER_LOGIN")
---     print("|cff00ff00[CritterEmote]|r Add-on Loaded Successfully!")
--- end
-
--- -- Function to Handle the Tooltip Frame
--- function CritterEmoteScanTooltip_OnLoad(self)
---     if self and self.SetOwner then
---         self:SetOwner(UIParent, "ANCHOR_NONE")
---     else
---         print("|cffff0000[CritterEmote]|r Warning: Tooltip frame failed to initialize.")
---     end
--- end
 
 -- -- Register Frame for Chat Events
 -- local eventFrame = CreateFrame("Frame")
