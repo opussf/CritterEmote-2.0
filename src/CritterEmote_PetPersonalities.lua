@@ -1,4 +1,4 @@
-CritterEmote_Personalities = {
+CritterEmote.Personalities = {
 ["Abyssal Eel"] = "aquatic",
 ["Abyssal Slitherling"] = "aquatic",
 ["Abyssius"] = "elemental",

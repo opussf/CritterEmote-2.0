@@ -16,6 +16,15 @@ CritterEmote.LogNames = { "Info", "Warn", "Error" }
 CritterEmote_Variables = {}
 CritterEmote_CharacterVariables = {}
 
+CritterEmote_Variables.Categories = {
+  Normal = true,
+  Silly = true,
+  Song = true,
+  Locations = true,
+  Special = true,
+  PVP = true,
+}
+
 CritterEmote_Variables.logLevel = 3 -- ERROR
 
 
@@ -31,6 +40,15 @@ function CritterEmote.Log(level, msg)
 	if level <= CritterEmote_Variables.logLevel then
 		CritterEmote.Print(CritterEmote.LogNames[level]..": "..msg)
 	end
+end
+--Any formating functions for displaying the emote
+function CritterEmote.DisplayEmote(message)
+        if (string.sub(UnitName("player"), string.len(UnitName("player"))) == "s") then
+                nameAdd = ' ';
+        else
+                nameAdd = ': ';
+        end
+        CritterEmote_EmoteToSend = nameAdd  .. message;
 end
 function CritterEmote.OnLoad()
 	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
@@ -102,15 +120,13 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- isEmote is a flag to say that this is an emote.
 	-- false means that msg is text to use.
 	CritterEmote.Log(CritterEmote.Info, "Call to DoCritterEmote( "..msg..", "..(doemote and "True" or "False")..")")
-	local emoteStr = nil
 	local petName, customName = CritterEmote.GetActivePet()
 	print(petName, customName)
+	if isEmote then
+		msg = CritterEmote.GetEmoteMessage(msg, petName, customName)
+	end
 	if petName then
-		if isEmote then
-
-
-		end
-	else
+		CritterEmote.DisplayEmote((customName or petName).." "..msg)
 	end
 
 
@@ -155,35 +171,30 @@ function CritterEmote.GetActivePet()
 		return petInfo[8], petInfo[2]
 	end
 end
--- --Returns the name of the active pet one has out
--- function CritterEmote_GetActivePet(custom)
---   CritterEmote_printDebug("Call to CritterEmote_GetActivePet");
---   local petid
---     petid = C_PetJournal.GetSummonedPetGUID();
---     --CritterEmote_printDebug("Call to GetSummonedPetGUID");
---     if(petid == nil) then
---         CritterEmote_printDebug("PetID is nil");
--- 		return nil
--- 	end
--- 	CritterEmote_printDebug("PetID is " .. petid);
---     local _, customName, petName
---     _, customName, _, _, _, _, _, petName = C_PetJournal.GetPetInfoByPetID(petid);
---     --speciesID, customName, level, xp, maxXp, displayID, isFavorite, name, icon, petType, creatureID, sourceText, description, isWild, canBattle, tradable, unique, obtainable = C_PetJournal.GetPetInfoByPetID("petID");
---     --CritterEmote_printDebug("PetName " .. petName .. " Custom Name " .. customName);
--- 	--CritterEmote_printDebug("Found petname " .. customName or petName);
--- 	if(custom) then
--- 		if( customName )then
--- 			CritterEmote_printDebug("GetActivePet returning " .. customName);
--- 		return customName;
--- 		else
--- 			return nil
--- 		end
--- 	end
--- 				CritterEmote_printDebug("GetActivePet returning " .. petName);
--- 	return petName;
---     --return customName or petName
+function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
+	CritterEmote.Log(CritterEmote.Info, "Call to GetEmoteMessage("..emoteIn..", "..petName..", "..(customName or "nil")..")")
 
--- end
+	local petPersonality = CritterEmote.Personalities[petName]  -- @TODO: Should this also handle 'customName'?  What if a named pet has a different personality?
+	print(petPersonality)
+	-- get the table
+	local emoteList = {}
+	local emoteTable = CritterEmote.EmoteResponses[emoteIn]
+	if emoteTable then
+		emoteList = emoteTable[customName] or
+		            emoteTable[petName] or
+		            emoteTable[petPersonality] or
+		            emoteTable["default"]
+		-- for cat, enabled in pairs(CritterEmote_Variables.Categories) do
+		-- 	-- this seems the wrong place / time to do this?
+		--  -- should this be done if no entries are found?
+		-- 	search_name = petPersonality_silly
+		-- end
+		return CritterEmote.GetRandomTableEntry(emoteList)
+	end
+end
+function CritterEmote.GetRandomTableEntry(myTable)
+	return(myTable[random(1, #myTable)]);
+end
 
 
 --[[
@@ -192,6 +203,80 @@ bpt={C_PetJournal.GetPetInfoByPetID(bpid)};
 print(string.format("%s is a %s(%s)", bpt[8],PET_TYPE_SUFFIX[bpt[10] ],C_PetJournal.GetPetInfoBySpeciesID(bpt[1])))
 
 ]]
+
+
+-- --Searches the emote table for an appropriate emote
+-- --msg = predefined emote type
+-- --petName = the pet you have out
+-- function CritterEmote_GetEmoteMessage(msg,petName,customName)
+--   emo=nil;
+--   emoT=nil;
+--   tmp_table=nil;
+--   search_name=nil;
+--   emoPT = CritterEmote_TableSearch(CritterEmote_Personalities, petName);
+--   if(emoPT == nil) then
+--     emoPT = " " ; -- HACK to make sure table search is ok.
+--   end
+--   if(customName == nil ) then
+--   	customName = " " ;
+--   end
+--   --See if pet exists in table
+--   CritterEmote_printDebug("Call to GetEmoteMessage");
+--   CritterEmote_printDebug(" Getting Emote Table for " .. msg);
+--   emoT = CritterEmote_TableSearch(CritterEmote_ResponseDb, msg);
+--   --Found emote table
+--   if(emoT) then
+--     CritterEmote_printDebug("  Found the table" .. msg);
+--     emo=CritterEmote_TableSearch(emoT, customName)
+--     if( emo ) then
+--    		CritterEmote_printDebug("  Found custom name " .. customName);
+--     	search_name=customName;
+--     else
+-- 	emo=CritterEmote_TableSearch(emoT, petName)
+-- 	if( emo ) then
+-- 		CritterEmote_printDebug("  Found pet name " .. petName);
+-- 		search_name=petName;
+-- 	else
+-- 	emo=CritterEmote_TableSearch(emoT, emoPT)
+-- 	if( emo ) then
+-- 		CritterEmote_printDebug("  Found pet type " .. emoPT);
+-- 		search_name=emoPT;
+-- 	else
+-- 	emo=CritterEmote_TableSearch(emoT, "default")
+-- 	if( emo ) then
+-- 		CritterEmote_printDebug("  Found default ");
+-- 		search_name="default";
+-- 	end
+-- 	end
+-- 	end
+--     end
+--     if(emo) then --Found the exact pet
+--       --CritterEmote_printDebug("  Found pet: " .. petName);
+--       for k, v in pairs(CritterEmote_Cats) do
+--         if(v==true) then
+--           CritterEmote_printDebug("    Searching for " .. k);
+--           tmp_table = CritterEmote_TableSearch(emoT, search_name .. "_" .. k)
+--           if(type(tmp_table) == "table" )  then
+--             CritterEmote_printDebug("    Found " .. k);
+--             emo = CE_array_concat(emo, tmp_table);
+--           end
+--         end
+--       end
+--       if( type(emo) == "table" ) then
+--         CritterEmote_printDebug("Returning random entry for " .. search_name);
+--         return CritterEmote_GetRandomTableEntry(emo);
+--       end
+--     end
+--     CritterEmote_printDebug("Could not find table entry for ".. msg);
+-- 	return nil;
+--   end --ifemoT
+--   CritterEmote_printDebug("Could not find table for ".. msg);
+--   return nil;
+-- end
+
+
+
+----------------------------------------------------------
 
 
 -- Steps_Frame:RegisterEvent( "" )
