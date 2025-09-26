@@ -8,6 +8,16 @@ CritterEmote.Colors = {
 	print = "|cff00ff00",
 	reset = "|r",
 }
+CritterEmote.Info  = 1
+CritterEmote.Warn  = 2
+CritterEmote.Error = 3
+CritterEmote.LogNames = { "Info", "Warn", "Error" }
+
+CritterEmote_Variables = {}
+CritterEmote_CharacterVariables = {}
+
+CritterEmote_Variables.logLevel = 3 -- ERROR
+
 
 function CritterEmote.Print(msg, showName)
 	-- print to the chat frame
@@ -17,6 +27,11 @@ function CritterEmote.Print(msg, showName)
 	end
 	DEFAULT_CHAT_FRAME:AddMessage( msg )
 end
+function CritterEmote.Log(level, msg)
+	if level <= CritterEmote_Variables.logLevel then
+		CritterEmote.Print(CritterEmote.LogNames[level]..": "..msg)
+	end
+end
 function CritterEmote.OnLoad()
 	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
 	CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
@@ -25,7 +40,7 @@ function CritterEmote.OnLoad()
 
 	SLASH_CRITTEREMOTE1 = "/ce"
 	SlashCmdList["CRITTEREMOTE"] = CritterEmote.SlashHandler
-	CritterEmote.playerName = GetUnitName("player", false)
+	CritterEmote.playerName = UnitName("player", false)
 end
 function CritterEmote.LOADING_SCREEN_DISABLED()
 end
@@ -44,48 +59,36 @@ function CritterEmote.CHAT_MSG_EMOTE( a, b, c, d )
 	print(d)
 end
 function CritterEmote.OnEmote(emote, target)
-	print("OnEmote")
-	print(emote)
+	CritterEmote.Log(CritterEmote.Info, "OnEmote( "..emote..", "..(target or "nil").." ("..(target and #target or "nil")..")")
 	if target and #target < 1 then
-		print("TARGET and #TARGET < 1")
-		print(type(target))
-		print(string.format(">%s<", target))
-		local petowner = CritterEmote.GetTargetPetsOwner()
-		print("Returned petowner: >"..petowner.."<")
+		if CritterEmote.GetTargetPetsOwner() then
+			-- since this returns truthy on if the pet is the player's, no reason to store a value.
+			-- debug, if desired, can use CritterEmote.playerName
+			print("Pet belongs to you")
+			CritterEmote.DoCritterEmote(emote, true)
+		end
 	end
 end
 function CritterEmote.OnUpdate()
 end
 
-
--- --      For secure func hook on DoEmote()
--- local function CritterEmote.OnEmote(emote, target)
---   CritterEmote_printDebug("Emote detected: ".. emote)
---   if target and #target < 1 then
---     local petowner = CritterEmote_GetTargetPetsOwner()
---     if petowner then
---       CritterEmote_printDebug("\tFound petowner : " .. petowner);
---       if(petowner == UnitName("player") ) then
---         CritterEmote_doEmote(emote,true);
---       end
---     end
---   end
--- end
-
 function CritterEmote.GetTargetPetsOwner()
 	-- this is probably misnamed, should probably be IsPetOwnedByPlayer() and return truthy values.  Though, returning the name would be true.
-	-- print("GetTargetPetsOwner()")
+	print("GetTargetPetsOwner()")
 	if UnitExists("target") and not UnitIsPlayer("target") then
 		local creatureType = UnitCreatureType("target")
-		-- print("creatureType: "..creatureType.."==?"..CritterEmote.L["Wild Pet"])
-		-- print(CritterEmote.L["Wild Pet"], CritterEmote.L["Non-combat Pet"])
+		print("creatureType: "..creatureType.."==?"..CritterEmote.L["Wild Pet"])
+		print(CritterEmote.L["Wild Pet"], CritterEmote.L["Non-combat Pet"])
 		if creatureType == CritterEmote.L["Wild Pet"] or creatureType == CritterEmote.L["Non-combat Pet"] then
 			local tooltipData = C_TooltipInfo.GetUnit("target")
 			if tooltipData and tooltipData.lines then
 				for _, line in ipairs(tooltipData.lines) do
 					if line.leftText then
+						print(line.leftText, CritterEmote.playerName)
+						print(string.find(line.leftText, CritterEmote.playerName))
 						if string.find(line.leftText, CritterEmote.playerName) then
 							-- this keeps it simple as a find, not a match, and keeps the text returned as the playername from GetUnitName
+							print("Return: "..CritterEmote.playerName)
 							return CritterEmote.playerName
 						end
 					end
@@ -95,6 +98,100 @@ function CritterEmote.GetTargetPetsOwner()
 	end
 	-- returning nothing is the same as returning nil.
 end
+function CritterEmote.DoCritterEmote(msg, isEmote)
+	-- isEmote is a flag to say that this is an emote.
+	-- false means that msg is text to use.
+	CritterEmote.Log(CritterEmote.Info, "Call to DoCritterEmote( "..msg..", "..(doemote and "True" or "False")..")")
+	local emoteStr = nil
+	local petName, customName = CritterEmote.GetActivePet()
+	print(petName, customName)
+	if petName then
+		if isEmote then
+
+
+		end
+	else
+	end
+
+
+        -- local emo=nil;
+        -- local petName = CritterEmote_GetActivePet(nil);
+        -- local customName = CritterEmote_GetActivePet(1);
+        -- --local tableRef = CritterEmote.ResponseDb[petName][WOW BattlePet API]
+        -- if(petName ~= nil) then
+        --         if( doemote ) then
+        --                 emo = CritterEmote_GetEmoteMessage(msg,petName,customName);
+        --                 if(emo) then
+        --                 		if(customName) then
+        --                 			CritterEmote_DisplayEmote(customName .. " " .. emo);
+        --                 		else
+        --                         	CritterEmote_DisplayEmote(petName .. " " .. emo);
+        --                         end
+        --                 --else
+        --                 --      CritterEmote_DisplayEmote(petName .. " responds to your " .. msg .. ".");
+        --                 end
+        --         else
+        --                 if(type(msg) == "string") then
+        --                 		if(customName) then
+        --                         	CritterEmote_DisplayEmote(customName .. " " .. msg);
+        --                         else
+        --                             CritterEmote_DisplayEmote(petName .. " " .. msg);
+        --                         end
+        --                 else
+        --                         --Catch all should really never be here.
+        --                         CritterEmote_DisplayEmote(petName .. " moons you.");
+        --                 end
+        --         end
+        -- else
+        --         CritterEmote_Message("You do not have an active critter out.");
+        -- end
+end
+function CritterEmote.GetActivePet()
+	-- returns pet name and custom name.  Custom Name is nil if not given.
+	CritterEmote.Log(CritterEmote.Info, "Call to GetActivePet()")
+	local petid = C_PetJournal.GetSummonedPetGUID()
+	if petid then
+		local petInfo = {C_PetJournal.GetPetInfoByPetID(petid)} -- {} wraps the multiple return values into a table.
+		return petInfo[8], petInfo[2]
+	end
+end
+-- --Returns the name of the active pet one has out
+-- function CritterEmote_GetActivePet(custom)
+--   CritterEmote_printDebug("Call to CritterEmote_GetActivePet");
+--   local petid
+--     petid = C_PetJournal.GetSummonedPetGUID();
+--     --CritterEmote_printDebug("Call to GetSummonedPetGUID");
+--     if(petid == nil) then
+--         CritterEmote_printDebug("PetID is nil");
+-- 		return nil
+-- 	end
+-- 	CritterEmote_printDebug("PetID is " .. petid);
+--     local _, customName, petName
+--     _, customName, _, _, _, _, _, petName = C_PetJournal.GetPetInfoByPetID(petid);
+--     --speciesID, customName, level, xp, maxXp, displayID, isFavorite, name, icon, petType, creatureID, sourceText, description, isWild, canBattle, tradable, unique, obtainable = C_PetJournal.GetPetInfoByPetID("petID");
+--     --CritterEmote_printDebug("PetName " .. petName .. " Custom Name " .. customName);
+-- 	--CritterEmote_printDebug("Found petname " .. customName or petName);
+-- 	if(custom) then
+-- 		if( customName )then
+-- 			CritterEmote_printDebug("GetActivePet returning " .. customName);
+-- 		return customName;
+-- 		else
+-- 			return nil
+-- 		end
+-- 	end
+-- 				CritterEmote_printDebug("GetActivePet returning " .. petName);
+-- 	return petName;
+--     --return customName or petName
+
+-- end
+
+
+--[[
+bpid=C_PetJournal.GetSummonedPetGUID();
+bpt={C_PetJournal.GetPetInfoByPetID(bpid)};
+print(string.format("%s is a %s(%s)", bpt[8],PET_TYPE_SUFFIX[bpt[10] ],C_PetJournal.GetPetInfoBySpeciesID(bpt[1])))
+
+]]
 
 
 -- Steps_Frame:RegisterEvent( "" )

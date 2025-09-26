@@ -1,5 +1,5 @@
 ## Interface: @INTERFACE@
-## Title: Critter Emote 2.0
+## Title: Critter Emote
 ## Author: Acidfrost59, Fysker, ChatGPT, Grok3
 ## Version: @VERSION@
 ## email: PBCritterEmote@gmail.com
@@ -15,5 +15,6 @@ localization_ru.lua
 
 ## Core Functionality
 CritterEmote_Core.lua
+CritterEmote_PetPersonalities.lua
 CritterEmote.xml
 
