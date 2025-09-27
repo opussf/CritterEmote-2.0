@@ -134,9 +134,7 @@ CritterEmote.EmoteResponses = {
 		["Deathy"] = { "hops towards you.", },
 		["Gregarious Grell"] = { "says, \"Alright, I'm coming.\"", },
 		["Lil' Deathwing"] = { "flies closer.", },
-		["Lil' K.T."] = {
-			"stares you down disdainfully.",
-		},
+		["Lil' K.T."] = { "stares you down disdainfully.", },
 	},
 	BEG = {
 		default = nil,
@@ -161,7 +159,7 @@ CritterEmote.EmoteResponses = {
 		["Lil' Deathwing"] = { "shoots a fireball at your feet while telling you to dance!", },
 		["Lil' K.T."] = { "sends undead minions to eat your brains. \"Brains!\"", },
 		["Lil' Ragnaros"] = { "laughs wickedly while telling you that 3 of your teeth just melted.", },
-		},
+	},
 	BLAME = {
 		default = { "cries.", },
 		cat = { "doesn't seem to care and strolls away, tail raised and swaying mockingly.", },
@@ -236,35 +234,17 @@ CritterEmote.EmoteResponses = {
 		["Lil' Ragnaros"] = { "praises you for acknowledging %t's superiority.", },
 	},
 	BRANDISH = {
-		default = {
-			"watches you guardedly.",
-		},
-	  ooze = {
-			"brandishes a femur bone at you.",
-			},
+		default = { "watches you guardedly.", },
+		ooze = { "brandishes a femur bone at you.", },
 	},
 	BREATH = {
-		default = {
-			"takes a deep breath.",
-		},
-		mech = {
-			"starts to emanate smoke. Oh no! It's on fire!",
-			},
-		["Onyxian Whelpling"] = {
-			"summons more whelps!",
-		},
-		["Deathy"] = {
-	   "breathes out a fireball!",
-	  },
-		["Lil' Deathwing"] = {
-	   "breathes out a giant flame!",
-		 },
-		  ["Lil' K.T."] = {
-				"can't remember the last time he took a breath.",
-				},
-		["Lil' Ragnaros"] = {
-				"blows out some smoke.",
-				},
+		default = { "takes a deep breath.", },
+		mech = { "starts to emanate smoke. Oh no! It's on fire!", },
+		["Onyxian Whelpling"] = { "summons more whelps!", },
+		["Deathy"] = { "breathes out a fireball!", },
+		["Lil' Deathwing"] = { "breathes out a giant flame!", },
+		["Lil' K.T."] = { "can't remember the last time he took a breath.", },
+		["Lil' Ragnaros"] = { "blows out some smoke.", },
 	},
 	BURP = {
 		default = {
@@ -2055,27 +2035,13 @@ CritterEmote.EmoteResponses = {
 				},
 	},
 	SING = {
-		default = {
-			"sings with you.",
-		},
-		cat = {
-			"sings, \"I like tuna, I like chicken, I like liver, meow meow meow meow, meow meow meow meow.\"",
-		},
-		snake = {
-			"sings, \"I want you to see your body move like a snake, yeah.\"",
-		},
-		reptile = {
-		"raises its head and sways side to side to the rhythm.",
-		},
-		inanimate = {
-			"is unaffected.",
-			},
-		ooze = {
-			"responds positively, bouncing up and down to the rhythm.",
-			},
-		dragon = {
-			"sings, \"Puff the Magic Dragon lived by the sea.\"",
-		},
+		default = { "sings with you.", },
+		cat = { "sings, \"I like tuna, I like chicken, I like liver, meow meow meow meow, meow meow meow meow.\"", },
+		snake = { "sings, \"I want you to see your body move like a snake, yeah.\"", },
+		reptile = { "raises its head and sways side to side to the rhythm.", },
+		inanimate = { "is unaffected.", },
+		ooze = { "responds positively, bouncing up and down to the rhythm.",	},
+		dragon = { "sings, \"Puff the Magic Dragon lived by the sea.\"", },
 		frog = {
 			"sings, \"It\'s not that easy being green, having to spend each day the color of the leaves, when I think it could be nicer being red, or yellow, or gold or something.\"",
 		},
@@ -2096,15 +2062,10 @@ CritterEmote.EmoteResponses = {
 		 },
 		["Curious Oracle Hatchling"] = {
 			"sings, \"Sunny day sweepin' the clouds away, on my way to where the air is sweet; can you tell me how to get, how to get to Seasame Street?\"",
-				 },
-		["Curious Wolvar Pup"] = {  "sings, \"Do-do-do-do-do Dora! Do-do-do-do-do Dora! Dora Dora Dora the explorer! Boots, the super cool explora, Dora.\"",
-			 },
-		["Deathy"] = {
-				"sings, \"Stacy\'s mom has got it goin' on, she's all I want and I\'ve waited for so looong.\"",
-			 },
-		["Elekk Plushie"] = {
-				"sings, \"Sunny day sweepin' the clouds away, on my way to where the air is sweet; can you tell me how to get, how to get to Seasame Street?\"",
-					 },
+		},
+		["Curious Wolvar Pup"] = {  "sings, \"Do-do-do-do-do Dora! Do-do-do-do-do Dora! Dora Dora Dora the explorer! Boots, the super cool explora, Dora.\"", },
+		["Deathy"] = { "sings, \"Stacy\'s mom has got it goin' on, she's all I want and I\'ve waited for so looong.\"", },
+		["Elekk Plushie"] = { "sings, \"Sunny day sweepin' the clouds away, on my way to where the air is sweet; can you tell me how to get, how to get to Seasame Street?\"", },
 		["Ethereal Soul-Trader"] = {
 			"sings, \"I\'ve got a lovely bunch of coconuts. There they are standing in a row. Big ones, small ones, some as big as your head!\"",
 		},
@@ -2505,9 +2466,7 @@ CritterEmote.EmoteResponses = {
 		default = nil,
 	},
 	WAVE = {
-		default = {
-			"waves back.",
-		},
+		default = { "waves back.", },
 		bird = {  "nods at you.", },
 		cat = {
 			"snuggles your leg.",
@@ -2519,13 +2478,9 @@ CritterEmote.EmoteResponses = {
 			"wags tail.",
 			"runs in circles.",
 		},
-		inanimate = {
-			"is inanimate but dreams of waving back.",
-		},
+		inanimate = { "is inanimate but dreams of waving back.", },
 		spider = { "considers which leg to wave back with.", },
-	  ["Lil' K.T."] = {
-			"mocks your foolishness.",
-			},
+		["Lil' K.T."] = { "mocks your foolishness.", },
 	},
 	WELCOME = {
 		default = {
@@ -2549,28 +2504,19 @@ CritterEmote.EmoteResponses = {
 	},
 	WHISTLE = {
 		default = nil,
-	  ["Lil' K.T."] = {
-			 "was rated Hottest Lich of 2009.",
-			 },
+		["Lil' K.T."] = { "was rated Hottest Lich of 2009.", },
 	},
 	WINK = {
 		default = nil,
 	},
 	WORK = {
-		default = {
-			"appreciates the help.",
-		},
-		evil = {
-			"laughs diabolically. Now its evil plans will be set more quickly in motion.",
-		},
-		inanimate = {
-			"works with you, synergy!",
-			},
-		["Lil' K.T."] = {
-			"reminds you that you work for him, not with him.",
-			},
+		default = { "appreciates the help.", },
+		evil = { "laughs diabolically. Now its evil plans will be set more quickly in motion.", },
+		inanimate = { "works with you, synergy!", },
+		cat = { "settles down to watch you." },
+		["Lil' K.T."] = { "reminds you that you work for him, not with him.", },
 	},
 	YAWN = {
-		default = nil,
-		},
+		default = { "tries to resist for as long as possible, gives in with a large yawn", },
 	}
+}

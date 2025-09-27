@@ -85,7 +85,7 @@ function CritterEmote.OnEmote(emote, target)
 		if CritterEmote.GetTargetPetsOwner() then
 			-- since this returns truthy on if the pet is the player's, no reason to store a value.
 			-- debug, if desired, can use CritterEmote.playerName
-			print("Pet belongs to you")
+			CritterEmote.Log(CritterEmote.Info, "Trigger an emote response.")
 			CritterEmote.DoCritterEmote(emote, true)
 		end
 	end
@@ -133,6 +133,8 @@ function CritterEmote.GetTargetPetsOwner()
 				end
 			end
 		end
+	else
+		CritterEmote.Log(CritterEmote.Info, "Nothing is targeted, or is targeting a player.")
 	end
 	-- returning nothing is the same as returning nil.
 end
@@ -141,7 +143,7 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- false means that msg is text to use.
 	CritterEmote.Log(CritterEmote.Info, "Call to DoCritterEmote( "..msg..", "..(doemote and "True" or "False")..")")
 	local petName, customName = CritterEmote.GetActivePet()
-	print(petName, customName)
+	-- print(petName, customName)
 	if isEmote then
 		msg = CritterEmote.GetEmoteMessage(msg, petName, customName)
 	end
