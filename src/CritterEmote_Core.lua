@@ -54,8 +54,6 @@ end
 function CritterEmote.OnLoad()
 	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
 	CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
-	-- CritterEmoteFrame:RegisterEvent("CHAT_MSG_TEXT_EMOTE")
-	-- CritterEmoteFrame:RegisterEvent("CHAT_MSG_EMOTE")
 
 	SLASH_CRITTEREMOTE1 = "/ce"
 	SlashCmdList["CRITTEREMOTE"] = CritterEmote.SlashHandler
@@ -64,20 +62,6 @@ function CritterEmote.OnLoad()
 	CritterEmote.updateInterval = CritterEmote.CreateUpdateInterval()
 end
 function CritterEmote.LOADING_SCREEN_DISABLED()
-end
-function CritterEmote.CHAT_MSG_TEXT_EMOTE( a, b, c, d )
-	print( "Chat_msg_TEXT_EMOTE" )
-	-- print(a)
-	-- print(b)
-	-- print(c)
-	-- print(d)
-end
-function CritterEmote.CHAT_MSG_EMOTE( a, b, c, d )
-	print( "Chat_msg_EMOTE" )
-	-- print(a)
-	-- print(b)
-	-- print(c)
-	-- print(d)
 end
 function CritterEmote.OnEmote(emote, target)
 	CritterEmote.Log(CritterEmote.Info, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
