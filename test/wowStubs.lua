@@ -2299,6 +2299,10 @@ C_PetJournal.data = {
 function C_PetJournal.GetSummonedPetGUID()
 	return C_PetJournal.data.summoned
 end
+function C_PetJournal.GetPetInfoByPetID( petID )
+	-- @TODO: Look this up
+	return "","CustomPetName",0,0,0,0,0,"PetName"
+end
 
 
 -- A SAX parser takes a content handler, which provides these methods:

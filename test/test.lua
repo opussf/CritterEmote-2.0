@@ -42,7 +42,7 @@ function test.test_do_emote_target_critter()
 	}
 	CritterEmote.OnEmote("SING", "")
 	print( CritterEmote.emoteToSend )
-	fail()
+	assertEquals( ": CustomPetName sings with you.", CritterEmote.emoteToSend )
 end
 
 

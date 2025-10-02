@@ -31,7 +31,6 @@ CritterEmote_Variables.minRange = 30
 CritterEmote_Variables.maxRange = 400
 CritterEmote_Variables.logLevel = 3 -- ERROR
 
-
 function CritterEmote.Print(msg, showName)
 	-- print to the chat frame
 	-- set showName to false to suppress the addon name printing
@@ -87,13 +86,14 @@ function CritterEmote.OnUpdate(elapsed)
 		if (CritterEmote_Variables.randomEnabled) then
 			if (CritterEmote.lastUpdate + CritterEmote.updateInterval < time() and
 					not UnitAffectingCombat("player") ) then
-				CritterEmote.Log(CritterEmote.Info, "Random intercal time elapsed.")
+				CritterEmote.Log(CritterEmote.Info, "Random interval time elapsed.")
+				local petName = CritterEmote.GetActivePet()
+
 				CritterEmote.DoCritterEmote()
 			end
 		end
 	end
 end
-
 function CritterEmote.GetTargetPetsOwner()
 	-- this is probably misnamed, should probably be IsPetOwnedByPlayer() and return truthy values.  Though, returning the name would be true.
 	CritterEmote.Log(CritterEmote.Info, "Call to GetTargetPetsOwner()")
@@ -144,11 +144,14 @@ function CritterEmote.GetActivePet()
 		return petInfo[8], petInfo[2]
 	end
 end
+function CritterEmote.GetPetPersonality(petName)
+	-- @TODO: Should this also handle 'customName'?  What if a named pet has a different personality?
+	return CritterEmote.Personalities[petName] or "default"
+end
 function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
 	CritterEmote.Log(CritterEmote.Info, "Call to GetEmoteMessage("..emoteIn..", "..petName..", "..(customName or "nil")..")")
 
-	local petPersonality = CritterEmote.Personalities[petName]  -- @TODO: Should this also handle 'customName'?  What if a named pet has a different personality?
-	print(petPersonality)
+	local petPersonality = CritterEmote.GetPetPersonality(petName)
 	-- get the table
 	local emoteList = {}
 	local emoteTable = CritterEmote.EmoteResponses[emoteIn]
@@ -188,31 +191,14 @@ end
 --     print("|cff00ff00[CritterEmote]|r Pet Personality table loaded successfully.")
 -- end
 
--- print("Debug: Response table:", Response)
+-- end
 
-
--- -- Register Frame for Chat Events
--- local eventFrame = CreateFrame("Frame")
--- eventFrame:RegisterEvent("CHAT_MSG_TEXT_EMOTE")
--- eventFrame:SetScript("OnEvent", function(self, event, msg, sender, ...)
---     CritterEmote_HandleEmote(msg, sender)
--- end)
-
--- -- Function to Get the Active Pet Name
--- function CritterEmote_GetActivePet()
---     local petGUID = C_PetJournal.GetSummonedPetGUID()
---     if not petGUID then return nil end -- No active pet
-
---     local _, customName, _, _, _, _, _, name = C_PetJournal.GetPetInfoByPetID(petGUID)
 
 --     -- Use custom name if available, otherwise default to species name
 --     return customName or name
 -- end
 
--- -- Function to Determine Pet Personality
--- local function GetPetPersonality(petName)
---     return PetPersonality[petName] or "default"
--- end
+
 
 -- local EmoteMap = CritterEmote_EmoteMap or {}
 
