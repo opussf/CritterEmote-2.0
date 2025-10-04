@@ -10,6 +10,7 @@ ParseTOC( "../src/CritterEmote.toc" )
 function test.before()
 	chatLog = {}
 	CritterEmote.emoteToSend = nil
+	CritterEmote_Variables.enabled = true
 	CritterEmote.OnLoad()
 end
 function test.after()
@@ -41,8 +42,13 @@ function test.test_do_emote_target_critter()
 		}
 	}
 	CritterEmote.OnEmote("SING", "")
-	print( CritterEmote.emoteToSend )
 	assertEquals( ": CustomPetName sings with you.", CritterEmote.emoteToSend )
+end
+function test.test_onUpdate_emoteToSend()
+	CritterEmote.OnUpdate()
+	CritterEmote.Personalities = nil
+	test.dump(CritterEmote)
+
 end
 
 

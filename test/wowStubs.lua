@@ -2300,8 +2300,9 @@ function C_PetJournal.GetSummonedPetGUID()
 	return C_PetJournal.data.summoned
 end
 function C_PetJournal.GetPetInfoByPetID( petID )
+	-- speciesID, customName, level, xp, maxXp, displayID, isFavorite, name, icon, petType, creatureID, sourceText, description, isWild, canBattle, tradable, unique, obtainable = C_PetJournal.GetPetInfoByPetID(petID)
 	-- @TODO: Look this up
-	return "","CustomPetName",0,0,0,0,0,"PetName"
+	return 0,"CustomPetName",0,0,0,0,0,"PetName"
 end
 
 
