@@ -47,7 +47,9 @@ end
 function test.test_onUpdate_emoteToSend()
 	CritterEmote.OnUpdate()
 	CritterEmote.Personalities = nil
+	CritterEmote_Variables.randomEnabled = true
 	test.dump(CritterEmote)
+	fail()
 
 end
 

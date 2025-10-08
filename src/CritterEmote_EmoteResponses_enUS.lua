@@ -2049,10 +2049,10 @@ CritterEmote.EmoteResponses = {
 		undead = {"There\'s a zombie on your lawn.",},
 		["Argent Gruntling"] = {
 			"sings, \"It\'s the hard-knock life for us! It\'s the hard-knock life for us! \'Steada treated, we get tricked! \'Steada kisses, we get kicked! It\'s the hard-knock life!\"",
-			},
+		},
 		["Argent Squire"] = {
 			"sings, \"It\'s the hard-knock life for us! It\'s the hard-knock life for us! \'Steada treated, we get tricked! \'Steada kisses, we get kicked! It\'s the hard-knock life!\"",
-			},
+		},
 		["Bananas"] = {
 				"sings, \"Yes, I have no bananas, I have no bananas today. Doo doo doo doooo\"",
 				},

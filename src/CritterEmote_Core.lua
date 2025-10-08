@@ -74,7 +74,7 @@ function CritterEmote.OnEmote(emote, target)
 	end
 end
 function CritterEmote.OnUpdate(elapsed)
-	if (CritterEmote_Variables.enabled) then
+	if CritterEmote_Variables.enabled then
 		if CritterEmote.emoteToSend then
 			CritterEmote.emoteTimer = CritterEmote.emoteTimer and CritterEmote.emoteTimer + elapsed or elapsed
 			if CritterEmote.emoteTimer > 0.5 then
@@ -83,7 +83,7 @@ function CritterEmote.OnUpdate(elapsed)
 				CritterEmote.emoteTimer = nil
 			end
 		end
-		if (CritterEmote_Variables.randomEnabled) then
+		if CritterEmote_Variables.randomEnabled then
 			if (CritterEmote.lastUpdate + CritterEmote.updateInterval < time() and
 					not UnitAffectingCombat("player") ) then
 				CritterEmote.Log(CritterEmote.Info, "Random interval time elapsed.")
@@ -125,7 +125,7 @@ end
 function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- isEmote is a flag to say that this is an emote.
 	-- false means that msg is text to use.
-	CritterEmote.Log(CritterEmote.Info, "Call to DoCritterEmote( "..msg..", "..(doemote and "True" or "False")..")")
+	CritterEmote.Log(CritterEmote.Info, "Call to DoCritterEmote( "..(msg or "nil")..", "..(doemote and "True" or "False")..")")
 	local petName, customName = CritterEmote.GetActivePet()
 	-- print(petName, customName)
 	if isEmote then
