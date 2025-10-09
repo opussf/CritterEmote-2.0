@@ -16,6 +16,7 @@ localization_ru.lua
 ## Core Functionality
 CritterEmote_Core.lua
 CritterEmote_PetPersonalities.lua
+CritterEmote_EmoteMap.lua
 CritterEmote_EmoteResponses_enUS.lua
 CritterEmote.xml
 CritterEmote_Options.lua

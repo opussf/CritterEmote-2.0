@@ -1,4 +1,6 @@
-CritterEmote_EmoteMap = {
+local _, CritterEmote = ...
+
+CritterEmote.EmoteMap = {
     ["wave"] = "WAVE",
     ["cheer"] = "CHEER",
     ["raise"] = "ANGRY",
@@ -12,3 +14,9 @@ CritterEmote_EmoteMap = {
     ["smile"] = "SMILE",
     ["thank"] = "THANK",
 }
+local function defaultFunc(L, key)
+    -- same as the localization core table
+    CritterEmote.Log(CritterEmote.Error, "No match found for: "..(key or "nil"))
+    return nil
+end
+setmetatable( CritterEmote.EmoteMap, {__index=defaultFunc})

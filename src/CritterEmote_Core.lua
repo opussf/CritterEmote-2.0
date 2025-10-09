@@ -8,10 +8,10 @@ CritterEmote.Colors = {
 	print = "|cff00ff00",
 	reset = "|r",
 }
-CritterEmote.Info  = 1
+CritterEmote.Error = 1
 CritterEmote.Warn  = 2
-CritterEmote.Error = 3
-CritterEmote.LogNames = { "Info", "Warn", "Error" }
+CritterEmote.Info  = 3
+CritterEmote.LogNames = { "Error", "Warn", "Info" }
 
 CritterEmote_Variables = {}
 CritterEmote_CharacterVariables = {}
