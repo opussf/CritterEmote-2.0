@@ -1,5 +1,4 @@
 CritterEmote_Locations_enUS = {
-
     "wants to stay home.",
     "wants to explore all of Azeroth.",
     "would like to visit the Eastern Kingdoms.",

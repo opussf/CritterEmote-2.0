@@ -29,7 +29,7 @@ CritterEmote_Variables.randomEnabled = true
 CritterEmote_Variables.baseInterval = 300
 CritterEmote_Variables.minRange = 30
 CritterEmote_Variables.maxRange = 400
-CritterEmote_Variables.logLevel = 3 -- ERROR
+CritterEmote_Variables.logLevel = 3 -- Info
 
 function CritterEmote.Print(msg, showName)
 	-- print to the chat frame
@@ -180,42 +180,6 @@ end
 
 
 
--- -- Load Libraries & Modules
--- local Response = CritterEmote_Response_enUS
--- local TargetEmotes = CritterEmote_Target_enUS
--- local PetPersonality = CritterEmote_PetPersonality or {}
-
--- if not CritterEmote_PetPersonality then
---     print("|cffff0000[CritterEmote]|r ERROR: Pet Personality table is nil!")
--- else
---     print("|cff00ff00[CritterEmote]|r Pet Personality table loaded successfully.")
--- end
-
--- end
-
-
---     -- Use custom name if available, otherwise default to species name
---     return customName or name
--- end
-
-
-
--- local EmoteMap = CritterEmote_EmoteMap or {}
-
--- function GetEmoteKey(msg)
---     if not msg then return nil end
---     msg = msg:lower()  -- Normalize case
-
---     -- Directly check if the message contains a valid emote keyword
---     for keyword, token in pairs(CritterEmote_EmoteMap) do
---         if string.find(msg, keyword, 1, true) then
---             return token  -- Return the corresponding Blizzard emote token
---         end
---     end
-
---     print("|cffff0000[CritterEmote]|r ERROR: No match found for:", msg)
---     return nil
--- end
 
 -- function GetEmoteResponse(msg, petName)
 --     local emoteToken = GetEmoteKey(msg)

@@ -1,3 +1,4 @@
+_, CritterEmote = ...
 CritterEmote.Personalities = {
 ["Abyssal Eel"] = "aquatic",
 ["Abyssal Slitherling"] = "aquatic",

@@ -46,11 +46,9 @@ function test.test_do_emote_target_critter()
 end
 function test.test_onUpdate_emoteToSend()
 	CritterEmote.OnUpdate()
-	CritterEmote.Personalities = nil
 	CritterEmote_Variables.randomEnabled = true
 	test.dump(CritterEmote)
 	fail()
-
 end
 
 
