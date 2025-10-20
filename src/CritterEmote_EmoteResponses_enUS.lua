@@ -247,63 +247,31 @@ CritterEmote.EmoteResponses = {
 		["Lil' Ragnaros"] = { "blows out some smoke.", },
 	},
 	BURP = {
-		default = {
-			"thinks you're disgusting.",
-		},
-		dragon = {
-			"burps out a puff of fire.",
-		},
-		ooze = {
-			"burps out a wishbone.",
-		},
-		murloc = {
-			"lets out a loud belch.",
-		},
-		cat = {
-			"burps up a hairball.",
-		},
-		reptile = {
-			"burps up a small critter.",
-		},
-		["Deathy"] = {
-	   "burps out a puff of green nastiness.",
-		},
+		default = { "thinks you're disgusting.", },
+		dragon = { "burps out a puff of fire.", },
+		ooze = { "burps out a wishbone.", },
+		murloc = { "lets out a loud belch.", },
+		cat = { "burps up a hairball.", },
+		reptile = { "burps up a small critter.", },
+		["Deathy"] = { "burps out a puff of green nastiness.", },
 	},
 	BYE = {
-		default = {
-			"waves goodbye.",
-		},
-	  mech = {
-			"shuts down.",
-			},
-	  ["Gregarious Grell"] = { "says, \"You know, we've had a lot of fun together, it's been really special, but I think it's time I should start seeing other masters. Just a little on the side. No, no, no, it's not you, it's not you, it's me. I just need my space.\"", },
+		default = { "waves goodbye.", },
+		mech = { "shuts down.", },
+		["Gregarious Grell"] = { "says, \"You know, we've had a lot of fun together, it's been really special, but I think it's time I should start seeing other masters. Just a little on the side. No, no, no, it's not you, it's not you, it's me. I just need my space.\"", },
 	},
 	CACKLE = {
-		default = {
-			"cackles maniacally with you.",
-		},
-		cat = {
-			"rawrs maniacally with you.",
-		},
-		reptile = {
-			"hisses maniacally with you.",
-		},
+		default = { "cackles maniacally with you.", },
+		cat = { "rawrs maniacally with you.", },
+		reptile = { "hisses maniacally with you.", },
 	},
 	CALM = {
-		default = {
-			"is calmed.",
-		},
+		default = { "is calmed.", },
 	},
 	CHALLENGE = {
-		default = {
-			"has defeated you in a duel!.",
-		},
-		["Gregarious Grell"] = {
-				"doesn't want to fight its master.",
-		},
-		["Lil' Ragnaros"] = {
-				"shouts, \"Fall to your knees, mortal! This ends now!\"",
-				},
+		default = { "has defeated you in a duel!.", },
+		["Gregarious Grell"] = { "doesn't want to fight its master.", },
+		["Lil' Ragnaros"] = { "shouts, \"Fall to your knees, mortal! This ends now!\"", },
 	},
 	CHARGE = {
 		default = nil,

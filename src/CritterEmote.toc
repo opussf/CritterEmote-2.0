@@ -10,6 +10,7 @@
 ## SavedVariablesPerCharacter: CritterEmote_CharacterVariables
 
 localization_core.lua
+localization_us.lua
 localization_ru.lua
 
 

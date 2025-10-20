@@ -1,4 +1,5 @@
-CritterEmote_General_enUS = {
+local _, CritterEmote = ...
+CritterEmote.General_emotes_enUS = {
 	default = {"hums a little tune."},
 	default_normal = {
 		"does a little dance.","does a little dance.",
