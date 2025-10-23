@@ -17,7 +17,7 @@ function test.after()
 	test.dump(chatLog)
 end
 
-function test.notest_do_emote_no_target()
+function test.test_do_emote_no_target()
 	-- with no targeted critter, an emote does not set emoteToSend
 	-- OnUpdate takes care of posting this later.
 	Units["target"] = nil
@@ -50,21 +50,11 @@ function test.notest_onUpdate_emoteToSend()
 	test.dump(CritterEmote)
 	-- fail()
 end
-function test.notest_GetEmoteMessage()
-	CritterEmote_Personalities = CritterEmote.Personalities
-	CritterEmote_ResponseDb = CritterEmote.EmoteResponses
-	CritterEmote_Cats = {
-		Normal = true;
-		Silly = true;
-		Song = true;
-		Locations = true;
-		Special = true;
-		PVP = true;
-	}
-	print(CritterEmote_GetEmoteMessage1("CHEER","petName","customName"))
-	-- test.dump(CritterEmote_ResponseDb)
-	-- test.dump(CritterEmote_Personalities)
-	fail()
+
+function test.test_GetEmoateMessage()
+	local emoteToSend = CritterEmote.GetEmoteMessage("CHEER","petName","customName")
+	test.dump(chatLog)
+	assertEquals( "Celebrates!", emoteToSend )
 end
 function test.test_noCritterEmote_()
 	local prefix = "CritterEmote_"
@@ -72,17 +62,18 @@ function test.test_noCritterEmote_()
 	-- test.dump(_G)
 	for n, v in pairs(_G) do
 		if n:sub(1, #prefix) == prefix then
-			table.insert( badThings, {n, type(v)} )
+			badThings[n] = type(v)
 		end
 	end
-	if #badThings > 3 then
-		test.dump(badThings)
+	badThings.CritterEmote_SLUG = nil
+	badThings.CritterEmote_Variables = nil
+	badThings.CritterEmote_CharacterVariables = nil
+	test.dump(badThings)
+	local count = 0
+	for k, v in pairs(badThings) do
+		count = count + 1
 	end
-	assertTrue( #badThings <= 3 )
-end
-function test.test_yaya()
-	assertIsNil( CritterEmote_testThingy )
-	-- fail()
+	assertTrue( count <= 0 )
 end
 
 

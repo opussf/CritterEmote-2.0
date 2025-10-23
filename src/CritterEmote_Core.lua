@@ -150,12 +150,16 @@ function CritterEmote.GetPetPersonality(petName)
 end
 function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
 	CritterEmote.Log(CritterEmote.Info, "Call to GetEmoteMessage("..emoteIn..", "..petName..", "..(customName or "nil")..")")
+	CritterEmote.Log(CritterEmote.Info, " Getting Emote Table for ".. emoteIn )
 
 	local petPersonality = CritterEmote.GetPetPersonality(petName)
+	emoteIn = CritterEmote.EmoteMap[emoteIn]
+
 	-- get the table
 	local emoteList = {}
 	local emoteTable = CritterEmote.EmoteResponses[emoteIn]
 	if emoteTable then
+
 
 		emoteList = emoteTable[customName] or
 		            emoteTable[petName] or
@@ -179,97 +183,6 @@ function CritterEmote.CreateUpdateInterval()
 			random(CritterEmote_Variables.minRange, CritterEmote_Variables.maxRange)
 end
 
-function CritterEmote_GetEmoteMessage1(msg,petName,customName)
-	emo=nil;
-	emoT=nil;
-  tmp_table=nil;
-  search_name=nil;
-  emoPT = CritterEmote_TableSearch(CritterEmote_Personalities, petName);
-  if(emoPT == nil) then
-    emoPT = " " ; -- HACK to make sure table search is ok.
-  end
-  if(customName == nil ) then
-    customName = " " ;
-  end
-  --See if pet exists in table
-  CritterEmote_printDebug("Call to GetEmoteMessage");
-  CritterEmote_printDebug(" Getting Emote Table for " .. msg);
-  emoT = CritterEmote_TableSearch(CritterEmote_ResponseDb, msg);
-  CritterEmote_printDebug("  emoT: " )
-  test.dump(emoT)
-  --Found emote table
-  if(emoT) then
-    CritterEmote_printDebug("  Found the table" .. msg);
-    emo=CritterEmote_TableSearch(emoT, customName)
-    if( emo ) then
-      CritterEmote_printDebug("  Found custom name " .. customName);
-      search_name=customName;
-    else
-      emo=CritterEmote_TableSearch(emoT, petName)
-      if( emo ) then
-        CritterEmote_printDebug("  Found pet name " .. petName);
-        search_name=petName;
-      else
-        emo=CritterEmote_TableSearch(emoT, emoPT)
-        if( emo ) then
-          CritterEmote_printDebug("  Found pet type " .. emoPT);
-          search_name=emoPT;
-        else
-          emo=CritterEmote_TableSearch(emoT, "default")
-          if( emo ) then
-            CritterEmote_printDebug("  Found default ");
-            search_name="default";
-          end
-        end
-      end
-    end
-    if(emo) then --Found the exact pet
-      CritterEmote_printDebug("  Found pet: " .. petName);
-      for k, v in pairs(CritterEmote_Cats) do
-        if(v==true) then
-          CritterEmote_printDebug("    Searching for " .. k);
-          tmp_table = CritterEmote_TableSearch(emoT, search_name .. "_" .. k)
-          if(type(tmp_table) == "table" )  then
-            CritterEmote_printDebug("    Found " .. k);
-            emo = CE_array_concat(emo, tmp_table);
-          end
-        end
-      end
-      if( type(emo) == "table" ) then
-        CritterEmote_printDebug("Returning random entry for " .. search_name);
-        return CritterEmote_GetRandomTableEntry(emo);
-      end
-    end
-    CritterEmote_printDebug("Could not find table entry for ".. msg);
-    return nil;
-  end --ifemoT
-  CritterEmote_printDebug("Could not find table for ".. msg);
-  return nil;
-end
-function CritterEmote_testThingy()
-	z = 5
-	a,b = table.unpack(z==6 and {1,2} or {3})
-	print(a, b)
-end
---Search an incomplete lua table and return found node
-function CritterEmote_TableSearch(mytable, search)
-        CritterEmote_printDebug("TableSearch=> Call to Table Search with " .. search);
-        for k,v in pairs(mytable) do
-                if(k == search) then
-                        CritterEmote_printDebug("TableSearch=> Found " .. k);
-                        return v;
-                end
-        end
-        return nil;
-end
-function CritterEmote_printDebug(txt)
-	print(txt)
-end
-function CritterEmote_GetRandomTableEntry(myTable)
-	--print("Call to Random Table");
-	test.dump(myTable)
-	return(myTable[random(1, #myTable)]);
-end
 
 -- function GetEmoteResponse(msg, petName)
 --     local emoteToken = GetEmoteKey(msg)
@@ -316,14 +229,14 @@ end
 --     if petName ~= activePet then return end -- Ignore if target is not player's summoned pet
 
 --     -- Get the correct emote name
---     local emote = GetEmoteKey(msg)
+--     local emote = GetEmoteKey(msg)  -- [x]
 --     if not emote then
 --         print("|cffff0000[CritterEmote]|r ERROR: Could not identify emote from message:", msg)
 --         return
 --     end
 
 --     -- Get the pet's personality
---     local petType = GetPetPersonality(petName)
+--     local petType = GetPetPersonality(petName)  -- [x]
 --     local response = GetEmoteResponse(emote, petName)
 --     or GetEmoteResponse(emote, CritterEmote_GetActivePet(1))
 --     or GetTargetEmote()

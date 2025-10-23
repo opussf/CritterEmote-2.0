@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  September 22 2025
--- Revision:  9.5.1-17-g28f1478
+-- Date    :  October 19 2025
+-- Revision:  9.5.1-19-gf11854c
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
@@ -21,10 +21,10 @@ settings = {
 actionLog = {
 }
 buildInfo = {
-	"1.1.1",       --version
-	"3255",        --build
-	"Sep 12 2025", --date
-	20400          --TOC Version
+	"11.2.5",       -- version
+	"3255",         -- build
+	"Sep 12 2025",  -- date
+	110205          -- TOC Version
 }
 -- append actions to the log to track actions that may not have an other sideeffects.
 -- record the function calls
@@ -2304,7 +2304,6 @@ function C_PetJournal.GetPetInfoByPetID( petID )
 	-- @TODO: Look this up
 	return 0,"CustomPetName",0,0,0,0,0,"PetName"
 end
-
 
 -- A SAX parser takes a content handler, which provides these methods:
 --     startDocument()                 -- called at the start of the Document

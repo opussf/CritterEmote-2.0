@@ -1,18 +1,18 @@
 local _, CritterEmote = ...
 
 CritterEmote.EmoteMap = {
-    ["wave"] = "WAVE",
-    ["cheer"] = "CHEER",
-    ["raise"] = "ANGRY",
-    ["kiss"] = "KISS",
-    ["dance"] = "DANCE",
-    ["laugh"] = "LAUGH",
-    ["hug"] = "HUG",
-    ["kneel"] = "KNEEL",
-    ["nod"] = "NOD",
-    ["salute"] = "SALUTE",
-    ["smile"] = "SMILE",
-    ["thank"] = "THANK",
+    ["WAVE"] = "WAVE",
+    ["CHEER"] = "CHEER",
+    ["RAISE"] = "ANGRY",
+    ["KISS"] = "KISS",
+    ["DANCE"] = "DANCE",
+    ["LAUGH"] = "LAUGH",
+    ["HUG"] = "HUG",
+    ["KNEEL"] = "KNEEL",
+    ["NOD"] = "NOD",
+    ["SALUTE"] = "SALUTE",
+    ["SMILE"] = "SMILE",
+    ["THANK"] = "THANK",
 }
 local function defaultFunc(L, key)
     -- same as the localization core table.
