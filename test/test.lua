@@ -53,7 +53,6 @@ function test.test_onUpdate_randomEnabled_sets_emoteToSend()
 	if not CritterEmote.emoteToSend then
 		test.dump(chatLog)
 	end
-	print( "emoteToSend: "..CritterEmote.emoteToSend )
 	assertTrue( CritterEmote.emoteToSend )  -- this should be set, to be posted later
 	assertAlmostEquals( time(), CritterEmote.lastUpdate, nil, nil, 1 ) -- should set the time.
 end
@@ -90,5 +89,37 @@ function test.test_noCritterEmote_()
 	assertTrue( count <= 0 )
 end
 
+function test.test_slashCommand_help()
+	CritterEmote.SlashHandler("help")
+	test.dump(chatLog)
+end
+function test.test_slashCommand_turnOff()
+	CritterEmote_Variables.enabled = true
+	CritterEmote.SlashHandler("off")
+	assertFalse(CritterEmote_Variables.enabled)
+end
+function test.test_slashCommand_turnOn()
+	CritterEmote_Variables.enabled = false
+	CritterEmote.SlashHandler("on")
+	assertTrue(CritterEmote_Variables.enabled)
+end
+function test.test_slashCommand_info()
+	CritterEmote.SlashHandler("info")
+end
+function test.test_slashCommand_random_on()
+	CritterEmote_Variables.randomEnabled = false
+	CritterEmote.SlashHandler("random ON")
+	assertTrue(CritterEmote_Variables.randomEnabled)
+end
+function test.test_slashCommand_random_off()
+	CritterEmote_Variables.randomEnabled = true
+	CritterEmote.SlashHandler("random off")
+	assertFalse(CritterEmote_Variables.randomEnabled)
+end
+function test.test_slashCommand_random_noFlag()
+	CritterEmote_Variables.randomEnabled = true
+	CritterEmote.SlashHandler("random")
+	assertTrue(CritterEmote_Variables.randomEnabled)
+end
 
 test.run()

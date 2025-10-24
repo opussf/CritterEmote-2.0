@@ -1,5 +1,6 @@
 local _, CritterEmote = ...
-CritterEmote.Location_emotes_enUS = {
+if GetLocale() == "enUS" then
+CritterEmote.Location_emotes = {
     "wants to stay home.",
     "wants to explore all of Azeroth.",
     "would like to visit the Eastern Kingdoms.",
@@ -129,4 +130,5 @@ CritterEmote.Location_emotes_enUS = {
     "finds The Jailer in The Maw distasteful",
     "wonders how the dracthyr were frozen in time.",
     "flies with dragons on the Dragon Isles.",
-    }
+}
+end

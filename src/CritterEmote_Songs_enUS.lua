@@ -1,5 +1,6 @@
 local _, CritterEmote = ...
-CritterEmote.Song_emotes_enUS = {
+if GetLocale() == "enUS" then
+CritterEmote.Song_emotes = {
     --American Songs
     "sings, \"It\'s the hard-knock life for us! It\'s the hard-knock life for us! \'Steada treated, we get tricked! \'Steada kisses, we get kicked! It\'s the hard-knock life!\"",
     "sings [with a computer voice], \"When I look out there, it makes me glad I\'m not you. I\'ve got experiments to run. There is research to be done on the people who are still alive. And believe me I am still alive.\"",
@@ -79,3 +80,4 @@ CritterEmote.Song_emotes_enUS = {
     "sings, \"Stop running now, I'm already dead, yeah.\"",
     "sings, \"There's a Zombie on your lawn.\"",
 }
+end

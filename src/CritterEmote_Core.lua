@@ -29,7 +29,7 @@ CritterEmote_Variables.randomEnabled = true
 CritterEmote_Variables.baseInterval = 300
 CritterEmote_Variables.minRange = 30
 CritterEmote_Variables.maxRange = 400
-CritterEmote_Variables.logLevel = CritterEmote.Debug -- Set the default logLevel
+CritterEmote_Variables.logLevel = CritterEmote.Error -- Set the default logLevel
 
 function CritterEmote.Print(msg, showName)
 	-- print to the chat frame
@@ -203,3 +203,184 @@ function CritterEmote.CreateUpdateInterval()
 	return CritterEmote_Variables.baseInterval +
 			random(CritterEmote_Variables.minRange, CritterEmote_Variables.maxRange)
 end
+-------
+function CritterEmote.ParseCmd(msg)
+	if msg then
+		msg = string.lower(msg)
+		local a,b,c = strfind(msg, "(%S+)")  --contiguous string of non-space characters
+		if a then
+			-- c is the matched string, strsub is everything after that, skipping the space
+			return c, strsub(msg, b+2)
+		else
+			return ""
+		end
+	end
+end
+function CritterEmote.SlashHandler(msg)
+	local cmd, param = CritterEmote.ParseCmd(msg)
+	if CritterEmote.commandList[cmd] and CritterEmote.commandList[cmd].alias then
+		cmd = CritterEmote.commandList[cmd].alias
+	end
+	local cmdFunc = CritterEmote.commandList[cmd]
+	if cmdFunc and cmdFunc.func then
+		cmdFunc.func(param)
+	else
+		CritterEmote.PrintHelp()
+	end
+end
+function CritterEmote.PrintHelp()
+	CritterEmote.Print(string.format(CritterEmote.L["%s (%s) by %s"], CritterEmote.ADDONNAME, CritterEmote.VERSION, CritterEmote.AUTHOR))
+	for cmd, info in pairs(CritterEmote.commandList) do
+		if info.help then
+			local cmdStr = cmd
+			for c2, i2 in pairs(CritterEmote.commandList) do
+				if i2.alias and i2.alias == cmd then
+					cmdStr = string.format( "%s / %s", cmdStr, c2 )
+				end
+			end
+			CritterEmote.Print(string.format("%s %s %s -> %s",
+				SLASH_CRITTEREMOTE1, cmdStr, info.help[1], info.help[2]))
+		end
+	end
+end
+function CritterEmote.ShowInfo()
+	CritterEmote.Print(string.format(CritterEmote.L["%s (%s) by %s"], CritterEmote.ADDONNAME, CritterEmote.VERSION, CritterEmote.AUTHOR))
+	-- CritterEmote.Print()
+	-- @TODO: Figure this out.
+
+--[[function CritterEmote_Info ()
+
+  if(CritterEmote_enable) then
+    CritterEmote_Message(CritterEmote_Strings["WELCOME_ACTIVE"] .. "Active!");
+  else
+    CritterEmote_Message(CritterEmote_Strings["WELCOME_ACTIVE"] .. "Deactivated.");
+  end
+end]]
+end
+CritterEmote.commandList = {
+	[CritterEmote.L["off"]] = {
+		["help"] = {"", CritterEmote.L["turns the emotes off"]},
+		["func"] = function()
+			CritterEmote_Variables.enabled = false
+			CritterEmote.Print(CritterEmote.L["Critter Emote is now disabled. The critters are sad."])
+		end,
+	},
+	[CritterEmote.L["on"]] = {
+		["help"] = {"", CritterEmote.L["turns the emotes on"]},
+		["func"] = function()
+			CritterEmote_Variables.enabled = true
+			CritterEmote.Print(CritterEmote.L["Critter Emote is now enabled. Party Time, critters!"])
+		end,
+	},
+	[CritterEmote.L["info"]] = {
+		["help"] = {"", CritterEmote.L["displays Critter Emote information"]},
+		["func"] = CritterEmote.ShowInfo,
+	},
+	["debug"] = {  -- keep this as debug, no help will keep it from showing in help.  This keeps it 'hidden'
+		["func"] = function()
+			CritterEmote_Variables.logLevel = CritterEmote_Variables.logLevel + 1
+			if CritterEmote_Variables.logLevel > #CritterEmote.LogNames then
+				CritterEmote_Variables.logLevel = 1
+			end
+			CritterEmote.Print("Log level is now set to "..CritterEmote.LogNames[CritterEmote_Variables.logLevel])
+		end,
+	},
+	[CritterEmote.L["random"]] = {
+		["help"] = {CritterEmote.L["on"].."|"..CritterEmote.L["off"], CritterEmote.L["turns the periodic emotes on or off"]},
+		["func"] = function(flag)
+			-- flag will be "" if it is not given.
+			print( flag, string.len(flag) )
+			if flag==CritterEmote.L["on"] then
+				CritterEmote_Variables.randomEnabled = true
+			elseif flag==CritterEmote.L["off"] then
+				CritterEmote_Variables.randomEnabled = false
+			end
+			if CritterEmote.randomEnabled then
+				CritterEmote.Print(CritterEmote.L["Random Emotes are enabled! Time for nom."])
+			else
+				CritterEmote.Print(CritterEmote.L["Random Emotes are disabled! The little dudes are sad."])
+			end
+		end,
+	},
+}
+--[[
+
+local function CritterEmote_SlashHandler(msg, editbox)
+        if (msg == 'critter' or msg == "battle pet") then
+                print('I love to talk!');
+        elseif msg == "test" then
+  local guid = C_PetJournal.GetSummonedPetGUID()
+  print("GUID = " .. (guid or "none"))
+
+  local owner = CritterEmote_GetTargetPetsOwner()
+  if owner then
+    print("Target pet belongs to: " .. owner)
+  else
+    print("No valid pet target or companion owner text found.")
+  end
+
+  elseif(msg == "options" ) then
+          CritterEmote_DisplayOptions();
+  elseif(msg == "Silly" or msg=="silly") then
+    if(CritterEmote_Cats["Silly"]) then
+      CritterEmote_Message("Silly Emotes now disabled.");
+      CritterEmote_Cats["Silly"] = false;
+    else
+      CritterEmote_Message("Silly Emotes now enabled.");
+      CritterEmote_Cats["Silly"] = true;
+    end
+    CritterEmote_UpdateSaveTable();
+  elseif(msg == "Locations" or msg=="locations") then
+    if(CritterEmote_Cats["Locations"]) then
+      CritterEmote_Message("Location Emotes now disabled.");
+      CritterEmote_Cats["Locations"] = false;
+    else
+      CritterEmote_Message("Location Emotes now enabled.");
+      CritterEmote_Cats["Locations"] = true;
+    end
+    CritterEmote_UpdateSaveTable();
+  elseif(msg == "Songs" or msg=="songs") then
+    if(CritterEmote_Cats["Songs"]) then
+      CritterEmote_Message("Song Emotes now disabled.");
+      CritterEmote_Cats["Songs"] = false;
+    else
+      CritterEmote_Message("Song Emotes now enabled.");
+      CritterEmote_Cats["Songs"] = true;
+    end
+    CritterEmote_UpdateSaveTable();
+  elseif(msg == "Special" or msg=="special") then
+    if(CritterEmote_Cats["Special"]) then
+      CritterEmote_Message("Special Emotes now disabled.");
+      CritterEmote_Cats["Special"] = false;
+    else
+      CritterEmote_Message("Special Emotes now enabled.");
+      CritterEmote_Cats["Special"] = true;
+    end
+    CritterEmote_UpdateSaveTable();
+  elseif(msg == "PVP" or msg=="pvp") then
+    if(CritterEmote_Cats["PVP"]) then
+      CritterEmote_Message("PVP Emotes now disabled.");
+      CritterEmote_Cats["PVP"] = false;
+    else
+      CritterEmote_Message("PVP Emotes now enabled.");
+      CritterEmote_Cats["PVP"] = true;
+    end
+    CritterEmote_UpdateSaveTable();
+  elseif(msg == "General" or msg=="general") then
+    if(CritterEmote_Cats["General"]) then
+      CritterEmote_Message("General Emotes now disabled.");
+      CritterEmote_Cats["General"] = false;
+    else
+      CritterEmote_Message("General Emotes now enabled.");
+      CritterEmote_Cats["General"] = true;
+    end
+    CritterEmote_UpdateSaveTable();
+        elseif (msg == "") then
+                --CritterEmote_doEmote("Random", true);
+                --Instead of calling doEmote lets just set the random interval to now.
+                CritterEmote_TimeSinceLastUpdate = 99999999;
+                CritterEmote_forceEmote = true;
+        else
+                CritterEmote_doEmote(msg);
+        end
+end]]

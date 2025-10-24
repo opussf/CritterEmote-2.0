@@ -1,3 +1,5 @@
+local _, CritterEmote = ...
+if GetLocale() == "enUS" then
 CritterEmote.EmoteResponses = {
 	ABSENT = {
 		default = { "blinks at you.", },
@@ -2229,38 +2231,22 @@ CritterEmote.EmoteResponses = {
 		default = nil,
 	},
 	TALKEX = {
-		default = {
-			"listens intently",
-		},
-	 evil = {
-		"thinks you should zip your lip and lock it like a padlock. Blah blah blah.",
-		},
+		default = { "listens intently", },
+		evil = { "thinks you should zip your lip and lock it like a padlock. Blah blah blah.", },
 	},
 	TALKQ = {
 		default = nil,
 	},
 	TAP = {
 		default = nil,
-	  ["Lil' K.T."] = {
-			"is undead and can take all of eternity, mortal.",
-			},
-	  ["Gregarious Grell"] = {
-			"is running around in a circle.",
-		},
+		["Lil' K.T."] = { "is undead and can take all of eternity, mortal.", },
+		["Gregarious Grell"] = { "is running around in a circle.", },
 	},
 	TAUNT = {
-		default = {
-			"cowers in fear.",
-		},
-	 ["Gregarious Grell"] = {
-		"asks, \"Why does master taunt %t?\"",
-		},
-	 ["Lil' K.T."] = {
-		"is now taunt immune!",
-		},
-	 ["Lil' Ragnaros"] = {
-		"your arrogance will be purged in living flame!",
-		},
+		default = { "cowers in fear.", },
+		["Gregarious Grell"] = { "asks, \"Why does master taunt %t?\"", },
+		["Lil' K.T."] = { "is now taunt immune!", },
+		["Lil' Ragnaros"] = { "your arrogance will be purged in living flame!", },
 	},
 	TEASE = {
 		default = nil,
@@ -2396,3 +2382,4 @@ CritterEmote.EmoteResponses = {
 		default = { "tries to resist for as long as possible, gives in with a large yawn", },
 	}
 }
+end

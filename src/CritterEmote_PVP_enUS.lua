@@ -1,5 +1,6 @@
 local _, CritterEmote = ...
-CritterEmote.PVP_emotes_enUS = {
+if GetLocale() == "enUS" then
+CritterEmote.PVP_emotes = {
     "taunts, \"Your mother was a murloc and your father smelled of elderberries.\"",
     "taunts, \"Someone\'s not going home to see their kids tonight.\"",
     "yells, \"Once more into the breach dear master!\"",
@@ -14,6 +15,7 @@ CritterEmote.PVP_emotes_enUS = {
     "says, \"Who's the noob now, %t?\"",
     "Heh, heh, heh, heh, heh."
 }
+end
 -- @TODO put these in later.
     -- Horde = {
     --     "yells, \"FOR THE HORDE!\"",

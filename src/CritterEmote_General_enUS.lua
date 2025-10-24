@@ -1,5 +1,6 @@
 local _, CritterEmote = ...
-CritterEmote.General_emotes_enUS = {
+if GetLocale() == "enUS" then
+CritterEmote.General_emotes = {
 	"hums a little tune.",
 	"does a little dance.","does a little dance.",
 	"is excited to see new places.",
@@ -120,3 +121,4 @@ CritterEmote.General_emotes_enUS = {
 	"wants to find true love.",
 	"perks head up to listen to the conversation as it helps to stay current on world affairs.",
 }
+end

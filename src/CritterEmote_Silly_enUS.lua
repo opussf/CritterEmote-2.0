@@ -1,5 +1,6 @@
 local _, CritterEmote = ...
-CritterEmote.Silly_emotes_enUS = {
+if GetLocale() == "enUS" then
+CritterEmote.Silly_emotes = {
     "wonders how the mail system works.",
     "thinks you should send your friends some mail.",
     "looks at all the lonely people.",
@@ -32,7 +33,7 @@ CritterEmote.Silly_emotes_enUS = {
     "picks a peck of pickled peppers",
     "twerks.",
     "shakes it like they just don't care.",
-    "doesn't believe in ROUS.",  
+    "doesn't believe in ROUS.",
     "says \"Say 'ello to my little friend!\"",
     "says \"You idiots! These are not them! You've captured their stunt doubles!\"",
     "says \"Gentlemen, you can't fight in here! This is the War Room.\"",
@@ -121,3 +122,4 @@ CritterEmote.Silly_emotes_enUS = {
      "rides a pale horse.",
      "throws a dance party!",
 }
+end
