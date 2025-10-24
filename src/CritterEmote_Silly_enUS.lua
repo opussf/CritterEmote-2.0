@@ -1,5 +1,5 @@
-CritterEmote_Silly_enUS = {
-
+local _, CritterEmote = ...
+CritterEmote.Silly_emotes_enUS = {
     "wonders how the mail system works.",
     "thinks you should send your friends some mail.",
     "looks at all the lonely people.",

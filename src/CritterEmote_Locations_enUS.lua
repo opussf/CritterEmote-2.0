@@ -1,5 +1,5 @@
 local _, CritterEmote = ...
-CritterEmote.Locations_enUS = {
+CritterEmote.Location_emotes_enUS = {
     "wants to stay home.",
     "wants to explore all of Azeroth.",
     "would like to visit the Eastern Kingdoms.",

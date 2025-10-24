@@ -178,7 +178,8 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
 end
 function CritterEmote.GetRandomEmote()
 	-- not totally random
-	return "Bob"
+
+
 end
 function CritterEmote.GetRandomTableEntry(myTable)
 	if myTable and #myTable>0 then
