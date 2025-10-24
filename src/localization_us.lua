@@ -5,7 +5,3 @@ if GetLocale() == "enUS" then
 	L.Silly_emotes = L.Silly_emotes_enUS
 	L.Song_emotes = L.Song_emotes_enUS
 end
-
--- for k,v in pairs( L ) do
--- 	print( k, type(v) )
--- end

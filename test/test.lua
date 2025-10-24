@@ -4,6 +4,7 @@ require "wowTest"
 
 test.outFileName = "testOut.xml"
 test.coberturaFileName = "../coverage.xml"
+-- myLocale = "ruRU"  -- wowStubs lets me set my locale
 
 ParseTOC( "../src/CritterEmote.toc" )
 
@@ -17,20 +18,19 @@ function test.after()
 	-- test.dump(chatLog)
 end
 
-function test.notest_do_emote_no_target()
+function test.test_do_emote_no_target()
 	-- with no targeted critter, an emote does not set emoteToSend
 	-- OnUpdate takes care of posting this later.
 	Units["target"] = nil
 	CritterEmote.OnEmote("SILLY", "")
 	assertIsNil( CritterEmote.emoteToSend )
 end
-function test.notest_do_emote_target_self()
+function test.test_do_emote_target_self()
 	Units["target"] = Units["player"]
 	CritterEmote.OnEmote("TRAIN", "")
 	assertIsNil( CritterEmote.emoteToSend )
-	fail( "What does UnitCreatureType return for players?" )
 end
-function test.notest_do_emote_target_critter()
+function test.test_do_emote_target_critter()
 	Units["target"] = {
 		["creatureType"] = "Wild Pet",
 	}
@@ -44,7 +44,7 @@ function test.notest_do_emote_target_critter()
 	CritterEmote.OnEmote("SING", "")
 	assertEquals( ": CustomPetName sings with you.", CritterEmote.emoteToSend )
 end
-function test.test_onUpdate_emoteToSend()
+function test.test_onUpdate_randomEnabled_sets_emoteToSend()
 	CritterEmote_Variables.enabled = true
 	CritterEmote_Variables.randomEnabled = true
 	isInCombat = false
@@ -57,13 +57,20 @@ function test.test_onUpdate_emoteToSend()
 	assertTrue( CritterEmote.emoteToSend )  -- this should be set, to be posted later
 	assertAlmostEquals( time(), CritterEmote.lastUpdate, nil, nil, 1 ) -- should set the time.
 end
+function test.test_onUpdate_sends_emoteToSend()
+	CritterEmote_Variables.enabled = true
+	CritterEmote.lastUpdate = time()
+	CritterEmote.emoteToSend = "Looks around for parachuting ninjas."
+	CritterEmote.OnUpdate(1)
+	assertEquals( "Looks around for parachuting ninjas.", chatLog[1].msg )
+end
 
-function test.notest_GetEmoteMessage()
+function test.test_GetEmoteMessage()
 	local emoteToSend = CritterEmote.GetEmoteMessage("CHEER","petName","customName")
 	-- test.dump(chatLog)
 	assertEquals( "Celebrates!", emoteToSend )
 end
-function test.notest_noCritterEmote_()
+function test.test_noCritterEmote_()
 	local prefix = "CritterEmote_"
 	local badThings = {}
 	-- test.dump(_G)
