@@ -51,9 +51,9 @@ function test.test_onUpdate_emoteToSend()
 	CritterEmote.lastUpdate = 0  -- force update
 	CritterEmote.OnUpdate()
 	test.dump(chatLog)
-	assertTrue( CritterEmote.emoteToSend )
-	print(CritterEmote.emoteToSend)
-	fail()
+	print( "emoteToSend: "..CritterEmote.emoteToSend )
+	assertTrue( CritterEmote.emoteToSend )  -- this should be set, to be posted later
+	assertAlmostEquals( time(), CritterEmote.lastUpdate, nil, nil, 1 ) -- should set the time.
 end
 
 function test.notest_GetEmoteMessage()

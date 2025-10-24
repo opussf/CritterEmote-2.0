@@ -1,4 +1,5 @@
-CritterEmote_Songs_enUS = {
+local _, CritterEmote = ...
+CritterEmote.Song_emotes_enUS = {
     --American Songs
     "sings, \"It\'s the hard-knock life for us! It\'s the hard-knock life for us! \'Steada treated, we get tricked! \'Steada kisses, we get kicked! It\'s the hard-knock life!\"",
     "sings [with a computer voice], \"When I look out there, it makes me glad I\'m not you. I\'ve got experiments to run. There is research to be done on the people who are still alive. And believe me I am still alive.\"",
@@ -70,7 +71,7 @@ CritterEmote_Songs_enUS = {
     "sings, \"Oh, I wanna dance with somebody. I wanna feel the heat with somebody. Yeah, I wanna dance with somebody. With somebody who loves me\"",
     "sings, \"What rhymes with hug me?\"",
     "sings, \"Take me on (take on me). I'll be gone. In a day or two.\"",
-    "sings, \"Welcome to the Hotel Eastern Plaguelands! What a lovely place. (Such a lovely place.\"",
+    "sings, \"Welcome to the Hotel Eastern Plaguelands! What a lovely place. (Such a lovely place.)\"",
     "sings, \"This is what it sounds like when the doves cry.\"",
     "sings, \"Has anybody seen my baby? Has anybody seen her around?\"",
     "says, \"Whaddya want for nothin'? Rrrrrubber Bisquit? Ow, ow ow ow.\"",

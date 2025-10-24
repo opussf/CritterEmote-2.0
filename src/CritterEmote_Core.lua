@@ -14,14 +14,18 @@ CritterEmote.Info  = 3
 CritterEmote.Debug = 4
 CritterEmote.LogNames = { "Error", "Warn", "Info", "Debug" }
 
+CritterEmote.Categories = {
+	"General", "Silly", "Song", "Location", "Special", "PVP"
+}
+
 CritterEmote_Variables = {}
 CritterEmote_CharacterVariables = {}
 
 CritterEmote_Variables.Categories = {
-  Normal = true,
+  General = true,
   Silly = true,
   Song = true,
-  Locations = true,
+  Location = true,
   Special = true,
   PVP = true,
 }
@@ -177,9 +181,23 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
 	end
 end
 function CritterEmote.GetRandomEmote()
-	-- not totally random
-
-
+	-- not totally random.
+	-- random emotes are pulled from the enabled categories
+	CritterEmote.Log(CritterEmote.Debug, "Call to GetRandomEmote()")
+	CritterEmote.RandomEmoteTable = {}   -- add this to the addon table to keep from making new tables all the time.
+	local categoryEmote = ""
+	for category, enabled in pairs(CritterEmote_Variables.Categories) do
+		CritterEmote.Log(CritterEmote.Debug, "Emote category: "..category.." is "..(enabled and "enabled." or "disabled."))
+		if enabled and CritterEmote[category.."_emotes"] then
+			CritterEmote.Log(CritterEmote.Debug, "Get a random emote from: "..category.."_emotes ("..#CritterEmote[category.."_emotes"]..")" )
+			categoryEmote = CritterEmote.GetRandomTableEntry( CritterEmote[category.."_emotes"] or {})
+			CritterEmote.Log(CritterEmote.Debug, "categoryEmote: "..(categoryEmote or "nil"))
+			table.insert(CritterEmote.RandomEmoteTable, categoryEmote)
+		else
+			CritterEmote.Log(CritterEmote.Debug, "No "..category.." emote added to list to choose from.")
+		end
+	end
+	return CritterEmote.GetRandomTableEntry(CritterEmote.RandomEmoteTable)
 end
 function CritterEmote.GetRandomTableEntry(myTable)
 	if myTable and #myTable>0 then
