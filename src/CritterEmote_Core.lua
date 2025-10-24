@@ -11,7 +11,8 @@ CritterEmote.Colors = {
 CritterEmote.Error = 1
 CritterEmote.Warn  = 2
 CritterEmote.Info  = 3
-CritterEmote.LogNames = { "Error", "Warn", "Info" }
+CritterEmote.Debug = 4
+CritterEmote.LogNames = { "Error", "Warn", "Info", "Debug" }
 
 CritterEmote_Variables = {}
 CritterEmote_CharacterVariables = {}
@@ -29,7 +30,7 @@ CritterEmote_Variables.randomEnabled = true
 CritterEmote_Variables.baseInterval = 300
 CritterEmote_Variables.minRange = 30
 CritterEmote_Variables.maxRange = 400
-CritterEmote_Variables.logLevel = 3 -- Info
+CritterEmote_Variables.logLevel = CritterEmote.Debug -- Set the default logLevel
 
 function CritterEmote.Print(msg, showName)
 	-- print to the chat frame
@@ -63,7 +64,7 @@ end
 function CritterEmote.LOADING_SCREEN_DISABLED()
 end
 function CritterEmote.OnEmote(emote, target)
-	CritterEmote.Log(CritterEmote.Info, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
+	CritterEmote.Log(CritterEmote.Debug, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
 	if target and #target < 1 then
 		if CritterEmote.GetTargetPetsOwner() then
 			-- since this returns truthy on if the pet is the player's, no reason to store a value.
@@ -96,11 +97,10 @@ function CritterEmote.OnUpdate(elapsed)
 end
 function CritterEmote.GetTargetPetsOwner()
 	-- this is probably misnamed, should probably be IsPetOwnedByPlayer() and return truthy values.  Though, returning the name would be true.
-	CritterEmote.Log(CritterEmote.Info, "Call to GetTargetPetsOwner()")
+	CritterEmote.Log(CritterEmote.Debug, "Call to GetTargetPetsOwner()")
 	if UnitExists("target") and not UnitIsPlayer("target") then
 		local creatureType = UnitCreatureType("target")
-		-- print("creatureType: "..creatureType.."==?"..CritterEmote.L["Wild Pet"])
-		-- print(CritterEmote.L["Wild Pet"], CritterEmote.L["Non-combat Pet"])
+		CritterEmote.Log(CritterEmote.Debug, "creatureType: "..creatureType.."==?"..CritterEmote.L["Wild Pet"])
 		if creatureType == CritterEmote.L["Wild Pet"] or creatureType == CritterEmote.L["Non-combat Pet"] then
 			local tooltipData = C_TooltipInfo.GetUnit("target")
 			if tooltipData and tooltipData.lines then
@@ -125,7 +125,7 @@ end
 function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- isEmote is a flag to say that this is an emote.
 	-- false means that msg is text to use.
-	CritterEmote.Log(CritterEmote.Info, "Call to DoCritterEmote( "..(msg or "nil")..", "..(doemote and "True" or "False")..")")
+	CritterEmote.Log(CritterEmote.Debug, "Call to DoCritterEmote( "..(msg or "nil")..", "..(isEmote and "True" or "False")..")")
 	local petName, customName = CritterEmote.GetActivePet()
 	-- print(petName, customName)
 	if isEmote then
@@ -137,7 +137,7 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 end
 function CritterEmote.GetActivePet()
 	-- returns pet name and custom name.  Custom Name is nil if not given.
-	CritterEmote.Log(CritterEmote.Info, "Call to GetActivePet()")
+	CritterEmote.Log(CritterEmote.Debug, "Call to GetActivePet()")
 	local petid = C_PetJournal.GetSummonedPetGUID()
 	if petid then
 		local petInfo = {C_PetJournal.GetPetInfoByPetID(petid)} -- {} wraps the multiple return values into a table.
@@ -149,8 +149,8 @@ function CritterEmote.GetPetPersonality(petName)
 	return CritterEmote.Personalities[petName] or "default"
 end
 function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
-	CritterEmote.Log(CritterEmote.Info, "Call to GetEmoteMessage("..emoteIn..", "..petName..", "..(customName or "nil")..")")
-	CritterEmote.Log(CritterEmote.Info, " Getting Emote Table for ".. emoteIn )
+	CritterEmote.Log(CritterEmote.Debug, "Call to GetEmoteMessage("..emoteIn..", "..petName..", "..(customName or "nil")..")")
+	CritterEmote.Log(CritterEmote.Debug, " Getting Emote Table for ".. emoteIn )
 
 	local petPersonality = CritterEmote.GetPetPersonality(petName)
 	emoteIn = CritterEmote.EmoteMap[emoteIn]
@@ -159,7 +159,6 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
 	local emoteList = {}
 	local emoteTable = CritterEmote.EmoteResponses[emoteIn]
 	if emoteTable then
-
 
 		emoteList = emoteTable[customName] or
 		            emoteTable[petName] or
@@ -220,26 +219,35 @@ end
 -- end
 
 -- -- Function to Process Emotes
+-- -- Steps in this function
+-- 1. Exit if nothing is targeted.
+-- 2. Get the target's name - assign to 'petName'  o.O
+-- 3. Get the Active pet - assign to 'activePet'
+-- 4. Check if target's name is your active pet  o.O
+-- 5. Map the emote o.O  -- and Exit if it fails the map
+-- 6. Get the Personality  -- where is this used?
+-- 7. Get an emote response.
+--
 -- function CritterEmote_HandleEmote(msg, sender)
---     if not UnitExists("target") then return end -- Ensure a valid target exists
+--     if not UnitExists("target") then return end -- Ensure a valid target exists  (1.)
 
---     local petName = UnitName("target") -- Get the pet's name
---     local activePet = CritterEmote_GetActivePet() -- Get player's active pet
+--     local petName = UnitName("target") -- Get the pet's name (2.)
+--     local activePet = CritterEmote_GetActivePet() -- Get player's active pet (3.)
 
---     if petName ~= activePet then return end -- Ignore if target is not player's summoned pet
+--     if petName ~= activePet then return end -- Ignore if target is not player's summoned pet  (4.)
 
 --     -- Get the correct emote name
---     local emote = GetEmoteKey(msg)  -- [x]
+--     local emote = GetEmoteKey(msg)  -- [x]  (5).
 --     if not emote then
 --         print("|cffff0000[CritterEmote]|r ERROR: Could not identify emote from message:", msg)
 --         return
 --     end
 
 --     -- Get the pet's personality
---     local petType = GetPetPersonality(petName)  -- [x]
+--     local petType = GetPetPersonality(petName)  -- [x] (6.)
 --     local response = GetEmoteResponse(emote, petName)
---     or GetEmoteResponse(emote, CritterEmote_GetActivePet(1))
---     or GetTargetEmote()
+--     								or GetEmoteResponse(emote, CritterEmote_GetActivePet(1))
+--     								or GetTargetEmote()
 
 --     if response then
 --         local formattedResponse = string.format("%s %s", petName, response)
