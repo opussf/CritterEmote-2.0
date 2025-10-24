@@ -8,10 +8,10 @@ CritterEmote.Colors = {
 	print = "|cff00ff00",
 	reset = "|r",
 }
-CritterEmote.Error = 1
-CritterEmote.Warn  = 2
-CritterEmote.Info  = 3
-CritterEmote.Debug = 4
+CritterEmote.Error = 1  -- Something wrong happened, cannot work around.  -- least verbose
+CritterEmote.Warn  = 2  -- Something wrong happened, can work around.
+CritterEmote.Info  = 3  -- You might want to know
+CritterEmote.Debug = 4  -- Shows most everything  -- most verbose
 CritterEmote.LogNames = { "Error", "Warn", "Info", "Debug" }
 
 CritterEmote.Categories = {
@@ -216,6 +216,19 @@ function CritterEmote.ParseCmd(msg)
 		end
 	end
 end
+function CritterEmote.spairs( t, f )  -- This is an awesome function I found
+	local a = {}
+	for n in pairs( t ) do table.insert( a, n ) end
+	table.sort( a, f ) -- @TODO: Look into giving a sort function here.
+	local i = 0
+	local iter = function()
+		i = i + 1
+		if a[i] == nil then return nil
+		else return a[i], t[a[i]]
+		end
+	end
+	return iter
+end
 function CritterEmote.SlashHandler(msg)
 	local cmd, param = CritterEmote.ParseCmd(msg)
 	if CritterEmote.commandList[cmd] and CritterEmote.commandList[cmd].alias then
@@ -229,8 +242,8 @@ function CritterEmote.SlashHandler(msg)
 	end
 end
 function CritterEmote.PrintHelp()
-	CritterEmote.Print(string.format(CritterEmote.L["%s (%s) by %s"], CritterEmote.ADDONNAME, CritterEmote.VERSION, CritterEmote.AUTHOR))
-	for cmd, info in pairs(CritterEmote.commandList) do
+	CritterEmote.Print(string.format(CritterEmote.L["%s (%s) by %s"], CritterEmote.ADDONNAME, CritterEmote.VERSION, CritterEmote.AUTHOR), false)
+	for cmd, info in CritterEmote.spairs(CritterEmote.commandList) do
 		if info.help then
 			local cmdStr = cmd
 			for c2, i2 in pairs(CritterEmote.commandList) do
@@ -239,12 +252,12 @@ function CritterEmote.PrintHelp()
 				end
 			end
 			CritterEmote.Print(string.format("%s %s %s -> %s",
-				SLASH_CRITTEREMOTE1, cmdStr, info.help[1], info.help[2]))
+				SLASH_CRITTEREMOTE1, cmdStr, info.help[1], info.help[2]), false)
 		end
 	end
 end
 function CritterEmote.ShowInfo()
-	CritterEmote.Print(string.format(CritterEmote.L["%s (%s) by %s"], CritterEmote.ADDONNAME, CritterEmote.VERSION, CritterEmote.AUTHOR))
+	CritterEmote.Print(string.format(CritterEmote.L["%s (%s) by %s"], CritterEmote.ADDONNAME, CritterEmote.VERSION, CritterEmote.AUTHOR), false)
 	-- CritterEmote.Print()
 	-- @TODO: Figure this out.
 
@@ -286,22 +299,23 @@ CritterEmote.commandList = {
 		end,
 	},
 	[CritterEmote.L["random"]] = {
-		["help"] = {CritterEmote.L["on"].."|"..CritterEmote.L["off"], CritterEmote.L["turns the periodic emotes on or off"]},
+		["help"] = {CritterEmote.L["on"].."|"..CritterEmote.L["off"],
+				CritterEmote.L["turns the periodic emotes on, off, or posts one"]},
 		["func"] = function(flag)
 			-- flag will be "" if it is not given.
-			print( flag, string.len(flag) )
 			if flag==CritterEmote.L["on"] then
 				CritterEmote_Variables.randomEnabled = true
 			elseif flag==CritterEmote.L["off"] then
 				CritterEmote_Variables.randomEnabled = false
 			end
-			if CritterEmote.randomEnabled then
+			if CritterEmote_Variables.randomEnabled then
 				CritterEmote.Print(CritterEmote.L["Random Emotes are enabled! Time for nom."])
 			else
 				CritterEmote.Print(CritterEmote.L["Random Emotes are disabled! The little dudes are sad."])
 			end
 		end,
 	},
+
 }
 --[[
 
