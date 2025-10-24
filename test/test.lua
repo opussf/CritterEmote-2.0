@@ -126,5 +126,20 @@ function test.test_slashCommand_debug_1()
 	CritterEmote.SlashHandler("debug")
 	assertEquals( 1, CritterEmote_Variables.logLevel )
 end
+function test.test_slashCommand_noCommand()
+	-- this should post a random emote
+	CritterEmote_Variables.enabled = true
+	CritterEmote_Variables.randomEnabled = true
+	CritterEmote.SlashHandler()
+	assertTrue(CritterEmote.emoteToSend)
+end
+function test.test_slashCommand_withMessage()
+	-- this should post a random emote
+	CritterEmote_Variables.enabled = true
+	CritterEmote_Variables.randomEnabled = true
+	CritterEmote.SlashHandler("Oh SNAP!")
+	assertEquals(": CustomPetName Oh SNAP!", CritterEmote.emoteToSend)
+end
+
 
 test.run()

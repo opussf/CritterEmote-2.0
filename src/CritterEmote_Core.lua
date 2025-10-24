@@ -237,8 +237,10 @@ function CritterEmote.SlashHandler(msg)
 	local cmdFunc = CritterEmote.commandList[cmd]
 	if cmdFunc and cmdFunc.func then
 		cmdFunc.func(param)
+	elseif msg=="" then
+		CritterEmote.lastUpdate = 0
 	else
-		CritterEmote.PrintHelp()
+		CritterEmote.DoCritterEmote(msg)
 	end
 end
 function CritterEmote.PrintHelp()
