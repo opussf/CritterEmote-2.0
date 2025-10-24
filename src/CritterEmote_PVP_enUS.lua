@@ -13,7 +13,7 @@ CritterEmote.PVP_emotes_enUS = {
     "yells, \"Time for a meat grinder!\"",
     "says, \"Who's the noob now, %t?\"",
     "Heh, heh, heh, heh, heh."
-},
+}
 -- @TODO put these in later.
     -- Horde = {
     --     "yells, \"FOR THE HORDE!\"",
