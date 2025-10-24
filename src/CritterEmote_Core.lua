@@ -18,17 +18,12 @@ CritterEmote.Categories = {
 	"General", "Silly", "Song", "Location", "Special", "PVP"
 }
 
-CritterEmote_Variables = {}
+CritterEmote_Variables = { Categories = {} }
 CritterEmote_CharacterVariables = {}
+for _,v in pairs(CritterEmote.Categories) do
+	CritterEmote_Variables.Categories[v] = true
+end
 
-CritterEmote_Variables.Categories = {
-  General = true,
-  Silly = true,
-  Song = true,
-  Location = true,
-  Special = true,
-  PVP = true,
-}
 CritterEmote_Variables.enabled = true
 CritterEmote_Variables.randomEnabled = true
 CritterEmote_Variables.baseInterval = 300
@@ -132,7 +127,7 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- false means that msg is text to use.
 	CritterEmote.Log(CritterEmote.Debug, "Call to DoCritterEmote( "..(msg or "nil")..", "..(isEmote and "True" or "False")..")")
 	local petName, customName = CritterEmote.GetActivePet()
-	CritterEmote.Log(CritterEmote.Debug, "petName: "..petName..", customName:"..(customName or "nil"))
+	CritterEmote.Log(CritterEmote.Debug, "petName: "..(petName or "nil")..", customName:"..(customName or "nil"))
 	if petName then -- a pet is summoned
 		if isEmote or msg == nil then
 			msg = CritterEmote.GetEmoteMessage(msg, petName, customName)

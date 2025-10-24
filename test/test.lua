@@ -50,7 +50,9 @@ function test.test_onUpdate_emoteToSend()
 	isInCombat = false
 	CritterEmote.lastUpdate = 0  -- force update
 	CritterEmote.OnUpdate()
-	test.dump(chatLog)
+	if not CritterEmote.emoteToSend then
+		test.dump(chatLog)
+	end
 	print( "emoteToSend: "..CritterEmote.emoteToSend )
 	assertTrue( CritterEmote.emoteToSend )  -- this should be set, to be posted later
 	assertAlmostEquals( time(), CritterEmote.lastUpdate, nil, nil, 1 ) -- should set the time.
