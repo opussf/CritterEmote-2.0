@@ -1905,12 +1905,8 @@ CritterEmote.EmoteResponses = {
 	},
 	SHIMMY = {
 		default = nil,
-	  ["Lil' K.T."] = {
-			"doesn't think you're very good at dancing.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"is clearly not impressed.",
-			},
+		["Lil' K.T."] = { "doesn't think you're very good at dancing.", },
+		["Lil' Ragnaros"] = { "is clearly not impressed.", },
 	},
 	SHIVER = {
 		default = nil,
@@ -2270,165 +2266,87 @@ CritterEmote.EmoteResponses = {
 		default = nil,
 	},
 	THANK = {
-		default = {
-			"nods.",
-		},
-	  ["Gregarious Grell"] = {
-			"says, \"I only obey the contract.\"",
-		},
-	  ["Lil' K.T."] = {
-			"tells you the credit goes to our glorious Master, the Lich King.",
-			},
+		default = { "nods.", },
+		["Gregarious Grell"] = { "says, \"I only obey the contract.\"", },
+		["Lil' K.T."] = { "tells you the credit goes to our glorious Master, the Lich King.", },
 	},
 	THINK = {
 		default = nil,
-	 ["Gregarious Grell"] = {
-		"wonders what it would be like to have a minion.",
-		},
-	 ["Lil' K.T."] = {
-		 "thinks about himself in his spare time as well.",
-		 },
-	 ["Lil' Ragnaros"] = {
-		"dreams about setting the world on fire.",
-		},
+		["Gregarious Grell"] = { "wonders what it would be like to have a minion.", },
+		["Lil' K.T."] = { "thinks about himself in his spare time as well.",  },
+		["Lil' Ragnaros"] = { "dreams about setting the world on fire.", },
 	},
 	THIRSTY = {
 		default = {
 			"suggests a nice refreshing beer.",
 			"suggests an ice cold can of redbull.",
 		},
-		cat = {
-			"suggests a nice glass of milk.",
-		},
-		reptile = {
-			"suggests a nice glass of milk.",
-		},
-		["Warbot"] = {  "suggests a nice refreshing Mountain Dew.",
-		},
-		["Ethereal Soul-Trader"] = {  "grins and tells you, \"Of course you may have a drink, for the right price.\"",
-		},
-		["Gregarious Grell"] = { "reminds you to squeeze Grell Moss for liquid.",
-		},
-		["Lil' K.T."] = {  "picked something up from Illidan. \"You are not prepared!\"",
-			},
-		["Lil' Ragnaros"] = {   "suggests a flaming Homer.",
-			},
+		cat = { "suggests a nice glass of milk.", },
+		reptile = { "suggests a nice glass of milk.", },
+		["Warbot"] = { "suggests a nice refreshing Mountain Dew.", },
+		["Ethereal Soul-Trader"] = { "grins and tells you, \"Of course you may have a drink, for the right price.\"", },
+		["Gregarious Grell"] = { "reminds you to squeeze Grell Moss for liquid.", },
+		["Lil' K.T."] = { "picked something up from Illidan. \"You are not prepared!\"", },
+		["Lil' Ragnaros"] = { "suggests a flaming Homer.", },
 	},
 	THREATEN = {
-		default = {
-			"cowers in fear.",
-		},
-		bird = {
-			"circles overhead, waiting for an opening to attack.",
-		},
-		["Gregarious Grell"] = {
-				"shouts, \"No master! %t has children!\"",
-		},
-		["Lil' Ragnaros"] = {
-				"come forth, my servants, defend your master!",
-			},
-		["Lil' K.T."] = {
-			"is now taunt immune!",
-		},
+		default = { "cowers in fear.", },
+		bird = { "circles overhead, waiting for an opening to attack.", },
+		["Gregarious Grell"] = { "shouts, \"No master! %t has children!\"", },
+		["Lil' Ragnaros"] = { "come forth, my servants, defend your master!", },
+		["Lil' K.T."] = { "is now taunt immune!", },
 	},
 	TICKLE = {
 		default = nil,
-		beast = {
-			"rolls on its back gleefully.",
-		 },
-		evil = {
-			"is not ticklish.",
-		},
-		mech = {
-				"does not compute.",
-				},
-		["Gregarious Grell"] = {
-				"yells, \"No master! %t is ticklish!\"",
-		}
+		beast = { "rolls on its back gleefully.", },
+		evil = { "is not ticklish.", },
+		mech = { "does not compute.", },
+		["Gregarious Grell"] = { "yells, \"No master! %t is ticklish!\"", }
 	},
 	TIRED = {
 		default = nil,
-		beast = {
-			"jumps up and down like a bundle of energy.",
-			},
-		cat = { "is already taking a cat nap.",
-		  },
-		["Gregarious Grell"] = {
-				"jumps up and down like a a bundle of energy.",
-		},
-		["Lil' Ragnaros"] = {
-				"screams, \"NO, NOOOO! This was to be my hour of triumph!\"",
-				},
-		["Lil' K.T."] = {
-			"offers you immortality and a body that will never tire.",
-			},
+		beast = { "jumps up and down like a bundle of energy.", },
+		cat = { "is already taking a cat nap.", },
+		["Gregarious Grell"] = { "jumps up and down like a a bundle of energy.", },
+		["Lil' Ragnaros"] = { "screams, \"NO, NOOOO! This was to be my hour of triumph!\"", },
+		["Lil' K.T."] = { "offers you immortality and a body that will never tire.", },
 	},
 	TRAIN = {
 		default = nil,
-	  humanoid = {
-			"joins in, \"Choo, choo!\"",
-			},
-		["Gregarious Grell"] = {
-				"says, \"oohc, oohc.\"",
-		},
-		["Lil' K.T."] = {
-			"complains, \"Enough, I grow tired of these distractions.\"",
-			},
+		humanoid = { "joins in, \"Choo, choo!\"", },
+		["Gregarious Grell"] = { "says, \"oohc, oohc.\"", },
+		["Lil' K.T."] = { "complains, \"Enough, I grow tired of these distractions.\"", },
 	},
 	TRUCE = {
 		default = nil,
-		["Lil' Ragnaros"] = {
-				"shakes his head. Pathetic!",
-			},
-		  ["Lil' K.T."] = {
-				"threatens no quarter from the Scourge.",
-				},
+		["Lil' Ragnaros"] = { "shakes his head. Pathetic!", },
+		["Lil' K.T."] = { "threatens no quarter from the Scourge.", },
 	},
 	TWIDDLE = {
 		default = nil,
-	  ["Lil' K.T."] = {
-			"straightens his robes.",
-			},
+		["Lil' K.T."] = { "straightens his robes.", },
 	},
 	VETO = {
 		default = nil,
-	  ["Lil' K.T."] = {
-			"will see what the Lich King thinks of this.",
-			},
+		["Lil' K.T."] = { "will see what the Lich King thinks of this.", },
 	},
 	VICTORY = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"shouts, \"%t did good! %t did good!\"",
-		},
-	  ["Lil' Ragnaros"] = {
-			"says, \"Die insect!\"",
-			},
-	  ["Lil' K.T."] = {
-			"grins and says, \"All part of the Master's plan.\"",
-			},
+		["Gregarious Grell"] = { "shouts, \"%t did good! %t did good!\"", },
+		["Lil' Ragnaros"] = { "says, \"Die insect!\"", },
+		["Lil' K.T."] = { "grins and says, \"All part of the Master's plan.\"", },
 	},
 	VIOLIN = {
 		default = nil,
-		humanoid = {
-			"cries.",
-			},
-		["Ethereal Soul-Trader"] = {
-			"asks, \"Is that one of a kind? Care to barter?\"",
-		},
-		["Lil' K.T."] = {
-			"slowly claps for you, clearly unimpressed.",
-			},
+		humanoid = { "cries.", },
+		["Ethereal Soul-Trader"] = { "asks, \"Is that one of a kind? Care to barter?\"", },
+		["Lil' K.T."] = { "slowly claps for you, clearly unimpressed.", },
 	},
 	WAIT = {
-		default = {
-			"waits.",
-		},
+		default = { "waits.", },
 		bird = { "roosts on nearest convenient spot.", },
 		spider = { "taps legs one after the other.", },
-	   ["Lil' K.T."] = {
-			 "waits, but doesn't seem happy about it.",
-			 },
+		["Lil' K.T."] = { "waits, but doesn't seem happy about it.", },
 	},
 	WARN = {
 		default = nil,
@@ -2451,24 +2369,14 @@ CritterEmote.EmoteResponses = {
 		["Lil' K.T."] = { "mocks your foolishness.", },
 	},
 	WELCOME = {
-		default = {
-			"greetings.",
-		},
-		cat = {
-			"purrs.",
-		},
-		reptile = {
-			"hisses warmly.",
-		},
-	  ["Lil' K.T."] = {
-			"floats intimidatingly and doesn't reciprocate.",
-			},
+		default = { "greetings.", },
+		cat = { "purrs.", },
+		reptile = { "hisses warmly.", },
+		["Lil' K.T."] = { "floats intimidatingly and doesn't reciprocate.", },
 	},
 	WHINE = {
 		default = nil,
-	 evil = {
-		"is not here to babysit you.",
-		},
+		evil = { "is not here to babysit you.", },
 	},
 	WHISTLE = {
 		default = nil,

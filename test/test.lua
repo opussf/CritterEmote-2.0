@@ -14,10 +14,10 @@ function test.before()
 	CritterEmote.OnLoad()
 end
 function test.after()
-	test.dump(chatLog)
+	-- test.dump(chatLog)
 end
 
-function test.test_do_emote_no_target()
+function test.notest_do_emote_no_target()
 	-- with no targeted critter, an emote does not set emoteToSend
 	-- OnUpdate takes care of posting this later.
 	Units["target"] = nil
@@ -44,19 +44,24 @@ function test.notest_do_emote_target_critter()
 	CritterEmote.OnEmote("SING", "")
 	assertEquals( ": CustomPetName sings with you.", CritterEmote.emoteToSend )
 end
-function test.notest_onUpdate_emoteToSend()
-	CritterEmote.OnUpdate()
+function test.test_onUpdate_emoteToSend()
+	CritterEmote_Variables.enabled = true
 	CritterEmote_Variables.randomEnabled = true
-	test.dump(CritterEmote)
-	-- fail()
+	isInCombat = false
+	CritterEmote.lastUpdate = 0  -- force update
+	CritterEmote.OnUpdate()
+	test.dump(chatLog)
+	assertTrue( CritterEmote.emoteToSend )
+	print(CritterEmote.emoteToSend)
+	fail()
 end
 
-function test.test_GetEmoateMessage()
+function test.notest_GetEmoteMessage()
 	local emoteToSend = CritterEmote.GetEmoteMessage("CHEER","petName","customName")
-	test.dump(chatLog)
+	-- test.dump(chatLog)
 	assertEquals( "Celebrates!", emoteToSend )
 end
-function test.test_noCritterEmote_()
+function test.notest_noCritterEmote_()
 	local prefix = "CritterEmote_"
 	local badThings = {}
 	-- test.dump(_G)

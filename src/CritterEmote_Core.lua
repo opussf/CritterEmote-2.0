@@ -47,7 +47,8 @@ function CritterEmote.Log(level, msg)
 end
 --Any formating functions for displaying the emote
 function CritterEmote.DisplayEmote(message)
-	CritterEmote.Log(CritterEmote.Info, "DisplayEmote("..message..")")
+	-- this adds the players name to message and sets emoteToSend
+	CritterEmote.Log(CritterEmote.Debug, "DisplayEmote("..message..")")
 	local nameAdd = string.sub(CritterEmote.playerName, -1) == "s" and ' ' or ': '
 	CritterEmote.emoteToSend = nameAdd..message
 end
@@ -62,6 +63,7 @@ function CritterEmote.OnLoad()
 	CritterEmote.updateInterval = CritterEmote.CreateUpdateInterval()
 end
 function CritterEmote.LOADING_SCREEN_DISABLED()
+	CritterEmote.lastUpdate = time()
 end
 function CritterEmote.OnEmote(emote, target)
 	CritterEmote.Log(CritterEmote.Debug, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
@@ -88,9 +90,8 @@ function CritterEmote.OnUpdate(elapsed)
 			if (CritterEmote.lastUpdate + CritterEmote.updateInterval < time() and
 					not UnitAffectingCombat("player") ) then
 				CritterEmote.Log(CritterEmote.Info, "Random interval time elapsed.")
-				local petName = CritterEmote.GetActivePet()
-
 				CritterEmote.DoCritterEmote()
+				CritterEmote.lastUpdate = time()
 			end
 		end
 	end
@@ -127,12 +128,14 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- false means that msg is text to use.
 	CritterEmote.Log(CritterEmote.Debug, "Call to DoCritterEmote( "..(msg or "nil")..", "..(isEmote and "True" or "False")..")")
 	local petName, customName = CritterEmote.GetActivePet()
-	-- print(petName, customName)
-	if isEmote then
-		msg = CritterEmote.GetEmoteMessage(msg, petName, customName)
-	end
-	if msg and petName then
-		CritterEmote.DisplayEmote((customName or petName).." "..msg)
+	CritterEmote.Log(CritterEmote.Debug, "petName: "..petName..", customName:"..(customName or "nil"))
+	if petName then -- a pet is summoned
+		if isEmote or msg == nil then
+			msg = CritterEmote.GetEmoteMessage(msg, petName, customName)
+		end
+		if msg and petName then
+			CritterEmote.DisplayEmote((customName or petName).." "..msg)
+		end
 	end
 end
 function CritterEmote.GetActivePet()
@@ -149,8 +152,8 @@ function CritterEmote.GetPetPersonality(petName)
 	return CritterEmote.Personalities[petName] or "default"
 end
 function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
-	CritterEmote.Log(CritterEmote.Debug, "Call to GetEmoteMessage("..emoteIn..", "..petName..", "..(customName or "nil")..")")
-	CritterEmote.Log(CritterEmote.Debug, " Getting Emote Table for ".. emoteIn )
+	CritterEmote.Log(CritterEmote.Debug, "Call to GetEmoteMessage("..(emoteIn or "nil")..", "..petName..", "..(customName or "nil")..")")
+	CritterEmote.Log(CritterEmote.Debug, " Getting Emote Table for "..(emoteIn or "nil") )
 
 	local petPersonality = CritterEmote.GetPetPersonality(petName)
 	emoteIn = CritterEmote.EmoteMap[emoteIn]
@@ -159,7 +162,6 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
 	local emoteList = {}
 	local emoteTable = CritterEmote.EmoteResponses[emoteIn]
 	if emoteTable then
-
 		emoteList = emoteTable[customName] or
 		            emoteTable[petName] or
 		            emoteTable[petPersonality] or
@@ -170,7 +172,13 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
 		-- 	search_name = petPersonality_silly
 		-- end
 		return CritterEmote.GetRandomTableEntry(emoteList)
+	else
+		return CritterEmote.GetRandomEmote()
 	end
+end
+function CritterEmote.GetRandomEmote()
+	-- not totally random
+	return "Bob"
 end
 function CritterEmote.GetRandomTableEntry(myTable)
 	if myTable and #myTable>0 then
