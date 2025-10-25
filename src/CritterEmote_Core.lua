@@ -317,8 +317,20 @@ CritterEmote.commandList = {
 			end
 		end,
 	},
-
 }
+for _, category in pairs(CritterEmote.Categories) do
+	local c = CritterEmote.L[string.lower(category)]
+	CritterEmote.commandList[c] = {
+		["help"] = {"", CritterEmote.L["toggle inclusion of "..CritterEmote.L[category].." emotes"]},
+		["func"] = function()
+			CritterEmote.ToggleCategory(category)
+		end,
+	}
+end
+function CritterEmote.ToggleCategory(cat)
+	CritterEmote_Variables.Categories[cat] = not CritterEmote_Variables.Categories[cat]
+
+end
 --[[
 
 local function CritterEmote_SlashHandler(msg, editbox)
