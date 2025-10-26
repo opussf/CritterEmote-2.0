@@ -83,7 +83,7 @@ function CritterEmote.LOADING_SCREEN_DISABLED()
 	C_Timer.After(10, function()
 		CritterEmote.Log(CritterEmote.Debug, "Requesting calendar data...")
 		C_Calendar.OpenCalendar()  -- trigger CALENDAR_UPDATE_EVENT_LIST
-    end)
+	end)
 end
 function CritterEmote.OnEmote(emote, target)
 	CritterEmote.Log(CritterEmote.Debug, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
