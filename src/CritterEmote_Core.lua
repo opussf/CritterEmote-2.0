@@ -270,6 +270,8 @@ function CritterEmote.PrintHelp()
 end
 function CritterEmote.ShowInfo()
 	CritterEmote.Print(string.format(CritterEmote.L["%s (%s) by %s"], CritterEmote.ADDONNAME, CritterEmote.VERSION, CritterEmote.AUTHOR), false)
+	-- if CritterEmote_Variables.enabled then
+	-- 	CritterEmote.Print()
 	-- CritterEmote.Print()
 	-- @TODO: Figure this out.
 
@@ -285,10 +287,7 @@ end
 CritterEmote.commandList = {
 	["debug"] = {  -- keep this as debug, no help will keep it from showing in help.  This keeps it 'hidden'
 		["func"] = function()
-			CritterEmote_Variables.logLevel = CritterEmote_Variables.logLevel + 1
-			if CritterEmote_Variables.logLevel > #CritterEmote.LogNames then
-				CritterEmote_Variables.logLevel = 1
-			end
+			CritterEmote_Variables.logLevel = CritterEmote.Debug
 			CritterEmote.Print("Log level is now set to "..CritterEmote.LogNames[CritterEmote_Variables.logLevel])
 		end,
 	},
@@ -307,9 +306,19 @@ CritterEmote.commandList = {
 			if CritterEmote.activeHolidays then
 				print("Active holidays:")
 				for k,_ in pairs( CritterEmote.activeHolidays ) do
-					print(k)
+					print("> "..k)
 				end
 			end
+		end,
+	},
+	[CritterEmote.L["verbose"]] = {
+		["help"] = {"", CritterEmote.L["change the verbosity level"]},
+		["func"] = function()
+			CritterEmote_Variables.logLevel = CritterEmote_Variables.logLevel + 1
+			if CritterEmote_Variables.logLevel >= CritterEmote.Debug then
+				CritterEmote_Variables.logLevel = 1
+			end
+			CritterEmote.Print("Log level is now set to "..CritterEmote.LogNames[CritterEmote_Variables.logLevel])
 		end,
 	},
 	[CritterEmote.L["help"]] = {

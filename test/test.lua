@@ -122,9 +122,14 @@ function test.test_slashCommand_random_noFlag()
 	CritterEmote.SlashHandler("random")
 	assertTrue(CritterEmote_Variables.randomEnabled)
 end
-function test.test_slashCommand_debug_1()
-	CritterEmote_Variables.logLevel = 4
+function test.test_slashCommand_debug()
+	CritterEmote_Variables.logLevel = 3
 	CritterEmote.SlashHandler("debug")
+	assertEquals( 4, CritterEmote_Variables.logLevel )
+end
+function test.test_slashCommand_verbose()
+	CritterEmote_Variables.logLevel = 3
+	CritterEmote.SlashHandler("verbose")
 	assertEquals( 1, CritterEmote_Variables.logLevel )
 end
 function test.test_slashCommand_noCommand()
