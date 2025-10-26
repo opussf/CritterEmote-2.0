@@ -12,7 +12,11 @@ CritterEmote.Error = 1  -- Something wrong happened, cannot work around.  -- lea
 CritterEmote.Warn  = 2  -- Something wrong happened, can work around.
 CritterEmote.Info  = 3  -- You might want to know
 CritterEmote.Debug = 4  -- Shows most everything  -- most verbose
-CritterEmote.LogNames = { "Error", "Warn", "Info", "Debug" }
+CritterEmote.LogNames = { CritterEmote.L["Error"],
+		CritterEmote.L["Warn"],
+		CritterEmote.L["Info"],
+		"Debug"  -- this does not need to be translated.
+}
 
 CritterEmote.Categories = {
 	"General", "Silly", "Song", "Location", "Holiday", "PVP"
@@ -287,7 +291,7 @@ CritterEmote.commandList = {
 	["debug"] = {  -- keep this as debug, no help will keep it from showing in help.  This keeps it 'hidden'
 		["func"] = function()
 			CritterEmote_Variables.logLevel = CritterEmote.Debug
-			CritterEmote.Print("Log level is now set to "..CritterEmote.LogNames[CritterEmote_Variables.logLevel])
+			CritterEmote.Print(string.format(CritterEmote.L["Log level is now set to %s"], CritterEmote.LogNames[CritterEmote_Variables.logLevel]))
 		end,
 	},
 	["test"] = {  -- no help will keep it hidden.  Shows some test data.
@@ -368,10 +372,11 @@ function CritterEmote.AddEmoteCategoriesToCommandList()
 			["help"] = {"", string.format(CritterEmote.L["toggle inclusion of %s emotes."], CritterEmote.L[category])},
 			["func"] = function()
 				CritterEmote.ToggleCategory(category)
-				CritterEmote.Print(CritterEmote.L["%s is %s with %i emotes."],
+				CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
 						category,
 						(CritterEmote_Variables.Categories[category] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
 						(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or 0)
+					)
 				)
 			end,
 		}
