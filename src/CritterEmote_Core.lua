@@ -309,9 +309,9 @@ CritterEmote.commandList = {
 			local petName, customName = CritterEmote.GetActivePet()
 			local creatureType, creatureTypeCode = UnitCreatureType("target")
 			CritterEmote_TypeValues = CritterEmote_TypeValues or {}
-			CritterEmote_TypeValues[creatureType] = creatureTypeCode
+			if creatureType then CritterEmote_TypeValues[creatureType] = creatureTypeCode end
 			print(petName..(customName and " ("..customName..") " or "").." is a "..CritterEmote.GetPetPersonality(petName).."-\""..
-				creatureType.."\"("..creatureTypeCode..")"
+				(creatureType or "nil").."\"("..(creatureTypeCode or "nil")..")"
 			)
 			if CritterEmote.activeHolidays then
 				print("Active holidays:")

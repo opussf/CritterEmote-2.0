@@ -4,7 +4,7 @@
 Variables and method names are CamelCase (not snake_case), with varibles having a leading lowercase, and methods being capitalized.
 
 ## Indent
-Not supper important, going to start to project with tab indents, with my editor set to 4 chars per tab.
+Not supper important, going to start to indent with tab indents, with my editor set to 4 chars per tab.
 Don't mix, keep them clean, use spaces after the initial indent for alignment if needed.
 
 ## Line length
