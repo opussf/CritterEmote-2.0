@@ -971,6 +971,10 @@ function C_AddOns.LoadAddOn( addonName )
 end
 function C_AddOns.DisableAddOn( addonName, playerName )
 end
+function C_AddOns.IsAddOnLoaded( addonName )
+	-- assue it is, modify later
+	return true
+end
 
 C_Container = {}
 C_Container.SortBagsRightToLeft = false -- this is normal
@@ -2305,6 +2309,42 @@ function C_PetJournal.GetPetInfoByPetID( petID )
 	return 0,"CustomPetName",0,0,0,0,0,"PetName"
 end
 
+----------
+-- C_Calendar
+----------
+C_Calendar = {}
+C_Calendar.monthDays = {31,28,31,30,31,30,31,31,30,31,30,31}  -- no.  this is NOT perfect.... This is for testing only
+function C_Calendar.GetMonthInfo(monthOffset)
+	-- returns info about the current month.
+	-- { firstWeekday, numDays, year, month }
+	local isPos = (monthOffset > 0)
+	local out = {}
+	local today = os.date("*t",os.time())  -- this is date's struct
+	today.month = today.month + monthOffset
+
+	while ( today.month < 1 or today.month > 12 ) do
+		today.month = (isPos and today.month-12 or today.month+12)
+		today.year = (isPos and today.year+1 or today.year-1)
+	end
+
+	-- print(monthOffset)
+	-- test.dump(today)
+	-- print("----")
+
+	out = {firstWeekday=1, numDays=C_Calendar.monthDays[today.month], year=today.year, month=today.month}
+	-- test.dump(out)
+	-- print("=====")
+	return out
+end
+function C_Calendar.GetNumDayEvents(monthOffset, day)
+	return 0
+end
+function C_Calendar.OpenCalendar()
+	--
+end
+
+
+-----------------------------------------
 -- A SAX parser takes a content handler, which provides these methods:
 --     startDocument()                 -- called at the start of the Document
 --     endDocument()                   -- called at the end of the Document

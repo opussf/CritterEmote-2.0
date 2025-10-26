@@ -49,3 +49,12 @@ Planned Enhancements:
     Creating an addon for the Classic versions of WoW (MoP first).
 
     Expansion of translation files for multiple languages (local). Integrating them according to the Server, with the option to change the default language.
+
+
+=======================================
+
+
+## Ideas
+
+* Create tables of emotes.
+* Each table has an "init" and a "choose" method that can be overridden.

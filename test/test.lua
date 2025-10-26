@@ -13,6 +13,7 @@ function test.before()
 	CritterEmote.emoteToSend = nil
 	CritterEmote_Variables.enabled = true
 	CritterEmote.OnLoad()
+	CritterEmote.LOADING_SCREEN_DISABLED()
 end
 function test.after()
 	-- test.dump(chatLog)

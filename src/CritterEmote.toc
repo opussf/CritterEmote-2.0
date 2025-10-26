@@ -14,10 +14,11 @@ CritterEmote_PetPersonalities.lua
 CritterEmote_EmoteMap.lua
 CritterEmote_EmoteResponses_enUS.lua
 CritterEmote_General_enUS.lua
-CritterEmote_Locations_enUS.lua
+CritterEmote_Location_enUS.lua
 CritterEmote_PVP_enUS.lua
 CritterEmote_Silly_enUS.lua
 CritterEmote_Songs_enUS.lua
+CritterEmote_Special_enUS.lua
 
 ## Localization
 localization_core.lua
@@ -26,6 +27,7 @@ localization_ru.lua
 
 ## Core Functionality
 CritterEmote_Core.lua
+CritterEmote_Holidays.lua
 CritterEmote.xml
 
 ## Options

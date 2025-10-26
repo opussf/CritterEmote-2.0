@@ -1,28 +1,33 @@
-CritterEmote_Special_enUS = {
-    WinterVeil = {
+local _, CritterEmote = ...
+if GetLocale() == "enUS" then
+CritterEmote.Holiday_emotes = {
+    ["Feast of Winter Veil"] = {
         "dances around the festive tree.",
         "throws snowballs joyfully.",
         "sips hot cocoa.",
     },
-    MidsummerFireFestival = {
+    ["Midsummer Fire Festival"] = {
         "jumps over the bonfire.",
         "dances around the flame.",
         "lights fireworks.",
     },
-    Brewfest = {
+    ["Brewfest"] = {
         "takes a deep drink from a mug of ale.",
         "stumbles around happily.",
         "cheers loudly.",
     },
-    HallowsEnd = {
+    ["Hallow's End"] = {
         "carves a pumpkin.",
         "laughs maniacally.",
         "spooks everyone around.",
     },
-    LoveIsInTheAir = {
+    ["Love is in the Air"] = {
         "hands out love tokens.",
         "blows a kiss.",
         "throws rose petals.",
     },
+    ["Noblegarden"] = { },
+
     -- Add more holidays here...
 }
+end

@@ -54,6 +54,7 @@ end
 function CritterEmote.OnLoad()
 	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
 	CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
+	CritterEmoteFrame:RegisterEvent("CALENDAR_UPDATE_EVENT_LIST")
 
 	SLASH_CRITTEREMOTE1 = "/ce"
 	SlashCmdList["CRITTEREMOTE"] = CritterEmote.SlashHandler
@@ -63,6 +64,15 @@ function CritterEmote.OnLoad()
 end
 function CritterEmote.LOADING_SCREEN_DISABLED()
 	CritterEmote.lastUpdate = time()
+	CritterEmote.AddEmoteCategoriesToCommandList()
+	if not C_AddOns.IsAddOnLoaded("Blizzard_Calendar") then
+		CritterEmote.Log(CritterEmote.Debug, "Blizzard_Calendar was not loaded.")
+		UIParentLoadAddOn("Blizzard_Calendar")
+	end
+	C_Timer.After(2, function()
+		CritterEmote.Log(CritterEmote.Debug, "Requesting calendar data...")
+		C_Calendar.OpenCalendar()  -- trigger CALENDAR_UPDATE_EVENT_LIST
+    end)
 end
 function CritterEmote.OnEmote(emote, target)
 	CritterEmote.Log(CritterEmote.Debug, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
@@ -273,6 +283,39 @@ function CritterEmote.ShowInfo()
 end]]
 end
 CritterEmote.commandList = {
+	["debug"] = {  -- keep this as debug, no help will keep it from showing in help.  This keeps it 'hidden'
+		["func"] = function()
+			CritterEmote_Variables.logLevel = CritterEmote_Variables.logLevel + 1
+			if CritterEmote_Variables.logLevel > #CritterEmote.LogNames then
+				CritterEmote_Variables.logLevel = 1
+			end
+			CritterEmote.Print("Log level is now set to "..CritterEmote.LogNames[CritterEmote_Variables.logLevel])
+		end,
+	},
+	["test"] = {  -- no help will keep it hidden.  Shows some test data.
+		["func"] = function()
+			local guid = C_PetJournal.GetSummonedPetGUID()
+			print("Summoned pet GUID: "..(guid or "none"))
+			local owner = CritterEmote.GetTargetPetsOwner()
+			if owner then
+				print("Target pet belongs to: " .. owner)
+			else
+				print("No valid pet target or companion owner text found.")
+			end
+			local petName, customName = CritterEmote.GetActivePet()
+			print(petName..(customName and " ("..customName..") " or "").." is a "..CritterEmote.GetPetPersonality(petName))
+			if CritterEmote.activeHolidays then
+				print("Active holidays:")
+				for k,_ in pairs( CritterEmote.activeHolidays ) do
+					print(k)
+				end
+			end
+		end,
+	},
+	[CritterEmote.L["help"]] = {
+		["help"] = {"", CritterEmote.L["show the command help"]},
+		["func"] = CritterEmote.PrintHelp,
+	},
 	[CritterEmote.L["off"]] = {
 		["help"] = {"", CritterEmote.L["turns the emotes off"]},
 		["func"] = function()
@@ -291,18 +334,10 @@ CritterEmote.commandList = {
 		["help"] = {"", CritterEmote.L["displays Critter Emote information"]},
 		["func"] = CritterEmote.ShowInfo,
 	},
-	["debug"] = {  -- keep this as debug, no help will keep it from showing in help.  This keeps it 'hidden'
-		["func"] = function()
-			CritterEmote_Variables.logLevel = CritterEmote_Variables.logLevel + 1
-			if CritterEmote_Variables.logLevel > #CritterEmote.LogNames then
-				CritterEmote_Variables.logLevel = 1
-			end
-			CritterEmote.Print("Log level is now set to "..CritterEmote.LogNames[CritterEmote_Variables.logLevel])
-		end,
-	},
+
 	[CritterEmote.L["random"]] = {
 		["help"] = {CritterEmote.L["on"].."|"..CritterEmote.L["off"],
-				CritterEmote.L["turns the periodic emotes on, off, or posts one"]},
+				CritterEmote.L["turns the periodic emotes on or off"]},
 		["func"] = function(flag)
 			-- flag will be "" if it is not given.
 			if flag==CritterEmote.L["on"] then
@@ -318,97 +353,42 @@ CritterEmote.commandList = {
 		end,
 	},
 }
-for _, category in pairs(CritterEmote.Categories) do
-	local c = CritterEmote.L[string.lower(category)]
-	CritterEmote.commandList[c] = {
-		["help"] = {"", CritterEmote.L["toggle inclusion of "..CritterEmote.L[category].." emotes"]},
-		["func"] = function()
-			CritterEmote.ToggleCategory(category)
-		end,
-	}
+function CritterEmote.AddEmoteCategoriesToCommandList()
+	for _, category in pairs(CritterEmote.Categories) do
+		local c = CritterEmote.L[string.lower(category)]
+		CritterEmote.commandList[c] = {
+			["help"] = {"", CritterEmote.L["toggle inclusion of "..CritterEmote.L[category].." emotes"]},
+			["func"] = function()
+				CritterEmote.ToggleCategory(category)
+				CritterEmote.Print(category.." is "..(CritterEmote_Variables.Categories[category] and "ENABLED" or "DISABLED"))
+			end,
+		}
+	end
 end
 function CritterEmote.ToggleCategory(cat)
 	CritterEmote_Variables.Categories[cat] = not CritterEmote_Variables.Categories[cat]
-
+end
+function CritterEmote.CALENDAR_UPDATE_EVENT_LIST()
+	CritterEmote.Log(CritterEmote.Debug, "Call to CALENDAR_UPDATE_EVENT_LIST()")
+	CritterEmote.activeHolidays = CritterEmote.GetCurrentActiveHolidays()
+	CritterEmote.Special_emotes = {}
+	for holiday, _ in pairs(CritterEmote.activeHolidays) do
+		if CritterEmote.Holiday_emotes[holiday] then
+			for _, emote in pairs( CritterEmote.Holiday_emotes[holiday] ) do
+				CritterEmote.Log(CritterEmote.Debug, "Adding to Special_emotes: "..emote)
+				table.insert(CritterEmote.Special_emotes, emote)
+			end
+		end
+	end
 end
 --[[
 
 local function CritterEmote_SlashHandler(msg, editbox)
         if (msg == 'critter' or msg == "battle pet") then
                 print('I love to talk!');
-        elseif msg == "test" then
-  local guid = C_PetJournal.GetSummonedPetGUID()
-  print("GUID = " .. (guid or "none"))
 
-  local owner = CritterEmote_GetTargetPetsOwner()
-  if owner then
-    print("Target pet belongs to: " .. owner)
-  else
-    print("No valid pet target or companion owner text found.")
-  end
 
   elseif(msg == "options" ) then
           CritterEmote_DisplayOptions();
-  elseif(msg == "Silly" or msg=="silly") then
-    if(CritterEmote_Cats["Silly"]) then
-      CritterEmote_Message("Silly Emotes now disabled.");
-      CritterEmote_Cats["Silly"] = false;
-    else
-      CritterEmote_Message("Silly Emotes now enabled.");
-      CritterEmote_Cats["Silly"] = true;
-    end
-    CritterEmote_UpdateSaveTable();
-  elseif(msg == "Locations" or msg=="locations") then
-    if(CritterEmote_Cats["Locations"]) then
-      CritterEmote_Message("Location Emotes now disabled.");
-      CritterEmote_Cats["Locations"] = false;
-    else
-      CritterEmote_Message("Location Emotes now enabled.");
-      CritterEmote_Cats["Locations"] = true;
-    end
-    CritterEmote_UpdateSaveTable();
-  elseif(msg == "Songs" or msg=="songs") then
-    if(CritterEmote_Cats["Songs"]) then
-      CritterEmote_Message("Song Emotes now disabled.");
-      CritterEmote_Cats["Songs"] = false;
-    else
-      CritterEmote_Message("Song Emotes now enabled.");
-      CritterEmote_Cats["Songs"] = true;
-    end
-    CritterEmote_UpdateSaveTable();
-  elseif(msg == "Special" or msg=="special") then
-    if(CritterEmote_Cats["Special"]) then
-      CritterEmote_Message("Special Emotes now disabled.");
-      CritterEmote_Cats["Special"] = false;
-    else
-      CritterEmote_Message("Special Emotes now enabled.");
-      CritterEmote_Cats["Special"] = true;
-    end
-    CritterEmote_UpdateSaveTable();
-  elseif(msg == "PVP" or msg=="pvp") then
-    if(CritterEmote_Cats["PVP"]) then
-      CritterEmote_Message("PVP Emotes now disabled.");
-      CritterEmote_Cats["PVP"] = false;
-    else
-      CritterEmote_Message("PVP Emotes now enabled.");
-      CritterEmote_Cats["PVP"] = true;
-    end
-    CritterEmote_UpdateSaveTable();
-  elseif(msg == "General" or msg=="general") then
-    if(CritterEmote_Cats["General"]) then
-      CritterEmote_Message("General Emotes now disabled.");
-      CritterEmote_Cats["General"] = false;
-    else
-      CritterEmote_Message("General Emotes now enabled.");
-      CritterEmote_Cats["General"] = true;
-    end
-    CritterEmote_UpdateSaveTable();
-        elseif (msg == "") then
-                --CritterEmote_doEmote("Random", true);
-                --Instead of calling doEmote lets just set the random interval to now.
-                CritterEmote_TimeSinceLastUpdate = 99999999;
-                CritterEmote_forceEmote = true;
-        else
-                CritterEmote_doEmote(msg);
-        end
+
 end]]
