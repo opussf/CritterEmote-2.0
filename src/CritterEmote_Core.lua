@@ -394,14 +394,14 @@ function CritterEmote.ToggleCategory(cat)
 end
 function CritterEmote.CALENDAR_UPDATE_EVENT_LIST()
 	CritterEmote.Log(CritterEmote.Debug, "Call to CALENDAR_UPDATE_EVENT_LIST()")
-	if CritterEmote.Holiday_emotes then
+	if CritterEmote.Holiday_emotes_src then
 		CritterEmote.activeHolidays = CritterEmote.GetCurrentActiveHolidays()
-		CritterEmote.Special_emotes = {}
+		CritterEmote.Holiday_emotes = {}
 		for holiday, _ in pairs(CritterEmote.activeHolidays) do
-			if CritterEmote.Holiday_emotes[holiday] then
-				for _, emote in pairs( CritterEmote.Holiday_emotes[holiday] ) do
-					CritterEmote.Log(CritterEmote.Debug, "Adding to Special_emotes: "..emote)
-					table.insert(CritterEmote.Special_emotes, emote)
+			if CritterEmote.Holiday_emotes_src[holiday] then
+				for _, emote in pairs( CritterEmote.Holiday_emotes_src[holiday] ) do
+					CritterEmote.Log(CritterEmote.Debug, "Adding to Holiday_emotes: "..emote)
+					table.insert(CritterEmote.Holiday_emotes, emote)
 				end
 			end
 		end

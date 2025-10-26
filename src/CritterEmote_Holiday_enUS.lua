@@ -1,6 +1,6 @@
 local _, CritterEmote = ...
 if GetLocale() == "enUS" then
-CritterEmote.Holiday_emotes = {
+CritterEmote.Holiday_emotes_src = {
     ["Feast of Winter Veil"] = {
         "dances around the festive tree.",
         "throws snowballs joyfully.",
