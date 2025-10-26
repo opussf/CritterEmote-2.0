@@ -45,6 +45,7 @@ CritterEmote_Songs_enUS.lua
 
 ## Localization
 localization_core.lua
+localization_es.lua
 localization_ru.lua
 
 ## Core Functionality
