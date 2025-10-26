@@ -2,10 +2,19 @@
 ## Title: Critter Emote
 ## Author: Acidfrost59, Fysker, ChatGPT, Grok3
 ## Version: @VERSION@
+## IconTexture: Interface/Icons/Inv_pet_wingedlion
 ## email: PBCritterEmote@gmail.com
 ## Notes: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
 ## LoadOnDemand: 0
 ## DefaultState: enabled
+## Description: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
+## Description-deDE: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
+## Description-esES: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
+## Description-esMX: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
+## Description-frFR: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
+## Description-itIT: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
+## Description-ptBR: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
+## Description-ruRU: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
 ## Category: Roleplay
 ## Category-enUS: Roleplay
 ## Category-deDE: Roleplay
