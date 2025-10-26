@@ -1,5 +1,5 @@
 local _, CritterEmote = ...
-if GetLocale() == "enUS" then
+if GetLocale() == "esES" then
 CritterEmote.EmoteResponses = {
 	SHRUG = {
 		default = { "<encoge los hombros> ¿Qué?", },
