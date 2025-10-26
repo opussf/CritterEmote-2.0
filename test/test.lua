@@ -126,11 +126,19 @@ function test.test_slashCommand_debug()
 	CritterEmote_Variables.logLevel = 3
 	CritterEmote.SlashHandler("debug")
 	assertEquals( 4, CritterEmote_Variables.logLevel )
+	assertEquals( "|cff00ff00Critter Emote> |rLog level is now set to Error, Warn, Info, Debug", chatLog[#chatLog].msg )
 end
-function test.test_slashCommand_verbose()
+function test.test_slashCommand_verbose_to_Error()
 	CritterEmote_Variables.logLevel = 3
 	CritterEmote.SlashHandler("verbose")
 	assertEquals( 1, CritterEmote_Variables.logLevel )
+	assertEquals( "|cff00ff00Critter Emote> |rLog level is now set to Error", chatLog[#chatLog].msg )
+end
+function test.test_slashCommand_verbose_to_Info()
+	CritterEmote_Variables.logLevel = 2
+	CritterEmote.SlashHandler("verbose")
+	assertEquals( 3, CritterEmote_Variables.logLevel )
+	assertEquals( "|cff00ff00Critter Emote> |rLog level is now set to Error, Warn, Info", chatLog[#chatLog].msg )
 end
 function test.test_slashCommand_noCommand()
 	-- this should post a random emote

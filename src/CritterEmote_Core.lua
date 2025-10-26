@@ -48,6 +48,13 @@ function CritterEmote.Log(level, msg)
 		CritterEmote.Print(CritterEmote.LogNames[level]..": "..msg)
 	end
 end
+function CritterEmote.ReportLogLevels()
+	local reportLevels = {}
+	for i = 1, CritterEmote_Variables.logLevel do
+		table.insert(reportLevels, CritterEmote.LogNames[i] )
+	end
+	CritterEmote.Print(string.format(CritterEmote.L["Log level is now set to %s"], table.concat(reportLevels, ", ")))
+end
 --Any formating functions for displaying the emote
 function CritterEmote.DisplayEmote(message)
 	-- this adds the players name to message and sets emoteToSend
@@ -290,12 +297,6 @@ function CritterEmote.ShowInfo()
 	end
 end
 CritterEmote.commandList = {
-	["debug"] = {  -- keep this as debug, no help will keep it from showing in help.  This keeps it 'hidden'
-		["func"] = function()
-			CritterEmote_Variables.logLevel = CritterEmote.Debug
-			CritterEmote.Print(string.format(CritterEmote.L["Log level is now set to %s"], CritterEmote.LogNames[CritterEmote_Variables.logLevel]))
-		end,
-	},
 	["test"] = {  -- no help will keep it hidden.  Shows some test data.
 		["func"] = function()
 			local guid = C_PetJournal.GetSummonedPetGUID()
@@ -321,6 +322,12 @@ CritterEmote.commandList = {
 			end
 		end,
 	},
+	["debug"] = {  -- keep this as debug, no help will keep it from showing in help.  This keeps it 'hidden'
+		["func"] = function()
+			CritterEmote_Variables.logLevel = CritterEmote.Debug
+			CritterEmote.ReportLogLevels()
+		end,
+	},
 	[CritterEmote.L["verbose"]] = {
 		["help"] = {"", CritterEmote.L["change the verbosity level"]},
 		["func"] = function()
@@ -328,7 +335,7 @@ CritterEmote.commandList = {
 			if CritterEmote_Variables.logLevel >= CritterEmote.Debug then
 				CritterEmote_Variables.logLevel = 1
 			end
-			CritterEmote.Print("Log level is now set to "..CritterEmote.LogNames[CritterEmote_Variables.logLevel])
+			CritterEmote.ReportLogLevels()
 		end,
 	},
 	[CritterEmote.L["help"]] = {
