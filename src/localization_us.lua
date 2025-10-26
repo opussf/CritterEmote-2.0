@@ -1,3 +1,0 @@
-local _, L = ...
-if GetLocale() == "enUS" then
-end

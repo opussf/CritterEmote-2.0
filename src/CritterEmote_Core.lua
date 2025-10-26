@@ -72,7 +72,6 @@ function CritterEmote.LOADING_SCREEN_DISABLED()
 	C_Timer.After(10, function()
 		CritterEmote.Log(CritterEmote.Debug, "Requesting calendar data...")
 		C_Calendar.OpenCalendar()  -- trigger CALENDAR_UPDATE_EVENT_LIST
-		OpenCalendar()
     end)
 end
 function CritterEmote.OnEmote(emote, target)
@@ -170,7 +169,7 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
 
 	-- get the table
 	local emoteList = {}
-	local emoteTable = CritterEmote.EmoteResponses[emoteIn]
+	local emoteTable = CritterEmote.EmoteResponses and CritterEmote.EmoteResponses[emoteIn]
 	if emoteTable then
 		emoteList = emoteTable[customName] or
 		            emoteTable[petName] or
@@ -383,15 +382,19 @@ function CritterEmote.ToggleCategory(cat)
 end
 function CritterEmote.CALENDAR_UPDATE_EVENT_LIST()
 	CritterEmote.Log(CritterEmote.Debug, "Call to CALENDAR_UPDATE_EVENT_LIST()")
-	CritterEmote.activeHolidays = CritterEmote.GetCurrentActiveHolidays()
-	CritterEmote.Special_emotes = {}
-	for holiday, _ in pairs(CritterEmote.activeHolidays) do
-		if CritterEmote.Holiday_emotes[holiday] then
-			for _, emote in pairs( CritterEmote.Holiday_emotes[holiday] ) do
-				CritterEmote.Log(CritterEmote.Debug, "Adding to Special_emotes: "..emote)
-				table.insert(CritterEmote.Special_emotes, emote)
+	if CritterEmote.Holiday_emotes then
+		CritterEmote.activeHolidays = CritterEmote.GetCurrentActiveHolidays()
+		CritterEmote.Special_emotes = {}
+		for holiday, _ in pairs(CritterEmote.activeHolidays) do
+			if CritterEmote.Holiday_emotes[holiday] then
+				for _, emote in pairs( CritterEmote.Holiday_emotes[holiday] ) do
+					CritterEmote.Log(CritterEmote.Debug, "Adding to Special_emotes: "..emote)
+					table.insert(CritterEmote.Special_emotes, emote)
+				end
 			end
 		end
+	else
+		CritterEmote.Log(CritterEmote.Debug, "No Holiday_emotes")
 	end
 end
 --[[
