@@ -270,19 +270,18 @@ function CritterEmote.PrintHelp()
 end
 function CritterEmote.ShowInfo()
 	CritterEmote.Print(string.format(CritterEmote.L["%s (%s) by %s"], CritterEmote.ADDONNAME, CritterEmote.VERSION, CritterEmote.AUTHOR), false)
-	-- if CritterEmote_Variables.enabled then
-	-- 	CritterEmote.Print()
-	-- CritterEmote.Print()
-	-- @TODO: Figure this out.
-
---[[function CritterEmote_Info ()
-
-  if(CritterEmote_enable) then
-    CritterEmote_Message(CritterEmote_Strings["WELCOME_ACTIVE"] .. "Active!");
-  else
-    CritterEmote_Message(CritterEmote_Strings["WELCOME_ACTIVE"] .. "Deactivated.");
-  end
-end]]
+	if CritterEmote_Variables.enabled then
+		CritterEmote.Print(CritterEmote.L["Critter Emote is now enabled. Party Time, critters!"])
+	else
+		CritterEmote.Print(CritterEmote.L["Critter Emote is now disabled. The critters are sad."])
+	end
+	for _, category in pairs(CritterEmote.Categories) do
+		CritterEmote.Print(CritterEmote.L["%s is %s with %i emotes."],
+				category,
+				(CritterEmote_Variables.Categories[category] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
+				(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or "no")
+		)
+	end
 end
 CritterEmote.commandList = {
 	["debug"] = {  -- keep this as debug, no help will keep it from showing in help.  This keeps it 'hidden'
@@ -369,7 +368,11 @@ function CritterEmote.AddEmoteCategoriesToCommandList()
 			["help"] = {"", CritterEmote.L["toggle inclusion of "..CritterEmote.L[category].." emotes"]},
 			["func"] = function()
 				CritterEmote.ToggleCategory(category)
-				CritterEmote.Print(category.." is "..(CritterEmote_Variables.Categories[category] and "ENABLED" or "DISABLED"))
+				CritterEmote.Print(CritterEmote.L["%s is %s with %i emotes."],
+						category,
+						(CritterEmote_Variables.Categories[category] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
+						(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or "no")
+				)
 			end,
 		}
 	end

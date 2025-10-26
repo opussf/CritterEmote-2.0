@@ -6,6 +6,15 @@
 ## Notes: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
 ## LoadOnDemand: 0
 ## DefaultState: enabled
+## Category: Roleplay
+## Category-enUS: Roleplay
+## Category-deDE: Roleplay
+## Category-esES: Roleplay
+## Category-esMX: Roleplay
+## Category-frFR: Roleplay
+## Category-itIT: Roleplay
+## Category-ptBR: Roleplay
+## Category-ruRU: Roleplay
 ## SavedVariables: CritterEmote_Variables
 ## SavedVariablesPerCharacter: CritterEmote_CharacterVariables
 
@@ -22,7 +31,6 @@ CritterEmote_Special_enUS.lua
 
 ## Localization
 localization_core.lua
-localization_us.lua
 localization_ru.lua
 
 ## Core Functionality
@@ -32,3 +40,4 @@ CritterEmote.xml
 
 ## Options
 CritterEmote_Options.lua
+CritterEmote_Options.xml

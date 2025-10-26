@@ -1,0 +1,68 @@
+<!-- CritterEmote_Options @VERSION@ -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<CheckButton name="CritterEmoteOptionsCheckButtonTemplate" inherits="InterfaceOptionsCheckButtonTemplate" virtual="true">
+		<Scripts>
+			<OnEnter>
+				GameTooltip:SetOwner(self, "ANCHOR_LEFT");
+				GameTooltip:SetText(self.tooltip);
+			</OnEnter>
+			<OnLeave>GameTooltip:Hide();</OnLeave>
+		</Scripts>
+	</CheckButton>
+
+	<Frame name="CritterEmoteOptionsFrame">
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Title" inherits="GameFontNormalLarge">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset><AbsDimension x="16" y="-16"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_EnableHeader" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent_Title" relativePoint="BOTTOMLEFT">
+							<Offset><AbsDimension x="16" y="-10"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontSting name="$parent_EmoteCategoriesHeader" inherits="GameFontNormal">
+				</FontSting>
+			</Layer>
+		</Layers>
+		<Frames>
+			<CheckButton name="$parent_Enabled" inherits="CritterEmoteOptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_EnableHeader" relativePoint="BOTTOMLEFT">
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.tooltip = CritterEmote.L["Enable emotes."]</OnLoad>
+					<OnShow>CritterEmote.OptionsPanel_CheckButton_OnLoad(self,CritterEmote_Variables,"enabled",CritterEmote.L["Enable"])</OnShow>
+					<OnClick>CritterEmote.OptionsPanel_CheckButton_OnClick(self,CritterEmote_Variables,"enabled")</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parent_Random" inherits="CritterEmoteOptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Enabled" relativePoint="BOTTOMLEFT">
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>self.tooltip = CritterEmote.L["Enable scheduled random emotes."]</OnLoad>
+					<OnShow>CritterEmote.OptionsPanel_CheckButton_OnLoad(self,CritterEmote_Variables,"randomEnabled",CritterEmote.L["Enable Random"])</OnShow>
+					<OnClick>CritterEmote.OptionsPanel_CheckButton_OnClick(self,CritterEmote_Variables,"randomEnabled")</OnClick>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				CritterEmote.OptionsPanel_OnLoad(self)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+</Ui>
