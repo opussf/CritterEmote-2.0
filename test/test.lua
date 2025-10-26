@@ -93,7 +93,6 @@ end
 
 function test.test_slashCommand_help()
 	CritterEmote.SlashHandler("help")
-	test.dump(chatLog)
 end
 function test.test_slashCommand_turnOff()
 	CritterEmote_Variables.enabled = true

@@ -232,7 +232,7 @@ function CritterEmote.ParseCmd(msg)
 		end
 	end
 end
-function CritterEmote.spairs( t, f )  -- This is an awesome function I found
+function CritterEmote.Spairs( t, f )  -- This is an awesome function I found
 	local a = {}
 	for n in pairs( t ) do table.insert( a, n ) end
 	table.sort( a, f ) -- @TODO: Look into giving a sort function here.
@@ -261,7 +261,7 @@ function CritterEmote.SlashHandler(msg)
 end
 function CritterEmote.PrintHelp()
 	CritterEmote.Print(string.format(CritterEmote.L["%s (%s) by %s"], CritterEmote.ADDONNAME, CritterEmote.VERSION, CritterEmote.AUTHOR), false)
-	for cmd, info in CritterEmote.spairs(CritterEmote.commandList) do
+	for cmd, info in CritterEmote.Spairs(CritterEmote.commandList) do
 		if info.help then
 			local cmdStr = cmd
 			for c2, i2 in pairs(CritterEmote.commandList) do
