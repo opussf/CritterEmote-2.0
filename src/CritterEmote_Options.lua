@@ -12,7 +12,7 @@ function CritterEmote.OptionsPanel_OnLoad(panel)
 	panel.OnCommit = CritterEmote.OptionsPanel_OKAY
 	panel.cancel = CritterEmote.OptionsPanel_Cancel
 
-	local category, layout = Settings.RegisterCanvasLayoutCategory( panel, panel.name )
+	local category, layout = Settings.RegisterCanvasLayoutCategory(panel, panel.name)
 	panel.category = category
 	Settings.RegisterAddOnCategory(category)
 end
@@ -20,12 +20,12 @@ function CritterEmote.OptionsPanel_OKAY()
 end
 function CritterEmote.OptionsPanel_Cancel()
 end
-function CritterEmote.OptionsPanel_CheckButton_OnLoad( self, tbl, option, text )
+function CritterEmote.OptionsPanel_CheckButton_OnLoad(self, tbl, option, text)
 	getglobal(self:GetName().."Text"):SetText(text)
 	self:SetChecked(tbl[option])
 end
 -- OnClick for checkbuttons
-function CritterEmote.OptionsPanel_CheckButton_OnClick( self, tbl, option )
+function CritterEmote.OptionsPanel_CheckButton_OnClick(self, tbl, option)
 	tbl[option] = self:GetChecked()
 end
 function CritterEmote.AddCategoryOptions()

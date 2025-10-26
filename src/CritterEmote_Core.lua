@@ -69,9 +69,10 @@ function CritterEmote.LOADING_SCREEN_DISABLED()
 		CritterEmote.Log(CritterEmote.Debug, "Blizzard_Calendar was not loaded.")
 		UIParentLoadAddOn("Blizzard_Calendar")
 	end
-	C_Timer.After(2, function()
+	C_Timer.After(10, function()
 		CritterEmote.Log(CritterEmote.Debug, "Requesting calendar data...")
 		C_Calendar.OpenCalendar()  -- trigger CALENDAR_UPDATE_EVENT_LIST
+		OpenCalendar()
     end)
 end
 function CritterEmote.OnEmote(emote, target)

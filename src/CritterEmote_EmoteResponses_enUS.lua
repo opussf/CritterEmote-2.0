@@ -2211,21 +2211,15 @@ CritterEmote.EmoteResponses = {
 	},
 	SURRENDER = {
 		default = nil,
-	 ["Gregarious Grell"] = {
-		"screams, \"FINALLY! Now I am master!\"",
-		},
-	 ["Lil' K.T."] = {
-		"tells you to swear your allegiance to him.",
-		},
-	 ["Lil' Ragnaros"] = {
-		"this is my realm!",
-		},
+		["Gregarious Grell"] = { "screams, \"FINALLY! Now I am master!\"", },
+		["Lil' K.T."] = { "tells you to swear your allegiance to him.", },
+		["Lil' Ragnaros"] = { "this is my realm!", },
 	},
 	SUSPICIOUS = {
 		default = nil,
-	  ["Gregarious Grell"] = { "swears he only follows master's orders.", },
-	  ["Lil' K.T."] = { "tells you there's nothing suspicious about the Cult of the Damned. It's legit!", },
-	  ["Lil' Ragnaros"] = { "assures you %t is not planning another comeback... for now.", },
+		["Gregarious Grell"] = { "swears he only follows master's orders.", },
+		["Lil' K.T."] = { "tells you there's nothing suspicious about the Cult of the Damned. It's legit!", },
+		["Lil' Ragnaros"] = { "assures you %t is not planning another comeback... for now.", },
 	},
 	SWEAT = {
 		default = nil,
