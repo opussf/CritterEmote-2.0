@@ -535,7 +535,7 @@ Units = {
 		["sex"] = 3,
 		["currentHealth"] = 100000,
 		["maxHealth"] = 123456,
-		["creatureType"] = "Humanoid",
+		["creatureTypeID"] = 7,
 	},
 	["sameRealmUnit"] = {
 		["class"] = "Warrior",
@@ -547,7 +547,7 @@ Units = {
 		["realm"] = "testPlayer",
 		["realmRelationship"] = 1,
 		["sex"] = 2,
-		["creatureType"] = "Humanoid",
+		["creatureTypeID"] = 7,
 	},
 	["coalescedRealmUnit"] = {
 		["class"] = "Monk",
@@ -558,7 +558,7 @@ Units = {
 		["race"] = "Pandarian",
 		["realm"] = "coalescedRealm",
 		["realmRelationship"] = 2,
-		["creatureType"] = "Humanoid",
+		["creatureTypeID"] = 7,
 	},
 	["connectedRealmUnit"] = {
 		["class"] = "Mage",
@@ -568,7 +568,7 @@ Units = {
 		["name"] = "connectedUnit",
 		["realm"] = "connectedRealm",
 		["realmRelationship"] = 3,
-		["creatureType"] = "Humanoid",
+		["creatureTypeID"] = 7,
 	},
 	["mouseover"] = {
 		["class"] = "Priest",
@@ -579,10 +579,12 @@ Units = {
 		["race"] = "Dwarf",
 		["realm"] = "mouserealm",
 		["sex"] = 1,
-		["creatureType"] = "Humanoid",
+		["creatureTypeID"] = 7,
 	},
-
 }
+UnitCreatureTypes = { "Beast", "Dragonkin", "Demon", "Elemental", "Giant",
+		"Undead", "Humanoid", "Critter", "Mechanical", "Not specified",
+		"Totem", "Non-combat Pet", "Gas Cloud", "Wild Pet", "Aberration" }
 function CreateFrame( frameType, frameName, parentFrame, inheritFrame )
 --	print("CreateFrame: needing a new frame of type: "..(frameType or "nil"))
 	newFrame = {}
@@ -1662,7 +1664,9 @@ function UnitClass( who )
 	return Units[who].class, Units[who].classCAPS, Units[who].classIndex
 end
 function UnitCreatureType( who )
-	return Units[who] and Units[who].creatureType or nil
+	if Units[who] then
+		return UnitCreatureTypes[Units[who].creatureTypeID], Units[who].creatureTypeID
+	end
 end
 function UnitExists( who )
 	return Units[who] and true or nil

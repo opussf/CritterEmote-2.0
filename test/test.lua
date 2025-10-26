@@ -33,7 +33,7 @@ function test.test_do_emote_target_self()
 end
 function test.test_do_emote_target_critter()
 	Units["target"] = {
-		["creatureType"] = "Wild Pet",
+		["creatureTypeID"] = 14,
 	}
 	C_TooltipInfo.data = {
 		["target"] = {
