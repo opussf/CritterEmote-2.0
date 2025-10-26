@@ -29,7 +29,7 @@
 ## Category-ruRU: Ролевая игра
 ## Category-zhCN: 角色扮演
 ## Category-zhTW: 角色扮演
-## SavedVariables: CritterEmote_Variables
+## SavedVariables: CritterEmote_Variables CritterEmote_TypeValues
 ## SavedVariablesPerCharacter: CritterEmote_CharacterVariables
 
 ## DataFiles

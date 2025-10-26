@@ -81,6 +81,7 @@ function test.test_noCritterEmote_()
 	end
 	badThings.CritterEmote_SLUG = nil
 	badThings.CritterEmote_Variables = nil
+	badThings.CritterEmote_TypeValues = nil
 	badThings.CritterEmote_CharacterVariables = nil
 	test.dump(badThings)
 	local count = 0

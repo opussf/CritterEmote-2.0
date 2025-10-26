@@ -35,5 +35,4 @@ if GetLocale() == "esES" then
 	L.L["turns the periodic emotes on or off"] = "activa o desactiva los gestos periódicos"
 	L.L["verbose"] = "detallado"
 	L.L["Warn"] = "Aviso"
-	L.L["Wild Pet"] = "mansa"
 end
