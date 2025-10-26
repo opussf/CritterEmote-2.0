@@ -519,13 +519,9 @@ CritterEmote.EmoteResponses = {
 			"barely acknowledges your presence, but does nod.",
 			},
 	},
-	Clean = {
-		cat = {
-			"purrs.",
-		},
-		reptile = {
-			"hisses.",
-		},
+	CLEAN = {
+		cat = { "purrs.", },
+		reptile = { "hisses.", },
 	},
 	DANCE = {
 		default = {

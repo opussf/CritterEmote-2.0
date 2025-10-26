@@ -36,6 +36,7 @@
 CritterEmote_PetPersonalities.lua
 CritterEmote_EmoteMap.lua
 CritterEmote_EmoteResponses_enUS.lua
+CritterEmote_EmoteResponses_esES.lua
 CritterEmote_General_enUS.lua
 CritterEmote_Holiday_enUS.lua
 CritterEmote_Location_enUS.lua
