@@ -171,10 +171,10 @@ function test.test_slashCommand_categorysFromList_4()
 	assertTrue(CritterEmote_Variables.Categories.Location)
 end
 function test.test_slashCommand_categorysFromList_5()
-	CritterEmote_Variables.Categories.Special = false
-	assertTrue(CritterEmote.commandList.special)
-	CritterEmote.SlashHandler("special")
-	assertTrue(CritterEmote_Variables.Categories.Special)
+	CritterEmote_Variables.Categories.Holiday = false
+	assertTrue(CritterEmote.commandList.holiday)
+	CritterEmote.SlashHandler("holiday")
+	assertTrue(CritterEmote_Variables.Categories.Holiday)
 end
 function test.test_slashCommand_categorysFromList_6()
 	CritterEmote_Variables.Categories.PVP = false

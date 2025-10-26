@@ -15,7 +15,7 @@ CritterEmote.Debug = 4  -- Shows most everything  -- most verbose
 CritterEmote.LogNames = { "Error", "Warn", "Info", "Debug" }
 
 CritterEmote.Categories = {
-	"General", "Silly", "Song", "Location", "Special", "PVP"
+	"General", "Silly", "Song", "Location", "Holiday", "PVP"
 }
 
 CritterEmote_Variables = { Categories = {} }
@@ -276,11 +276,11 @@ function CritterEmote.ShowInfo()
 		CritterEmote.Print(CritterEmote.L["Critter Emote is now disabled. The critters are sad."])
 	end
 	for _, category in pairs(CritterEmote.Categories) do
-		CritterEmote.Print(CritterEmote.L["%s is %s with %i emotes."],
+		CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
 				category,
 				(CritterEmote_Variables.Categories[category] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
-				(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or "no")
-		)
+				(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or 0)
+		))
 	end
 end
 CritterEmote.commandList = {
@@ -365,13 +365,13 @@ function CritterEmote.AddEmoteCategoriesToCommandList()
 	for _, category in pairs(CritterEmote.Categories) do
 		local c = CritterEmote.L[string.lower(category)]
 		CritterEmote.commandList[c] = {
-			["help"] = {"", CritterEmote.L["toggle inclusion of "..CritterEmote.L[category].." emotes"]},
+			["help"] = {"", string.format(CritterEmote.L["toggle inclusion of %s emotes."], CritterEmote.L[category])},
 			["func"] = function()
 				CritterEmote.ToggleCategory(category)
 				CritterEmote.Print(CritterEmote.L["%s is %s with %i emotes."],
 						category,
 						(CritterEmote_Variables.Categories[category] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
-						(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or "no")
+						(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or 0)
 				)
 			end,
 		}

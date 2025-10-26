@@ -23,11 +23,11 @@ CritterEmote_PetPersonalities.lua
 CritterEmote_EmoteMap.lua
 CritterEmote_EmoteResponses_enUS.lua
 CritterEmote_General_enUS.lua
+CritterEmote_Holiday_enUS.lua
 CritterEmote_Location_enUS.lua
 CritterEmote_PVP_enUS.lua
 CritterEmote_Silly_enUS.lua
 CritterEmote_Songs_enUS.lua
-CritterEmote_Special_enUS.lua
 
 ## Localization
 localization_core.lua
