@@ -2538,8 +2538,15 @@ function ParseTOC( tocFile, useRequire )
 		local tocContents = f:read( "*all" )
 		for line in tocContents:gmatch("([^\n]*)\n?") do
 			if line ~= "" then
-				local luaFile = line:match("([_%a][_%w]*)%.lua")
-				local xmlFile = line:match("([_%a][_%w]*)%.xml")
+				local luaFile = line:match("([%w%._%-\\/]+)%.lua")
+				if luaFile then
+					luaFile = luaFile:gsub("\\", "/") -- normalize to forward slashes
+				end
+				local xmlFile = line:match("([%w%._%-\\/]+)%.xml")
+				if xmlFile then
+					xmlFile = xmlFile:gsub("\\", "/") -- normalize to forward slashes
+				end
+
 				local hashKey, hashValue = line:match("## ([_%a]*): (.*)")
 
 				if hashKey then
