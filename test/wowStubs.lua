@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  October 19 2025
--- Revision:  9.5.1-19-gf11854c
+-- Date    :  October 26 2025
+-- Revision:  9.5.1-20-g703e555
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
@@ -584,7 +584,8 @@ Units = {
 }
 UnitCreatureTypes = { "Beast", "Dragonkin", "Demon", "Elemental", "Giant",
 		"Undead", "Humanoid", "Critter", "Mechanical", "Not specified",
-		"Totem", "Non-combat Pet", "Gas Cloud", "Wild Pet", "Aberration" }
+		"Totem", "Non-combat Pet", "Gas Cloud", "Wild Pet", "Aberration"
+}
 function CreateFrame( frameType, frameName, parentFrame, inheritFrame )
 --	print("CreateFrame: needing a new frame of type: "..(frameType or "nil"))
 	newFrame = {}
