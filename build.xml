@@ -85,10 +85,10 @@
 		<delete dir="${package.dir}" verbose="false"/>
 		<copy	todir="${package.dir}" filtering="true">
 			<fileset dir="src">
-				<include name="*.lua"/>
-				<include name="*.toc"/>
-				<include name="*.xml"/>
-				<include name="*.txt"/>
+				<include name="**/*.lua"/>
+				<include name="**/*.toc"/>
+				<include name="**/*.xml"/>
+				<include name="**/*.txt"/>
 			</fileset>
 			<fileset dir="${working.dir}">
 				<include name="*.txt"/>
@@ -121,9 +121,9 @@
 		</delete>
 		<copy todir="${addon.dir}" filtering="true" verbose="true">
 			<fileset dir="src">
-				<include name="*.lua"/>
-				<include name="*.toc"/>
-				<include name="*.xml"/>
+				<include name="**/*.lua"/>
+				<include name="**/*.toc"/>
+				<include name="**/*.xml"/>
 				<include name="Readme.txt"/>
 			</fileset>
 		</copy>

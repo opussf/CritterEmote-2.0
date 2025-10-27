@@ -35,19 +35,24 @@
 ## DataFiles
 CritterEmote_PetPersonalities.lua
 CritterEmote_EmoteMap.lua
-CritterEmote_EmoteResponses_enUS.lua
-CritterEmote_EmoteResponses_esES.lua
-CritterEmote_General_enUS.lua
-CritterEmote_Holiday_enUS.lua
-CritterEmote_Location_enUS.lua
-CritterEmote_PVP_enUS.lua
-CritterEmote_Silly_enUS.lua
-CritterEmote_Songs_enUS.lua
+
+## Responses
+responses/CritterEmote_EmoteResponses_enUS.lua
+responses/CritterEmote_EmoteResponses_esES.lua
+
+## Emotes
+general/CritterEmote_General_enUS.lua
+location/CritterEmote_Location_enUS.lua
+pvp/CritterEmote_PVP_enUS.lua
+silly/CritterEmote_Silly_enUS.lua
+songs/CritterEmote_Songs_enUS.lua
+
+holiday/CritterEmote_Holiday_enUS.lua
 
 ## Localization
-localization_core.lua
-localization_es.lua
-localization_ru.lua
+localization/localization_core.lua
+localization/localization_es.lua
+localization/localization_ru.lua
 
 ## Core Functionality
 CritterEmote_Core.lua
