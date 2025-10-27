@@ -58,36 +58,3 @@ CritterEmote.commandList[CritterEmote.L["options"]] = {
 	["func"] = function() Settings.OpenToCategory( CritterEmoteOptionsFrame.category:GetID() ) end,
 	["help"] = {"", CritterEmote.L["Open the options panel"]},
 }
-
-
-
---[[
--- Assuming 'parent' is your options panel frame
-local checkButton = CreateFrame("CheckButton", "$parent_Enabled", parent, "CritterEmoteOptionsCheckButtonTemplate")
-
--- Anchor: same as the XML
-checkButton:SetPoint("TOPLEFT", parent.EnableHeader, "BOTTOMLEFT")
-
--- Tooltip: same as <OnLoad>
-checkButton.tooltip = CritterEmote.L["Enable emotes."]
-
--- OnShow script
-checkButton:SetScript("OnShow", function(self)
-    CritterEmote.OptionsPanel_CheckButton_OnLoad(
-        self,
-        CritterEmote_Variables,
-        "enabled",
-        CritterEmote.L["Enable"]
-    )
-end)
-
--- OnClick script
-checkButton:SetScript("OnClick", function(self)
-    CritterEmote.OptionsPanel_CheckButton_OnClick(
-        self,
-        CritterEmote_Variables,
-        "enabled"
-    )
-end)
-
-]]
