@@ -18,15 +18,13 @@ CritterEmote.LogNames = { CritterEmote.L["Error"],
 		"Debug"  -- this does not need to be translated.
 }
 
-CritterEmote.Categories = {
-	"General", "Silly", "Song", "Location", "Holiday", "PVP"
-}
+CritterEmote.Categories = {}  -- is now built later.
 
 CritterEmote_Variables = { Categories = {} }
 CritterEmote_CharacterVariables = {}
-for _,v in pairs(CritterEmote.Categories) do
-	CritterEmote_Variables.Categories[v] = true
-end
+-- for _,v in pairs(CritterEmote.Categories) do
+-- 	CritterEmote_Variables.Categories[v] = true
+-- end
 
 CritterEmote_Variables.enabled = true
 CritterEmote_Variables.randomEnabled = true
@@ -72,6 +70,17 @@ function CritterEmote.OnLoad()
 	CritterEmote.playerName = UnitName("player", false)
 	CritterEmote.lastUpdate = 0
 	CritterEmote.updateInterval = CritterEmote.CreateUpdateInterval()
+
+	for tblName in pairs(CritterEmote) do
+		local category = tblName:match("^([%a][%a]*)_emotes$")
+		-- print( category, tblName, type(CritterEmote[tblName]))
+		if category and type(CritterEmote[tblName]) == "table" then
+			if CritterEmote[tblName].init then
+				CritterEmote[tblName].init()
+			end
+			table.insert(CritterEmote.Categories, category)
+		end
+	end
 end
 function CritterEmote.LOADING_SCREEN_DISABLED()
 	CritterEmote.lastUpdate = time()

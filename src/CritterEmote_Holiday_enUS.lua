@@ -1,6 +1,9 @@
 local _, CritterEmote = ...
 if GetLocale() == "enUS" then
-CritterEmote.Holiday_emotes_src = {
+CritterEmote.Holiday_emotes = {
+    ["init"] = function()
+        print("Holiday init")
+    end,
     ["Feast of Winter Veil"] = {
         "dances around the festive tree.",
         "throws snowballs joyfully.",

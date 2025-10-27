@@ -156,37 +156,37 @@ function test.test_slashCommand_withMessage()
 end
 function test.test_slashCommand_categorysFromList_1()
 	CritterEmote_Variables.Categories.General = true
-	assertTrue(CritterEmote.commandList.general)
+	assertTrue(CritterEmote.commandList.general, "general should be in the commandList")
 	CritterEmote.SlashHandler("general")
-	assertFalse(CritterEmote_Variables.Categories.General)
+	assertFalse(CritterEmote_Variables.Categories.General, "CritterEmote_Variables.Categories General should be false")
 end
 function test.test_slashCommand_categorysFromList_2()
-	CritterEmote_Variables.Categories.General = true
-	assertTrue(CritterEmote.commandList.silly)
+	CritterEmote_Variables.Categories.Silly = true
+	assertTrue(CritterEmote.commandList.silly, "silly should be in the commandList")
 	CritterEmote.SlashHandler("silly")
 	assertFalse(CritterEmote_Variables.Categories.Silly)
 end
 function test.test_slashCommand_categorysFromList_3()
 	CritterEmote_Variables.Categories.Song = true
-	assertTrue(CritterEmote.commandList.song)
+	assertTrue(CritterEmote.commandList.song, "song should be in the commandList")
 	CritterEmote.SlashHandler("song")
 	assertFalse(CritterEmote_Variables.Categories.Song)
 end
 function test.test_slashCommand_categorysFromList_4()
 	CritterEmote_Variables.Categories.Location = false
-	assertTrue(CritterEmote.commandList.location)
+	assertTrue(CritterEmote.commandList.location, "location should be in the commandList")
 	CritterEmote.SlashHandler("location")
 	assertTrue(CritterEmote_Variables.Categories.Location)
 end
 function test.test_slashCommand_categorysFromList_5()
 	CritterEmote_Variables.Categories.Holiday = false
-	assertTrue(CritterEmote.commandList.holiday)
+	assertTrue(CritterEmote.commandList.holiday, "holiday should be in the commandList")
 	CritterEmote.SlashHandler("holiday")
 	assertTrue(CritterEmote_Variables.Categories.Holiday)
 end
 function test.test_slashCommand_categorysFromList_6()
 	CritterEmote_Variables.Categories.PVP = false
-	assertTrue(CritterEmote.commandList.pvp)
+	assertTrue(CritterEmote.commandList.pvp, "pvp should be in the commandList")
 	CritterEmote.SlashHandler("pvp")
 	assertTrue(CritterEmote_Variables.Categories.PVP)
 end
