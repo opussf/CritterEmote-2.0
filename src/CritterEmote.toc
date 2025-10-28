@@ -4,20 +4,19 @@
 ## Version: @VERSION@
 ## IconTexture: Interface/Icons/Inv_pet_wingedlion
 ## email: PBCritterEmote@gmail.com
-## Notes: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
 ## LoadOnDemand: 0
 ## DefaultState: enabled
-## Description-enUS: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
-## Description-deDE: Ermöglicht es deinen Begleiter-Tieren, zufällige Emotes in den Chat zu senden und auf In-Game-Slash-Befehle zu reagieren, wenn sie anvisiert werden
-## Description-esES: Permite que tus mascotas de compañía envíen gestos aleatorios al chat y respondan a los comandos de barra del juego cuando se las selecciona
-## Description-esMX: Permite que tus mascotas de compañía envíen gestos aleatorios al chat y respondan a los comandos de barra del juego cuando se las selecciona
-## Description-frFR: Permet à vos animaux de compagnie d'envoyer des émoticônes aléatoires dans le chat et de répondre aux commandes slash en jeu lorsqu'ils sont ciblés
-## Description-itIT: Consente ai tuoi animali da compagnia di inviare emoticon casuali in chat e di rispondere ai comandi slash in gioco quando vengono mirati
-## Description-koKR: 소환수 애완동물이 채팅에 무작위 이모트를 보내고, 대상이 지정되었을 때 게임 내 슬래시 명령에 응답할 수 있도록 합니다.
-## Description-ptBR: Permite que seus animais de estimação companheiros enviem emoticons aleatórios para o chat e respondam a comandos de barra no jogo quando selecionados
-## Description-ruRU: Позволяет вашим спутникам отправлять случайные эмоции в чат и отвечать на игровые слэш-команды при их цели
-## Description-zhCN: 允许你的宠物在聊天中发送随机表情，并在被选中时响应游戏内斜杠命令
-## Description-zhTW: 允許你的寵物在聊天中發送隨機表情，並在被選中時回應遊戲內斜線命令
+## Notes: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
+## Notes-deDE: Ermöglicht es deinen Begleiter-Tieren, zufällige Emotes in den Chat zu senden und auf In-Game-Slash-Befehle zu reagieren, wenn sie anvisiert werden
+## Notes-esES: Permite que tus mascotas de compañía envíen gestos aleatorios al chat y respondan a los comandos de barra del juego cuando se las selecciona
+## Notes-esMX: Permite que tus mascotas de compañía envíen gestos aleatorios al chat y respondan a los comandos de barra del juego cuando se las selecciona
+## Notes-frFR: Permet à vos animaux de compagnie d'envoyer des émoticônes aléatoires dans le chat et de répondre aux commandes slash en jeu lorsqu'ils sont ciblés
+## Notes-itIT: Consente ai tuoi animali da compagnia di inviare emoticon casuali in chat e di rispondere ai comandi slash in gioco quando vengono mirati
+## Notes-koKR: 소환수 애완동물이 채팅에 무작위 이모트를 보내고, 대상이 지정되었을 때 게임 내 슬래시 명령에 응답할 수 있도록 합니다.
+## Notes-ptBR: Permite que seus animais de estimação companheiros enviem emoticons aleatórios para o chat e respondam a comandos de barra no jogo quando selecionados
+## Notes-ruRU: Позволяет вашим спутникам отправлять случайные эмоции в чат и отвечать на игровые слэш-команды при их цели
+## Notes-zhCN: 允许你的宠物在聊天中发送随机表情，并在被选中时响应游戏内斜杠命令
+## Notes-zhTW: 允許你的寵物在聊天中發送隨機表情，並在被選中時回應遊戲內斜線命令
 ## Category-enUS: Roleplay
 ## Category-deDE: Rollenspiel
 ## Category-esES: Juego de rol
@@ -46,12 +45,14 @@ location/CritterEmote_Location_enUS.lua
 pvp/CritterEmote_PVP_enUS.lua
 silly/CritterEmote_Silly_enUS.lua
 songs/CritterEmote_Songs_enUS.lua
+target/CritterEmote_Target_enUS.lua
 
 holiday/CritterEmote_Holiday_enUS.lua
 
 ## Localization
 localization/localization_core.lua
 localization/localization_es.lua
+localization/localization_fr.lua
 localization/localization_ru.lua
 
 ## Core Functionality
