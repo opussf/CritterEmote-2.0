@@ -110,5 +110,5 @@ if __name__=="__main__":
 			data = sorted(petData.data.items(), key=lambda item: item[1]["name"])
 			for d in data:
 				# f.write(f'["{d[1]["name"]}"] = "{d[1]["personality"]}",\n')
-				f.write(f'[{d[0]:>5}] = "{d[1]["personality"]}" -- {d[1]["name"]},\n')
+				f.write(f'[{d[0]:>5}] = "{d[1]["personality"]}", -- {d[1]["name"]}\n')
 			f.write("}")
