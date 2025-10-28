@@ -47,27 +47,6 @@ class PetData():
 			self.newPets.append((id, name))
 		if self.data[str(id)]["personality"] == "":
 			self.missingPersonalities.append((id, name))
-	def compact_inner(self, obj, level=0):
-		"""Pretty-print JSON but compact innermost dictionaries/lists onto one line."""
-		if isinstance(obj, dict):
-			# Check if values are primitive (leaf dict)
-			if all(not isinstance(v, (dict, list)) for v in obj.values()):
-				return json.dumps(obj, ensure_ascii=False)
-			parts = []
-			for k, v in obj.items():
-				parts.append(f'{json.dumps(k)}: {self.compact_inner(v, level + 1)}')
-			indent = " " * 4 * level
-			inner_indent = " " * 4 * (level + 1)
-			return "{\n" + inner_indent + (",\n" + inner_indent).join(parts) + "\n" + indent + "}"
-		elif isinstance(obj, list):
-			if all(not isinstance(v, (dict, list)) for v in obj):
-				return json.dumps(obj, ensure_ascii=False)
-			parts = [self.compact_inner(v, level + 1) for v in obj]
-			indent = " " * 4 * level
-			inner_indent = " " * 4 * (level + 1)
-			return "[\n" + inner_indent + (",\n" + inner_indent).join(parts) + "\n" + indent + "]"
-		else:
-			return json.dumps(obj, ensure_ascii=False)
 	def save(self, outFile) -> None:
 		data = dict(sorted(self.data.items(), key=lambda item: item[1]["name"]))
 		textOut = json.dumps( data, ensure_ascii=False, indent=None )
