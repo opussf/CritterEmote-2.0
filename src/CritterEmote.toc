@@ -45,6 +45,7 @@ location/CritterEmote_Location_enUS.lua
 pvp/CritterEmote_PVP_enUS.lua
 silly/CritterEmote_Silly_enUS.lua
 songs/CritterEmote_Songs_enUS.lua
+target/CritterEmote_Target_enUS.lua
 
 holiday/CritterEmote_Holiday_enUS.lua
 

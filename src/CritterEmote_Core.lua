@@ -215,6 +215,12 @@ function CritterEmote.GetRandomEmote()
 			CritterEmote.Log(CritterEmote.Debug, "No "..category.." emote added to list to choose from.")
 		end
 	end
+	if UnitName("target") and CritterEmote.Target_emotes then
+		CritterEmote.Log(CritterEmote.Error, "You are targeting "..UnitName("target")..". Use a target emote.")
+		local targetEmote = CritterEmote.GetRandomTableEntry( CritterEmote.Target_emotes )
+		CritterEmote.Log(CritterEmote.Error, "targetEmote: "..(targetEmote or "nil"))
+		table.insert(CritterEmote.RandomEmoteTable, targetEmote)
+	end
 	return CritterEmote.GetRandomTableEntry(CritterEmote.RandomEmoteTable)
 end
 function CritterEmote.GetRandomTableEntry(myTable)
