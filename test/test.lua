@@ -9,6 +9,7 @@ test.coberturaFileName = "../coverage.xml"
 ParseTOC( "../src/CritterEmote.toc" )
 
 function test.before()
+	Units["target"] = nil
 	chatLog = {}
 	CritterEmote.emoteToSend = nil
 	CritterEmote_Variables.enabled = true
@@ -33,6 +34,8 @@ function test.test_do_emote_target_self()
 end
 function test.test_do_emote_target_critter()
 	Units["target"] = {
+		["name"] = "pet",
+		["realm"] = "not sure what this should be",
 		["creatureTypeID"] = 14,
 	}
 	C_TooltipInfo.data = {
@@ -189,6 +192,14 @@ function test.test_slashCommand_categorysFromList_6()
 	assertTrue(CritterEmote.commandList.pvp, "pvp should be in the commandList")
 	CritterEmote.SlashHandler("pvp")
 	assertTrue(CritterEmote_Variables.Categories.PVP)
+end
+function test.test_emote_with_target()
+	Units["target"] = {
+		["name"] = "World NPC",
+		["realm"] = "not sure what this should be",
+		["creatureTypeID"] = 1,
+	}
+	assertTrue( CritterEmote.GetRandomEmote() )
 end
 
 test.run()

@@ -158,11 +158,11 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- isEmote is a flag to say that this is an emote.
 	-- false means that msg is text to use.
 	CritterEmote.Log(CritterEmote.Debug, "Call to DoCritterEmote( "..(msg or "nil")..", "..(isEmote and "True" or "False")..")")
-	local petName, customName = CritterEmote.GetActivePet()
+	local petName, customName, petID = CritterEmote.GetActivePet()
 	CritterEmote.Log(CritterEmote.Debug, "petName: "..(petName or "nil")..", customName:"..(customName or "nil"))
 	if petName then -- a pet is summoned
 		if isEmote or msg == nil then
-			msg = CritterEmote.GetEmoteMessage(msg, petName, customName)
+			msg = CritterEmote.GetEmoteMessage(msg, petName, customName, petID)
 		end
 		if msg and petName then
 			CritterEmote.DisplayEmote((customName or petName).." "..msg)
@@ -175,18 +175,18 @@ function CritterEmote.GetActivePet()
 	local petid = C_PetJournal.GetSummonedPetGUID()
 	if petid then
 		local petInfo = {C_PetJournal.GetPetInfoByPetID(petid)} -- {} wraps the multiple return values into a table.
-		return petInfo[8], petInfo[2]
+		return petInfo[8], petInfo[2], petInfo[1]
 	end
 end
-function CritterEmote.GetPetPersonality(petName)
+function CritterEmote.GetPetPersonality(petID)
 	-- @TODO: Should this also handle 'customName'?  What if a named pet has a different personality?
-	return CritterEmote.Personalities[petName] or "default"
+	return CritterEmote.Personalities[petID] or "default"
 end
-function CritterEmote.GetEmoteMessage(emoteIn, petName, customName)
+function CritterEmote.GetEmoteMessage(emoteIn, petName, customName, petID)
 	CritterEmote.Log(CritterEmote.Debug, "Call to GetEmoteMessage("..(emoteIn or "nil")..", "..petName..", "..(customName or "nil")..")")
 	CritterEmote.Log(CritterEmote.Debug, " Getting Emote Table for "..(emoteIn or "nil") )
 
-	local petPersonality = CritterEmote.GetPetPersonality(petName)
+	local petPersonality = CritterEmote.GetPetPersonality(petID)
 	emoteIn = CritterEmote.EmoteMap[emoteIn]
 
 	-- get the table
@@ -223,6 +223,13 @@ function CritterEmote.GetRandomEmote()
 		else
 			CritterEmote.Log(CritterEmote.Debug, "No "..category.." emote added to list to choose from.")
 		end
+	end
+	-- add in a target emote if they exist, an there is a target.
+	if UnitName("target") and CritterEmote.Target_emotes then
+		CritterEmote.Log(CritterEmote.Debug, "You are targeting "..(UnitName("target") or "<no target>")..". Use a target emote.")
+		local targetEmote = CritterEmote.GetRandomTableEntry( CritterEmote.Target_emotes )
+		CritterEmote.Log(CritterEmote.Debug, "targetEmote: "..(targetEmote or "nil"))
+		table.insert(CritterEmote.RandomEmoteTable, targetEmote)
 	end
 	return CritterEmote.GetRandomTableEntry(CritterEmote.RandomEmoteTable)
 end
@@ -316,12 +323,12 @@ CritterEmote.commandList = {
 			else
 				print("No valid pet target or companion owner text found.")
 			end
-			local petName, customName = CritterEmote.GetActivePet()
+			local petName, customName, petID = CritterEmote.GetActivePet()
 			local creatureType, creatureTypeCode = UnitCreatureType("target")
 			CritterEmote_TypeValues = CritterEmote_TypeValues or {}
 			if creatureType then CritterEmote_TypeValues[creatureType] = creatureTypeCode end
-			print(petName..(customName and " ("..customName..") " or "").." is a "..CritterEmote.GetPetPersonality(petName).."-\""..
-				(creatureType or "nil").."\"("..(creatureTypeCode or "nil")..")"
+			print(petName.." ("..petID..")"..(customName and " ("..customName..") " or "").." is a "..
+				CritterEmote.GetPetPersonality(petID).."-\""..(creatureType or "nil").."\"("..(creatureTypeCode or "nil")..")"
 			)
 			if CritterEmote.activeHolidays then
 				print("Active holidays:")

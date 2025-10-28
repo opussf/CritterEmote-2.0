@@ -1704,7 +1704,9 @@ function UnitLevel( who )
 	return unitLevels[who]
 end
 function UnitName( who )
-	return Units[who].name, Units[who].realm
+	if Units[who] then
+		return Units[who].name, Units[who].realm
+	end
 end
 function UnitPowerMax( who, powerType )
 	-- http://wowwiki.wikia.com/wiki/API_UnitPowerMax

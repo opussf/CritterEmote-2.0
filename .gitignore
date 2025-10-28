@@ -31,3 +31,7 @@ CritterEmote-cf/
 
 # coverage files
 coverage.xml
+
+# misc scripts
+runmany.sh
+secrets.sh
