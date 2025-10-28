@@ -2034,5 +2034,5 @@ CritterEmote.Personalities = {
 [  731] = "reptile", -- Zooey Snake
 [ 1903] = "snail", -- Zoom
 [ 2550] = "magic", -- Zur'aj the Depleted
-[ 3425] = "", -- [DNT] Storm Pet Boss - Rare
+[ 3425] = nil, -- [DNT] Storm Pet Boss - Rare
 }

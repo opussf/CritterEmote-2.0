@@ -38,9 +38,11 @@ class PetData():
 		self.data = json.loads(stringIn)
 		self.newPets = []
 		self.missingPersonalities = []
+		self.removedPets = json.loads(stringIn) # pop out of here if the pet is updated.
 	def set(self, id: int, name: str) -> None:
 		# print(id, name, self.data)
 		try:
+			self.removedPets.pop(str(id), None)  # won’t raise KeyError
 			self.data[str(id)]["name"] = name
 		except KeyError:
 			self.data[str(id)] = { "name": name, "personality": "" }
@@ -56,6 +58,7 @@ class PetData():
 	def __del__(self):
 		print(f'There are {len(self.newPets)} new Pets.\n{self.newPets}')
 		print(f'The pets are missing personalities: {self.missingPersonalities}')
+		print(f'These pets are not listed by Blizzard: {self.removedPets}')
 
 
 if __name__=="__main__":
@@ -89,5 +92,12 @@ if __name__=="__main__":
 			data = sorted(petData.data.items(), key=lambda item: item[1]["name"])
 			for d in data:
 				# f.write(f'["{d[1]["name"]}"] = "{d[1]["personality"]}",\n')
-				f.write(f'[{d[0]:>5}] = "{d[1]["personality"]}", -- {d[1]["name"]}\n')
+				try:
+					if d[1]["personality"] == "":
+						personality = "nil"  # nil will let the default personality be used.
+					else:
+						personality = f'"{d[1]["personality"]}"'
+				except KeyError:
+					personality = "nil"
+				f.write(f'[{d[0]:>5}] = {personality}, -- {d[1]["name"]}\n')
 			f.write("}")
