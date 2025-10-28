@@ -1,6 +1,6 @@
 ## Interface: @INTERFACE@
 ## Title: Critter Emote
-## Author: Acidfrost59, Fysker, ChatGPT, Grok3
+## Author: Acidfrost59, Fysker, OpusSF, ChatGPT, Grok3
 ## Version: @VERSION@
 ## IconTexture: Interface/Icons/Inv_pet_wingedlion
 ## email: PBCritterEmote@gmail.com
