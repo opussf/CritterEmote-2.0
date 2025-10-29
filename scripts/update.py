@@ -65,18 +65,15 @@ if __name__=="__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument( "-r", "--region", choices=["us","eu","kr","tw"], default="us",
 			help="Region to query")
-	parser.add_argument( "-f", "--petfile", type=argparse.FileType('r'), default=sys.stdin,
-					 help="JSON file of current data" )
-	parser.add_argument( "-o", "--outfile",
+	parser.add_argument( "-j", "--jsonfile", type=str, required=True,
 					 help="JSON output file")
-	parser.add_argument( "-l", "--luafile",
+	parser.add_argument( "-l", "--luafile", type=str,
 					 help="Lua output file")
 
 	args = parser.parse_args()
-	print( args )
-	petData = PetData(args.petfile.read())
-	if args.petfile is not sys.stdin:
-		args.petfile.close()
+	if args.jsonfile:
+		with open(args.jsonfile, "r", encoding="utf-8") as f:
+			petData = PetData(f.read())
 	# print(petData.data)
 
 	BN = BattleNetAPI( args.region )
@@ -84,7 +81,7 @@ if __name__=="__main__":
 
 	for pet in petIndexData:
 		petData.set( pet["id"], pet["name"] )
-	petData.save( args.outfile )
+	petData.save( args.jsonfile )
 
 	if args.luafile:
 		with open(args.luafile, "w", encoding="utf-8") as f:
