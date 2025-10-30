@@ -2,7 +2,6 @@ local _, CritterEmote = ...
 if GetLocale() == "enUS" then
 CritterEmote.Holiday_emotes = {
 	["init"] = function()
-		print("Holiday init")
 		if not C_AddOns.IsAddOnLoaded("Blizzard_Calendar") then
 			CritterEmote.Log(CritterEmote.Debug, "Blizzard_Calendar was not loaded.")
 			UIParentLoadAddOn("Blizzard_Calendar")
@@ -11,11 +10,33 @@ CritterEmote.Holiday_emotes = {
 			CritterEmote.Log(CritterEmote.Debug, "Requesting calendar data...")
 			C_Calendar.OpenCalendar()  -- trigger CALENDAR_UPDATE_EVENT_LIST
 		end)
-		CritterEmote.EventCallback("CALENDAR_UPDATE_EVENT_LIST", CritterEmote.GetCurrentActiveHolidays)
+		CritterEmote.EventCallback("CALENDAR_UPDATE_EVENT_LIST", CritterEmote.Holiday_emotes.BuildActiveHolidays)
 	end,
-
-	["pick"] = function()
-		print("Holiday pick")
+	["BuildActiveHolidays"] = function()
+		CritterEmote.Log(CritterEmote.Error, "Call to GetCurrentActiveHolidays()")
+		CritterEmote.activeHolidays = CritterEmote.GetCurrentActiveHolidays()
+		for i,_ in ipairs(CritterEmote.Holiday_emotes) do -- clear possible emotes
+			print(i,_)
+			CritterEmote[i] = nil
+		end
+		for holiday, _ in pairs(CritterEmote.activeHolidays) do
+			if CritterEmote.Holiday_emotes[holiday] then
+				for _, emote in pairs(CritterEmote.Holiday_emotes[holiday]) do
+					CritterEmote.Log(CritterEmote.Debug, "Adding to Holiday_emotes: "..emote)
+					table.insert(CritterEmote.Holiday_emotes, emote)
+				end
+			end
+		end
+	end,
+	["PickTable"] = function(self)
+		if CritterEmote.activeHolidays then
+			-- for k,_ in pairs( CritterEmote.activeHolidays ) do
+			-- 	print("> "..k)
+			-- end
+			return self
+		else
+			C_Calendar.OpenCalendar()
+		end
 	end,
 	["Feast of Winter Veil"] = {
 		"dances around the festive tree.",

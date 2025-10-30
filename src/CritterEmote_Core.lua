@@ -108,9 +108,9 @@ function CritterEmote.OnLoad()
 				CritterEmote.Log(CritterEmote.Debug, tblName..".init()")
 				CritterEmote[tblName].init()
 			end
-			if not CritterEmote[tblName].pick then -- set the pick if not set.
-				CritterEmote.Log(CritterEmote.Debug, tblName..".pick() not assigned. Assign something.")
-				CritterEmote[tblName].pick = CritterEmote.GetRandomTableEntry
+			if not CritterEmote[tblName].PickTable then -- set the pick if not set.
+				CritterEmote.Log(CritterEmote.Debug, tblName..".PickTable() not assigned. Assign something.")
+				CritterEmote[tblName].PickTable = function(self) return self; end
 			end
 			table.insert(CritterEmote.Categories, category)
 		end
@@ -243,7 +243,7 @@ function CritterEmote.GetRandomEmote()
 		CritterEmote.Log(CritterEmote.Debug, "Emote category: "..category.." is "..(enabled and "enabled." or "disabled."))
 		if enabled and CritterEmote[category.."_emotes"] then
 			CritterEmote.Log(CritterEmote.Debug, "Get a random emote from: "..category.."_emotes ("..#CritterEmote[category.."_emotes"]..")" )
-			categoryEmote = CritterEmote[category.."_emotes"]:pick()
+			categoryEmote = CritterEmote.GetRandomTableEntry(CritterEmote[category.."_emotes"]:PickTable() or {})
 
 			-- categoryEmote = CritterEmote.GetRandomTableEntry( CritterEmote[category.."_emotes"] or {})
 			CritterEmote.Log(CritterEmote.Debug, "categoryEmote: "..(categoryEmote or "nil"))
@@ -251,13 +251,6 @@ function CritterEmote.GetRandomEmote()
 		else
 			CritterEmote.Log(CritterEmote.Debug, "No "..category.." emote added to list to choose from.")
 		end
-	end
-	-- add in a target emote if they exist, an there is a target.
-	if UnitName("target") and CritterEmote.Target_emotes then
-		CritterEmote.Log(CritterEmote.Debug, "You are targeting "..(UnitName("target") or "<no target>")..". Use a target emote.")
-		local targetEmote = CritterEmote.GetRandomTableEntry( CritterEmote.Target_emotes )
-		CritterEmote.Log(CritterEmote.Debug, "targetEmote: "..(targetEmote or "nil"))
-		table.insert(CritterEmote.RandomEmoteTable, targetEmote)
 	end
 	return CritterEmote.GetRandomTableEntry(CritterEmote.RandomEmoteTable)
 end
@@ -443,23 +436,7 @@ end
 function CritterEmote.ToggleCategory(cat)
 	CritterEmote_Variables.Categories[cat] = not CritterEmote_Variables.Categories[cat]
 end
-function CritterEmote.CALENDAR_UPDATE_EVENT_LIST()
-	CritterEmote.Log(CritterEmote.Debug, "Call to CALENDAR_UPDATE_EVENT_LIST()")
-	if CritterEmote.Holiday_emotes_src then
-		CritterEmote.activeHolidays = CritterEmote.GetCurrentActiveHolidays()
-		CritterEmote.Holiday_emotes = {}
-		for holiday, _ in pairs(CritterEmote.activeHolidays) do
-			if CritterEmote.Holiday_emotes_src[holiday] then
-				for _, emote in pairs( CritterEmote.Holiday_emotes_src[holiday] ) do
-					CritterEmote.Log(CritterEmote.Debug, "Adding to Holiday_emotes: "..emote)
-					table.insert(CritterEmote.Holiday_emotes, emote)
-				end
-			end
-		end
-	else
-		CritterEmote.Log(CritterEmote.Debug, "No Holiday_emotes")
-	end
-end
+
 --[[
 
 local function CritterEmote_SlashHandler(msg, editbox)

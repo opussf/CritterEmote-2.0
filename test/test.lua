@@ -10,6 +10,7 @@ ParseTOC( "../src/CritterEmote.toc" )
 
 function test.before()
 	Units["target"] = nil
+	CritterEmote.Test_emotes = { "Mutters something." }
 	chatLog = {}
 	CritterEmote.emoteToSend = nil
 	CritterEmote_Variables.enabled = true
@@ -67,9 +68,8 @@ function test.test_onUpdate_sends_emoteToSend()
 	CritterEmote.lastUpdate = time()
 	CritterEmote.emoteToSend = "Looks around for parachuting ninjas."
 	CritterEmote.OnUpdate(1)
-	assertEquals( "Looks around for parachuting ninjas.", chatLog[1].msg )
+	assertEquals( "Looks around for parachuting ninjas.", chatLog[#chatLog].msg )
 end
-
 function test.test_GetEmoteMessage()
 	local emoteToSend = CritterEmote.GetEmoteMessage("CHEER","petName","customName")
 	-- test.dump(chatLog)
@@ -95,7 +95,6 @@ function test.test_noCritterEmote_()
 	end
 	assertTrue( count <= 0 )
 end
-
 function test.test_slashCommand_help()
 	CritterEmote.SlashHandler("help")
 end
@@ -149,6 +148,7 @@ function test.test_slashCommand_noCommand()
 	-- this should post a random emote
 	CritterEmote_Variables.enabled = true
 	CritterEmote_Variables.randomEnabled = true
+	CritterEmote_Variables.Categories.Test = true
 	CritterEmote.SlashHandler()
 	assertTrue(CritterEmote.emoteToSend)
 end
@@ -201,6 +201,7 @@ function test.test_emote_with_target()
 		["realm"] = "not sure what this should be",
 		["creatureTypeID"] = 1,
 	}
+	CritterEmote_Variables.Categories.Target = true
 	assertTrue( CritterEmote.GetRandomEmote() )
 end
 
