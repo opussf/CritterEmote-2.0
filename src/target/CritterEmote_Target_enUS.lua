@@ -228,26 +228,26 @@ CritterEmote.Target_emotes = {
 	"is very happy with %t!",
 	"nods at %t.",
 	"was happy to help %t. ",
-	-- cat = {
-	-- 	"purrs at %t.",
-	-- 	"wraps itself around %t\'s leg.",
-	-- 	"paws at %t.",
-	-- 	"looks at %t for some food.",
-	-- },
-	-- dog = {
-	-- 	"wags tail at %t",
-	-- 	"runs in little circles.",
-	-- 	"chases tail.",
-	-- 	"barks at %t",
-	-- },
-	-- reptile = {
-	-- 	"hisses at %t.",
-	-- 	"wraps itself around %t\'s leg.",
-	-- 	"hisses at %t.",
-	-- 	"looks at %t for some food.",
-	-- },
-	-- bird = {
-	-- 	"flies around %t\'s head.",
-	-- }
+	cat = {
+		"purrs at %t.",
+		"wraps itself around %t\'s leg.",
+		"paws at %t.",
+		"looks at %t for some food.",
+	},
+	dog = {
+		"wags tail at %t",
+		"runs in little circles.",
+		"chases tail.",
+		"barks at %t",
+	},
+	reptile = {
+		"hisses at %t.",
+		"wraps itself around %t\'s leg.",
+		"hisses at %t.",
+		"looks at %t for some food.",
+	},
+	bird = {
+		"flies around %t\'s head.",
+	}
 }
 end

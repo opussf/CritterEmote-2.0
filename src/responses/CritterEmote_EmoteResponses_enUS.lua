@@ -1830,76 +1830,40 @@ CritterEmote.EmoteResponses = {
 		 },
 	},
 	SCRATCH = {
-		default = {
-			"says \"Ow!\"",
-		},
-		cat = {
-			"says \"meow?!\"",
-		},
-		reptile = {
-			"says \"hiss?!\"",
-		},
-		cat = {
-			"scratch back. Mrreoowww.",
-			},
-		["Gregarious Grell"] = {
-				"screams, \"THIS WAS NOT IN MY CONTRACT!\"",
-		},
-		["Lil' K.T."] = {
-			"glances him for 1 Physical.",
-			},
-		["Lil' Ragnaros"] = {
-				"glances him for 1 Physical.",
-				},
+		default = { "says \"Ow!\"", },
+		cat = { "says \"meow?!\"", },
+		reptile = { "says \"hiss?!\"", },
+		cat = { "scratch back. Mrreoowww.", },
+		["Gregarious Grell"] = { "screams, \"THIS WAS NOT IN MY CONTRACT!\"", },
+		["Lil' K.T."] = { "glances him for 1 Physical.", },
+		["Lil' Ragnaros"] = { "glances him for 1 Physical.", },
 	},
 	SEARCH = {
 		default = nil,
-		beast = {
-			"might have picked up fleas again.",
-			},
-		ooze = {
-			"may have eaten your keys.",
-			},
-		["Gregarious Grell"] = {
-				"shouts, \"No master! %t is ticklish!\"",
-		},
-		["Lil' K.T."] = {
-			"hides his loot table. NO! Not going to happen.",
-			},
-		["Lil' Ragnaros"] = {
-				"hides his loot table. NO! Not going to happen.",
-			},
+		beast = { "might have picked up fleas again.", },
+		ooze = {"may have eaten your keys.", },
+		["Gregarious Grell"] = { "shouts, \"No master! %t is ticklish!\"", },
+		["Lil' K.T."] = { "hides his loot table. NO! Not going to happen.", },
+		["Lil' Ragnaros"] = { "hides his loot table. NO! Not going to happen.", },
 	},
 	SEXY = {
-		default = nil,
-	  ["Gregarious Grell"] = { "looks rather hot with earrings.", },
-	  ["Lil' K.T."] = { "is rather devilish isn't he? So evil, it's sexy!", },
-	  ["Lil' Ragnaros"] = { "is so hot, not even lava compares.", },
+default = nil,
+["Gregarious Grell"] = { "looks rather hot with earrings.", },
+["Lil' K.T."] = { "is rather devilish isn't he? So evil, it's sexy!", },
+["Lil' Ragnaros"] = { "is so hot, not even lava compares.", },
 	},
 	SHAKE = {
 		default = nil,
-	  ["Lil' K.T."] = {
-			"fires a Frostbolt at that huge target.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"sends out a Sulfuras Smash.",
-			},
+		["Lil' K.T."] = { "fires a Frostbolt at that huge target.", },
+		["Lil' Ragnaros"] = { "sends out a Sulfuras Smash.", },
 	},
 	SHAKEFIST = {
-		default = {
-			"is ready! Bring it!",
-		},
-		cat = {
-			"stands on its hind legs and roars!",
-		},
+		default = { "is ready! Bring it!", },
+		cat = { "stands on its hind legs and roars!", },
 	},
 	SHIFTY = {
-		default = {
-			"wants to know what's going down.",
-		},
-	  ooze = {
-			"darts from side to side.",
-			},
+		default = { "wants to know what's going down.", },
+		ooze = { "darts from side to side.", },
 	},
 	SHIMMY = {
 		default = nil,
@@ -1908,38 +1872,18 @@ CritterEmote.EmoteResponses = {
 	},
 	SHIVER = {
 		default = nil,
-		beast = {
-			"cuddles close to warm you.",
-			},
-		cat = {
-			"brushes against your leg.",
-			 },
-		ooze = {
-			"shivers next to you.",
-			},
-		["Gregarious Grell"] = {
-				"asks, \"Would you like me to blast you with a Firebolt, master?\"",
-		},
-		["Lil' K.T."] = {
-			"checks to see if he is on AC mode.",
-			},
+		beast = { "cuddles close to warm you.", },
+		cat = { "brushes against your leg.", },
+		ooze = { "shivers next to you.", },
+		["Gregarious Grell"] = { "asks, \"Would you like me to blast you with a Firebolt, master?\"", },
+		["Lil' K.T."] = { "checks to see if he is on AC mode.", },
 	},
 	SHOO = {
-		default = {
-			"is shooed away.",
-		},
-		cat = {
-			"brushes against your leg and purrs.",
-			},
-		["Gregarious Grell"] = {
-				"says, \"Argh! I feel so used!\"",
-		},
-		["Lil' K.T."] = {
-			"will not be shooed away by a mere mortal!",
-			},
-		["Lil' Ragnaros"] = {
-				"the realm of fire will consume you!",
-				},
+		default = { "is shooed away.", },
+		cat = { "brushes against your leg and purrs.", },
+		["Gregarious Grell"] = { "says, \"Argh! I feel so used!\"", },
+		["Lil' K.T."] = { "will not be shooed away by a mere mortal!", },
+		["Lil' Ragnaros"] = { "the realm of fire will consume you!", },
 	},
 	SHRUG = {
 		default = nil,
@@ -1951,50 +1895,25 @@ CritterEmote.EmoteResponses = {
 		default = nil,
 	},
 	SIGH = {
-		default = {
-			"wants to know what's wrong.",
-		},
-		cat = {
-			"says \"meow?\".",
-		},
-		reptile = {
-			"says \"hiss?\".",
-		},
-	  humanoid = {
-			"wants to know what's wrong.",
-			},
+		default = { "wants to know what's wrong.", },
+		cat = { "says \"meow?\".", },
+		reptile = { "says \"hiss?\".", },
+		humanoid = { "wants to know what's wrong.", },
 	},
 	SIGNAL = {
 		default = nil,
+		["Uuna"] = { "winks and nods back at you." },
 	},
 	SILENCE = {
-		default = {
-			"tries to keep it down.",
-		},
-		cat = {
-			"says \"meow?\"",
-		},
-		reptile = {
-			"says \"hiss?\"",
-		},
-		flying_insect = {
-			"flies around your ear. Buzz buzz.",
-			},
-		inanimate = {
-			"is unaffected.",
-			},
-		mech = {
-			"goes into standby mode.",
-		},
-		["Gregarious Grell"] = {
-				"Has a Firebolt interrupted.",
-		},
-		["Lil' K.T."] = {
-			"has a Frostbolt interrupted.",
-			},
-		["Lil' Ragnaros"] = {
-				"is immune to interrupts.",
-				},
+		default = { "tries to keep it down.", },
+		cat = { "says \"meow?\"", },
+		reptile = { "says \"hiss?\"", },
+		flying_insect = { "flies around your ear. Buzz buzz.", },
+		inanimate = { "is unaffected.", },
+		mech = { "goes into standby mode.", },
+		["Gregarious Grell"] = { "Has a Firebolt interrupted.", },
+		["Lil' K.T."] = { "has a Frostbolt interrupted.", },
+		["Lil' Ragnaros"] = { "is immune to interrupts.", },
 	},
 	SING = {
 		default = { "sings with you.", },
@@ -2004,107 +1923,51 @@ CritterEmote.EmoteResponses = {
 		inanimate = { "is unaffected.", },
 		ooze = { "responds positively, bouncing up and down to the rhythm.",	},
 		dragon = { "sings, \"Puff the Magic Dragon lived by the sea.\"", },
-		frog = {
-			"sings, \"It\'s not that easy being green, having to spend each day the color of the leaves, when I think it could be nicer being red, or yellow, or gold or something.\"",
-		},
+		frog = { "sings, \"It\'s not that easy being green, having to spend each day the color of the leaves, when I think it could be nicer being red, or yellow, or gold or something.\"", },
 		mech = {"sings, \"Domo arigato, Mr. Roboto, Mata au hi made. Domo arigato, Mr. Roboto, Himitsu wo shiri tai. \"", },
 		undead = {"There\'s a zombie on your lawn.",},
-		["Argent Gruntling"] = {
-			"sings, \"It\'s the hard-knock life for us! It\'s the hard-knock life for us! \'Steada treated, we get tricked! \'Steada kisses, we get kicked! It\'s the hard-knock life!\"",
-		},
-		["Argent Squire"] = {
-			"sings, \"It\'s the hard-knock life for us! It\'s the hard-knock life for us! \'Steada treated, we get tricked! \'Steada kisses, we get kicked! It\'s the hard-knock life!\"",
-		},
-		["Bananas"] = {
-				"sings, \"Yes, I have no bananas, I have no bananas today. Doo doo doo doooo\"",
-				},
-		["Blue Clockwork Rocket Bot"] = {
-				"sings with a computer voice, \"When I look out there, it makes me glad I\'m not you. I\'ve got experiments to run. There is research to be done on the people who are still alive. And believe me I am still alive.\"", },
-		["Clockwork Rocket Bot"] = {  "sings with a computer voice, \"We are human, MmmaMmmaMmMMMHHhh, after all, MmmaMmaMMmmMMMHHH, flesh encumbered,  MmmaMmmaMmMMMHHhh, after all.\"",
-		 },
-		["Curious Oracle Hatchling"] = {
-			"sings, \"Sunny day sweepin' the clouds away, on my way to where the air is sweet; can you tell me how to get, how to get to Seasame Street?\"",
-		},
+		["Argent Gruntling"] = { "sings, \"It\'s the hard-knock life for us! It\'s the hard-knock life for us! \'Steada treated, we get tricked! \'Steada kisses, we get kicked! It\'s the hard-knock life!\"", },
+		["Argent Squire"] = { "sings, \"It\'s the hard-knock life for us! It\'s the hard-knock life for us! \'Steada treated, we get tricked! \'Steada kisses, we get kicked! It\'s the hard-knock life!\"", },
+		["Bananas"] = { "sings, \"Yes, I have no bananas, I have no bananas today. Doo doo doo doooo\"", },
+		["Blue Clockwork Rocket Bot"] = { "sings with a computer voice, \"When I look out there, it makes me glad I\'m not you. I\'ve got experiments to run. There is research to be done on the people who are still alive. And believe me I am still alive.\"", },
+		["Clockwork Rocket Bot"] = {  "sings with a computer voice, \"We are human, MmmaMmmaMmMMMHHhh, after all, MmmaMmaMMmmMMMHHH, flesh encumbered,  MmmaMmmaMmMMMHHhh, after all.\"", },
+		["Curious Oracle Hatchling"] = { "sings, \"Sunny day sweepin' the clouds away, on my way to where the air is sweet; can you tell me how to get, how to get to Seasame Street?\"", },
 		["Curious Wolvar Pup"] = {  "sings, \"Do-do-do-do-do Dora! Do-do-do-do-do Dora! Dora Dora Dora the explorer! Boots, the super cool explora, Dora.\"", },
 		["Deathy"] = { "sings, \"Stacy\'s mom has got it goin' on, she's all I want and I\'ve waited for so looong.\"", },
 		["Elekk Plushie"] = { "sings, \"Sunny day sweepin' the clouds away, on my way to where the air is sweet; can you tell me how to get, how to get to Seasame Street?\"", },
-		["Ethereal Soul-Trader"] = {
-			"sings, \"I\'ve got a lovely bunch of coconuts. There they are standing in a row. Big ones, small ones, some as big as your head!\"",
-		},
-		["Father Winter\'s Helper"] = {
-			"sings, \"Jingle bell, jingle bell, jingle bell rock.  Jingle bells swing and jingle bells ring, snowing and blowing up bushels of fun, now the jingle hop has begun.\"",
-		},
-		["Gregarious Grell"] = {
-				"sings, \"snroh htiw dog a ,sevooh htiw dog a, snroh htiw dog a ,sevooh htiw dog A.\"",
-		},
-		["Grunty"] = {
-			"sings, \"I am more than a fish. I am more than a man. Death will rise from the tide. I am murloc! MMMRRRGGGLLL.\"",
-		 },
-		["Kirin Tor Familiar"] = {
-			"sings, \"Imagine all the people living life in peace. You may say I\'m a dreamer but I\'m not the only one. I hope someday you\'ll join us and the world will be as one.\"",
-		},
-		["Lil' K.T."] = {
-			"sings, \"Cause I\'m the Boogie Man and if you aren\'t shakin\' then there\'s something very wrong. Cause this may be the last time now that you hear the boogie song. Oooh.\"",
-			},
+		["Ethereal Soul-Trader"] = { "sings, \"I\'ve got a lovely bunch of coconuts. There they are standing in a row. Big ones, small ones, some as big as your head!\"", },
+		["Father Winter\'s Helper"] = { "sings, \"Jingle bell, jingle bell, jingle bell rock.  Jingle bells swing and jingle bells ring, snowing and blowing up bushels of fun, now the jingle hop has begun.\"", },
+		["Gregarious Grell"] = { "sings, \"snroh htiw dog a ,sevooh htiw dog a, snroh htiw dog a ,sevooh htiw dog A.\"", },
+		["Grunty"] = { "sings, \"I am more than a fish. I am more than a man. Death will rise from the tide. I am murloc! MMMRRRGGGLLL.\"", },
+		["Kirin Tor Familiar"] = { "sings, \"Imagine all the people living life in peace. You may say I\'m a dreamer but I\'m not the only one. I hope someday you\'ll join us and the world will be as one.\"", },
+		["Lil' K.T."] = { "sings, \"Cause I\'m the Boogie Man and if you aren\'t shakin\' then there\'s something very wrong. Cause this may be the last time now that you hear the boogie song. Oooh.\"", },
 		["Lil' Ragnaros"] = { "sings, \"we didn\'t start the fire, it was always burning, since the world's been turning.\"", },
 		["Lil' Smoky"] = { "sings, \"I\'m a sex machine ready to reload like an atom bomb about to oh oh oh oh explode! I'm burning through the sky, yeah! 200 degrees, that\'s why they call me Mr. Fahrenheit.\"", },
-		["Mini Diablo"] = {
-			"sings, \"I wanna be yours pretty baby, yours and yours alone. I\'m here to tell ya honey that I\'m bad to the bone. Bad to the bone. B-b-b-bad.\"",
-		 },
-		["Mini Tyrael"] = {
-			"sings, \"You just call on me brother when you need a hand. We all need somebody to lean on. I just might have a problem that you\'ll understand. We all need somebody to lean on.\"",
-			},
-		["Murky"] = {
-			"sings in murloc, \"Doo doo doo doo doo doo I\'m singing in the rain. Just singing in the rain. What a glorious feeling, I\'m happy again.\"",
-			},
-		["Pandaren Monk"] = {
-			"sings, \"War, huh, yeah! What is it good for! Absolutely nothing! Say it again, you all.\"",
-			},
-		["Peddlefeet"] = {
-			"sings, \"Don\'t you want somebody to love. Don\'t you need somebody to love. Wouldn\'t you love somebody to love. You better find somebody to love, love, love.\"",
-		},
-		["Scorchling"] = {
-			"sings, \"But oh it\'s too hot, too hot lady. I gotta run for shelter, I gotta run for shade. It\'s too hot, too hot lady. Gotta cool this anger. What a mess we made.\"",
-						},
-		["Teldrassil Sproutling"] = {
-			"sings, \"But nothing ever happens and I wonder, I wonder how, I wonder why, yesterday you told me about the blue, blue sky and all that I can see is just another lemon tree.\"",
-			},
-		["Winter's Little Helper"] = {
-			"sings, \"Oohh ooo. Oohh ooo. What would Christmas be like without you here, singing at the bottom of the mistletoe waiting for you to come home.\"",
-		},
+		["Mini Diablo"] = { "sings, \"I wanna be yours pretty baby, yours and yours alone. I\'m here to tell ya honey that I\'m bad to the bone. Bad to the bone. B-b-b-bad.\"", },
+		["Mini Tyrael"] = { "sings, \"You just call on me brother when you need a hand. We all need somebody to lean on. I just might have a problem that you\'ll understand. We all need somebody to lean on.\"", },
+		["Murky"] = { "sings in murloc, \"Doo doo doo doo doo doo I\'m singing in the rain. Just singing in the rain. What a glorious feeling, I\'m happy again.\"", },
+		["Pandaren Monk"] = { "sings, \"War, huh, yeah! What is it good for! Absolutely nothing! Say it again, you all.\"", },
+		["Peddlefeet"] = { "sings, \"Don\'t you want somebody to love. Don\'t you need somebody to love. Wouldn\'t you love somebody to love. You better find somebody to love, love, love.\"", },
+		["Scorchling"] = { "sings, \"But oh it\'s too hot, too hot lady. I gotta run for shelter, I gotta run for shade. It\'s too hot, too hot lady. Gotta cool this anger. What a mess we made.\"", },
+		["Teldrassil Sproutling"] = { "sings, \"But nothing ever happens and I wonder, I wonder how, I wonder why, yesterday you told me about the blue, blue sky and all that I can see is just another lemon tree.\"", },
+		["Winter's Little Helper"] = { "sings, \"Oohh ooo. Oohh ooo. What would Christmas be like without you here, singing at the bottom of the mistletoe waiting for you to come home.\"", },
 	},
 	SIT = {
 		default = { "sits down.", },
 		cat = { "sits on cat guardian's lap.", },
 	},
 	SLAP = {
-		default = {
-			"says \"Ow!\"",
-		},
-		cat = {
-			"cringes.",
-		},
-		reptile = {
-			"cringes.",
-		},
-	  flying_insect = {
-			"is swatted down. Mayday! Mayday!.",
-			},
-	   ["Gregarious Grell"] = {
-			 "is hit for 3 Physical.",
-			 },
-		 ["Lil' K.T."] = {
-			 "parries your attack.",
-			 },
-	   ["Lil' Ragnaros"] = {
-			 "laughs while you burn your hand.",
-			 },
+		default = { "says \"Ow!\"", },
+		cat = { "cringes.", },
+		reptile = { "cringes.", },
+		flying_insect = { "is swatted down. Mayday! Mayday!.", },
+		["Gregarious Grell"] = { "is hit for 3 Physical.", },
+		["Lil' K.T."] = { "parries your attack.", },
+		["Lil' Ragnaros"] = { "laughs while you burn your hand.", },
 	},
 	SLEEP = {
 		default = nil,
-		ooze = {
-			"takes the shape of a mini Night Elf female with two green glowsticks and goes off to a rave.",
-			},
+		ooze = { "takes the shape of a mini Night Elf female with two green glowsticks and goes off to a rave.", },
 		["Lil' Ragnaros"] = { "\"Puny insect, sleep is for the weak!\"", },
 	},
 	SMACK = {
@@ -2114,14 +1977,9 @@ CritterEmote.EmoteResponses = {
 		["Lil' Ragnaros"] = { "dodges and strikes back with Sulfuras.", },
 	},
 	SMILE = {
-		default = {
-			"smiles back.",
-		},
-	  ["Lil' K.T."] = {
-			"smiles with a hint of evil and a pinch of diabolical",
-			},
-	  ["Lil' Ragnaros"] = { "does not know what this so-called \'smile\' is.",
-		},
+		default = { "smiles back.", },
+		["Lil' K.T."] = { "smiles with a hint of evil and a pinch of diabolical", },
+		["Lil' Ragnaros"] = { "does not know what this so-called \'smile\' is.", },
 	},
 	SMIRK = {
 		default = nil,
@@ -2131,28 +1989,20 @@ CritterEmote.EmoteResponses = {
 	},
 	SNARL = {
 		default = nil,
-	  ["Lil' K.T."] = {
-			"is shaking in his chains. \"So scary\", he says sarcastically.",
-			},
+		["Lil' K.T."] = { "is shaking in his chains. \"So scary\", he says sarcastically.", },
 	},
 	SNEAK = {
 		default = nil,
-	  ["Lil' K.T."] = { "sees you in the corner of his eye. You can't do that in combat.", },
+		["Lil' K.T."] = { "sees you in the corner of his eye. You can't do that in combat.", },
 	},
 	SNEEZE = {
 		default = nil,
-	  ["Gregarious Grell"] = { "asks, \"Is master coming down with a cold?\"", },
-	  ["Lil' K.T."] = {
-			"thinks you should see a doctor. Luckily, he has a PHD in Pwnology.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"yes, keep inhaling my sweet sulfur.",
-			},
+		["Gregarious Grell"] = { "asks, \"Is master coming down with a cold?\"", },
+		["Lil' K.T."] = { "thinks you should see a doctor. Luckily, he has a PHD in Pwnology.", },
+		["Lil' Ragnaros"] = { "yes, keep inhaling my sweet sulfur.", },
 	},
 	SNICKER = {
-		default = {
-			"cries.",
-		},
+		default = { "cries.", },
 	},
 	SNIFF = {
 		default = nil,
@@ -2162,8 +2012,8 @@ CritterEmote.EmoteResponses = {
 	},
 	SNUB = {
 		default = nil,
-	  humanoid = { "crosses its arms and ignores you until you lose the attitude.", },
-	  ["Lil' K.T."] = { "cannot be snubbed by you. It\'s Lil\' K.T. that snubs you!", },
+		humanoid = { "crosses its arms and ignores you until you lose the attitude.", },
+		["Lil' K.T."] = { "cannot be snubbed by you. It\'s Lil\' K.T. that snubs you!", },
 	},
 	SOOTHE = {
 		default = nil,
@@ -2188,22 +2038,13 @@ CritterEmote.EmoteResponses = {
 	},
 	STINK = {
 		default = nil,
-		ooze = {
-			"oozes with exotic odors.",
-			},
-		["Gregarious Grell"] = {
-				"smells like a dead rat.",
-		},
-		["Lil' K.T."] = {
-			"asks if you know that he is dead. You know, don\'t you?",
-			},
-		["Lil' Ragnaros"] = { "exudes the sweet smell of sulfur.",
-			},
+		ooze = { "oozes with exotic odors.", },
+		["Gregarious Grell"] = { "smells like a dead rat.", },
+		["Lil' K.T."] = { "asks if you know that he is dead. You know, don\'t you?", },
+		["Lil' Ragnaros"] = { "exudes the sweet smell of sulfur.", },
 	},
 	SURPRISED = {
-		default = {
-			"is full of surprises.",
-		},
+		default = { "is full of surprises.", },
 	},
 	SURRENDER = {
 		default = nil,
