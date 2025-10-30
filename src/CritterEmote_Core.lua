@@ -73,6 +73,13 @@ function CritterEmote.OnLoad()
 	CritterEmote.lastUpdate = 0
 	CritterEmote.updateInterval = CritterEmote.CreateUpdateInterval()
 end
+function CritterEmote.ModifyMenu(owner, rootDescription, contextData)
+	print( owner, rootDescription, contextData )
+end
+Menu.ModifyMenu("MENU_UNIT_PET", CritterEmote.ModifyMenu)
+Menu.ModifyMenu("MENU_UNIT_COMPANION_PET", CritterEmote.ModifyMenu)
+
+
 function CritterEmote.LOADING_SCREEN_DISABLED()
 	CritterEmote.lastUpdate = time()
 	CritterEmote.AddEmoteCategoriesToCommandList()
