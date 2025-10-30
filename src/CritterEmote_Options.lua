@@ -7,8 +7,8 @@ function CritterEmote.OptionsPanel_OnLoad(panel)
 	CritterEmote.AddCategoryOptions()
 
 	-- These NEED to be set
-	panel.OnDefault = function() end
-	panel.OnRefresh = function() end
+	panel.default = function() end
+	panel.refresh = CritterEmote.OptionsPanel_OnLoad
 	panel.OnCommit = CritterEmote.OptionsPanel_OKAY
 	panel.cancel = CritterEmote.OptionsPanel_Cancel
 

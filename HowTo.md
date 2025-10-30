@@ -7,7 +7,7 @@ Here are the steps:
     1. export CLIENTID="clientID"
     2. export BLSECRET="clientSecret"
     3. These should be in your environment now.
-2. run `./scripts/update.py -o data/pets.json -l src/CritterEmote_PetPersonalities.lua < data/pets.json`
+2. run `./scripts/update.py -j data/pets.json -l src/CritterEmote_PetPersonalities.lua`
 3. look for the report of any new pets
 4. look for any pets missing personalities
 5. update the `data/pets.json` file with missing or updated personalities
