@@ -13,6 +13,7 @@ function test.before()
 	chatLog = {}
 	CritterEmote.emoteToSend = nil
 	CritterEmote_Variables.enabled = true
+	CritterEmote_Variables.logLevel = CritterEmote.Debug
 	CritterEmote.OnLoad()
 	CritterEmote.LOADING_SCREEN_DISABLED()
 end
@@ -53,6 +54,7 @@ function test.test_onUpdate_randomEnabled_sets_emoteToSend()
 	CritterEmote_Variables.randomEnabled = true
 	isInCombat = false
 	CritterEmote.lastUpdate = 0  -- force update
+	CritterEmote_Variables.Categories.General = true
 	CritterEmote.OnUpdate()
 	if not CritterEmote.emoteToSend then
 		test.dump(chatLog)

@@ -19,6 +19,7 @@ CritterEmote.LogNames = { CritterEmote.L["Error"],
 }
 
 CritterEmote.Categories = {}  -- is now built later.
+CritterEmote.eventFunctions = {}
 
 CritterEmote_Variables = { Categories = {} }
 CritterEmote_CharacterVariables = {}
@@ -60,10 +61,38 @@ function CritterEmote.DisplayEmote(message)
 	local nameAdd = string.sub(CritterEmote.playerName, -1) == "s" and ' ' or ': '
 	CritterEmote.emoteToSend = nameAdd..message
 end
+function CritterEmote.EventCallback( event, callback )
+	-- returns:
+	-- 		true if event registered.
+	--  	nil if event not registered.
+	if( event == "ADDON_LOADED" or event == "VARIABLES_LOADED" ) then
+		return
+	end
+
+	-- record callback function in table
+	if not CritterEmote.eventFunctions[event] then
+		CritterEmote.eventFunctions[event] = {}
+	end
+	table.insert(CritterEmote.eventFunctions[event], callback)
+
+	if not CritterEmote[event] then
+		-- create function if it does not exist
+		CritterEmote[event] = function( ... )
+			if CritterEmote.eventFunctions[event] then
+				for _, func in pairs(CritterEmote.eventFunctions[event]) do
+					func( ... )
+				end
+			else
+				CritterEmote.Log(CritterEmote.Warn, "There are no function callbacks registered for this event: ("..event..")")
+			end
+		end
+	end
+	-- register event with the frame
+	CritterEmoteFrame:RegisterEvent(event)
+end
 function CritterEmote.OnLoad()
 	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
-	CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
-	CritterEmoteFrame:RegisterEvent("CALENDAR_UPDATE_EVENT_LIST")
+	-- CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
 
 	SLASH_CRITTEREMOTE1 = "/ce"
 	SlashCmdList["CRITTEREMOTE"] = CritterEmote.SlashHandler
@@ -75,23 +104,20 @@ function CritterEmote.OnLoad()
 		local category = tblName:match("^([%a][%a]*)_emotes$")
 		-- print( category, tblName, type(CritterEmote[tblName]))
 		if category and type(CritterEmote[tblName]) == "table" then
-			if CritterEmote[tblName].init then
+			if CritterEmote[tblName].init then  -- call an init if set.
+				CritterEmote.Log(CritterEmote.Debug, tblName..".init()")
 				CritterEmote[tblName].init()
+			end
+			if not CritterEmote[tblName].pick then -- set the pick if not set.
+				CritterEmote.Log(CritterEmote.Debug, tblName..".pick() not assigned. Assign something.")
+				CritterEmote[tblName].pick = CritterEmote.GetRandomTableEntry
 			end
 			table.insert(CritterEmote.Categories, category)
 		end
 	end
-end
-function CritterEmote.LOADING_SCREEN_DISABLED()
-	CritterEmote.lastUpdate = time()
-	CritterEmote.AddEmoteCategoriesToCommandList()
-	if not C_AddOns.IsAddOnLoaded("Blizzard_Calendar") then
-		CritterEmote.Log(CritterEmote.Debug, "Blizzard_Calendar was not loaded.")
-		UIParentLoadAddOn("Blizzard_Calendar")
-	end
-	C_Timer.After(10, function()
-		CritterEmote.Log(CritterEmote.Debug, "Requesting calendar data...")
-		C_Calendar.OpenCalendar()  -- trigger CALENDAR_UPDATE_EVENT_LIST
+	CritterEmote.EventCallback("LOADING_SCREEN_DISABLED", function()
+		CritterEmote.lastUpdate = time()
+		CritterEmote.AddEmoteCategoriesToCommandList()
 	end)
 end
 function CritterEmote.OnEmote(emote, target)
@@ -157,9 +183,9 @@ end
 function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- isEmote is a flag to say that this is an emote.
 	-- false means that msg is text to use.
-	CritterEmote.Log(CritterEmote.Debug, "Call to DoCritterEmote( "..(msg or "nil")..", "..(isEmote and "True" or "False")..")")
+	CritterEmote.Log(CritterEmote.Debug, "Call to DoCritterEmote("..(msg or "nil")..", "..(isEmote and "True" or "False")..")")
 	local petName, customName, petID = CritterEmote.GetActivePet()
-	CritterEmote.Log(CritterEmote.Debug, "petName: "..(petName or "nil")..", customName:"..(customName or "nil"))
+	CritterEmote.Log(CritterEmote.Debug, "petName: "..(petName or "nil")..", customName:"..(customName or "nil")..", petID:"..(petID or "nil"))
 	if petName then -- a pet is summoned
 		if isEmote or msg == nil then
 			msg = CritterEmote.GetEmoteMessage(msg, petName, customName, petID)
@@ -217,7 +243,9 @@ function CritterEmote.GetRandomEmote()
 		CritterEmote.Log(CritterEmote.Debug, "Emote category: "..category.." is "..(enabled and "enabled." or "disabled."))
 		if enabled and CritterEmote[category.."_emotes"] then
 			CritterEmote.Log(CritterEmote.Debug, "Get a random emote from: "..category.."_emotes ("..#CritterEmote[category.."_emotes"]..")" )
-			categoryEmote = CritterEmote.GetRandomTableEntry( CritterEmote[category.."_emotes"] or {})
+			categoryEmote = CritterEmote[category.."_emotes"]:pick()
+
+			-- categoryEmote = CritterEmote.GetRandomTableEntry( CritterEmote[category.."_emotes"] or {})
 			CritterEmote.Log(CritterEmote.Debug, "categoryEmote: "..(categoryEmote or "nil"))
 			table.insert(CritterEmote.RandomEmoteTable, categoryEmote)
 		else
