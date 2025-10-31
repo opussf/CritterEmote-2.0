@@ -57,7 +57,7 @@ CritterEmote.Holiday_emotes = {
 		"laughs maniacally.",
 		"spooks everyone around.",
 		"chases a floating candy corn as if it were a deadly foe.",
-		"lets out a terrifying \“boo!\” that's only slightly adorable.",
+		"lets out a terrifying \"boo!\" that's only slightly adorable.",
 		"hides under a pumpkin, convinced it's the perfect disguise.",
 		"sniffs the air and shivers — something spooky this way comes.",
 		"tries to howl at the moon… but it comes out as a squeak.",
