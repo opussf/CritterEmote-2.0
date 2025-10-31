@@ -164,8 +164,6 @@ function CritterEmote.GetTargetPetsOwner()
 			if tooltipData and tooltipData.lines then
 				for _, line in ipairs(tooltipData.lines) do
 					if line.leftText then
-						-- print(line.leftText, CritterEmote.playerName)
-						-- print(string.find(line.leftText, CritterEmote.playerName))
 						if string.find(line.leftText, CritterEmote.playerName) then
 							-- this keeps it simple as a find, not a match, and keeps the text returned as the playername from GetUnitName
 							CritterEmote.Log(CritterEmote.Info, "Pet belongs to player.")
@@ -178,7 +176,6 @@ function CritterEmote.GetTargetPetsOwner()
 	else
 		CritterEmote.Log(CritterEmote.Info, "Nothing is targeted, or is targeting a player.")
 	end
-	-- returning nothing is the same as returning nil.
 end
 function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- isEmote is a flag to say that this is an emote.
@@ -205,7 +202,6 @@ function CritterEmote.GetActivePet()
 	end
 end
 function CritterEmote.GetPetPersonality(petID)
-	-- @TODO: Should this also handle 'customName'?  What if a named pet has a different personality?
 	return CritterEmote.Personalities[petID] or "default"
 end
 function CritterEmote.GetEmoteMessage(emoteIn, petName, customName, petID)
@@ -223,11 +219,6 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName, petID)
 		            emoteTable[petName] or
 		            emoteTable[petPersonality] or
 		            emoteTable["default"]
-		-- for cat, enabled in pairs(CritterEmote_Variables.Categories) do
-		-- 	-- this seems the wrong place / time to do this?
-		--  -- should this be done if no entries are found?
-		-- 	search_name = petPersonality_silly
-		-- end
 		return CritterEmote.GetRandomTableEntry(emoteList)
 	else
 		return CritterEmote.GetRandomEmote()
@@ -244,8 +235,6 @@ function CritterEmote.GetRandomEmote()
 		if enabled and CritterEmote[category.."_emotes"] then
 			CritterEmote.Log(CritterEmote.Debug, "Get a random emote from: "..category.."_emotes ("..#CritterEmote[category.."_emotes"]..")" )
 			categoryEmote = CritterEmote.GetRandomTableEntry(CritterEmote[category.."_emotes"]:PickTable() or {})
-
-			-- categoryEmote = CritterEmote.GetRandomTableEntry( CritterEmote[category.."_emotes"] or {})
 			CritterEmote.Log(CritterEmote.Debug, "categoryEmote: "..(categoryEmote or "nil"))
 			table.insert(CritterEmote.RandomEmoteTable, categoryEmote)
 		else
@@ -436,15 +425,3 @@ end
 function CritterEmote.ToggleCategory(cat)
 	CritterEmote_Variables.Categories[cat] = not CritterEmote_Variables.Categories[cat]
 end
-
---[[
-
-local function CritterEmote_SlashHandler(msg, editbox)
-        if (msg == 'critter' or msg == "battle pet") then
-                print('I love to talk!');
-
-
-  elseif(msg == "options" ) then
-          CritterEmote_DisplayOptions();
-
-end]]
