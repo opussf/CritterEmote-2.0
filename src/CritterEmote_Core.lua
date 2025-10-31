@@ -68,7 +68,6 @@ function CritterEmote.EventCallback( event, callback )
 	if( event == "ADDON_LOADED" or event == "VARIABLES_LOADED" ) then
 		return
 	end
-
 	-- record callback function in table
 	if not CritterEmote.eventFunctions[event] then
 		CritterEmote.eventFunctions[event] = {}
@@ -382,7 +381,6 @@ CritterEmote.commandList = {
 		["help"] = {"", CritterEmote.L["displays Critter Emote information"]},
 		["func"] = CritterEmote.ShowInfo,
 	},
-
 	[CritterEmote.L["random"]] = {
 		["help"] = {CritterEmote.L["on"].."|"..CritterEmote.L["off"],
 				CritterEmote.L["turns the periodic emotes on or off"]},
@@ -402,6 +400,8 @@ CritterEmote.commandList = {
 	},
 }
 function CritterEmote.AddEmoteCategoriesToCommandList()
+	CritterEmote.Log(CritterEmote.Debug, "Run AddEmoteCategoriesToCommandList()")
+	CritterEmoteFrame:UnregisterEvent("LOADING_SCREEN_DISABLED")
 	for _, category in pairs(CritterEmote.Categories) do
 		local c = CritterEmote.L[string.lower(category)]
 		CritterEmote.commandList[c] = {
