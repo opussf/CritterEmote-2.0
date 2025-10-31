@@ -13,10 +13,9 @@ CritterEmote.Holiday_emotes = {
 		CritterEmote.EventCallback("CALENDAR_UPDATE_EVENT_LIST", CritterEmote.Holiday_emotes.BuildActiveHolidays)
 	end,
 	["BuildActiveHolidays"] = function()
-		CritterEmote.Log(CritterEmote.Error, "Call to GetCurrentActiveHolidays()")
+		CritterEmote.Log(CritterEmote.Debug, "Call to GetCurrentActiveHolidays()")
 		CritterEmote.activeHolidays = CritterEmote.GetCurrentActiveHolidays()
 		for i,_ in ipairs(CritterEmote.Holiday_emotes) do -- clear possible emotes
-			print(i,_)
 			CritterEmote[i] = nil
 		end
 		for holiday, _ in pairs(CritterEmote.activeHolidays) do
