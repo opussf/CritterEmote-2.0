@@ -156,8 +156,6 @@ function CritterEmote.GetTargetPetsOwner()
 	CritterEmote.Log(CritterEmote.Debug, "Call to GetTargetPetsOwner()")
 	if UnitExists("target") and not UnitIsPlayer("target") then
 		local creatureType, creatureTypeCode = UnitCreatureType("target")
-		CritterEmote_TypeValues = CritterEmote_TypeValues or {}
-		CritterEmote_TypeValues[creatureType] = creatureTypeCode
 		CritterEmote.Log(CritterEmote.Debug, "creatureType: "..creatureType.."("..creatureTypeCode..")==? 12 or 14")
 		if creatureTypeCode == 12 or creatureTypeCode == 14 then  -- https://warcraft.wiki.gg/wiki/API_UnitCreatureType
 			local tooltipData = C_TooltipInfo.GetUnit("target")
@@ -335,8 +333,6 @@ CritterEmote.commandList = {
 			end
 			local petName, customName, petID = CritterEmote.GetActivePet()
 			local creatureType, creatureTypeCode = UnitCreatureType("target")
-			CritterEmote_TypeValues = CritterEmote_TypeValues or {}
-			if creatureType then CritterEmote_TypeValues[creatureType] = creatureTypeCode end
 			print(petName.." ("..petID..")"..(customName and " ("..customName..") " or "").." is a "..
 				CritterEmote.GetPetPersonality(petID).."-\""..(creatureType or "nil").."\"("..(creatureTypeCode or "nil")..")"
 			)
