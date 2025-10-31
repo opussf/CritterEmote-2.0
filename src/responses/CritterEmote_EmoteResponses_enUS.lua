@@ -284,33 +284,19 @@ CritterEmote.EmoteResponses = {
 		["Lil' Ragnaros"] = { "shouts, \"Enough! I will finish this!\"", },
 	},
 	CHARM = {
-		default = {
-			"smiles sweetly at you.",
-		},
-	  evil = {
-			"feels pretty smug right about now.",
-			},
+		default = { "smiles sweetly at you.", },
+		evil = { "feels pretty smug right about now.", },
 	},
 	CHEER = {
-		default = {
-			"Celebrates!",
-		},
-		bird = {
-			"fans out wings and lets out a victory screech.",
-			},
-		crab = {
-			"raises claws in air.",
-			},
-		humanoid = { "raises hands in the air and shouts victoriously!",
-		},
-		mech = {
-			"fires out a mini celebration firework.",
-			},
+		default = { "Celebrates!", },
+		bird = { "fans out wings and lets out a victory screech.", },
+		crab = { "raises claws in air.", },
+		humanoid = { "raises hands in the air and shouts victoriously!", },
+		mech = { "fires out a mini celebration firework.", },
 	},
 	CHICKEN = {
 		default = { "is ready! Bring it!", },
-		beast = { "is confused. You're not a chicken.",
-			},
+		beast = { "is confused. You're not a chicken.", },
 		bird = { "cocks its head to one side and stares at you.", },
 		cat = { "comes up to you inquisitively.", },
 		dog = { "barks at you in confusion.", },
@@ -340,103 +326,48 @@ CritterEmote.EmoteResponses = {
 		["Lil' Ragnaros"] = { "takes a small bow.", },
 	},
 	COLD = {
-		default = {
-			"says \"Winter is Coming!\"",
-			},
-		beast = {
-			"cuddles close to you to warm you.",
-			},
-		reptile = {
-			"looks for a warm rock to hide under.",
-			},
-		["Deathy"] = {
-	   "breathes some fire at you to warm you up",
-	  },
-		["Lil' Deathwing"] = {
-	   "breathes some fire at you to warm you up",
-	  },
-	  ["Lil' K.T."] = { "lets you know he's always cold. Ice ice baby.", },
-	  ["Lil' Ragnaros"] = {
-			"sets your pant leg on fire. Hot!",
-			},
+		default = { "says \"Winter is Coming!\"", },
+		beast = { "cuddles close to you to warm you.", },
+		reptile = { "looks for a warm rock to hide under.", },
+		["Deathy"] = { "breathes some fire at you to warm you up", },
+		["Lil' Deathwing"] = { "breathes some fire at you to warm you up", },
+		["Lil' K.T."] = { "lets you know he's always cold. Ice ice baby.", },
+		["Lil' Ragnaros"] = { "sets your pant leg on fire. Hot!", },
 	},
 	COMFORT = {
-		default = {
-			"is comforted.",
-		},
-		["Elekk Plushie"] = {
-			"tries to comfort you.",
-		},
+		default = { "is comforted.", },
+		["Elekk Plushie"] = { "tries to comfort you.", },
 	},
 	COMMEND = {
-		default = {
-			"jumps up in happiness.",
-		},
-		["Gregarious Grell"] = {
-				"shouts, \"%t did good!\"",
-		},
-	  ["Lil' K.T."] = {
-			"smiles to himself.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"thanks you for your praise.",
-			},
+		default = { "jumps up in happiness.", },
+		["Gregarious Grell"] = { "shouts, \"%t did good!\"", },
+		["Lil' K.T."] = { "smiles to himself.", },
+		["Lil' Ragnaros"] = { "thanks you for your praise.", },
 	},
 	CONFUSED = {
-		default = {
-			"shrugs.",
-		},
-		cat = {
-			"looks confused.",
-		},
-		reptile = {
-			"looks confused.",
-		},
-		mech = {
-			"searches database for correct response.",
-			},
+		default = { "shrugs.", },
+		cat = { "looks confused.", },
+		reptile = { "looks confused.", },
+		mech = { "searches database for correct response.", },
 	},
 	CONGRATULATE = {
-		default = {
-			"thanks you.",
-		},
-		cat = {
-			"looks happy! Meow.",
-		},
-		dog = {
-			"looks happy! Woof",
-		},
-		reptile = {
-			"looks happy! Hissss.",
-		},
-	  evil = {
-			"would like to thank all the little people %t stepped on along the way.",
-			},
+		default = { "thanks you.", },
+		cat = { "looks happy! Meow.", },
+		dog = { "looks happy! Woof", },
+		reptile = { "looks happy! Hissss.", },
+		evil = { "would like to thank all the little people %t stepped on along the way.", },
 	},
 	COUGH = {
-		default = {
-			"doesn't want to get sick!",
-		},
-		cat = {
-			"coughs up a hairball.",
-		},
-		reptile = {
-			"coughs up a small critter.",
-		},
-		mech = {
-			"does not recognize that voice command.",
-		},
-		ooze = {
-			"coughs up a bone. What's that doing there?",
-			},
-		["Lil' K.T."] = {
-			"laughs at how fragile mortals are.",
-			},
+		default = { "doesn't want to get sick!", },
+		cat = { "coughs up a hairball.", },
+		reptile = { "coughs up a small critter.", },
+		mech = { "does not recognize that voice command.", },
+		ooze = { "coughs up a bone. What's that doing there?", },
+		["Lil' K.T."] = { "laughs at how fragile mortals are.", },
 		["Lil' Ragnaros"] = { "tells you to keep smoking.", },
-		},
+	},
 	COVEREARS = {
-		default = { "can't hear!",
-		},
+		default = { "can't hear!", },
 		evil = { "wants you to remove your hands immediately.", },
 	},
 	COWER = {
@@ -461,22 +392,14 @@ CritterEmote.EmoteResponses = {
 	CRY = {
 		default = { "tries to comfort you.", },
 		cat = { "snuggles you.", },
-		reptile = {
-			"snuggles you.",
-		},
-	  beast = {
-			"licks you and tries to comfort you.",
-			},
+		reptile = { "snuggles you.", },
+		beast = { "licks you and tries to comfort you.", },
 		["Elekk Plushie"] = {
 			"wants a hug.",
 			"cries with you.",
 		},
-		["Lil' K.T."] = {
-			"feeds on your tears.",
-			},
-		["Lil' Ragnaros"] = {
-				"accepts your apology.",
-				},
+		["Lil' K.T."] = { "feeds on your tears.", },
+		["Lil' Ragnaros"] = { "accepts your apology.", },
 	},
 	CUDDLE = {
 		default = { "cuddles back.", },
@@ -489,127 +412,61 @@ CritterEmote.EmoteResponses = {
 	},
 	CURIOUS = {
 		default = nil,
-		["Deathy"] = {
-	   "informs you murlocs eat seaweed for breakfast",
-	  },
-	  ["Gregarious Grell"] = {
-			"informs you that imps have very low hitpoints.",
-		},
-	  ["Lil' Deathwing"] = {
-	   "informs you that dragons eat small critters for breakfast",
-	  },
-	  ["Lil' K.T."] = {
-			"tells you that your curiosity will be the death of you.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"tells you that your curiosity will be the death of you",
-			},
+		["Deathy"] = { "informs you murlocs eat seaweed for breakfast", },
+		["Gregarious Grell"] = { "informs you that imps have very low hitpoints.", },
+		["Lil' Deathwing"] = { "informs you that dragons eat small critters for breakfast", 	  },
+		["Lil' K.T."] = { "tells you that your curiosity will be the death of you.", },
+		["Lil' Ragnaros"] = { "tells you that your curiosity will be the death of you", },
 	},
 	CURTSEY = {
-		default = {
-			"bows before you politely.",
-		},
-		cat = {
-			"purrs.",
-		},
-		reptile = {
-			"hisses.",
-		},
-	  ["Lil' K.T."] = {
-			"barely acknowledges your presence, but does nod.",
-			},
+		default = { "bows before you politely.", },
+		cat = { "purrs.", },
+		reptile = { "hisses.", },
+		["Lil' K.T."] = { "barely acknowledges your presence, but does nod.", },
 	},
 	CLEAN = {
 		cat = { "purrs.", },
 		reptile = { "hisses.", },
 	},
 	DANCE = {
-		default = {
-			"dances with you",
-		},
-		reptile = {
-			"slides around to the beat.",
-		},
-		ooze = {
-			"weaves around your legs as you dance.",
-			},
-		["Teldrassil Sproutling"] = {
-			"does the twist.",
-			},
-		murloc = {
-	   "busts out some moves to disco ",
-	  },
-	  ["Gregarious Grell"] = {
-			"does the Thriller",
-		},
-		["Lil' Deathwing"] = {
-	   "busts out some moves to hardcore metal.",
-	  },
-		["Lil' K.T."] = {
-			"does the Pop and Lock dance.",
-			},
-		["Lil' Ragnaros"] = {
-				"does the macarena and complains about not having any legs.",
-				},
+		default = { "dances with you", },
+		reptile = { "slides around to the beat.", },
+		ooze = { "weaves around your legs as you dance.", },
+		["Teldrassil Sproutling"] = { "does the twist.", },
+		murloc = { "busts out some moves to disco ", },
+		["Gregarious Grell"] = { "does the Thriller", },
+		["Lil' Deathwing"] = { "busts out some moves to hardcore metal.", },
+		["Lil' K.T."] = { "does the Pop and Lock dance.", },
+		["Lil' Ragnaros"] = { "does the macarena and complains about not having any legs.", },
 		["Baa'l"] = { "headbangs.", },
 	},
 	DING = {
 		default = nil,
 	},
 	DISAGREE = {
-		default = {
-			"thinks we should agree to disagree.",
-		},
-		cat = {
-			"looks at you, confused.",
-		},
-		reptile = {
-			"looks at you confused.",
-		},
-		evil = {
-			"thinks you have the right to your WRONG opinion.",
-			},
+		default = { "thinks we should agree to disagree.", },
+		cat = { "looks at you, confused.", },
+		reptile = { "looks at you confused.", },
+		evil = { "thinks you have the right to your WRONG opinion.", },
 	},
 	DOUBT = {
-		default = {
-			"feels insecure.",
-		},
-		["Lil' K.T."] = {
-			"is the mighty K.T.. How dare you doubt him!",
-			},
-	  ["Lil' Ragnaros"] = {
-				"wonders about making a comeback.",
-				},
+		default = { "feels insecure.", },
+		["Lil' K.T."] = { "is the mighty K.T.. How dare you doubt him!", },
+		["Lil' Ragnaros"] = { "wonders about making a comeback.", },
 	},
 	DRINK = {
-		default = {
-			"cheers!",
-		},
-		["Deathy"] = {
-				"grabs a Fiery Festival Brew and enjoys it.",
-				},
+		default = { "cheers!", },
+		["Deathy"] = { "grabs a Fiery Festival Brew and enjoys it.", },
 	},
 	DROOL = {
-		default = {
-			"wonders if you have some brain damage.",
-		},
-		ooze = {
-			"drips slime.",
-			},
-		["Lil' K.T."] = {
-			"says, \"I once knew a ghoul who drooled. I called him Drooly.\"",
-			},
-		["Lil' Ragnaros"] = {
-				"drools some lava onto you. Ouch!",
-			},
+		default = { "wonders if you have some brain damage.", },
+		ooze = { "drips slime.", },
+		["Lil' K.T."] = { "says, \"I once knew a ghoul who drooled. I called him Drooly.\"", },
+		["Lil' Ragnaros"] = { "drools some lava onto you. Ouch!", },
 	},
 	DUCK = {
-		default = {
-			"shields you.",
-		},
-		evil = {
-			"side steps and leaves you vulnerable.",
-			},
+		default = { "shields you.", },
+		evil = { "side steps and leaves you vulnerable.", },
 	},
 	EAT = {
 		default = { "is hungry too!", },
@@ -628,24 +485,14 @@ CritterEmote.EmoteResponses = {
 		default = { "is encouraged.", },
 	},
 	ENEMY = {
-		default = {
-			"tenses up.",
-		},
-		["Gregarious Grell"] = {
-				"says, \"What? You mean you can't kill this one by yourself?\"",
-		},
-	  ["Lil' K.T."] = {
-			"scowls about intruders daring to invade his sanctum.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"complains about raiders in the Firelands.",
-			},
+		default = { "tenses up.", },
+		["Gregarious Grell"] = { "says, \"What? You mean you can't kill this one by yourself?\"", },
+		["Lil' K.T."] = { "scowls about intruders daring to invade his sanctum.", },
+		["Lil' Ragnaros"] = { "complains about raiders in the Firelands.", },
 	},
 	EYE = {
 		default = nil,
-		evil = {
-			"strikes a rather fiendish looking pose.",
-			},
+		evil = { "strikes a rather fiendish looking pose.", },
 	},
 	EYEBROW = {
 		default = nil,
@@ -656,7 +503,7 @@ CritterEmote.EmoteResponses = {
 		["Lil' Deathwing"] = { "asks you if someone mentioned Chuck Norris in chat again.", },
 		["Lil' K.T."] = { "checks to see if his robes are on backwards again. They aren't backwards, are they?.", },
 		["Lil' Ragnaros"] = { "blames you for %t's mistake.", },
-	  },
+	},
 	FAINT = {
 		default = nil,
 		humanoid = { "tries slapping you to wake you up.", },
@@ -670,15 +517,9 @@ CritterEmote.EmoteResponses = {
 		humanoid = { "tries to wave the scent away. Ewwww.", },
 		ooze = { "explodes and then reforms.", },
 		["Deathy"] = { "tells you not even murlocs smell that bad.", },
-		["Lil' Deathwing"] = {
-				"asks if you had onions for breakfast.",
-				},
-		["Lil' K.T."] = {
-			"is glad his sense of smell died with his mortal body.",
-			},
-		["Lil' Ragnaros"] = {
-				"holds a light to your fart. Flamethrower!",
-				},
+		["Lil' Deathwing"] = { "asks if you had onions for breakfast.", },
+		["Lil' K.T."] = { "is glad his sense of smell died with his mortal body.", },
+		["Lil' Ragnaros"] = { "holds a light to your fart. Flamethrower!", },
 	},
 	FIDGET = {
 		default = { "tries to hurry.", },
@@ -687,237 +528,123 @@ CritterEmote.EmoteResponses = {
 	},
 	FLEE = {
 		default = nil,
-		bird = {
-			"flies away.",
-			},
-		critter = {
-			"scampers away.",
-		},
-		flying_insect = {
-			"flies away."
-		},
-		["Deathy"] = {
-				"is immune to fear effects.",
-				},
-		["Gregarious Grell"] = {
-				"says, \"Ahh! Okay, okay, okay, okay, okay, okay!\"",
-		},
-		["Lil' Deathwing"] = {
-				"is immune to fear effects.",
-				},
-		["Lil' K.T."] = {
-			"is immune to fear effects.",
-		 },
-		["Lil' Ragnaros"] = {
-				"refuses.",
-				},
+		bird = { "flies away.", },
+		critter = { "scampers away.", },
+		flying_insect = { "flies away.", },
+		["Deathy"] = { "is immune to fear effects.", },
+		["Gregarious Grell"] = { "says, \"Ahh! Okay, okay, okay, okay, okay, okay!\"", },
+		["Lil' Deathwing"] = { "is immune to fear effects.", },
+		["Lil' K.T."] = { "is immune to fear effects.", },
+		["Lil' Ragnaros"] = { "refuses.", },
 	},
 	FLEX = {
-		default = {
-			"is impressed",
-		},
-		undead = {
-			"flexes its muscles. Oh wait! Nothing but bone.",
-		},
-	  ["Deathy"] = {
-			"reminds you that you are puny in comparison to Deathwing.",
-			},
-	  ["Gregarious Grell"] = {
-			"says, \"Master is looking powerful today.\"",
-		},
-	  ["Lil' Deathwing"] = {
-			"reminds you that you are puny in comparison to Deathwing.",
-			},
-	  ["Lil' K.T."] = {
-			"flexes his muscles. Oh wait! Nothing but bone.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"informs you that flesh is weak.",
-			},
+		default = { "is impressed", },
+		undead = { "flexes its muscles. Oh wait! Nothing but bone.", },
+		["Deathy"] = { "reminds you that you are puny in comparison to Deathwing.", },
+		["Gregarious Grell"] = { "says, \"Master is looking powerful today.\"", },
+		["Lil' Deathwing"] = { "reminds you that you are puny in comparison to Deathwing.", },
+		["Lil' K.T."] = { "flexes his muscles. Oh wait! Nothing but bone.", },
+		["Lil' Ragnaros"] = { "informs you that flesh is weak.", },
 	},
 	FLIRT = {
-		default = {
-			"blushes at you.",
-		},
-	  ["Deathy"] = {
-			"tells you that he has full heroic gear and an expensive mount.",
-			},
-	  ["Lil' Deathwing"] = {
-			"tells you that he has full heroic gear and an expensive mount.",
-			 },
-	  ["Lil' K.T."] = {
-			"tells you that he has legions of tireless servants and an expensive mount.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"winks and asks if you would like a Firelands boost.",
-			},
+		default = { "blushes at you.", },
+		["Deathy"] = { "tells you that he has full heroic gear and an expensive mount.", },
+		["Lil' Deathwing"] = { "tells you that he has full heroic gear and an expensive mount.", },
+		["Lil' K.T."] = { "tells you that he has legions of tireless servants and an expensive mount.", },
+		["Lil' Ragnaros"] = { "winks and asks if you would like a Firelands boost.", },
 	},
 	FLOP = {
-		default = {
-			"facepalms.",
-		},
-		beast = {
-			"flops around with you thinking it's a game.",
-		},
-		ooze = {
-			"flops over like a slinky.",
-			},
-		["Gregarious Grell"] = {
-				"shouts, \"Noooo, master is down, we need a healer!\"",
-		},
-		["Lil' K.T."] = {
-			"flee for only death awaits you, helpless mortal!",
-			},
-		["Lil' Ragnaros"] = {
-				"flee for only death awaits you, puny insect!",
-				},
+		default = { "facepalms.", },
+		beast = { "flops around with you thinking it's a game.", },
+		ooze = { "flops over like a slinky.", },
+		["Gregarious Grell"] = { "shouts, \"Noooo, master is down, we need a healer!\"", },
+		["Lil' K.T."] = { "flee for only death awaits you, helpless mortal!", },
+		["Lil' Ragnaros"] = { "flee for only death awaits you, puny insect!", },
 	},
 	FOLLOW = {
-		default = {
-			"is already following that target!",
-		},
+		default = { "is already following that target!", },
 	},
 	FROWN = {
-		default = {
-			"feels ashamed.",
-	   },
-		["Gregarious Grell"] = {
-				"explains to you that he is a better version then the standard warlock imp.",
-	   },
-		["Lil' K.T."] = {
-		"is the best investment ever. How can you be disappointed?",
-		 },
-	  ["Lil' Ragnaros"] = {
-			"informs you that besides being a pet, %t also makes a great cooking fire.",
-			},
+		default = { "feels ashamed.", },
+		["Gregarious Grell"] = { "explains to you that he is a better version then the standard warlock imp.", },
+		["Lil' K.T."] = { "is the best investment ever. How can you be disappointed?", },
+		["Lil' Ragnaros"] = { "informs you that besides being a pet, %t also makes a great cooking fire.", },
 	},
 	GASP = {
 		default = nil,
 	},
 	GAZE = {
-		default = {
-			"looks back at you.",
-		},
+		default = { "looks back at you.", },
 	},
 	GIGGLE = {
 		default = nil,
 	},
 	GLARE = {
-		default = {
-			"hides.",
-		},
-	  evil = {
-			"glares back. So fierce!",
-			},
+		default = { "hides.", },
+		evil = { "glares back. So fierce!", },
 	},
 	GLOAT = {
 		default = nil,
-	  ["Deathy"] = { "You may have won this battle, I give you that. But hear this, and hear it well. I have seen you", },
-	  ["Gregarious Grell"] = { "says, \"Minion knows master is great.\"", },
-	  ["Lil' Deathwing"] = { "You may have won this battle, I give you that. But hear this, and hear it well. I have seen you", },
-	  ["Lil' K.T."] = { "scoffs, \"A minor setback.\"", },
-	  ["Lil' Ragnaros"] = {
-			"shouts, \"You have come too soon!\"",
-			},
+		["Deathy"] = { "You may have won this battle, I give you that. But hear this, and hear it well. I have seen you", },
+		["Gregarious Grell"] = { "says, \"Minion knows master is great.\"", },
+		["Lil' Deathwing"] = { "You may have won this battle, I give you that. But hear this, and hear it well. I have seen you", },
+		["Lil' K.T."] = { "scoffs, \"A minor setback.\"", },
+		["Lil' Ragnaros"] = { "shouts, \"You have come too soon!\"", },
 	},
 	GLOWER = {
-		default = {
-			"hides.",
-		},
-	  ["Lil' K.T."] = { "rolls his eyes at you.", },
+		default = { "hides.", },
+		["Lil' K.T."] = { "rolls his eyes at you.", },
 	},
 	GO = {
-		default = {
-			"leaves feeling unwanted.",
-		},
-		["Gregarious Grell"] = {
-				"says, \"Don't call on me, I'll call on you.\"",
-		},
-		["Lil' K.T."] = {
-				"has other places to be anyway.",
-				},
-		["Lil' Ragnaros"] = {
-				"retreats into the lava.",
-				},
+		default = { "leaves feeling unwanted.", },
+		["Gregarious Grell"] = { "says, \"Don't call on me, I'll call on you.\"", },
+		["Lil' K.T."] = { "has other places to be anyway.", },
+		["Lil' Ragnaros"] = { "retreats into the lava.", },
 	},
 	GOING = {
-		default = {
-			"will tag along.",
-		},
+		default = { "will tag along.", },
 	},
 	GOLFCLAP = {
-		default = {
-			"doesn't appreciate the sarcasm.",
-		},
+		default = { "doesn't appreciate the sarcasm.", },
 	},
 	GREET = {
-		default = {
-			"waves back.",
-		},
-		cat = {
-			"looks at you. Meow?",
-		},
-		reptile = {
-			"looks at you. Hiss?",
-		},
-		bird = {
-			"perches on your shoulder and chirps a greeting.",
-			},
-		flying_insect = {
-			"lands on your shoulder.",
-			},
-		["Lil' K.T."] = {
-			"doesn't seem interested.",
-			},
-		["Lil' Ragnaros"] = {
-				"shoo's you away.",
-				},
+		default = { "waves back.", },
+		cat = { "looks at you. Meow?", },
+		reptile = { "looks at you. Hiss?", },
+		bird = { "perches on your shoulder and chirps a greeting.", },
+		flying_insect = { "lands on your shoulder.", },
+		["Lil' K.T."] = { "doesn't seem interested.", },
+		["Lil' Ragnaros"] = { "shoo's you away.", },
 	},
 	GRIN = {
 		default = nil,
-		evil = {
-			 "grins at you with a menacing display of teeth.",
-			 },
+		evil = { "grins at you with a menacing display of teeth.", },
 	},
 	GROAN = {
 		default = nil,
 	},
 	GROVEL = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"has waited a long time to be the master.",
-		},
-	  ["Lil' K.T."] = {
-			 "says, \"Come child, the Lich King has plans for you.\"",
-			 },
-	  ["Lil' Ragnaros"] = {
-			"says, \"A new servant has arisen.\"",
-			},
+		["Gregarious Grell"] = { "has waited a long time to be the master.", },
+		["Lil' K.T."] = { "says, \"Come child, the Lich King has plans for you.\"", },
+		["Lil' Ragnaros"] = { "says, \"A new servant has arisen.\"", },
 	},
 	GROWL = {
 		default = nil,
-		beast = {
-			"growls back.",
-			},
-		dino = {
-			"roars at you.",
-			},
+		beast = { "growls back.", },
+		dino = { "roars at you.", },
 	},
 	GUFFAW = {
 		default = nil,
-	  ["Lil' K.T."] = {
-			"glares at you. \"My robes have a higher gear score than your raggy ensemble.\"",
-			},
-	  ["Lil' Ragnaros"] = {
-			"hisses at you. \"Sulfuras has a higher gear score then all your characters combined.\"",
-			},
+		["Lil' K.T."] = { "glares at you. \"My robes have a higher gear score than your raggy ensemble.\"", },
+		["Lil' Ragnaros"] = { "hisses at you. \"Sulfuras has a higher gear score then all your characters combined.\"", },
 	},
 	HAIL = {
 		default = { "hails back.", },
 		cat = { "looks at you. Meow?", },
 		dog = { "looks at you. Woof?", },
 		reptile = { "looks at you. Hiss?", },
-		},
+	},
 	HAPPY = {
 		default = { "feels warm and fuzzy inside.", },
 	},
@@ -926,34 +653,22 @@ CritterEmote.EmoteResponses = {
 	},
 	HEALME = {
 		default = nil,
-	  humanoid = { "gives you an extra healing potion.", },
+		humanoid = { "gives you an extra healing potion.", },
 		["Gregarious Grell"] = { "reminds you that imps don't do healing.", },
 		["Lil' K.T."] = { "doesn't do healing, but will gladly raise you after you're dead.", },
 		["Lil' Ragnaros"] = { "asks if you want to be cauterized.", },
 	},
 	HELLO = {
 		default = { "waves back.", },
-		cat = {
-			"looks intently at you, meows and rubs your leg.",
-		},
-		reptile = {
-			"looks at you and hisses.",
-		},
+		cat = { "looks intently at you, meows and rubs your leg.", },
+		reptile = { "looks at you and hisses.", },
 		snake = { "weaves back and forth. Hisssss.", },
-		bird = {
-			"chirps a hello.",
-			},
+		bird = { "chirps a hello.", },
 		dog = { "runs exitedly around you in greeting. Do I get a pat now?", },
 		frog = { "\"Ribbit.\"", },
-		["Gregarious Grell"] = {
-				"says, \"Greetings master.\"",
-		},
-		["Lil' K.T."] = {
-			"says, \"You dare address me, mortal?\"",
-			},
-		["Lil' Ragnaros"] = {
-				 "says, \"Your pathetic mortal world will burn with my vengeance!\"",
-				 },
+		["Gregarious Grell"] = { "says, \"Greetings master.\"", },
+		["Lil' K.T."] = { "says, \"You dare address me, mortal?\"", },
+		["Lil' Ragnaros"] = { "says, \"Your pathetic mortal world will burn with my vengeance!\"", },
 	},
 	HELPME = {
 		default = nil,
@@ -979,155 +694,72 @@ CritterEmote.EmoteResponses = {
 	},
 	HOLDHAND = {
 		default = 	nil,
-		bird = {
-			"offers a wing for you to hold.",
-			},
-		reptile = {
-			 "doesn't have hands!",
-			 },
-		["Lil' K.T."] = {
-			"isn't a scrub and doesn't need his hand held.",
-			},
-		["Lil' Ragnaros"] = {
-				"burns you. Ouch!",
-				},
+		bird = { "offers a wing for you to hold.", },
+		reptile = { "doesn't have hands!", },
+		["Lil' K.T."] = { "isn't a scrub and doesn't need his hand held.", },
+		["Lil' Ragnaros"] = { "burns you. Ouch!", },
 	},
 	HUG = {
 		default =	nil,
-		beast = {
-			"hugs back.",
-			},
-		humanoid = {
-			"returns the hug.",
-			},
-		["Gregarious Grell"] = {
-				"says, \"%t loves the master too!\"",
-		},
-		["Lil' K.T."] = {
-			"thinks this is awkward.",
-			},
-		["Lil' Ragnaros"] = {
-				"makes it clear that this does not make up for your last raid.",
-				},
+		beast = { "hugs back.", },
+		humanoid = { "returns the hug.", },
+		["Gregarious Grell"] = { "says, \"%t loves the master too!\"", },
+		["Lil' K.T."] = { "thinks this is awkward.", },
+		["Lil' Ragnaros"] = { "makes it clear that this does not make up for your last raid.", },
 	},
 	HUNGRY = {
-		default = {
-			"shakes its head. No, not going to eat me.",
-		},
-		bird = {
-			"offers an extra cracker held in its beak.",
-			},
-		evil = {
-			"doesn't want to share with you.",
-			},
-	  mech = {
-			"has an extra battery to offer.",
-			},
-		reptile = {
-			 "spits out a whole egg. Lucky it wasn't a rat.",
-			  },
-		["Warbot"] = {
-			"thinks you should get some Mountain Dew.",
-			},
-		["Lil' K.T."] = {
-			"hungers for the suffering of others.",
-			},
-		["Lil' Ragnaros"] = {
-				"hungers for the world to burn.",
-				},
+		default = { "shakes its head. No, not going to eat me.", },
+		bird = { "offers an extra cracker held in its beak.", },
+		evil = { "doesn't want to share with you.", },
+		mech = { "has an extra battery to offer.", },
+		reptile = { "spits out a whole egg. Lucky it wasn't a rat.", },
+		["Warbot"] = { "thinks you should get some Mountain Dew.", },
+		["Lil' K.T."] = { "hungers for the suffering of others.", },
+		["Lil' Ragnaros"] = { "hungers for the world to burn.", },
 	},
 	HURRY = {
 		default = nil,
-		mech = {
-			"optimizes its current task.",
-			},
-		["Gregarious Grell"] = {
-				"says, \"Alright, I'm on it! Stop yelling!\"",
-		},
-		["Lil' K.T."] = {
-				"tells you to respect your elders and not give him sass.",
-				},
-		["Lil' Ragnaros"] = {
-				"tells you he doesn't have legs...yet.",
-				},
+		mech = { "optimizes its current task.", },
+		["Gregarious Grell"] = { "says, \"Alright, I'm on it! Stop yelling!\"", },
+		["Lil' K.T."] = { "tells you to respect your elders and not give him sass.", },
+		["Lil' Ragnaros"] = { "tells you he doesn't have legs...yet.", },
 	},
 	IDEA = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"asks you to explain in detail.",
-		},
-	  ["Lil' K.T."] = {
-			"thinks your mortal ideas are small and lack insight.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"explains to you that your idea lacks spark. It needs a little fire.",
-			},
+		["Gregarious Grell"] = { "asks you to explain in detail.", },
+		["Lil' K.T."] = { "thinks your mortal ideas are small and lack insight.", },
+		["Lil' Ragnaros"] = { "explains to you that your idea lacks spark. It needs a little fire.", },
 	},
 	INCOMING = {
 		default = 	nil,
-	  ["Gregarious Grell"] = {
-			"says, \"THIS WAS NOT IN MY CONTRACT!\"",
-		},
-	  ["Lil' K.T."] = {
-			"rolls with an army of Undead as well. Death Knights eat your hearts out.",
-			},
+		["Gregarious Grell"] = { "says, \"THIS WAS NOT IN MY CONTRACT!\"", },
+		["Lil' K.T."] = { "rolls with an army of Undead as well. Death Knights eat your hearts out.", },
 	},
 	INSULT = {
 		default = nil,
-		bird = {
-			"pecks at you with its beak and screeches at you.",
-			},
-		cat = {
-			"snubs you.",
-		},
-		dog = {
-			"yips at you.",
-		},
-		elemental = {
-			"would like to cast something at you, too.",
-		},
-		ooze = {
-			"spits a bone at you.",
-			},
-		["Gregarious Grell"] = {
-				"asks you if you feel big now.",
-		},
-		["Lil' K.T."] = {
-			"threatens to freeze the blood in your veins.",
-			},
-		["Lil' Ragnaros"] = {
-				"says, \"Arise, servants of fire! Consume their flesh!\"",
-				},
+		bird = { "pecks at you with its beak and screeches at you.", },
+		cat = { "snubs you.", },
+		dog = { "yips at you.", },
+		elemental = { "would like to cast something at you, too.", },
+		ooze = { "spits a bone at you.", },
+		["Gregarious Grell"] = { "asks you if you feel big now.", },
+		["Lil' K.T."] = { "threatens to freeze the blood in your veins.", },
+		["Lil' Ragnaros"] = { "says, \"Arise, servants of fire! Consume their flesh!\"", },
 	},
 	INTRODUCE = {
 		default = 	nil,
-		bird = {
-			"squawks a greeting.",
-			},
-		dog = {
-			"barks a greeting.",
-		},
-		critter = {
-			"chitters a greeting,",
-		},
-		mech = {
-			"scans you and saves a profile.",
-			},
-		["Gregarious Grell"] = {
-				"introduces himself.",
-		},
-		["Lil' K.T."] = {
-			"asks, \"Do you know who I am?\"",
-			},
-		["Lil' Ragnaros"] = {
-				"says, \"I need no introduction, insect!\"",
-				},
+		bird = { "squawks a greeting.", },
+		dog = { "barks a greeting.", },
+		critter = { "chitters a greeting,", },
+		mech = { "scans you and saves a profile.", },
+		["Gregarious Grell"] = { "introduces himself.", },
+		["Lil' K.T."] = { "asks, \"Do you know who I am?\"", },
+		["Lil' Ragnaros"] = { "says, \"I need no introduction, insect!\"", },
 	},
 	JEALOUS = {
 		default = nil,
-	  cat = { "holds its head up smugly.", },
-		["Gregarious Grell"] = { "knows he has awesome earrings.",
-		},
+		cat = { "holds its head up smugly.", },
+		["Gregarious Grell"] = { "knows he has awesome earrings.", },
 		["Lil' K.T."] = { "is naturally the envy of all of Azeroth and then some.", },
 		["Lil' Ragnaros"] = { "firmly holds onto Sulfuras.", },
 	},
@@ -1137,107 +769,55 @@ CritterEmote.EmoteResponses = {
 	},
 	JOKE = {
 		default = { "smiles.", },
-	  ["Gregarious Grell"] = { "tells a joke, \"Why should you never go to dinner with a Rogue? He'll vanish when the bill comes!\"", },
-	  ["Lil' K.T."] = { "tells a joke, \"Three mounted knights enter Naxxramas and ask me for a place to stay for the night. I politely decline and tell them, \'I'm already housing Four Horsemen!\' Ha!\"", },
-	  ["Lil' Ragnaros"] = { "reminds you of your first trip to The Firelands.", },
+		["Gregarious Grell"] = { "tells a joke, \"Why should you never go to dinner with a Rogue? He'll vanish when the bill comes!\"", },
+		["Lil' K.T."] = { "tells a joke, \"Three mounted knights enter Naxxramas and ask me for a place to stay for the night. I politely decline and tell them, \'I'm already housing Four Horsemen!\' Ha!\"", },
+		["Lil' Ragnaros"] = { "reminds you of your first trip to The Firelands.", },
 	},
 	KISS = {
 		default = { "catches it.", },
 		cat = { "purrs and responds with wet nose kisses.", },
 		dog = { "wags its tail and snuggles closer.", },
 		reptile = { "hisses.", },
-		frog = {
-			"wonders if a kiss on the lips will make it human.",
-			},
-		["Lil' K.T."] = {
-			 "doesn't like this.",
-			 },
-		["Lil' Ragnaros"] = {
-				"doesn't swing that way.",
-				},
+		frog = { "wonders if a kiss on the lips will make it human.", },
+		["Lil' K.T."] = { "doesn't like this.", },
+		["Lil' Ragnaros"] = { "doesn't swing that way.", },
 	},
 	KNEEL = {
 		default = nil,
-		beast = {
-			"comes closer and licks your face.",
-		},
-		cat = {
-			"inches closer to see if you've brought kitty treats.",
-			},
-		["Gregarious Grell"] = {
-				"wonders how life would be with you as %t's companion.",
-		},
-		["Lil' K.T."] = {
-			"nods in approval as you answer the call of the Lich King.",
-			},
-		["Lil' Ragnaros"] = {
-				"explains that worshippers will be granted power.",
-				},
+		beast = { "comes closer and licks your face.", },
+		cat = { "inches closer to see if you've brought kitty treats.", },
+		["Gregarious Grell"] = { "wonders how life would be with you as %t's companion.", },
+		["Lil' K.T."] = { "nods in approval as you answer the call of the Lich King.", },
+		["Lil' Ragnaros"] = { "explains that worshippers will be granted power.", },
 	},
 	LAUGH = {
-		default = {
-			"doesn't like being laughed at.",
-		},
-		mech = {
-			"lets out a lifeless mechanical laugh.",
-			},
+		default = { "doesn't like being laughed at.", },
+		mech = { "lets out a lifeless mechanical laugh.", },
 	},
 	LAYDOWN = {
 		default =	nil,
-		beast = {
-			"curls up on your lap.",
-			},
-		["Lil' K.T."] = {
-				"likes where this is going.",
-				},
-		["Lil' Ragnaros"] = {
-				"accepts your surrender.",
-				},
+		beast = { "curls up on your lap.", },
+		["Lil' K.T."] = { "likes where this is going.", },
+		["Lil' Ragnaros"] = { "accepts your surrender.", },
 	},
 	LICK = {
 		default = nil,
-		beast = {
-			"nuzzles you.",
-			},
-		cat = {
-			"licks back and purrs.",
-			},
-		crab = {
-			"tastes fishy.",
-			},
-		flying_insect = {
-			"tastes like bug. Did you just lick a bug?!",
-			},
-		humanoid = {
-			"looks at you strangely.",
-			},
-		insect = {
-			"tastes like bug. Did you just lick a bug?!",
-			},
-		mech = {
-			"tastes like metal.",
-		  },
-		["Gregarious Grell"] = {
-				"tells you %t doesn't serve you in that way.",
-		},
-		["Lil' K.T."] = {
-			"tastes like a blueberry popsicle.",
-		},
-		["Lil' Ragnaros"] = {
-				"tastes like a burned pizza and burns your tongue. Ouch!",
-				},
+		beast = { "nuzzles you.", },
+		cat = { "licks back and purrs.", },
+		crab = { "tastes fishy.", },
+		flying_insect = { "tastes like bug. Did you just lick a bug?!", },
+		humanoid = { "looks at you strangely.", },
+		insect = { "tastes like bug. Did you just lick a bug?!", },
+		mech = { "tastes like metal.", },
+		["Gregarious Grell"] = { "tells you %t doesn't serve you in that way.", },
+		["Lil' K.T."] = { "tastes like a blueberry popsicle.", },
+		["Lil' Ragnaros"] = { "tastes like a burned pizza and burns your tongue. Ouch!", },
 	},
 	LISTEN = {
 		default = nil,
-		inanimate = {
-			"is inanimate.  You might be crazy! Consult your nearest healer.",
-			},
-		mech = {
-			 "sounds like it is operating nominally.",
-			 },
-		ooze = {
-			"makes disgusting bubbling noises.",
-			},
+		inanimate = { "is inanimate.  You might be crazy! Consult your nearest healer.", },
+		mech = { "sounds like it is operating nominally.", },
+		ooze = { "makes disgusting bubbling noises.", },
 	},
 	LOOK = {
 		default = nil,
@@ -1257,159 +837,91 @@ CritterEmote.EmoteResponses = {
 		default = { "feels loved.", },
 		humanoid = { "likes you, but doesn't \'like you\' like you.", },
 		ooze = { "forms itself into a little heart shape.", },
-	  ["Gregarious Grell"] = {
-			"shouts, \"%t loves the master too!\"",
-		},
-	  ["Lil' K.T."] = {
-			"has no time for love while in servitude of the glorious Lich King.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"is too focused on his career for love.",
-			},
+		["Gregarious Grell"] = { "shouts, \"%t loves the master too!\"", },
+		["Lil' K.T."] = { "has no time for love while in servitude of the glorious Lich King.", },
+		["Lil' Ragnaros"] = { "is too focused on his career for love.", },
 	},
 	LUCK = {
 		default = nil,
-	  ["Lil' K.T."] = {
-			"doesn't need luck when he has magic; such powerful magic.",
-			},
+		["Lil' K.T."] = { "doesn't need luck when he has magic; such powerful magic.", },
 	},
 	MAP = {
 		default = nil,
 	},
 	MASSAGE = {
 		default = nil,
-		humanoid = {
-			"thanks you for the wonderful massage.",
-			},
-		ooze = {
-			"is kneaded like dough. You're not going to bake it are you?!",
-			},
-		["Gregarious Grell"] = {
-				"enjoys this. He has a stressful job.",
-		},
-		["Lil' K.T."] = {
-			"enjoys this. He has a stressful job.",
-			},
-		["Lil' Ragnaros"] = {
-				"enjoys this. He has a stressful job.",
-				},
+		humanoid = { "thanks you for the wonderful massage.", },
+		ooze = { "is kneaded like dough. You're not going to bake it are you?!", },
+		["Gregarious Grell"] = { "enjoys this. He has a stressful job.", },
+		["Lil' K.T."] = { "enjoys this. He has a stressful job.", },
+		["Lil' Ragnaros"] = { "enjoys this. He has a stressful job.", },
 	},
 	MERCY = {
 		default = nil,
-		evil = {
-			"is amused by your plea for mercy.",
-		},
-	  ["Lil' K.T."] = {
-			"is amused by your plea for mercy.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"denies you mercy.",
-			},
+		evil = { "is amused by your plea for mercy.", },
+		["Lil' K.T."] = { "is amused by your plea for mercy.", },
+		["Lil' Ragnaros"] = { "denies you mercy.", },
 	},
 	MOAN = {
 		default = nil,
-		["Gregarious Grell"] = {
-				"grumbles indistinctly, \"I wish you were DEAD.\"",
-		},
+		["Gregarious Grell"] = { "grumbles indistinctly, \"I wish you were DEAD.\"", },
 	},
 	MOCK = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"asks, \"How did I displease the master?\"",
-		},
-	  ["Lil' K.T."] = {
-			"says, \"Mr. Bigglesworth! Slay this interloper. What?! He's been killed? WHO DID THIS?!\"",
-			},
-	  ["Lil' Ragnaros"] = {
-			"minions of fire, purge the outsider!",
-			},
+		["Gregarious Grell"] = { "asks, \"How did I displease the master?\"", },
+		["Lil' K.T."] = { "says, \"Mr. Bigglesworth! Slay this interloper. What?! He's been killed? WHO DID THIS?!\"", },
+		["Lil' Ragnaros"] = { "minions of fire, purge the outsider!", },
 	},
 	MOON = {
 		default = nil,
-		ooze = {
-			"shakes something at you.  Does it have a rear?",
-			},
-		["Gregarious Grell"] = {
-				"runs away terrified.",
-		},
-		["Lil' K.T."] = {
-			"spanks you to teach you some respect.",
-			},
-		["Lil' Ragnaros"] = {
-				"fires a Magma Blast at your behind. Ouch!",
-				},
+		ooze = { "shakes something at you.  Does it have a rear?", },
+		["Gregarious Grell"] = { "runs away terrified.", },
+		["Lil' K.T."] = { "spanks you to teach you some respect.", },
+		["Lil' Ragnaros"] = { "fires a Magma Blast at your behind. Ouch!", },
 	},
 	MOO = {
 		default = nil,
 		cow = {  "moos back.", },
-		humanoid = {
-			"doesn't speak cow.",
-			},
-		ooze = {
-			"makes gurgling sounds trying to mimic you.",
-			},
-		["Lil' K.T."] = {
-			"doesn't even know where to begin.",
-			},
+		humanoid = { "doesn't speak cow.", },
+		ooze = { "makes gurgling sounds trying to mimic you.", },
+		["Lil' K.T."] = { "doesn't even know where to begin.", },
 	},
 	MOURN = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"informs you that after that, you can resummon %t.",
-		},
-	  ["Lil' K.T."] = {
-			"isn't dead! Well... not 'dead' dead. More like undead.",
-			},
+		["Gregarious Grell"] = { "informs you that after that, you can resummon %t.", },
+		["Lil' K.T."] = { "isn't dead! Well... not 'dead' dead. More like undead.", },
 	},
 	MUTTER = {
 		default = nil,
-		humanoid = {
-			"asks you to speak up.",
-			},
+		humanoid = { "asks you to speak up.", },
 	},
 	NERVOUS = {
 		default = nil,
-		["Gregarious Grell"] = {
-				"fidgets uncontrollably",
-		},
-	  ooze = {
-			 "quivers nervously.",
-			 },
+		["Gregarious Grell"] = { "fidgets uncontrollably", },
+		ooze = { "quivers nervously.", },
 	},
 	NO = {
 		default = nil,
 	},
 	NOD = {
 		default = nil,
-	  bird = {
-			"bobs its head.",
-			},
+		bird = { "bobs its head.", },
 	},
 	NOSEPICK = {
 		default = nil,
-		evil = {
-			"wonders if you're going to eat it next.",
-			},
-		ooze = { "jumps onto your hand and wonders if it can jiggle, too. Ew!",
-		},
+		evil = { "wonders if you're going to eat it next.", },
+		ooze = { "jumps onto your hand and wonders if it can jiggle, too. Ew!", },
 	},
 	OBJECT = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"agrees with you.",
-		},
-	  ["Lil' K.T."] = {
-			"overrules your objection!",
-			},
-	  ["Lil' Ragnaros"] = {
-			 "reminds you that %t outranks you.",
-			 },
+		["Gregarious Grell"] = { "agrees with you.", },
+		["Lil' K.T."] = { "overrules your objection!", },
+		["Lil' Ragnaros"] = { "reminds you that %t outranks you.", },
 	},
 	OFFER = {
 		default = nil,
 		cat = { "hopes you brought treats.", },
-		["Ethereal Soul-Trader"] = { "thinks the details need to be worked out.  Will you haggle?",
-		 },
+		["Ethereal Soul-Trader"] = { "thinks the details need to be worked out.  Will you haggle?", },
 		["Gregarious Grell"] = { "asks if you would like to renegotiate your contract.", },
 		["Lil' K.T."] = { "doubts you could match the Lich King's eternal reward for servitude.", },
 		["Lil' Ragnaros"] = { "does not make deals with insects.", },
@@ -1423,8 +935,7 @@ CritterEmote.EmoteResponses = {
 		cat = { "hisses.", },
 		dog = { "growls.", },
 		reptile = { "hisses.", },
-		humanoid = { "opens fire.",
-			},
+		humanoid = { "opens fire.", },
 		mech = { "launches rockets at the target.", },
 		ooze = { "charges at the target and latches on. Nom nom nom.", },
 	},
@@ -1442,93 +953,44 @@ CritterEmote.EmoteResponses = {
 	},
 	PEER = {
 		default = { "hides the loot table. NO! Not going to happen.", },
-	  ["Lil' K.T."] = { "hides his loot table. NO! Not going to happen.", },
+		["Lil' K.T."] = { "hides his loot table. NO! Not going to happen.", },
 	},
 	PET = {
-		default = {
-			"coos.",
-		},
-		bird = {
-			"happily flaps its wings.",
-			},
-		cat = {
-			"mews at you.",
-			},
-		dog = {
-			"wags its tail and licks your face.",
-			},
-		dragon = {
-			"wags its tail and flaps its wings as it brushes against your hand.",
-			},
-		elephant = {
-			"trumpets happily.",
-			},
-		evil = {
-			"thinks that's a good way to lose a hand.",
-		 },
-		frog = {
-			"hops away from you.",
-		 },
-		humanoid = {
-			"wants to know what you're doing exactly and looks at you strangely.",
-			},
-	  magic = {
-			 "glows softly.",
-			 },
-		ooze = {
-			"absorbs your hand into its gooey form.",
-			},
-		reptile = {
-			"coils closely around your hand, enjoying the warmth.",
-			},
+		default = { "coos.", },
+		bird = { "happily flaps its wings.", },
+		cat = { "mews at you.", },
+		dog = { "wags its tail and licks your face.", },
+		dragon = { "wags its tail and flaps its wings as it brushes against your hand.", },
+		elephant = { "trumpets happily.", },
+		evil = { "thinks that's a good way to lose a hand.", },
+		frog = { "hops away from you.", },
+		humanoid = { "wants to know what you're doing exactly and looks at you strangely.", },
+		magic = { "glows softly.", },
+		ooze = { "absorbs your hand into its gooey form.", },
+		reptile = { "coils closely around your hand, enjoying the warmth.", },
 	},
 	PINCH = {
-		default = {
-			"cries.",
-		},
-		crab = {
-			"snaps its pincers at you as a warning.",
-			},
-		frog = {
-			"hops away from you.",
-			},
-		ooze = {
-			"engulfs your fingers and suckles on them.",
-			},
-		reptile = {
-			"hisses at you in warning.",
-			},
-	  ["Gregarious Grell"] = {
-			"screams, \"THIS WAS NOT IN MY CONTRACT!\"",
-		},
-		["Lil' K.T."] = {
-			"informs you that yes you are really in his legendary presence, but not to touch him.",
-			},
-		["Lil' Ragnaros"] = {
-				"smiles while he burns your fingers.",
-				},
-		["Zergling"] = {
-			"chitters angrily.",
-			},
+		default = { "cries.", },
+		crab = { "snaps its pincers at you as a warning.", },
+		frog = { "hops away from you.", },
+		ooze = { "engulfs your fingers and suckles on them.", },
+		reptile = { "hisses at you in warning.", },
+		["Gregarious Grell"] = { "screams, \"THIS WAS NOT IN MY CONTRACT!\"", },
+		["Lil' K.T."] = { "informs you that yes you are really in his legendary presence, but not to touch him.", },
+		["Lil' Ragnaros"] = { "smiles while he burns your fingers.", },
+		["Zergling"] = { "chitters angrily.", },
 	},
 	PITY = {
 		default = nil,
 	},
 	PLEAD = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"promises to do your bidding.",
-		},
-	  ["Lil' K.T."] = {
-			"will not hear your pleas.",
-			},
+		["Gregarious Grell"] = { "promises to do your bidding.", },
+		["Lil' K.T."] = { "will not hear your pleas.", },
 	},
 	POINT = {
 		default = nil,
-	  ooze = {
-			"leans its upper half towards you to point back.",
-			},
-
+		ooze = { "leans its upper half towards you to point back.", },
 	},
 	POKE = {
 		default = { "looks at you. Yes?", },
@@ -1556,278 +1018,144 @@ CritterEmote.EmoteResponses = {
 	},
 	POUT = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"comforts you.",
-		},
-	  ["Lil' K.T."] = {
-			"has no time for babies and shoos you away.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"understands insects are weak.",
-			},
+		["Gregarious Grell"] = { "comforts you.", },
+		["Lil' K.T."] = { "has no time for babies and shoos you away.", },
+		["Lil' Ragnaros"] = { "understands insects are weak.", },
 	},
 	PRAISE = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"is happy to be praised.",
-		},
-	  ["Lil' K.T."] = {
-			"grins, absorbing your praise into his ego.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"cackles.",
-			},
+		["Gregarious Grell"] = { "is happy to be praised.", },
+		["Lil' K.T."] = { "grins, absorbing your praise into his ego.", },
+		["Lil' Ragnaros"] = { "cackles.", },
 	},
 	PRAY = {
 		default = nil,
-		["Gregarious Grell"] = {
-				"tries to make out your gesture.",
-		},
-		["Lil' K.T."] = {
-			"suggests you join the Cult of the Damned for better results.",
-			},
-		["Lil' Ragnaros"] = {
-				"commends your worship.",
-				},
+		["Gregarious Grell"] = { "tries to make out your gesture.", },
+		["Lil' K.T."] = { "suggests you join the Cult of the Damned for better results.", },
+		["Lil' Ragnaros"] = { "commends your worship.", },
 	},
 	PROUD = {
 		default = nil,
-		beast = {
-			 "holds head high proudly.",
-			  },
+		beast = { "holds head high proudly.", },
 	},
 	PULSE = {
 		default = nil,
 	},
 	PUNCH = {
 		default = nil,
-		bird = {
-			"easily evades the attack and flies out of reach.",
-		},
-		flying_insect = {
-			"easily evades the attack and flies about you.",
-			},
-	  ["Gregarious Grell"] = {
-			"is hit for 15 Physical.",
-		},
-	  ["Lil' K.T."] = {
-			"is already tapped by another player.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"blocks your punch with Sulfuras.",
-			},
+		bird = { "easily evades the attack and flies out of reach.", },
+		flying_insect = { "easily evades the attack and flies about you.", },
+		["Gregarious Grell"] = { "is hit for 15 Physical.", },
+		["Lil' K.T."] = { "is already tapped by another player.", },
+		["Lil' Ragnaros"] = { "blocks your punch with Sulfuras.", },
 	},
 	PURR = {
-		default = {
-			"coos.",
-		},
-		reptile = {
-			"hisses.",
-		},
-		cat = {
-			"purrs back at you.",
-			},
-		evil = {
-			"looks at you strangely.",
-			},
-		humanoid = {
-			"wants to know if you're being flirty.",
-			},
-		mech = {
-			"beeps back at you with a series of light notes.",
-			 },
+		default = { "coos.", },
+		reptile = { "hisses.", },
+		cat = { "purrs back at you.", },
+		evil = { "looks at you strangely.", },
+		humanoid = { "wants to know if you're being flirty.", },
+		mech = { "beeps back at you with a series of light notes.", },
 	},
 	PUZZLE = {
 		default = nil,
-		humanoid = {
-			"says, \"It is a puzzle just like in Zelda!\"",
-		},
-		mech = {
-			 "attempts to recalibrate its interaction subroutines.",
-			 },
-		["Lil' K.T."] = {
-			"didn't expect you to comprehend his greatness.",
-			},
-		["Lil' Ragnaros"] = {
-				"didn't expect you to comprehend his evil scheme.",
-				},
+		humanoid = { "says, \"It is a puzzle just like in Zelda!\"", },
+		mech = { "attempts to recalibrate its interaction subroutines.", },
+		["Lil' K.T."] = { "didn't expect you to comprehend his greatness.", },
+		["Lil' Ragnaros"] = { "didn't expect you to comprehend his evil scheme.", },
 	},
 	RAISE = {
 		default = nil,
-	   ["Gregarious Grell"] = {
-			"tells you that command doesn't work on %t.",
-		},
-	   ["Lil' K.T."] = {
-			"smiles. \"Ah, volunteers. Most excellent.\"",
-			},
+		["Gregarious Grell"] = { "tells you that command doesn't work on %t.", },
+		["Lil' K.T."] = { "smiles. \"Ah, volunteers. Most excellent.\"", },
 	},
 	RASP = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"asks, \"Why can't we just get along?\"",
-		},
-	  ["Lil' K.T."] = {
-			 "yells, \"Burn!\"",
-			 },
+		["Gregarious Grell"] = { "asks, \"Why can't we just get along?\"", },
+		["Lil' K.T."] = { "yells, \"Burn!\"", },
 	},
 	READY = {
 		default = nil,
 	},
 	REGRET = {
 		default = nil,
-		["Gregarious Grell"] = {
-				"regrets signing over %t's services.\"",
-		},
-		["Lil' K.T."] = {
-			 "highly doubts he will.",
-			 },
-
+		["Gregarious Grell"] = { "regrets signing over %t's services.\"", },
+		["Lil' K.T."] = { "highly doubts he will.", },
 	},
 	REVENGE = {
 		default = nil,
-		evil = {
-			"rubs its hands together and eagerly awaits the plan.",
-		},
-	  ["Gregarious Grell"] = {
-			"says, \"There are bigger minions more suited for this job.\"",
-		},
-	  ["Lil' K.T."] = {
-			"thinks your vows are lovely and has yet to work on his.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"proposes a pact to set fire to the world.",
-			},
+		evil = { "rubs its hands together and eagerly awaits the plan.", },
+		["Gregarious Grell"] = { "says, \"There are bigger minions more suited for this job.\"", },
+		["Lil' K.T."] = { "thinks your vows are lovely and has yet to work on his.", },
+		["Lil' Ragnaros"] = { "proposes a pact to set fire to the world.", },
 	},
 	ROAR = {
 		default = nil,
-		beast = {
-			"roars back ferociously.",
-		},
-		cat = {
-			"flees.",
-			},
-		dino = {
-			"roars back ferociously.",
-			},
-		["Lil' K.T."] = {
-			"asks if you are done making a ruckus.",
-			},
-		["Lil' Ragnaros"] = {
-				"has seen bigger beasts in The Firelands.",
-				},
+		beast = { "roars back ferociously.", },
+		cat = { "flees.", },
+		dino = { "roars back ferociously.", },
+		["Lil' K.T."] = { "asks if you are done making a ruckus.", },
+		["Lil' Ragnaros"] = { "has seen bigger beasts in The Firelands.", },
 	},
 	ROFL = {
 		default = nil,
-		ooze = {
-			"shakes as if it were laughing heartily.",
-			},
-		["Gregarious Grell"] = {
-				"screams, \"HELP! Master is down!\"",
-		},
-		["Lil' K.T."] = {
-			"kicks you while you're down.",
-			},
-		["Lil' Ragnaros"] = {
-				"yells, \"Victory is mine!\"",
-				},
+		ooze = { "shakes as if it were laughing heartily.", },
+		["Gregarious Grell"] = { "screams, \"HELP! Master is down!\"", },
+		["Lil' K.T."] = { "kicks you while you're down.", },
+		["Lil' Ragnaros"] = { "yells, \"Victory is mine!\"", },
 	},
 	ROLLEYES = {
 		default = nil,
-	  evil = {
-			 "glowers at you.",
-			 },
+		evil = { "glowers at you.", },
 	},
 	RUDE = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"asks, \"Why can't we just get along?\"",
-		},
-	  ["Lil' K.T."] = {
-			"threatens to freeze the blood in your veins.",
-			},
-	  ["Lil' Ragnaros"] = {
-			 "smacks Sulfuras against your knee.",
-			 },
+		["Gregarious Grell"] = { "asks, \"Why can't we just get along?\"", },
+		["Lil' K.T."] = { "threatens to freeze the blood in your veins.", },
+		["Lil' Ragnaros"] = { "smacks Sulfuras against your knee.", },
 	},
 	RUFFLE = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"screams, \"NOT THE EARRINGS!\"",
-		},
-	  ["Lil' K.T."] = {
-			"says, \"No, not the hat! Takes ages to straighten.\"",
-			},
-	  ["Lil' Ragnaros"] = {
-			"says, \"You will burn your fingers insect!\"",
-			},
+		["Gregarious Grell"] = { "screams, \"NOT THE EARRINGS!\"", },
+		["Lil' K.T."] = { "says, \"No, not the hat! Takes ages to straighten.\"", },
+		["Lil' Ragnaros"] = { "says, \"You will burn your fingers insect!\"", },
 	},
 	SAD = {
 		default = { "cries like a baby."},
-		ooze = { "melts into a depressed looking puddle.",
-		},
+		ooze = { "melts into a depressed looking puddle.", },
 		["Gregarious Grell"] = { "comforts the master.", },
 	},
 	SALUTE = {
 		default = nil,
-		beast = {
-			"salutes back with attentiveness.",
-			},
-		bird = {
-			"raises one wing as a salute.",
-			},
+		beast = { "salutes back with attentiveness.", },
+		bird = { "raises one wing as a salute.", },
 		dragon = { "blows a smoke ring in return.", },
-		mech = {
-			"salutes and is awaiting orders.",
-			},
+		mech = { "salutes and is awaiting orders.", },
 		spider = { "salutes you with four legs.", },
 		evil = { "snickers at you.", },
-		["Gregarious Grell"] = {
-				"informs you %t is ready for action.",
-		},
-		["Lil' K.T."] = {
-			"recognizes you as a member of his fan club.",
-			},
-		["Lil' Ragnaros"] = {
-				"promotes you to Lieutenant of the Flame.",
-				},
+		["Gregarious Grell"] = { "informs you %t is ready for action.", },
+		["Lil' K.T."] = { "recognizes you as a member of his fan club.", },
+		["Lil' Ragnaros"] = { "promotes you to Lieutenant of the Flame.", },
 		["Baa'l"] = { "feels he deserves to be saluted.", },
 	},
 	SCARED = {
 		default = nil,
-	  ["Gregarious Grell"] = {
-			"shouts, \"Let's get out of here! FAST!\"",
-		},
-	  ["Lil' K.T."] = {
-			"wiggles his fingers and taunts you with ghost noises.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"flexes his mucles before you.",
-			},
+		["Gregarious Grell"] = { "shouts, \"Let's get out of here! FAST!\"", },
+		["Lil' K.T."] = { "wiggles his fingers and taunts you with ghost noises.", },
+		["Lil' Ragnaros"] = { "flexes his mucles before you.", },
 	},
 	SCOFF = {
-		default = {
-			"jeers right back at you.",
-		},
+		default = { "jeers right back at you.", },
 	},
 	SCOLD = {
-		default = {
-			"hangs head dejectedly.",
-		},
-	  ["Lil' K.T."] = {
-			"mocks your scolding.",
-			},
-	  ["Lil' Ragnaros"] = {
-			"asks you if you didn't wipe enough in The Firelands.",
-			},
+		default = { "hangs head dejectedly.", },
+		["Lil' K.T."] = { "mocks your scolding.", },
+		["Lil' Ragnaros"] = { "asks you if you didn't wipe enough in The Firelands.", },
 	},
 	SCOWL = {
 		default = nil,
-	  ["Lil' K.T."] = {
-		"tries to irk you on.",
-		},
-	  ["Lil' Ragnaros"] = {
-		"prepares Sulfuras for an attack.",
-		 },
+		["Lil' K.T."] = { "tries to irk you on.", },
+		["Lil' Ragnaros"] = { "prepares Sulfuras for an attack.", },
 	},
 	SCRATCH = {
 		default = { "says \"Ow!\"", },
@@ -1847,10 +1175,10 @@ CritterEmote.EmoteResponses = {
 		["Lil' Ragnaros"] = { "hides his loot table. NO! Not going to happen.", },
 	},
 	SEXY = {
-default = nil,
-["Gregarious Grell"] = { "looks rather hot with earrings.", },
-["Lil' K.T."] = { "is rather devilish isn't he? So evil, it's sexy!", },
-["Lil' Ragnaros"] = { "is so hot, not even lava compares.", },
+		default = nil,
+		["Gregarious Grell"] = { "looks rather hot with earrings.", },
+		["Lil' K.T."] = { "is rather devilish isn't he? So evil, it's sexy!", },
+		["Lil' Ragnaros"] = { "is so hot, not even lava compares.", },
 	},
 	SHAKE = {
 		default = nil,
