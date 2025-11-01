@@ -4,7 +4,7 @@ require "wowTest"
 
 test.outFileName = "testOut.xml"
 test.coberturaFileName = "../coverage.xml"
--- myLocale = "ruRU"  -- wowStubs lets me set my locale
+-- myLocale = "esES"  -- wowStubs lets me set my locale
 
 ParseTOC( "../src/CritterEmote.toc" )
 
@@ -16,7 +16,6 @@ function test.before()
 	CritterEmote_Variables.enabled = true
 	CritterEmote_Variables.logLevel = CritterEmote.Debug
 	CritterEmote.OnLoad()
-	CritterEmote.LOADING_SCREEN_DISABLED()
 end
 function test.after()
 	-- test.dump(chatLog)
@@ -161,38 +160,32 @@ function test.test_slashCommand_withMessage()
 end
 function test.test_slashCommand_categorysFromList_1()
 	CritterEmote_Variables.Categories.General = true
-	assertTrue(CritterEmote.commandList.general, "general should be in the commandList")
-	CritterEmote.SlashHandler("general")
+	CritterEmote.SlashHandler("disable general")
 	assertFalse(CritterEmote_Variables.Categories.General, "CritterEmote_Variables.Categories General should be false")
 end
 function test.test_slashCommand_categorysFromList_2()
 	CritterEmote_Variables.Categories.Silly = true
-	assertTrue(CritterEmote.commandList.silly, "silly should be in the commandList")
-	CritterEmote.SlashHandler("silly")
+	CritterEmote.SlashHandler("disable silly")
 	assertFalse(CritterEmote_Variables.Categories.Silly)
 end
 function test.test_slashCommand_categorysFromList_3()
 	CritterEmote_Variables.Categories.Song = true
-	assertTrue(CritterEmote.commandList.song, "song should be in the commandList")
-	CritterEmote.SlashHandler("song")
+	CritterEmote.SlashHandler("disable song")
 	assertFalse(CritterEmote_Variables.Categories.Song)
 end
 function test.test_slashCommand_categorysFromList_4()
 	CritterEmote_Variables.Categories.Location = false
-	assertTrue(CritterEmote.commandList.location, "location should be in the commandList")
-	CritterEmote.SlashHandler("location")
+	CritterEmote.SlashHandler("enable location")
 	assertTrue(CritterEmote_Variables.Categories.Location)
 end
 function test.test_slashCommand_categorysFromList_5()
 	CritterEmote_Variables.Categories.Holiday = false
-	assertTrue(CritterEmote.commandList.holiday, "holiday should be in the commandList")
-	CritterEmote.SlashHandler("holiday")
+	CritterEmote.SlashHandler("enable holiday")
 	assertTrue(CritterEmote_Variables.Categories.Holiday)
 end
 function test.test_slashCommand_categorysFromList_6()
 	CritterEmote_Variables.Categories.PVP = false
-	assertTrue(CritterEmote.commandList.pvp, "pvp should be in the commandList")
-	CritterEmote.SlashHandler("pvp")
+	CritterEmote.SlashHandler("enable pvp")
 	assertTrue(CritterEmote_Variables.Categories.PVP)
 end
 function test.test_emote_with_target()

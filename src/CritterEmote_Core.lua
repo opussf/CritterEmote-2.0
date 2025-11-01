@@ -98,6 +98,7 @@ function CritterEmote.OnLoad()
 	CritterEmote.playerName = UnitName("player", false)
 	CritterEmote.lastUpdate = 0
 	CritterEmote.updateInterval = CritterEmote.CreateUpdateInterval()
+	CritterEmote.lastUpdate = time()
 
 	for tblName in pairs(CritterEmote) do
 		local category = tblName:match("^([%a][%a]*)_emotes$")
@@ -114,10 +115,6 @@ function CritterEmote.OnLoad()
 			table.insert(CritterEmote.Categories, category)
 		end
 	end
-	CritterEmote.EventCallback("LOADING_SCREEN_DISABLED", function()
-		CritterEmote.lastUpdate = time()
-		CritterEmote.AddEmoteCategoriesToCommandList()
-	end)
 end
 function CritterEmote.OnEmote(emote, target)
 	CritterEmote.Log(CritterEmote.Debug, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
@@ -319,6 +316,18 @@ function CritterEmote.ShowInfo()
 		))
 	end
 end
+function CritterEmote.SetCategoryStatus(category, status)
+	for _, knownCategory in pairs(CritterEmote.Categories) do
+		if category == string.lower(knownCategory) then
+			CritterEmote_Variables.Categories[knownCategory] = status
+			CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
+						knownCategory,
+						(CritterEmote_Variables.Categories[knownCategory] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
+						(CritterEmote[knownCategory.."_emotes"] and #CritterEmote[knownCategory.."_emotes"] or 0)
+			))
+		end
+	end
+end
 CritterEmote.commandList = {
 	["test"] = {  -- no help will keep it hidden.  Shows some test data.
 		["func"] = function()
@@ -401,26 +410,12 @@ CritterEmote.commandList = {
 			end
 		end,
 	},
+	[CritterEmote.L["enable"]] = {
+		["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Enable Category"]},
+		["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, true) end,
+	},
+	[CritterEmote.L["disable"]] = {
+		["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Disable Category"]},
+		["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, false) end,
+	},
 }
-function CritterEmote.AddEmoteCategoriesToCommandList()
-	CritterEmote.Log(CritterEmote.Debug, "Run AddEmoteCategoriesToCommandList()")
-	CritterEmoteFrame:UnregisterEvent("LOADING_SCREEN_DISABLED")
-	for _, category in pairs(CritterEmote.Categories) do
-		local c = CritterEmote.L[string.lower(category)]
-		CritterEmote.commandList[c] = {
-			["help"] = {"", string.format(CritterEmote.L["toggle inclusion of %s emotes."], CritterEmote.L[category])},
-			["func"] = function()
-				CritterEmote.ToggleCategory(category)
-				CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
-						category,
-						(CritterEmote_Variables.Categories[category] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
-						(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or 0)
-					)
-				)
-			end,
-		}
-	end
-end
-function CritterEmote.ToggleCategory(cat)
-	CritterEmote_Variables.Categories[cat] = not CritterEmote_Variables.Categories[cat]
-end
