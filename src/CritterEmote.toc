@@ -39,6 +39,9 @@ CritterEmote_EmoteMap.lua
 responses/CritterEmote_EmoteResponses_enUS.lua
 responses/CritterEmote_EmoteResponses_esES.lua
 
+## Factions
+faction/CritterEmote_Faction_enUS.lua
+
 ## Emotes
 cities/CritterEmote_Stormwind_enUS.lua
 general/CritterEmote_General_enUS.lua

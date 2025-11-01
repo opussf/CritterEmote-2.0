@@ -1,7 +1,7 @@
 local _, CritterEmote = ...
 if GetLocale() == "enUS" then
 CritterEmote.Holiday_emotes = {
-	["init"] = function()
+	["Init"] = function(self)
 		if not C_AddOns.IsAddOnLoaded("Blizzard_Calendar") then
 			CritterEmote.Log(CritterEmote.Debug, "Blizzard_Calendar was not loaded.")
 			UIParentLoadAddOn("Blizzard_Calendar")
@@ -16,7 +16,7 @@ CritterEmote.Holiday_emotes = {
 		CritterEmote.Log(CritterEmote.Debug, "Call to GetCurrentActiveHolidays()")
 		CritterEmote.activeHolidays = CritterEmote.GetCurrentActiveHolidays()
 		for i,_ in ipairs(CritterEmote.Holiday_emotes) do -- clear possible emotes
-			CritterEmote[i] = nil
+			CritterEmote.Holiday_emotes[i] = nil
 		end
 		for holiday, _ in pairs(CritterEmote.activeHolidays) do
 			if CritterEmote.Holiday_emotes[holiday] then
@@ -29,9 +29,6 @@ CritterEmote.Holiday_emotes = {
 	end,
 	["PickTable"] = function(self)
 		if CritterEmote.activeHolidays then
-			-- for k,_ in pairs( CritterEmote.activeHolidays ) do
-			-- 	print("> "..k)
-			-- end
 			return self
 		else
 			C_Calendar.OpenCalendar()

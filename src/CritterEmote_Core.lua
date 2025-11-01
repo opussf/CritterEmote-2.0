@@ -103,9 +103,9 @@ function CritterEmote.OnLoad()
 		local category = tblName:match("^([%a][%a]*)_emotes$")
 		-- print( category, tblName, type(CritterEmote[tblName]))
 		if category and type(CritterEmote[tblName]) == "table" then
-			if CritterEmote[tblName].init then  -- call an init if set.
-				CritterEmote.Log(CritterEmote.Debug, tblName..".init()")
-				CritterEmote[tblName].init()
+			if CritterEmote[tblName].Init then  -- call an init if set.
+				CritterEmote.Log(CritterEmote.Debug, tblName..".Init()")
+				CritterEmote[tblName]:Init()
 			end
 			if not CritterEmote[tblName].PickTable then -- set the pick if not set.
 				CritterEmote.Log(CritterEmote.Debug, tblName..".PickTable() not assigned. Assign something.")
@@ -358,6 +358,9 @@ CritterEmote.commandList = {
 			end
 			CritterEmote.ReportLogLevels()
 		end,
+	},
+	["help"] = {
+		["alias"] = CritterEmote.L["help"]
 	},
 	[CritterEmote.L["help"]] = {
 		["help"] = {"", CritterEmote.L["show the command help"]},
