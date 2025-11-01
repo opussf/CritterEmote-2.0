@@ -1,6 +1,12 @@
 local _, CritterEmote = ...
 if GetLocale() == "enUS" then
 CritterEmote.Target_emotes = {
+	["PickTable"] = function(self)
+		if UnitName("target") then
+			CritterEmote.Log(CritterEmote.Debug, "You are targeting "..(UnitName("target") or "<no target>")..". Use a target emote.")
+			return self
+		end
+	end,
 	"says \"look, %t!\"",
 	"says \"There's %t!\"",
 	"says \"What is it I see? A %t!\"",

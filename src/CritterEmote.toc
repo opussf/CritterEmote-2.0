@@ -28,7 +28,7 @@
 ## Category-ruRU: Ролевая игра
 ## Category-zhCN: 角色扮演
 ## Category-zhTW: 角色扮演
-## SavedVariables: CritterEmote_Variables CritterEmote_TypeValues
+## SavedVariables: CritterEmote_Variables
 ## SavedVariablesPerCharacter: CritterEmote_CharacterVariables
 
 ## DataFiles
@@ -39,11 +39,16 @@ CritterEmote_EmoteMap.lua
 responses/CritterEmote_EmoteResponses_enUS.lua
 responses/CritterEmote_EmoteResponses_esES.lua
 
+## Factions
+faction/CritterEmote_Faction_enUS.lua
+
 ## Emotes
+cities/CritterEmote_Stormwind_enUS.lua
 general/CritterEmote_General_enUS.lua
 location/CritterEmote_Location_enUS.lua
 pvp/CritterEmote_PVP_enUS.lua
 silly/CritterEmote_Silly_enUS.lua
+silly/CritterEmote_Silly_esES.lua
 songs/CritterEmote_Songs_enUS.lua
 target/CritterEmote_Target_enUS.lua
 

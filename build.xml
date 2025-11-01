@@ -124,6 +124,7 @@
 				<include name="**/*.lua"/>
 				<include name="**/*.toc"/>
 				<include name="**/*.xml"/>
+				<include name="**/*.txt"/>
 				<include name="Readme.txt"/>
 			</fileset>
 		</copy>

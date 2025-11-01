@@ -16,10 +16,3 @@ CritterEmote.PVP_emotes = {
     "Heh, heh, heh, heh, heh."
 }
 end
--- @TODO put these in later.
-    -- Horde = {
-    --     "yells, \"FOR THE HORDE!\"",
-    -- },
-    -- Alliance = {
-    --     "yells, \"FOR THE ALLIANCE!\"",
-    -- },
