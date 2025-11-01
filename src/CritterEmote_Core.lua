@@ -18,15 +18,14 @@ CritterEmote.LogNames = { CritterEmote.L["Error"],
 		"Debug"  -- this does not need to be translated.
 }
 
-CritterEmote.Categories = {
-	"General", "Silly", "Song", "Location", "Holiday", "PVP"
-}
+CritterEmote.Categories = {}  -- is now built later.
+CritterEmote.eventFunctions = {}
 
 CritterEmote_Variables = { Categories = {} }
 CritterEmote_CharacterVariables = {}
-for _,v in pairs(CritterEmote.Categories) do
-	CritterEmote_Variables.Categories[v] = true
-end
+-- for _,v in pairs(CritterEmote.Categories) do
+-- 	CritterEmote_Variables.Categories[v] = true
+-- end
 
 CritterEmote_Variables.enabled = true
 CritterEmote_Variables.randomEnabled = true
@@ -62,28 +61,60 @@ function CritterEmote.DisplayEmote(message)
 	local nameAdd = string.sub(CritterEmote.playerName, -1) == "s" and ' ' or ': '
 	CritterEmote.emoteToSend = nameAdd..message
 end
+function CritterEmote.EventCallback( event, callback )
+	-- returns:
+	-- 		true if event registered.
+	--  	nil if event not registered.
+	if( event == "ADDON_LOADED" or event == "VARIABLES_LOADED" ) then
+		return
+	end
+	-- record callback function in table
+	if not CritterEmote.eventFunctions[event] then
+		CritterEmote.eventFunctions[event] = {}
+	end
+	table.insert(CritterEmote.eventFunctions[event], callback)
+
+	if not CritterEmote[event] then
+		-- create function if it does not exist
+		CritterEmote[event] = function( ... )
+			if CritterEmote.eventFunctions[event] then
+				for _, func in pairs(CritterEmote.eventFunctions[event]) do
+					func( ... )
+				end
+			else
+				CritterEmote.Log(CritterEmote.Warn, "There are no function callbacks registered for this event: ("..event..")")
+			end
+		end
+	end
+	-- register event with the frame
+	CritterEmoteFrame:RegisterEvent(event)
+end
 function CritterEmote.OnLoad()
 	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
-	CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
-	CritterEmoteFrame:RegisterEvent("CALENDAR_UPDATE_EVENT_LIST")
+	-- CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
 
 	SLASH_CRITTEREMOTE1 = "/ce"
 	SlashCmdList["CRITTEREMOTE"] = CritterEmote.SlashHandler
 	CritterEmote.playerName = UnitName("player", false)
 	CritterEmote.lastUpdate = 0
 	CritterEmote.updateInterval = CritterEmote.CreateUpdateInterval()
-end
-function CritterEmote.LOADING_SCREEN_DISABLED()
 	CritterEmote.lastUpdate = time()
-	CritterEmote.AddEmoteCategoriesToCommandList()
-	if not C_AddOns.IsAddOnLoaded("Blizzard_Calendar") then
-		CritterEmote.Log(CritterEmote.Debug, "Blizzard_Calendar was not loaded.")
-		UIParentLoadAddOn("Blizzard_Calendar")
+
+	for tblName in pairs(CritterEmote) do
+		local category = tblName:match("^([%a][%a]*)_emotes$")
+		-- print( category, tblName, type(CritterEmote[tblName]))
+		if category and type(CritterEmote[tblName]) == "table" then
+			if CritterEmote[tblName].Init then  -- call an init if set.
+				CritterEmote.Log(CritterEmote.Debug, tblName..".Init()")
+				CritterEmote[tblName]:Init()
+			end
+			if not CritterEmote[tblName].PickTable then -- set the pick if not set.
+				CritterEmote.Log(CritterEmote.Debug, tblName..".PickTable() not assigned. Assign something.")
+				CritterEmote[tblName].PickTable = function(self) return self; end
+			end
+			table.insert(CritterEmote.Categories, category)
+		end
 	end
-	C_Timer.After(10, function()
-		CritterEmote.Log(CritterEmote.Debug, "Requesting calendar data...")
-		C_Calendar.OpenCalendar()  -- trigger CALENDAR_UPDATE_EVENT_LIST
-	end)
 end
 function CritterEmote.OnEmote(emote, target)
 	CritterEmote.Log(CritterEmote.Debug, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
@@ -121,16 +152,12 @@ function CritterEmote.GetTargetPetsOwner()
 	CritterEmote.Log(CritterEmote.Debug, "Call to GetTargetPetsOwner()")
 	if UnitExists("target") and not UnitIsPlayer("target") then
 		local creatureType, creatureTypeCode = UnitCreatureType("target")
-		CritterEmote_TypeValues = CritterEmote_TypeValues or {}
-		CritterEmote_TypeValues[creatureType] = creatureTypeCode
 		CritterEmote.Log(CritterEmote.Debug, "creatureType: "..creatureType.."("..creatureTypeCode..")==? 12 or 14")
 		if creatureTypeCode == 12 or creatureTypeCode == 14 then  -- https://warcraft.wiki.gg/wiki/API_UnitCreatureType
 			local tooltipData = C_TooltipInfo.GetUnit("target")
 			if tooltipData and tooltipData.lines then
 				for _, line in ipairs(tooltipData.lines) do
 					if line.leftText then
-						-- print(line.leftText, CritterEmote.playerName)
-						-- print(string.find(line.leftText, CritterEmote.playerName))
 						if string.find(line.leftText, CritterEmote.playerName) then
 							-- this keeps it simple as a find, not a match, and keeps the text returned as the playername from GetUnitName
 							CritterEmote.Log(CritterEmote.Info, "Pet belongs to player.")
@@ -143,14 +170,13 @@ function CritterEmote.GetTargetPetsOwner()
 	else
 		CritterEmote.Log(CritterEmote.Info, "Nothing is targeted, or is targeting a player.")
 	end
-	-- returning nothing is the same as returning nil.
 end
 function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- isEmote is a flag to say that this is an emote.
 	-- false means that msg is text to use.
-	CritterEmote.Log(CritterEmote.Debug, "Call to DoCritterEmote( "..(msg or "nil")..", "..(isEmote and "True" or "False")..")")
+	CritterEmote.Log(CritterEmote.Debug, "Call to DoCritterEmote("..(msg or "nil")..", "..(isEmote and "True" or "False")..")")
 	local petName, customName, petID = CritterEmote.GetActivePet()
-	CritterEmote.Log(CritterEmote.Debug, "petName: "..(petName or "nil")..", customName:"..(customName or "nil"))
+	CritterEmote.Log(CritterEmote.Debug, "petName: "..(petName or "nil")..", customName:"..(customName or "nil")..", petID:"..(petID or "nil"))
 	if petName then -- a pet is summoned
 		if isEmote or msg == nil then
 			msg = CritterEmote.GetEmoteMessage(msg, petName, customName, petID)
@@ -170,7 +196,6 @@ function CritterEmote.GetActivePet()
 	end
 end
 function CritterEmote.GetPetPersonality(petID)
-	-- @TODO: Should this also handle 'customName'?  What if a named pet has a different personality?
 	return CritterEmote.Personalities[petID] or "default"
 end
 function CritterEmote.GetEmoteMessage(emoteIn, petName, customName, petID)
@@ -188,11 +213,6 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName, petID)
 		            emoteTable[petName] or
 		            emoteTable[petPersonality] or
 		            emoteTable["default"]
-		-- for cat, enabled in pairs(CritterEmote_Variables.Categories) do
-		-- 	-- this seems the wrong place / time to do this?
-		--  -- should this be done if no entries are found?
-		-- 	search_name = petPersonality_silly
-		-- end
 		return CritterEmote.GetRandomTableEntry(emoteList)
 	else
 		return CritterEmote.GetRandomEmote()
@@ -208,19 +228,12 @@ function CritterEmote.GetRandomEmote()
 		CritterEmote.Log(CritterEmote.Debug, "Emote category: "..category.." is "..(enabled and "enabled." or "disabled."))
 		if enabled and CritterEmote[category.."_emotes"] then
 			CritterEmote.Log(CritterEmote.Debug, "Get a random emote from: "..category.."_emotes ("..#CritterEmote[category.."_emotes"]..")" )
-			categoryEmote = CritterEmote.GetRandomTableEntry( CritterEmote[category.."_emotes"] or {})
+			categoryEmote = CritterEmote.GetRandomTableEntry(CritterEmote[category.."_emotes"]:PickTable() or {})
 			CritterEmote.Log(CritterEmote.Debug, "categoryEmote: "..(categoryEmote or "nil"))
 			table.insert(CritterEmote.RandomEmoteTable, categoryEmote)
 		else
 			CritterEmote.Log(CritterEmote.Debug, "No "..category.." emote added to list to choose from.")
 		end
-	end
-	-- add in a target emote if they exist, an there is a target.
-	if UnitName("target") and CritterEmote.Target_emotes then
-		CritterEmote.Log(CritterEmote.Debug, "You are targeting "..(UnitName("target") or "<no target>")..". Use a target emote.")
-		local targetEmote = CritterEmote.GetRandomTableEntry( CritterEmote.Target_emotes )
-		CritterEmote.Log(CritterEmote.Debug, "targetEmote: "..(targetEmote or "nil"))
-		table.insert(CritterEmote.RandomEmoteTable, targetEmote)
 	end
 	return CritterEmote.GetRandomTableEntry(CritterEmote.RandomEmoteTable)
 end
@@ -303,6 +316,18 @@ function CritterEmote.ShowInfo()
 		))
 	end
 end
+function CritterEmote.SetCategoryStatus(category, status)
+	for _, knownCategory in pairs(CritterEmote.Categories) do
+		if category == string.lower(knownCategory) then
+			CritterEmote_Variables.Categories[knownCategory] = status
+			CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
+						knownCategory,
+						(CritterEmote_Variables.Categories[knownCategory] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
+						(CritterEmote[knownCategory.."_emotes"] and #CritterEmote[knownCategory.."_emotes"] or 0)
+			))
+		end
+	end
+end
 CritterEmote.commandList = {
 	["test"] = {  -- no help will keep it hidden.  Shows some test data.
 		["func"] = function()
@@ -316,8 +341,6 @@ CritterEmote.commandList = {
 			end
 			local petName, customName, petID = CritterEmote.GetActivePet()
 			local creatureType, creatureTypeCode = UnitCreatureType("target")
-			CritterEmote_TypeValues = CritterEmote_TypeValues or {}
-			if creatureType then CritterEmote_TypeValues[creatureType] = creatureTypeCode end
 			print(petName.." ("..petID..")"..(customName and " ("..customName..") " or "").." is a "..
 				CritterEmote.GetPetPersonality(petID).."-\""..(creatureType or "nil").."\"("..(creatureTypeCode or "nil")..")"
 			)
@@ -345,6 +368,9 @@ CritterEmote.commandList = {
 			CritterEmote.ReportLogLevels()
 		end,
 	},
+	["help"] = {
+		["alias"] = CritterEmote.L["help"]
+	},
 	[CritterEmote.L["help"]] = {
 		["help"] = {"", CritterEmote.L["show the command help"]},
 		["func"] = CritterEmote.PrintHelp,
@@ -367,7 +393,6 @@ CritterEmote.commandList = {
 		["help"] = {"", CritterEmote.L["displays Critter Emote information"]},
 		["func"] = CritterEmote.ShowInfo,
 	},
-
 	[CritterEmote.L["random"]] = {
 		["help"] = {CritterEmote.L["on"].."|"..CritterEmote.L["off"],
 				CritterEmote.L["turns the periodic emotes on or off"]},
@@ -385,52 +410,12 @@ CritterEmote.commandList = {
 			end
 		end,
 	},
+	[CritterEmote.L["enable"]] = {
+		["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Enable Category"]},
+		["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, true) end,
+	},
+	[CritterEmote.L["disable"]] = {
+		["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Disable Category"]},
+		["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, false) end,
+	},
 }
-function CritterEmote.AddEmoteCategoriesToCommandList()
-	for _, category in pairs(CritterEmote.Categories) do
-		local c = CritterEmote.L[string.lower(category)]
-		CritterEmote.commandList[c] = {
-			["help"] = {"", string.format(CritterEmote.L["toggle inclusion of %s emotes."], CritterEmote.L[category])},
-			["func"] = function()
-				CritterEmote.ToggleCategory(category)
-				CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
-						category,
-						(CritterEmote_Variables.Categories[category] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
-						(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or 0)
-					)
-				)
-			end,
-		}
-	end
-end
-function CritterEmote.ToggleCategory(cat)
-	CritterEmote_Variables.Categories[cat] = not CritterEmote_Variables.Categories[cat]
-end
-function CritterEmote.CALENDAR_UPDATE_EVENT_LIST()
-	CritterEmote.Log(CritterEmote.Debug, "Call to CALENDAR_UPDATE_EVENT_LIST()")
-	if CritterEmote.Holiday_emotes_src then
-		CritterEmote.activeHolidays = CritterEmote.GetCurrentActiveHolidays()
-		CritterEmote.Holiday_emotes = {}
-		for holiday, _ in pairs(CritterEmote.activeHolidays) do
-			if CritterEmote.Holiday_emotes_src[holiday] then
-				for _, emote in pairs( CritterEmote.Holiday_emotes_src[holiday] ) do
-					CritterEmote.Log(CritterEmote.Debug, "Adding to Holiday_emotes: "..emote)
-					table.insert(CritterEmote.Holiday_emotes, emote)
-				end
-			end
-		end
-	else
-		CritterEmote.Log(CritterEmote.Debug, "No Holiday_emotes")
-	end
-end
---[[
-
-local function CritterEmote_SlashHandler(msg, editbox)
-        if (msg == 'critter' or msg == "battle pet") then
-                print('I love to talk!');
-
-
-  elseif(msg == "options" ) then
-          CritterEmote_DisplayOptions();
-
-end]]

@@ -228,7 +228,7 @@ CritterEmote.EmoteResponses = {
 		["Lil' K.T."] = { "doesn't like this foolishness.", },
 	},
 	BOW = {
-		default = {"bows at you.", },
+		default = { "bows at you.", },
 		["Deathy"] = { "praises you for acknowledging %t's superiority.", },
 		["Gregarious Grell"] = { "looks at you in confusion.", },
 		["Lil' Deathwing"] = { "praises you for acknowledging %t's superiority.", },

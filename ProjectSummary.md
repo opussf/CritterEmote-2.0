@@ -58,16 +58,16 @@ Planned Enhancements:
 [x] Slash Command Responses
 [x] Random Emotes
 [x] Holiday Events - Still have to figure out how to force calendar load
-[ ] Target awareness
+[x] Target awareness
 [x] Toggleable Categories
-[/] Localization Support - Mostly.  Need to try on another locale.
-[ ] Horde / Alliance themed emotes - Should be fairly simple
+[x] Localization Support - Mostly.  Need to try on another locale.
+[x] Horde / Alliance themed emotes - Should be fairly simple
 
 [x] UI panel - Still want to improve
 [x] should have no conflicts as only a few tables in the global space.
 [x] Localization should be easy.  Need to review the things to localize.
 
 [x] Multiple holidays should create a longer table to choose from.
-[ ] Have not looked at API integration.
-[ ] No Classic version done.
-[ ] translations should be done based on client locale.
+[x] API integration.
+[ ] Classic version done.
+[x] translations should be done based on client locale.
