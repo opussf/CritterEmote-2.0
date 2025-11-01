@@ -74,6 +74,13 @@ CritterEmote.Holiday_emotes = {
 		"throws rose petals.",
 	},
 	["Noblegarden"] = { },
+	["Darkmoon Faire"] = {
+		"wants to ride the roller coaster.",
+		"wants to ride the carousel",
+		"wants to ride the merry-go-round.",
+		"wants to watch the dance context.",
+		"wants to be shot out of a cannon.",
+	}
 
 	-- Add more holidays here...
 }
