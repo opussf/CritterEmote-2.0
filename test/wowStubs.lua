@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  October 26 2025
--- Revision:  9.5.1-20-g703e555
+-- Date    :  November 02 2025
+-- Revision:  9.5.2
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
@@ -2548,7 +2548,6 @@ function ParseTOC( tocFile, useRequire )
 				if xmlFile then
 					xmlFile = xmlFile:gsub("\\", "/") -- normalize to forward slashes
 				end
-
 				local hashKey, hashValue = line:match("## ([_%a]*): (.*)")
 
 				if hashKey then
