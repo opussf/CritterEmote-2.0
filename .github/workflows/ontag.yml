@@ -26,7 +26,7 @@ jobs:
           java-version: 17
 
       - name: Set up Lua
-        uses: leafo/gh-actions-lua@v10
+        uses: leafo/gh-actions-lua@v12
         with:
           luaVersion: "5.3.5"
 
@@ -36,19 +36,10 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1.1.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body_path: target/working/changelog.txt
+          artifacts: "./target/*.zip*"
+          bodyFile: target/working/changelog.txt
+          name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-
-      - name: Upload release binaries
-        uses: alexellis/upload-assets@0.4.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          asset_paths: '["./target/*.zip*"]'

@@ -9,6 +9,7 @@ CritterEmote.Stormwind_emotes = {
 	"looks at all the buildings.",
 	"wants to explore the Mage Quarter.",
 	"wonders if the King is home.",
+	["dog"] = { "pees on the nearest tree." },
 	["Uuna"] = { "wants to see her friends in the orphanage", },
 }
 end

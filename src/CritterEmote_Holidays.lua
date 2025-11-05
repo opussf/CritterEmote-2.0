@@ -1,5 +1,4 @@
 local _, CritterEmote = ...
-
 function CritterEmote.GetCurrentActiveHolidays()
     CritterEmote.Log(CritterEmote.Debug, "Call to GetCurrentActiveHolidays()" )
     local now = C_DateAndTime.GetCurrentCalendarTime()
