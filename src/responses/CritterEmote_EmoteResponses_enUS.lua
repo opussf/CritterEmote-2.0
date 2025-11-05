@@ -1239,7 +1239,7 @@ CritterEmote.EmoteResponses = {
 		flying_insect = { "flies around your ear. Buzz buzz.", },
 		inanimate = { "is unaffected.", },
 		mech = { "goes into standby mode.", },
-		["Gregarious Grell"] = { "Has a Firebolt interrupted.", },
+		["Gregarious Grell"] = { "has a Firebolt interrupted.", },
 		["Lil' K.T."] = { "has a Frostbolt interrupted.", },
 		["Lil' Ragnaros"] = { "is immune to interrupts.", },
 	},

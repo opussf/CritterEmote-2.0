@@ -121,6 +121,6 @@ CritterEmote.Silly_emotes = {
     "sees all!",
     "rides a pale horse.",
     "throws a dance party!",
-    "Looks around for parachuting ninjas.",
+    "looks around for parachuting ninjas.",
 }
 end
