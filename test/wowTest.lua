@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  November 02 2025
--- Revision:  9.5.2
+-- Date    :  November 05 2025
+-- Revision:  9.6
 -----------------------------------------
 -- This is an uber simple unit test implementation
 -- It creates a dictionary called test.
@@ -72,6 +72,7 @@ end
 
 test = {}
 test.outFileName = "testOut.xml"
+test.coverageReportPercent = false  -- set to true to enable this feature.
 test.runInfo = {
 		["count"] = 0,
 		["fail"] = 0,
@@ -159,17 +160,42 @@ function test.toCobertura()
 		-- https://gcovr.com/en/stable/output/sonarqube.html
 		-- https://gcovr.com/en/stable/output/cobertura.html
 
-		-- calculate some data - meh, all coverage will be 100% for now anyway
+		-- calculate some data
+		local linesByFile = { lineCount = 0, covered = 0 }
+		for file, lines in pairs( test.coverage ) do
+			linesByFile[file] = { lineCount = 0, covered = 0 }
+			for line, count in pairs( lines ) do
+				linesByFile.lineCount = linesByFile.lineCount + 1
+				linesByFile[file].lineCount = linesByFile[file].lineCount + 1
+				if count > 0 then
+					linesByFile.covered = linesByFile.covered + 1
+					linesByFile[file].covered = linesByFile[file].covered + 1
+				end
+			end
+		end
+
+		-- build the cobertureTable
 		local coberturaTable = {}
 		table.insert( coberturaTable, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" )
 		table.insert( coberturaTable, "<!DOCTYPE coverage SYSTEM 'http://cobertura.sourceforge.net/xml/coverage-04.dtd'>" )
-		table.insert( coberturaTable, "<coverage line-rate='1' branch-rate='0' lines-covered='0' lines-valid='0' branches-covered='0' branches-valid='0' complexity='0' timestamp='"..time().."' version='vROFL'>" )
+		table.insert( coberturaTable, string.format(
+				"<coverage line-rate='%.5f' branch-rate='0' lines-covered='%i' lines-valid='%i' branches-covered='0' branches-valid='0' complexity='0' timestamp='%s' version='vROFL'>",
+				test.coverageReportPercent and linesByFile.covered/linesByFile.lineCount or 1,
+				test.coverageReportPercent and linesByFile.covered or 0,
+				test.coverageReportPercent and linesByFile.lineCount or 0,
+				time()
+			)
+		)
 		table.insert( coberturaTable, "<sources><source>test</source></sources>" )
 		table.insert( coberturaTable, "<packages>" )
 		table.insert( coberturaTable, "<package name='' line-rate='1' branch-rate='0' complexity='0'>" )
 		table.insert( coberturaTable, "<classes>" )
 		for file, lines in test.PairsByKeys( test.coverage ) do
-			table.insert( coberturaTable, "<class name='' filename='"..file.."' line-rate='0' branch-rate='0' complexity='0'>" )
+			table.insert( coberturaTable, string.format( "<class name='' filename='%s' line-rate='%.5f' branch-rate='0' complexity='0'>",
+					file,
+					test.coverageReportPercent and linesByFile[file].covered/linesByFile[file].lineCount or 1
+				)
+			)
 			table.insert( coberturaTable, "<methods/>" )
 			table.insert( coberturaTable, "<lines>" )
 			for line, count in test.PairsByKeys( lines ) do
@@ -183,11 +209,59 @@ function test.toCobertura()
 		table.insert( coberturaTable, "</packages>" )
 		table.insert( coberturaTable, "</coverage>" )
 
-
+		-- write the file
 		local f = assert( io.open( test.coberturaFileName, "w" ) )
 		f:write( table.concat( coberturaTable, "\n" ) )
 		f:close()
 	end
+end
+function test.scanFileLines( coverageFile )
+	-- scans a file
+	local srcFile = assert( io.open( coverageFile, "r" ) )
+	if srcFile then
+		srcContents = srcFile:read( "*all" )
+		local lineNum = 0
+		local multilinecomment = false
+		for line in srcContents:gmatch("([^\n]*)\n?") do
+			lineNum = lineNum + 1
+			local includeLine = true
+			-- find lines to not include
+			if includeLine and line:match("^%s*%-%-+") then -- Full line comments: 2 or more "--" at the start of a line
+				includeLine = false
+			end
+			-- if multilinecomment
+			-- if includeLine and line:match("%-%-%[%[") then -- start of a multi line comment
+			-- 	multilinecomment = true
+			-- end
+			if includeLine and line:match("^%s*$") then -- blank lines
+				includeLine = false
+			end
+			if includeLine and line:match("^%s*require") then -- require statement is not 'code'
+				includeLine = false
+			end
+			if includeLine and line:match("function") then -- hmmm
+				includeLine = false
+			end
+			if includeLine and line:match("^%s*end") then -- How to do this
+				includeLine = false
+			end
+			if includeLine and (line:match("else") or line:match("elseif")) then -- hmmm
+				includeLine = false
+			end
+			if includeLine and line:match("^%s*%}") then -- Any line with a closing }
+				includeLine = false
+			end
+			if includeLine and line:match("^%s*%)%)*%s*$") then -- Any line with just 1 or more )
+				includeLine = false
+			end
+
+			if includeLine then
+				test.coverage[coverageFile] = test.coverage[coverageFile] or {}
+				test.coverage[coverageFile][lineNum] = test.coverage[coverageFile][lineNum] or 0
+			end
+		end
+	end
+	srcFile:close()
 end
 
 function test.processCoverage()
@@ -201,6 +275,11 @@ function test.processCoverage()
 			end
 		end
 	end
+	-- scan files
+	for coverageFile in pairs( test.coverage ) do
+		test.scanFileLines( coverageFile )
+	end
+	-- Create file
 	test.toCobertura()
 end
 

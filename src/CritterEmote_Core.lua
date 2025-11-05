@@ -210,25 +210,33 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName, petID)
 	local emoteTable = CritterEmote.EmoteResponses and CritterEmote.EmoteResponses[emoteIn]
 	if emoteTable then
 		emoteList = emoteTable[customName] or
-		            emoteTable[petName] or
-		            emoteTable[petPersonality] or
-		            emoteTable["default"]
+				emoteTable[petName] or
+				emoteTable[petPersonality] or
+				emoteTable["default"]
 		return CritterEmote.GetRandomTableEntry(emoteList)
 	else
-		return CritterEmote.GetRandomEmote()
+		return CritterEmote.GetRandomEmote(petName, customName, petID)
 	end
 end
-function CritterEmote.GetRandomEmote()
+function CritterEmote.GetRandomEmote(petName, customName, petID)
 	-- not totally random.
 	-- random emotes are pulled from the enabled categories
-	CritterEmote.Log(CritterEmote.Debug, "Call to GetRandomEmote()")
+	CritterEmote.Log(CritterEmote.Debug, "Call to GetRandomEmote( "..(petName or "nil")..", "..(customName or "nil")..","..(petID or "nil")..")")
 	CritterEmote.RandomEmoteTable = {}   -- add this to the addon table to keep from making new tables all the time.
 	local categoryEmote = ""
 	for category, enabled in pairs(CritterEmote_Variables.Categories) do
 		CritterEmote.Log(CritterEmote.Debug, "Emote category: "..category.." is "..(enabled and "enabled." or "disabled."))
 		if enabled and CritterEmote[category.."_emotes"] then
 			CritterEmote.Log(CritterEmote.Debug, "Get a random emote from: "..category.."_emotes ("..#CritterEmote[category.."_emotes"]..")" )
-			categoryEmote = CritterEmote.GetRandomTableEntry(CritterEmote[category.."_emotes"]:PickTable() or {})
+			local emoteTable = CritterEmote[category.."_emotes"]:PickTable() or {}
+			local extraTable = (customName and emoteTable[customName]) or
+					(petName and emoteTable[petName]) or
+					(petID and emoteTable[CritterEmote.GetPetPersonality(petID)]) or
+					{}
+			for _, extraEmote in pairs(extraTable) do -- add entries from extra table to main
+				table.insert(emoteTable, extraEmote)
+			end
+			categoryEmote = CritterEmote.GetRandomTableEntry(emoteTable)
 			CritterEmote.Log(CritterEmote.Debug, "categoryEmote: "..(categoryEmote or "nil"))
 			table.insert(CritterEmote.RandomEmoteTable, categoryEmote)
 		else

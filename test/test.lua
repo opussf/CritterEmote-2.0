@@ -4,13 +4,14 @@ require "wowTest"
 
 test.outFileName = "testOut.xml"
 test.coberturaFileName = "../coverage.xml"
+test.coverageReportPercent = true
 -- myLocale = "esES"  -- wowStubs lets me set my locale
 
 ParseTOC( "../src/CritterEmote.toc" )
 
 function test.before()
 	Units["target"] = nil
-	CritterEmote.Test_emotes = { "Mutters something." }
+	CritterEmote.Test_emotes = { "mutters something." }
 	chatLog = {}
 	CritterEmote.emoteToSend = nil
 	CritterEmote_Variables.enabled = true
@@ -107,7 +108,12 @@ function test.test_slashCommand_turnOn()
 	CritterEmote.SlashHandler("on")
 	assertTrue(CritterEmote_Variables.enabled)
 end
-function test.test_slashCommand_info()
+function test.test_slashCommand_info_enabled()
+	CritterEmote_Variables.enabled = true
+	CritterEmote.SlashHandler("info")
+end
+function test.test_slashCommand_info_disabled()
+	CritterEmote_Variables.enabled = false
 	CritterEmote.SlashHandler("info")
 end
 function test.test_slashCommand_random_on()
@@ -188,6 +194,11 @@ function test.test_slashCommand_categorysFromList_6()
 	CritterEmote.SlashHandler("enable pvp")
 	assertTrue(CritterEmote_Variables.Categories.PVP)
 end
+function test.test_slashCommand_noCommandForcesRandom()
+	CritterEmote.lastUpdate = time()
+	CritterEmote.SlashHandler("")
+	assertEquals(0,CritterEmote.lastUpdate)
+end
 function test.test_emote_with_target()
 	Units["target"] = {
 		["name"] = "World NPC",
@@ -196,6 +207,50 @@ function test.test_emote_with_target()
 	}
 	CritterEmote_Variables.Categories.Target = true
 	assertTrue( CritterEmote.GetRandomEmote() )
+end
+function test.test_additive_withNoDefault_customName()
+	CritterEmote.Test_emotes[1]= nil
+	CritterEmote.Test_emotes["Frank"] = { "sings a mournful melody.", }
+	CritterEmote_Variables.Categories = { Test = true }
+	local emote = CritterEmote.GetRandomEmote("Squire", "Frank", 214)
+	assertEquals( "sings a mournful melody.", emote )
+end
+function test.test_additive_withNoDefault_normalName()
+	CritterEmote.Test_emotes[1]= nil
+	CritterEmote.Test_emotes["Squire"] = { "looks busy.", }
+	CritterEmote_Variables.Categories = { Test = true }
+	local emote = CritterEmote.GetRandomEmote("Squire", "Frank", 214)
+	assertEquals( "looks busy.", emote )
+end
+function test.test_additive_withNoDefault_personality()
+	CritterEmote.Test_emotes[1]= nil
+	CritterEmote.Test_emotes["humanoid"] = { "picks their nose.", }
+	CritterEmote_Variables.Categories = { Test = true }
+	local emote = CritterEmote.GetRandomEmote("Squire", "Frank", 214)
+	assertEquals( "picks their nose.", emote )
+end
+function test.test_additive_withNoDefault_picksMostSpecific()
+	CritterEmote.Test_emotes[1]= nil
+	CritterEmote.Test_emotes["Frank"] = { "sings a mournful melody.", }
+	CritterEmote.Test_emotes["Squire"] = { "looks busy.", }
+	CritterEmote.Test_emotes["humanoid"] = { "picks their nose.", }
+	CritterEmote_Variables.Categories = { Test = true }
+	local emote = CritterEmote.GetRandomEmote("Squire", "Frank", 214)
+	assertEquals( "sings a mournful melody.", emote )
+end
+function test.test_additive_withDefault_noExtraMatch()
+	CritterEmote.Test_emotes["Frank"] = { "sings a mournful melody.", }
+	CritterEmote.Test_emotes["Squire"] = { "looks busy.", }
+	CritterEmote.Test_emotes["humanoid"] = { "picks their nose.", }
+	CritterEmote_Variables.Categories = { Test = true }
+	local emote = CritterEmote.GetRandomEmote("None", "None", 4)
+	assertEquals( "mutters something.", emote )
+end
+function test.test_GetRandomEmote_noParameters()
+	-- should still work
+	CritterEmote_Variables.Categories = { Test = true }
+	local emote = CritterEmote.GetRandomEmote()
+	assertEquals( "mutters something.", emote )
 end
 
 test.run()
