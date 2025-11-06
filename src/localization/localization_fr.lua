@@ -1,6 +1,6 @@
 local _, L = ...
 if GetLocale() == "frFR" then
-	L.L["%s %i emotes"] = "%s %i émotes"
+	L.L["%s %i emotes"] = "%s %i émotes."
 	L.L["%s (%s) by %s"] = "%s (%s) par %s"
 	L.L["%s is %s with %i emotes."] = "%s est %s avec %i émotes."
 	L.L["change the verbosity level"] = "changer le niveau de verbosité"
@@ -33,6 +33,7 @@ if GetLocale() == "frFR" then
 	L.L["Random Emotes are enabled! Time for nom."] = "Les émotes aléatoires sont activées ! C’est l’heure du festin."
 	L.L["random"] = "aléatoire"
 	L.L["show the command help"] = "afficher l’aide de la commande"
+	L.L["Toggle inclusion of %s emotes."] = "Activer/désactiver l'inclusion de %s émotes."
 	L.L["turns the emotes off"] = "désactive les émotes"
 	L.L["turns the emotes on"] = "active les émotes"
 	L.L["turns the periodic emotes on or off"] = "active ou désactive les émotes périodiques"
