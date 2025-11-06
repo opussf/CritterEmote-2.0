@@ -10,6 +10,8 @@ This is a rethink from DropDowns
 
 Modifing the drop downs will be difficult because of how Rematch did their UI.
 
+Create a UI with a pet portrait, ad dropdown and a scrollable text box.
+
 ## FlexibleCategories
 
 This is to allow flexible categories.
