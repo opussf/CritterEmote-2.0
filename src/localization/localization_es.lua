@@ -1,6 +1,6 @@
 local _, L = ...
 if GetLocale() == "esES" then
-	L.L["%s %i emotes"] = "%s %i gestos"
+	L.L["%s %i emotes."] = "%s %i gestos."
 	L.L["%s (%s) by %s"] = "%s (%s) por %s"
 	L.L["%s is %s with %i emotes."] = "%s es %s con %i gestos."
 	L.L["change the verbosity level"] = "cambiar el nivel de detalle"
@@ -33,6 +33,7 @@ if GetLocale() == "esES" then
 	L.L["Random Emotes are enabled! Time for nom."] = "¡Los gestos aleatorios están activados! Es hora de zampar."
 	L.L["random"] = "aleatorio"
 	L.L["show the command help"] = "muestra la ayuda de comandos"
+	L.L["Toggle inclusion of %s emotes."] = "Alternar la inclusión de %s emotes."
 	L.L["turns the emotes off"] = "apaga los gestos"
 	L.L["turns the emotes on"] = "enciende los gestos"
 	L.L["turns the periodic emotes on or off"] = "activa o desactiva los gestos periódicos"

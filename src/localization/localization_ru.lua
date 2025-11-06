@@ -1,6 +1,6 @@
 local _, L = ...;
 if GetLocale() == "ruRU" then
-	L.L["%s %i emotes"] = "%s %i эмоций"
+	L.L["%s %i emotes."] = "%s %i эмоций"
 	L.L["%s (%s) by %s"] = "%s (%s) от %s"
 	L.L["%s is %s with %i emotes."] = "%s %s с %i эмоциями."
 	L.L["change the verbosity level"] = "изменить уровень подробности"
@@ -33,6 +33,7 @@ if GetLocale() == "ruRU" then
 	L.L["Random Emotes are enabled! Time for nom."] = "Случайные эмоции включены! Время веселья."
 	L.L["random"] = "случайно"
 	L.L["show the command help"] = "показать справку по командам"
+	L.L["Toggle inclusion of %s emotes."] = "Переключить включение %s эмоций."
 	L.L["turns the emotes off"] = "выключает эмоции"
 	L.L["turns the emotes on"] = "включает эмоции"
 	L.L["turns the periodic emotes on or off"] = "включает или выключает периодические эмоции"
