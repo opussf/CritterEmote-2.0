@@ -22,6 +22,7 @@ CritterEmote.Categories = {}  -- is now built later.
 CritterEmote.eventFunctions = {}
 
 CritterEmote_Variables = { Categories = {} }
+CritterEmote_CustomResponseEmotes = {}
 CritterEmote_CharacterVariables = {}
 -- for _,v in pairs(CritterEmote.Categories) do
 -- 	CritterEmote_Variables.Categories[v] = true
@@ -175,11 +176,11 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 	-- isEmote is a flag to say that this is an emote.
 	-- false means that msg is text to use.
 	CritterEmote.Log(CritterEmote.Debug, "Call to DoCritterEmote("..(msg or "nil")..", "..(isEmote and "True" or "False")..")")
-	local petName, customName, petID = CritterEmote.GetActivePet()
+	local petID, petName, customName = CritterEmote.GetActivePet()
 	CritterEmote.Log(CritterEmote.Debug, "petName: "..(petName or "nil")..", customName:"..(customName or "nil")..", petID:"..(petID or "nil"))
 	if petName then -- a pet is summoned
 		if isEmote or msg == nil then
-			msg = CritterEmote.GetEmoteMessage(msg, petName, customName, petID)
+			msg = CritterEmote.GetEmoteMessage(msg, petID, petName, customName)
 		end
 		if msg and petName then
 			CritterEmote.DisplayEmote((customName or petName).." "..msg)
@@ -192,14 +193,14 @@ function CritterEmote.GetActivePet()
 	local petid = C_PetJournal.GetSummonedPetGUID()
 	if petid then
 		local petInfo = {C_PetJournal.GetPetInfoByPetID(petid)} -- {} wraps the multiple return values into a table.
-		return petInfo[8], petInfo[2], petInfo[1]
+		return petInfo[1], petInfo[8], petInfo[2]
 	end
 end
 function CritterEmote.GetPetPersonality(petID)
 	return CritterEmote.Personalities[petID] or "default"
 end
-function CritterEmote.GetEmoteMessage(emoteIn, petName, customName, petID)
-	CritterEmote.Log(CritterEmote.Debug, "Call to GetEmoteMessage("..(emoteIn or "nil")..", "..petName..", "..(customName or "nil")..")")
+function CritterEmote.GetEmoteMessage(emoteIn, petID, petName, customName)
+	CritterEmote.Log(CritterEmote.Debug, "Call to GetEmoteMessage("..(emoteIn or "nil")..", "..(petID or "nil")..", "..petName..", "..(customName or "nil")..")")
 	CritterEmote.Log(CritterEmote.Debug, " Getting Emote Table for "..(emoteIn or "nil") )
 
 	local petPersonality = CritterEmote.GetPetPersonality(petID)
@@ -215,13 +216,13 @@ function CritterEmote.GetEmoteMessage(emoteIn, petName, customName, petID)
 				emoteTable["default"]
 		return CritterEmote.GetRandomTableEntry(emoteList)
 	else
-		return CritterEmote.GetRandomEmote(petName, customName, petID)
+		return CritterEmote.GetRandomEmote(petID, petName, customName)
 	end
 end
-function CritterEmote.GetRandomEmote(petName, customName, petID)
+function CritterEmote.GetRandomEmote(petID, petName, customName)
 	-- not totally random.
 	-- random emotes are pulled from the enabled categories
-	CritterEmote.Log(CritterEmote.Debug, "Call to GetRandomEmote( "..(petName or "nil")..", "..(customName or "nil")..","..(petID or "nil")..")")
+	CritterEmote.Log(CritterEmote.Debug, "Call to GetRandomEmote( "..(petID or "nil")..", "..(petName or "nil")..", "..(customName or "nil")..")")
 	CritterEmote.RandomEmoteTable = {}   -- add this to the addon table to keep from making new tables all the time.
 	local categoryEmote = ""
 	for category, enabled in pairs(CritterEmote_Variables.Categories) do
@@ -347,7 +348,7 @@ CritterEmote.commandList = {
 			else
 				print("No valid pet target or companion owner text found.")
 			end
-			local petName, customName, petID = CritterEmote.GetActivePet()
+			local petID, petName, customName = CritterEmote.GetActivePet()
 			local creatureType, creatureTypeCode = UnitCreatureType("target")
 			if petID then
 				print(petName.." ("..petID..")"..(customName and " ("..customName..") " or "").." is a "..
