@@ -43,7 +43,7 @@ responses/CritterEmote_EmoteResponses_esES.lua
 faction/CritterEmote_Faction_enUS.lua
 
 ## Emotes
-cities/CritterEmote_Stormwind_enUS.lua
+cities/CritterEmote_Cities_enUS.lua
 general/CritterEmote_General_enUS.lua
 location/CritterEmote_Location_enUS.lua
 pvp/CritterEmote_PVP_enUS.lua
