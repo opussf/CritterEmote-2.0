@@ -117,12 +117,6 @@ function CritterEmote.OnLoad()
 		end
 	end
 end
-function CritterEmote.ModifyMenu(owner, rootDescription, contextData)
-	print( owner, rootDescription, contextData )
-end
-Menu.ModifyMenu("MENU_UNIT_PET", CritterEmote.ModifyMenu)
-Menu.ModifyMenu("MENU_UNIT_COMPANION_PET", CritterEmote.ModifyMenu)
-
 function CritterEmote.OnEmote(emote, target)
 	CritterEmote.Log(CritterEmote.Debug, "OnEmote( "..emote..", "..(target or "nil").." - "..(target and #target or "nil")..")")
 	if target and #target < 1 then

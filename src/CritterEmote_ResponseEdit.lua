@@ -1,15 +1,15 @@
 _, CritterEmote = ...
 function CritterEmote.Edit_OnLoad()
-	print("OnLoad")
+	CritterEmoteResponseEditFrame_Title:SetText(CritterEmote.ADDONNAME)
 end
 function CritterEmote.Edit_OnShow()
 	CritterEmote.Log(CritterEmote.Error, "EditOnShow")
-	CritterEmote.Edit_UpdatePetIcon()
-	-- CritterEmote.Edit_UpdateEmoteDropDown()
+	CritterEmote.Edit_UpdatePetInfo()
 end
-function CritterEmote.Edit_UpdatePetIcon()
-	local petIcon = select(9, C_PetJournal.GetPetInfoByPetID(C_PetJournal.GetSummonedPetGUID()))
-	CritterEmoteResponseEditFrame_Icon:SetTexture(petIcon)
+function CritterEmote.Edit_UpdatePetInfo()
+	local petInfo = {C_PetJournal.GetPetInfoByPetID(C_PetJournal.GetSummonedPetGUID())}
+	CritterEmoteResponseEditFrame_Icon:SetTexture(petInfo[9])
+	CritterEmoteResponseEditFrame_Name:SetText((petInfo[2] or PetInfo[8]))
 end
 function CritterEmote.Edit_InitEmoteDropDown(self)
 	if not CritterEmote.knownEmotes then
@@ -30,28 +30,28 @@ function CritterEmote.Edit_InitEmoteDropDown(self)
 		end
 		table.sort(CritterEmote.knownEmotes.keys)
 	end
-	UIDropDownMenu_Initialize(self, CritterEmote.Edit_EmoteDropDownPopulate)
-	UIDropDownMenu_JustifyText(self, "LEFT")
-end
-function CritterEmote.Edit_EmoteDropDownPopulate(self, level, menuList)
-	-- this gets called MANY times
-	local info = UIDropDownMenu_CreateInfo()
+	UIDropDownMenu_Initialize(self, function(self, level, menuList) -- keep this an an anonymous function
+			-- this gets called MANY times
+			local info = UIDropDownMenu_CreateInfo()
 
-	if (level or 1) == 1 then
-		for _, header in ipairs(CritterEmote.knownEmotes.keys) do
-			info.text = header
-			info.hasArrow, info.notCheckable = true, true
-			info.menuList = header
-			UIDropDownMenu_AddButton(info)
+			if (level or 1) == 1 then
+				for _, header in ipairs(CritterEmote.knownEmotes.keys) do
+					info.text = header
+					info.hasArrow, info.notCheckable = true, true
+					info.menuList = header
+					UIDropDownMenu_AddButton(info)
+				end
+			else
+				info.func = CritterEmote.Edit_SetEmoteForEdit
+				for _, emote in pairs(CritterEmote.knownEmotes[menuList]) do
+					info.text = emote
+					info.hasArrow, info.notCheckable = false, true
+					UIDropDownMenu_AddButton(info, level)
+				end
+			end
 		end
-	else
-		info.func = CritterEmote.Edit_SetEmoteForEdit
-		for _, emote in pairs(CritterEmote.knownEmotes[menuList]) do
-			info.text = emote
-			info.hasArrow, info.notCheckable = false, true
-			UIDropDownMenu_AddButton(info, level)
-		end
-	end
+	)
+	UIDropDownMenu_JustifyText(self, "LEFT")
 end
 function CritterEmote.Edit_SetEmoteForEdit(info)  -- takes the info table
 	CritterEmote.editEmote = info.value
