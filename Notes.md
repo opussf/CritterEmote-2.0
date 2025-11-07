@@ -5,12 +5,6 @@
 * "slash commands when targeted" means emotes to pet?
 
 
-
-
-
-
-
-
 ## Ideas
 
 * Create tables of emotes.

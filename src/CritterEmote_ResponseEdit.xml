@@ -9,6 +9,14 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 			<Anchor point="CENTER"/>
 		</Anchors>
 		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_BG" file="Interface\DialogFrame\UI-DialogBox-Background">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
 			<Layer level="ARTWORK">
 				<FontString name="$parent_Title" inherits="GameFontNormalLarge">
 					<Anchors>
@@ -25,5 +33,28 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 				</Texture>
 			</Layer>
 		</Layers>
+		<Frames>
+			<Button name="$parent_Close" inherits="UIPanelCloseButton" parent="CritterEmoteResponseEditFrame">
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="0" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>self:GetParent():Hide()</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="$parent_EmoteDropDown" inherits="UIDropDownMenuTemplate" parentKey="EmoteDropDownMenu">
+				<Size x="50" y="16"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="TOPRIGHT" x="100"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>CritterEmote.Edit_InitEmoteDropDown(self)</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>CritterEmote.Edit_OnLoad()</OnLoad>
+			<OnShow>CritterEmote.Edit_OnShow()</OnShow>
+		</Scripts>
 	</Frame>
 </Ui>
