@@ -1,6 +1,6 @@
 local _, L = ...;
 if GetLocale() == "ruRU" then
-	L.L["%s %i emotes."] = "%s %i эмоций"
+	L.L["%s emotes."] = "%s эмоций"
 	L.L["%s (%s) by %s"] = "%s (%s) от %s"
 	L.L["%s is %s with %i emotes."] = "%s %s с %i эмоциями."
 	L.L["change the verbosity level"] = "изменить уровень подробности"

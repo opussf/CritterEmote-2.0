@@ -40,7 +40,7 @@ function CritterEmote.AddCategoryOptions()
 				self,
 				CritterEmote_Variables.Categories,
 				category,
-				string.format(CritterEmote.L["%s %i emotes."], category, (CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or 0))
+				string.format(CritterEmote.L["%s emotes."], category)
 			)
 		end)
 		checkButton:SetScript("OnClick", function(self)
