@@ -5,11 +5,20 @@ end
 function CritterEmote.Edit_OnShow()
 	CritterEmote.Log(CritterEmote.Error, "EditOnShow")
 	CritterEmote.Edit_UpdatePetInfo()
+	CritterEmoteResponseEditFrame:RegisterEvent("COMPANION_UPDATE")
+end
+function CritterEmote.Edit_OnHide()
+	CritterEmoteResponseEditFrame:UnregisterEvent("COMPANION_UPDATE")
+end
+function CritterEmote.Edit_COMPANION_UPDATE()
+	-- this seems to fire a lot....
+	-- print("COMPANION_UPDATE")
+	-- CritterEmote.Edit_UpdatePetInfo()
 end
 function CritterEmote.Edit_UpdatePetInfo()
 	local petInfo = {C_PetJournal.GetPetInfoByPetID(C_PetJournal.GetSummonedPetGUID())}
 	CritterEmoteResponseEditFrame_Icon:SetTexture(petInfo[9])
-	CritterEmoteResponseEditFrame_Name:SetText((petInfo[2] or PetInfo[8]))
+	CritterEmoteResponseEditFrame_Name:SetText((petInfo[2] or petInfo[8]))
 end
 function CritterEmote.Edit_InitEmoteDropDown(self)
 	if not CritterEmote.knownEmotes then
