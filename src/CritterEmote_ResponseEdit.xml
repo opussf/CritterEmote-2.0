@@ -52,7 +52,7 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 				</Anchors>
 				<ScrollChild>
 					<EditBox name="$parent_EditBox" multiLine="true" letters="0" autoFocus="false" nonspacewrap="true">
-						<Size x="280" y="1000"/>
+						<Size x="300" y="1000"/>
 						<FontString name="$parent_FontString" inherits="ChatFontNormal"/>
 						<TextInsets left="6" right="0" top="0" bottom="0"/>
 						<Scripts>

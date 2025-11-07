@@ -63,13 +63,27 @@ function CritterEmote.Edit_InitEmoteDropDown(self)
 	UIDropDownMenu_JustifyText(self, "LEFT")
 end
 function CritterEmote.Edit_SetEmoteForEdit(info)  -- takes the info table
+	CritterEmote.Edit_SaveEmotes()
+
 	CritterEmote.editEmote = info.value
 	print(CritterEmote.editEmote)
 	UIDropDownMenu_SetText(CritterEmoteResponseEditFrame_EmoteDropDown, CritterEmote.editEmote)
 	CloseDropDownMenus()
+end
+function CritterEmote.Edit_SaveEmotes()
+	local numLines = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetNumLines()
+	print(numLines)
+	if numLines > 0 then
+		local text = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetText()
+	end
+
 end
 
 CritterEmote.commandList[CritterEmote.L["edit"]] = {
 	["help"] = {"", CritterEmote.L["Show the Critter Emote Response Edit frame."]},
 	["func"] = function() CritterEmoteResponseEditFrame:Show() end,
 }
+
+
+-- eyes you like you have lost your head.   Midnight Blue - Dance
+
