@@ -1,4 +1,4 @@
-L.L["%s %i emotes."] = ""
+L.L["%s emotes."] = ""
 L.L["%s (%s) by %s"] = ""
 L.L["%s is %s with %i emotes."] = ""
 L.L["change the verbosity level"] = ""

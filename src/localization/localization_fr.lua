@@ -1,6 +1,6 @@
 local _, L = ...
 if GetLocale() == "frFR" then
-	L.L["%s %i emotes"] = "%s %i émotes."
+	L.L["%s emotes"] = "%s émotes."
 	L.L["%s (%s) by %s"] = "%s (%s) par %s"
 	L.L["%s is %s with %i emotes."] = "%s est %s avec %i émotes."
 	L.L["change the verbosity level"] = "changer le niveau de verbosité"
