@@ -23,7 +23,7 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 				</FontString>
 				<Texture name="$parent_Icon">
 					<Size x="64" y="64"/>
-					<Anchors><Anchor point="TOPLEFT" x="" y="-16"/></Anchors>
+					<Anchors><Anchor point="TOPLEFT" x="0" y="-16"/></Anchors>
 				</Texture>
 				<FontString name="$parent_Name" inherits="GameFontNormal">
 					<Anchors><Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="TOPRIGHT" x="8"/></Anchors>
@@ -47,13 +47,14 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 			<ScrollFrame name="$parent_EditScrollFrame" inherits="UIPanelScrollFrameTemplate">
 				<Size x="300" y="270"/>
 				<Anchors>
-					<Anchor point="TOPLEFT" x="20" y="-60"/>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="BOTTOMLEFT" x="0" y="-6"/>
 					<Anchor point="BOTTOMRIGHT" x="-30" y="20"/>
 				</Anchors>
 				<ScrollChild>
-					<EditBox name="$parent_EditBox" multiLine="true" autoFocus="false" nonspacewrap="true">
+					<EditBox name="$parent_EditBox" multiLine="true" letters="0" autoFocus="false" nonspacewrap="true">
 						<Size x="280" y="1000"/>
-						<FontString inherits="ChatFontNormal"/>
+						<FontString name="$parent_FontString" inherits="ChatFontNormal"/>
+						<TextInsets left="6" right="0" top="0" bottom="0"/>
 						<Scripts>
 							<OnEscapePressed>self:ClearFocus()</OnEscapePressed>
 							<OnTextChanged>self:GetParent():UpdateScrollChildRect()</OnTextChanged>
@@ -70,39 +71,3 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 		</Scripts>
 	</Frame>
 </Ui>
-
-
-<!--
-<EditBox name="$parent_EditBox" inherits="InputBoxTemplate" multiLine="false">
-				<Size x="590" y="20"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" x="5"/>
-				</Anchors>
-				<FontString name="$parent_FontString" inherits="ChatFontNormal"/>
-				<Scripts>
-					<OnLoad>self:SetAutoFocus( false )</OnLoad>
-					<OnShow>self:SetFocus()</OnShow>
-				</Scripts>
-			</EditBox>
--->
-
-<!--
-    <EditBox name="$parentEditBox" multiLine="true" autoFocus="false" letters="0">
-        <Size x="280" y="150"/>
-        <Anchors>
-            <Anchor point="TOPLEFT"/>
-            <Anchor point="RIGHT" x="-5"/>
-        </Anchors>
-        <FontString inherits="ChatFontNormal"/>
-        <Scripts>
-            <OnEscapePressed>
-                self:ClearFocus()
-            </OnEscapePressed>
-            <OnTextChanged>
-                local parent = self:GetParent()
-                parent:UpdateScrollChildRect()
-            </OnTextChanged>
-        </Scripts>
-    </EditBox>
-</ScrollFrame>
--->
