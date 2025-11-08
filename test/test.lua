@@ -256,5 +256,9 @@ end
 function test.test_UI_01()
 	CritterEmote.SlashHandler("edit")
 end
+function test.test_UI_OnLoad()
+	test.dump(_G)
+	-- CritterEmote.Edit_OnHide()
+end
 
 test.run()

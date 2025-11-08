@@ -20,9 +20,7 @@ CritterEmote.LogNames = { CritterEmote.L["Error"],
 
 CritterEmote.Categories = {}  -- is now built later.
 CritterEmote.eventFunctions = {}
-
 CritterEmote_Variables = { Categories = {} }
-CritterEmote_CustomResponseEmotes = {}
 CritterEmote_CharacterVariables = {}
 -- for _,v in pairs(CritterEmote.Categories) do
 -- 	CritterEmote_Variables.Categories[v] = true

@@ -1,4 +1,6 @@
 _, CritterEmote = ...
+CritterEmote_ResponseEmotesPatches = {}  -- save variable
+---------------------
 function CritterEmote.Edit_OnLoad()
 	CritterEmoteResponseEditFrame_Title:SetText(CritterEmote.ADDONNAME)
 end
@@ -80,41 +82,138 @@ function CritterEmote.Edit_SetEmoteForEdit(info)  -- takes the info table, calle
 	CloseDropDownMenus()
 	CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:SetFocus()
 end
-function CritterEmote.Edit_SaveEmotes()
-	local numLines = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetNumLines()
-	if numLines > 0 then
-		local petName = CritterEmoteResponseEditFrame_Name:GetText()
-		local editEmote = CritterEmote.editEmote
+-- function CritterEmote.Edit_SaveEmotes()
+	-- local numLines = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetNumLines()
+	-- if numLines > 0 then
+	-- 	local petName = CritterEmoteResponseEditFrame_Name:GetText()
+	-- 	local editEmote = CritterEmote.editEmote
 
-		if petName then
-			-- clear old data, or make new
-			CritterEmote_CustomResponseEmotes[petName] = CritterEmote_CustomResponseEmotes[petName] or {}
-			CritterEmote_CustomResponseEmotes[petName][editEmote] = {} -- this is being replaced
+	-- 	if petName then
+	-- 		-- clear old data, or make new
+	-- 		CritterEmote_CustomResponseEmotes[petName] = CritterEmote_CustomResponseEmotes[petName] or {}
+	-- 		CritterEmote_CustomResponseEmotes[petName][editEmote] = {} -- this is being replaced
 
-			-- populate data from editbox
-			local text = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetText().."\n"  -- append a newline
-			for emote in text:gmatch("(.-)\n") do
-				if emote ~= "" then
-					table.insert(CritterEmote_CustomResponseEmotes[petName][editEmote], emote)
-				end
-			end
-		end
-	end
-end
+	-- 		-- populate data from editbox
+	-- 		local text = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetText().."\n"  -- append a newline
+	-- 		for emote in text:gmatch("(.-)\n") do
+	-- 			if emote ~= "" then
+	-- 				table.insert(CritterEmote_CustomResponseEmotes[petName][editEmote], emote)
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
+-- end
 function CritterEmote.Edit_PopulateEditBox()
 	local petName = CritterEmoteResponseEditFrame_Name:GetText()
 	local editEmote = CritterEmote.editEmote
 	CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:SetText(
-			table.concat((CritterEmote_CustomResponseEmotes[petName] and CritterEmote_CustomResponseEmotes[petName][editEmote] or {}), "\n")
+			table.concat((CritterEmote_ResponseEmotesPatches[petName] and CritterEmote_ResponseEmotesPatches[petName][editEmote] or {}), "\n")
 		)
 end
 --------------------------
+-- Support functions
+--------------------------
+function CritterEmote.Edit_SaveEmotes()
+	-- make and save a patch structure
+	local numLines = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetNumLines()
+	if numLines > 0 then
+		local petName = CritterEmoteResponseEditFrame_Name:GetText()
+		local editEmote = CritterEmote.editEmote
+		if petName and editEmote then
+			local patch = {}
+			local baseList = CritterEmote.EmoteResponses[editEmote][petName]
+			local newList = {}
+
+			-- convert text block to newList
+			local text = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetText().."\n"  -- append a new line
+			for emote in text:gmatch("(.-)\n") do
+				if emote ~= "" then
+					table.insert(newList, emote)
+				end
+			end
+
+			-- make baseSet, and newSet
+			local baseSet, newSet = {}, {}
+			for _, v in ipairs(baseList or {}) do baseSet[v] = true end
+			for _, v in ipairs(newList or {}) do newSet[v] = true end
+
+			for v in pairs(newSet) do
+				if not baseSet[v] then -- this line is not in the baseList
+					patch.add = patch.add or {}
+					print("Add ", v)
+					table.insert(patch.add, v)
+				end
+			end
+
+			for v in pairs(baseSet) do
+				if not newSet[v] then
+					patch.remove = patch.remove or {}
+					print("Remove ",v)
+					table.insert(patch.remove, v)
+				end
+			end
+
+			CritterEmote_ResponseEmotesPatches[editEmote] = CritterEmote_ResponseEmotesPatches[editEmote] or {}
+			CritterEmote_ResponseEmotesPatches[editEmote][petName] = patch
+		end
+	end
+end
+function CritterEmote.Edit_DoAThing(emote, petName)
+	-- still not sure how to do this exactly
+	local base = CritterEmote.EmoteResponses[emote][petName]
+	local patch = CritterEmote_ResponseEmotesPatches[editEmote][petName]
+	local listOut = {}
+	for _, v in ipairs(base) do  -- copy from base list
+		table.insert(listOut, v)
+	end
+
+	if patch then
+		-- Remove
+		if patch.remove == true then
+			return {}
+		end
+		-- elseif type(patch.remove) == "table" then
+		local removeSet = {}
+		for _, v in ipairs(patch.remove) do removeSet[v] = true end
+		local newList = {}
+		for _, v in ipairs(newList) do
+			if not removeSet[v] then
+				table.insert(newList,v)
+			end
+		end
+		listOut = newList
+
+		-- Add
+		if type(patch.add) == "table" then
+			for _, v in ipairs(patch.add) do
+				table.insert(listOut, v)
+			end
+		end
+	end
+
+	return listOut
+end
+
 -- @TODO: Answer these questions:
 -- 1. the current save structure is  ["petName"] = { ["EMOTE"] = {}, }
 --    Should this be 'reveresed' like the shipped data structure.
 --    The inital thought was to allow the user to ADD emotes for their specific pet.
 --    ADDING would let the user add response emotes, and allow shipped emotes to be added or removed, and still used.
 --
+
+
+
+
+
+
+
+
+
+
+
+
+-- CritterEmote_ResponseEmotesPatches
+
 
 
 
