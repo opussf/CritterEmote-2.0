@@ -108,12 +108,19 @@ function CritterEmote.Edit_PopulateEditBox()
 			table.concat((CritterEmote_CustomResponseEmotes[petName] and CritterEmote_CustomResponseEmotes[petName][editEmote] or {}), "\n")
 		)
 end
+--------------------------
+-- @TODO: Answer these questions:
+-- 1. the current save structure is  ["petName"] = { ["EMOTE"] = {}, }
+--    Should this be 'reveresed' like the shipped data structure.
+--    The inital thought was to allow the user to ADD emotes for their specific pet.
+--    ADDING would let the user add response emotes, and allow shipped emotes to be added or removed, and still used.
+--
+
+
+
+
 
 CritterEmote.commandList[CritterEmote.L["edit"]] = {
 	["help"] = {"", CritterEmote.L["Show the Critter Emote Response Edit frame."]},
 	["func"] = function() CritterEmoteResponseEditFrame:Show() end,
 }
-
-
--- eyes you like you have lost your head.   Midnight Blue - Dance
-
