@@ -1,7 +1,7 @@
 ## Interface: @INTERFACE@
 ## Title: Critter Emote
 ## Author: OpusSF
-## X-Contributors: Acidfrost59 (emotes, updates), Fysker (IT))
+## X-Contributors: Acidfrost59 (emotes, updates), Fysker (IT)
 ## X-PreviousAuthor: Zompter (original), seegeen00 (previous)
 ## Version: @VERSION@
 ## IconTexture: Interface/Icons/Inv_pet_wingedlion
