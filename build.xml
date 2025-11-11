@@ -1,0 +1,184 @@
+<project name="CritterEmote" default="package">
+	<!-- version 7.1 -->
+
+	<tstamp/>
+	<property file="build.properties"/>
+	<property environment="env"/>
+	<property name="env.BUILD_NUMBER" value=""/>
+	<property name="build.number" value=""/>
+	<property name="addon.dir" location="${ADDONLOC}/${ant.project.name}"/>
+	<!--  Pull git repo info -->
+	<!-- Get the last tag reachable from this branch -->
+	<exec executable="git" dir="." outputproperty="git.tag" failifexecutionfails="false" errorproperty="">
+		<arg line="describe --tags --abbrev=0" />
+	</exec>
+	<!-- Get a 'revision' based on last tag, commit count, commitsha, and branch name -->
+	<exec executable="git" dir="." outputproperty="git.revision" failifexecutionfails="false" errorproperty="">
+		<arg line="describe --tags --always HEAD" />
+	</exec>
+	<condition property="repository.version" value="${git.revision}" else="unknown">
+		<and>
+			<isset property="git.revision"/>
+			<length string="${git.revision}" trim="yes" length="0" when="greater"/>
+		</and>
+	</condition>
+	<!-- find gitbranch -->
+	<!-- find gitbranch -->
+	<exec executable="git" dir="." outputproperty="git.branch.tmp" failifexecutionfails="false" errorproperty="">
+		<arg line="rev-parse --abbrev-ref HEAD"/>
+	</exec>
+	<!-- replace '/' in branch name with '_' -->
+	<loadresource property="git.branch">
+		<propertyresource name="git.branch.tmp"/>
+		<filterchain>
+			<tokenfilter>
+				<replacestring from="/" to="_"/>
+			</tokenfilter>
+		</filterchain>
+	</loadresource>
+	<!-- assign the git.branch to the branch property -->
+	<condition property="branch" value="-${git.branch}" else="">
+		<and>
+			<isset property="git.branch"/>
+			<not>
+				<or>
+					<equals arg1="${git.branch}" arg2="main"/>
+					<equals arg1="${git.branch}" arg2="HEAD"/>
+				</or>
+			</not>
+		</and>
+	</condition>
+
+	<property name="version.number" value="${repository.version}${branch}${build.number}"/>
+	<echo>Building: ${version.number}</echo>
+	<!-- end git repo info -->
+
+	<property name="project.zip" value="${ant.project.name}_${version.number}.zip"/>
+	<property name="test.dir" location="test"/>
+
+	<property name="target.dir" location="target"/>
+	<property name="working.dir" location="${target.dir}/working"/>
+	<property name="report.dir" location="${target.dir}/reports"/>
+
+	<condition property="test.check">
+		<available file="${test.dir}/test.lua" type="file"/>
+	</condition>
+
+	<filter token="VERSION" value="${version.number}"/>
+	<filter token="INTERFACE" value="${INTERFACE}"/>
+
+	<target name="clean" description="Cleans old builds">
+		<delete dir="target" verbose="true"/>
+	</target>
+
+	<target name="changelog" description="Creates a changelog">
+		<mkdir dir="${working.dir}"/>
+		<echo file="${working.dir}/changelog.txt">Changes since ${git.tag}..${line.separator}${line.separator}</echo>
+		<exec executable="git" dir=".">
+			<arg line="log --graph --pretty=format:'%h %ci - %d %s &lt;%an&gt;' ${git.tag}~1.."/>
+			<redirector append="true" output="${working.dir}/changelog.txt"/>
+		</exec>
+	</target>
+
+	<target name="package" depends="changelog, test" description="Create a deploy package">
+		<property name="package.dir" location="${working.dir}/${ant.project.name}"/>
+		<delete dir="${package.dir}" verbose="false"/>
+		<copy	todir="${package.dir}" filtering="true">
+			<fileset dir="src">
+				<include name="**/*.lua"/>
+				<include name="**/*.toc"/>
+				<include name="**/*.xml"/>
+				<include name="**/*.txt"/>
+			</fileset>
+			<fileset dir="${working.dir}">
+				<include name="*.txt"/>
+			</fileset>
+		</copy>
+		<zip 	destfile="${target.dir}/${project.zip}"
+				basedir="${working.dir}"
+				includes="${ant.project.name}/**"/>
+		<checksum file="${target.dir}/${project.zip}"
+				  property="zip.md5" />
+		<echo file="${target.dir}/${project.zip}.md5">${zip.md5} ${project.zip}${line.separator}</echo>
+	</target>
+
+	<target name="web.deploy" description="deploys the web site">
+		<mkdir	dir="${target.dir}/web"/>
+		<zip	destfile="${target.dir}/${ant.project.name}-web.zip"
+				basedir="src/web"
+				includes="**"/>
+
+		<exec executable="rsync" dir="src/web" failonerror="true">
+			<arg line='-rvihz --rsh="/usr/bin/ssh -l ${USER} -p 2022" . ${USER}@${HOST}:${DIR}'/>
+		</exec>
+	<!--		<delete dir="${target.dir}/web" verbose="true"/>   -->
+	</target>
+
+	<target name="wow" depends="test" description="copy files to currnet wow install">
+		<mkdir dir="${addon.dir}"/>
+		<delete>
+			<fileset dir="${addon.dir}" includes="*.toc"/>
+		</delete>
+		<copy todir="${addon.dir}" filtering="true" verbose="true">
+			<fileset dir="src">
+				<include name="**/*.lua"/>
+				<include name="**/*.toc"/>
+				<include name="**/*.xml"/>
+				<include name="**/*.txt"/>
+				<include name="Readme.txt"/>
+			</fileset>
+		</copy>
+		<chmod perm="ugo+x" dir="${addon.dir}" includes="${ant.project.name}_Export.lua" />
+		<echo>Deployed ${version.number} locally</echo>
+	</target>
+
+	<target name="open" description="open the addon dir in the current wow install">
+		<exec executable="open">
+			<arg value="${addon.dir}"/>
+		</exec>
+	</target>
+
+	<target name="test" description="run unit tests" if="test.check">
+		<mkdir  dir="${report.dir}"/>
+		<exec executable="lua" dir="test" resultproperty="testResult">
+			<arg value="test.lua"/>
+		</exec>
+		<move todir="${report.dir}" file="${test.dir}/testOut.xml"/>
+		<fail message="The tests failed. Please see the output for details." status="${testResult}">
+			<condition>
+				<not>
+					<equals arg1="${testResult}" arg2="0"/>
+				</not>
+			</condition>
+		</fail>
+	</target>
+
+	<target name="curse" depends="package" description="Package to curse.dir">
+		<property name="curse.dir" location="${ant.project.name}-cf"/>
+		<exec executable="git" dir="${curse.dir}" failifexecutionfails="true" errorproperty="">
+			<arg line="reset --hard HEAD" />
+		</exec>
+		<copy todir="${curse.dir}">
+			<fileset dir="${package.dir}"/>
+		</copy>
+		<exec executable="git" dir="${curse.dir}" failifexecutionfails="true" errorproperty="">
+			<arg line="status" />
+		</exec>
+		<fail message="Not a tagged release.">
+			<condition>
+				<not>
+					<equals arg1="${version.number}" arg2="${git.tag}"/>
+				</not>
+			</condition>
+		</fail>
+		<exec executable="git" dir="${curse.dir}" failifexecutionfails="true" errorproperty="">
+			<arg line="add ." />
+		</exec>
+		<exec executable="git" dir="${curse.dir}" failifexecutionfails="true" errorproperty="">
+			<arg line="commit -a -m '${git.tag}'" />
+		</exec>
+		<exec executable="git" dir="${curse.dir}" failifexecutionfails="true" errorproperty="">
+			<arg line="tag -a ${git.tag} -m '${git.tag}'" />
+		</exec>
+	</target>
+</project>

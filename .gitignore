@@ -24,3 +24,14 @@ Thumbs.db  # Windows thumbnail cache
 
 # Ignore GitHub Codespaces & editor-specific files
 .codespaces/
+
+# build results
+target/
+CritterEmote-cf/
+
+# coverage files
+coverage.xml
+
+# misc scripts
+runmany.sh
+secrets.sh
