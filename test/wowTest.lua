@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  November 05 2025
--- Revision:  9.6
+-- Date    :  November 10 2025
+-- Revision:  9.7-1-g72afecc
 -----------------------------------------
 -- This is an uber simple unit test implementation
 -- It creates a dictionary called test.
@@ -72,6 +72,7 @@ end
 
 test = {}
 test.outFileName = "testOut.xml"
+test.coberturaFileName = nil
 test.coverageReportPercent = false  -- set to true to enable this feature.
 test.runInfo = {
 		["count"] = 0,
@@ -93,7 +94,19 @@ end
 function test.PairsByKeys( t, f )  -- This is an awesome function I found
 	local a = {}
 	for n in pairs( t ) do table.insert( a, n ) end
-	table.sort( a, f ) -- @TODO: Look into giving a sort function here.
+	table.sort( a, ( f or function(a, b)
+			local ta, tb = type(a), type(b)
+			if ta == tb then
+				if ta == "number" then
+					return a < b
+				else
+					return tostring(a):lower() < tostring(b):lower()
+				end
+			else
+				-- numbers come first
+				return ta == "number"
+			end
+		end) )
 	local i = 0
 	local iter = function()
 		i = i + 1
@@ -125,7 +138,7 @@ function test.dump( tableIn, depth )
 			elseif ( type( v ) == "function" ) then
 				io.write( "function()" )
 			else
-				io.write( v )
+				io.write( (v or "nil") )
 			end
 			io.write( ",\n" )
 		end
@@ -183,7 +196,7 @@ function test.toCobertura()
 				test.coverageReportPercent and linesByFile.covered/linesByFile.lineCount or 1,
 				test.coverageReportPercent and linesByFile.covered or 0,
 				test.coverageReportPercent and linesByFile.lineCount or 0,
-				time()
+				os.time()
 			)
 		)
 		table.insert( coberturaTable, "<sources><source>test</source></sources>" )

@@ -1,9 +1,10 @@
 ## Interface: @INTERFACE@
 ## Title: Critter Emote
-## Author: Acidfrost59, Fysker, OpusSF, ChatGPT, Grok3
+## Author: OpusSF
+## X-Contributors: Acidfrost59 (emotes, updates), Fysker (IT))
+## X-PreviousAuthor: Zompter (original), seegeen00 (previous)
 ## Version: @VERSION@
 ## IconTexture: Interface/Icons/Inv_pet_wingedlion
-## email: PBCritterEmote@gmail.com
 ## LoadOnDemand: 0
 ## DefaultState: enabled
 ## Notes: Allows your companion pets to send random emotes to chat and to respond to in-game slash commands when targeted
