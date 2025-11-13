@@ -13,7 +13,7 @@ CritterEmote.EmoteResponses = {
 		chicken = { "pecks at your feet.", },
 		["Deathy"] = { "starts a little fire.", },
 		["Lil' Deathwing"] = { "starts a little fire.", },
-		["Lil' K.T."] = { "is used to dealing with absent minded zombies.", },
+		["Lil' K.T."] = { "is used to dealing with absent-minded zombies.", },
 	},
 	AGREE = {
 		default = { "nods.", },
