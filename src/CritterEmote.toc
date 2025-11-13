@@ -60,6 +60,7 @@ localization/localization_core.lua
 localization/localization_es.lua
 localization/localization_fr.lua
 localization/localization_ru.lua
+localization/localization_zhTW.lua
 
 ## Core Functionality
 CritterEmote_Core.lua
