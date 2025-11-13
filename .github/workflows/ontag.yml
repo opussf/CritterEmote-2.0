@@ -1,0 +1,45 @@
+name: Tag - Create Release
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    runs-on:
+      - ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3.5.0
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Set up Lua
+        uses: leafo/gh-actions-lua@v12
+        with:
+          luaVersion: "5.3.5"
+
+      # Runs a single command using the runners shell
+      - name: Build with ant
+        run: ant package; ls ./target/*.zip*
+
+      - name: Create Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "./target/*.zip*"
+          bodyFile: target/working/changelog.txt
+          name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false

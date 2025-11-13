@@ -1,4 +1,6 @@
-CritterEmote_Songs_enUS = {
+local _, CritterEmote = ...
+if GetLocale() == "enUS" then
+CritterEmote.Song_emotes = {
     --American Songs
     "sings, \"It\'s the hard-knock life for us! It\'s the hard-knock life for us! \'Steada treated, we get tricked! \'Steada kisses, we get kicked! It\'s the hard-knock life!\"",
     "sings [with a computer voice], \"When I look out there, it makes me glad I\'m not you. I\'ve got experiments to run. There is research to be done on the people who are still alive. And believe me I am still alive.\"",
@@ -59,18 +61,18 @@ CritterEmote_Songs_enUS = {
     "sings, \"We didn\'t start the fire. It was always burning, Since the world\'s been turning\"",
     "sings, \"Sweet dreams are made of this. Who am I to disagree? I travel the world, and the seven seas. Everybody's looking for something.\"",
     "sings, \"I just wanna use your love tonight. I don't wanna lose your love tonight\"",
-    "sings, \"(Turn around, bright eyes), Every now and then I fall apart, And I need you now, tonight. And I need you more than ever\"",
-    "sings, \"It\'s the eye of the tiger, It\'s the thrill of the fight, Risin\' up to the challenge of our rival",
+    "sings, \"(Turn around, bright eyes), Every now and then I fall apart, And I need you now, tonight. And I need you more than ever.\"",
+    "sings, \"It\'s the eye of the tiger, It\'s the thrill of the fight, Risin\' up to the challenge of our rival.",
     "sings, \"Every breath you take. Every move you make. Every bond you break. Every step you take. I\'ll be watching you.\"",
     "sings, \"Do you come from a land down under? Where women glow and men plunder? Can\'t you hear, can\'t you hear the thunder? You better run, you better take cover\"",
     "sings, \"It\'s gonna take a lot to drag me away from you. There\'s nothing that a hundred men or more could ever do. I bless the rains down in Africa. Gonna take some time to do the things we never had\"",
     "sings, \"Ah, push it - push it good. Ah, push it - push it real good. Ah, push it - push it good. Ah, push it - p-push it real good\"",
     "sings, \"Woah, we\'re half way there. Woah, livin\' on a prayer. Take my hand, we\'ll make it I swear. Woah, livin\' on a prayer\"",
-    "sings, \"When you call my name it\'s like a little prayer. I\'m down on my knees, I wanna take you there\"",
+    "sings, \"When you call my name it\'s like a little prayer. I\'m down on my knees, I wanna take you there.\"",
     "sings, \"Oh, I wanna dance with somebody. I wanna feel the heat with somebody. Yeah, I wanna dance with somebody. With somebody who loves me\"",
     "sings, \"What rhymes with hug me?\"",
     "sings, \"Take me on (take on me). I'll be gone. In a day or two.\"",
-    "sings, \"Welcome to the Hotel Eastern Plaguelands! What a lovely place. (Such a lovely place.\"",
+    "sings, \"Welcome to the Hotel Eastern Plaguelands! What a lovely place. (Such a lovely place.)\"",
     "sings, \"This is what it sounds like when the doves cry.\"",
     "sings, \"Has anybody seen my baby? Has anybody seen her around?\"",
     "says, \"Whaddya want for nothin'? Rrrrrubber Bisquit? Ow, ow ow ow.\"",
@@ -78,3 +80,4 @@ CritterEmote_Songs_enUS = {
     "sings, \"Stop running now, I'm already dead, yeah.\"",
     "sings, \"There's a Zombie on your lawn.\"",
 }
+end
