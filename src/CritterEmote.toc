@@ -57,9 +57,9 @@ holiday/CritterEmote_Holiday_enUS.lua
 
 ## Localization
 localization/localization_core.lua
-localization/localization_es.lua
-localization/localization_fr.lua
-localization/localization_ru.lua
+localization/localization_esES.lua
+localization/localization_frFR.lua
+localization/localization_ruRU.lua
 localization/localization_zhCN.lua
 localization/localization_zhTW.lua
 
