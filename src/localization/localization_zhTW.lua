@@ -1,4 +1,4 @@
-local _, L = ...;
+local _, L = ...
 if GetLocale() == "zhTW" then
 L.L["%s emotes."] = "%s 表情。"
 L.L["%s (%s) by %s"] = "%s（%s）由 %s 製作"
