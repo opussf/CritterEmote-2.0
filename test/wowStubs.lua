@@ -2304,11 +2304,12 @@ end
 C_PetJournal = {}
 C_PetJournal.data = {
 	["summoned"] = {
+		GUID = 12534
 
 	},
 }
 function C_PetJournal.GetSummonedPetGUID()
-	return C_PetJournal.data.summoned
+	return C_PetJournal.data.summoned.GUID
 end
 function C_PetJournal.GetPetInfoByPetID( petID )
 	-- speciesID, customName, level, xp, maxXp, displayID, isFavorite, name, icon, petType, creatureID, sourceText, description, isWild, canBattle, tradable, unique, obtainable = C_PetJournal.GetPetInfoByPetID(petID)
