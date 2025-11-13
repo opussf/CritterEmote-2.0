@@ -1,6 +1,10 @@
 Welcome to Critter Emote.
 
 You are probably reading this to figure out how to add your own emotes.
+If you are not, welcome to a light overview of the data structures used.
+
+A note: These extension instructions all require adding files to the addon folder, and modifying the .toc file.
+Keep your originals in a safe place, and remember to recopy and update the .toc file after addon updates.
 
 There are 2 types of emotes, and how to add them is different.
 
@@ -26,11 +30,22 @@ These attributes are optional:
 
 	A default `PickTable(self)` will be given if not provided.
 
-For reference, and {array table} is a table with contiguous numeric keys.
+For reference, an {array table} is a table with contiguous numeric keys.
 1="", 2="", etc.
 
 An Example:
 CritterEmote.Kitty_emotes = { "purrs.", ["PickTable"] = function(self) return self end }
+
+### How to Add to this
+
+Create your own files in another location, copy them to the addon directory, and add to the .toc file.
+Keep the originals in another location.
+
+If you want to add to a current category, add them, as a block, to the end of the category file.
+Keep a copy of the originals in another location so that you can copy them back in after updates.
+
+If you want to create your own category, the simplist way is to create a table like the `CritterEmote.Kitty_emotes` above.
+Copy that file to addon directory, and add it to the .toc file.
 
 ## Response Emotes
 
@@ -56,5 +71,21 @@ If you `/drool` at a pet, "Lil' K.T." will have a different response than a pet 
 
 ### How to Add to this
 
-You can add a file that directly adds emotes to `CritterEmote.EmoteResponses`.
+You can add a file that directly adds emotes to `CritterEmote.EmoteResponses`, and add that file to the .toc list.
+
+Example: `responses\Frank_EmoteResponses.lua`.
+
+For a pet with a custom name of Frank, add to the `CritterEmote.EmoteResponses` table like this:
+
+```
+CritterEmote.EmoteResponses["ABSENT"]["Frank"] = { "hums a little tune.", "looks like they are working out a dance move.", }
+CritterEmote.EmoteREsponses["DANCE"]["Frank"] = { "breaks into dance and song.", }
+```
+
+Again, keep the original in a safe place, copy it to the addon directory.
+
+## Afterword
+
+I hope that you enjoy this addon.
+Many people have believed in this addon to keep it alive.
 
