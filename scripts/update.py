@@ -42,7 +42,6 @@ class BattleNetAPI():
 			# Any other unexpected errors
 			print(f"Unexpected error: {e}")
 			sys.exit(1)
-
 	def __makeAPIRequest(self, endPoint: str):
 		""" This sets self.request """
 		url = f'https://{self.region}.api.blizzard.com{endPoint}'
@@ -64,8 +63,6 @@ class BattleNetAPI():
 		except Exception as e:
 			# Any other unexpected errors
 			print(f"Unexpected error: {e}")
-		finally:
-			return None
 
 	def getPetIndex(self, local: str="en_US") -> dict | None:
 		# https://us.api.blizzard.com/data/wow/pet/index?namespace=static-us&locale=en_US
