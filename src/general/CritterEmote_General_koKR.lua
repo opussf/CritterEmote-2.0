@@ -1,6 +1,7 @@
 local _, CritterEmote = ...
 if GetLocale() == "koKR" then
 CritterEmote.General_emotes = {
+	name="일반",
 	"작은 춤을 춘다.",
 	"작은 춤을 춘다.",
 	"새로운 장소를 보는 것이 신난다.",
