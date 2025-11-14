@@ -1,5 +1,5 @@
 local _, CritterEmote = ...
-if GetLocale() == "koKO" then
+if GetLocale() == "koKR" then
 CritterEmote.General_emotes = {
 	"작은 춤을 춘다.",
 	"작은 춤을 춘다.",

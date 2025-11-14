@@ -1,5 +1,5 @@
 local _, L = ...
-if GetLocale() == "koKO" then
+if GetLocale() == "koKR" then
 	L.L["%s emotes."] = "%s 감정 표현"
 	L.L["%s (%s) by %s"] = "%s (%s) 제작: %s"
 	L.L["%s is %s with %i emotes."] = "%s 는 %s이며, %i개의 감정 표현이 포함되어 있습니다."
