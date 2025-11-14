@@ -46,6 +46,8 @@ faction/CritterEmote_Faction_enUS.lua
 ## Emotes
 cities/CritterEmote_Cities_enUS.lua
 general/CritterEmote_General_enUS.lua
+general/CritterEmote_General_esES.lua
+general/CritterEmote_General_esMX.lua
 general/CritterEmote_General_frFR.lua
 general/CritterEmote_General_ruRU.lua
 general/CritterEmote_General_zhCN.lua
@@ -62,6 +64,7 @@ holiday/CritterEmote_Holiday_enUS.lua
 ## Localization
 localization/localization_core.lua
 localization/localization_esES.lua
+localization/localization_esMX.lua
 localization/localization_frFR.lua
 localization/localization_ruRU.lua
 localization/localization_zhCN.lua
