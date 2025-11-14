@@ -46,6 +46,7 @@ faction/CritterEmote_Faction_enUS.lua
 ## Emotes
 cities/CritterEmote_Cities_enUS.lua
 general/CritterEmote_General_enUS.lua
+general/CritterEmote_General_frFR.lua
 general/CritterEmote_General_ruRU.lua
 general/CritterEmote_General_zhCN.lua
 general/CritterEmote_General_zhTW.lua
