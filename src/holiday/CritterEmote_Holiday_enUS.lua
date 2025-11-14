@@ -41,7 +41,7 @@ CritterEmote.Holiday_emotes = {
 		"sings, \"It's beginning to look a lot like Winter Veil, here and everywhere.\"",
 		"sings, \"Oh the weather outside is frightful, but inside it's so delightful.\"",
 		"sings, \"Don't sit under the Winter Veil tree with anyone else but me.\"",
-		"sings, \"Have yourself a Merry little Winter Veil, may your heart be light. From now on all your troubles will be out of sight.\"",
+		"sings, \"Have yourself a Merry little Winter Veil, may your heart be light. From now on, all your troubles will be out of sight.\"",
 		"sings, \"Here comes Greatfather, here comes Greatfather, riding down Winter Veil Lane.\"",
 		"sings, \"Jingle bell, jingle bell, jingle bell rock.  Jingle bells swing and jingle bells ring, snowing and blowing up bushels of fun, now that Winter Veil has begun.\"",
 	},
