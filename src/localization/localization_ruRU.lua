@@ -1,4 +1,4 @@
-local _, L = ...;
+local _, L = ...
 if GetLocale() == "ruRU" then
 	L.L["%s emotes."] = "%s эмоций"
 	L.L["%s (%s) by %s"] = "%s (%s) от %s"
