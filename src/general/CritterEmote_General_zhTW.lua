@@ -1,6 +1,7 @@
 local _, CritterEmote = ...
 if GetLocale() == "zhTW" then
-CritterEmote.一般_emotes = {
+CritterEmote.General_emotes = {
+name="一般",
 "跳了一段小舞。",
 "跳了一段小舞。",
 "對看到新地方感到興奮。",

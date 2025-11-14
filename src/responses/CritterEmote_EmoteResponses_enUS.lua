@@ -84,11 +84,11 @@ CritterEmote.EmoteResponses = {
 		croc = { "snaps jaws. Ready to go.", },
 		elemental = { "charges up.", },
 		skunk = { "tail goes up. Ready.", },
+		reptile = { "coils up defensively.", },
 		["Deathy"] = { "spits lava.", },
 		["Gregarious Grell"] = { "says, \"Oooooh, sure! Send the LITTLE guy!\"", },
 		["Lil' Deathwing"] = { "spits fireballs.", },
 		["Lil' K.T."] = { "fires a Frostbolt at you.", },
-		reptile = { "coils up defensively.", },
 	},
 	AWE = {
 		default = { "shows off.", },
@@ -110,7 +110,7 @@ CritterEmote.EmoteResponses = {
 		["Lil' K.T."] = { "taunts you. Bring it!", },
 	},
 	BARK = {
-		default = {"is at a loss.", },
+		default = { "is at a loss.", },
 		dog = { "barks back.", },
 		cat = { "wonders if you have lost your mind.", },
 		evil = { "haughtily informs you that there's no need to bark at them.", },
