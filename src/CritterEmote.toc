@@ -49,6 +49,7 @@ general/CritterEmote_General_enUS.lua
 general/CritterEmote_General_esES.lua
 general/CritterEmote_General_esMX.lua
 general/CritterEmote_General_frFR.lua
+general/CritterEmote_General_ptBR.lua
 general/CritterEmote_General_ruRU.lua
 general/CritterEmote_General_zhCN.lua
 general/CritterEmote_General_zhTW.lua
@@ -66,6 +67,7 @@ localization/localization_core.lua
 localization/localization_esES.lua
 localization/localization_esMX.lua
 localization/localization_frFR.lua
+localization/localization_ptBR.lua
 localization/localization_ruRU.lua
 localization/localization_zhCN.lua
 localization/localization_zhTW.lua
