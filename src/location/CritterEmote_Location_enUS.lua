@@ -55,7 +55,7 @@ CritterEmote.Location_emotes = {
 		"wants to explore Azuremyst Isle, where everything feels bathed in the calm glow of blue.",
 		"wants to explore Dustwallow Marsh, where the fog is thick and the land is full of secrets.",
 		"wants to explore the vast deserts of Tanaris, where the sands hide ancient secrets.",
-	}.
+	},
 	["Outland"] = {
 		"wants to avoid Hellfire Peninsula, where the land is scorched and demons still roam freely.",
 		"wants to avoid the murky depths of Zangarmarsh, where the giant mushrooms block out the sun.",
