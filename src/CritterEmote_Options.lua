@@ -30,7 +30,7 @@ function CritterEmote.OptionsPanel_CheckButton_OnClick(self, tbl, option)
 end
 function CritterEmote.AddCategoryOptions()
 	local lastName = nil
-	for _, category in CritterEmote.Spairs(CritterEmote.Categories) do
+	for _, category in pairs(CritterEmote.Categories) do
 		local name = "$parent_Enable"..category
 		local displayName = CritterEmote[category.."_emotes"].name or category
 		local checkButton = CreateFrame("CheckButton", name, CritterEmoteOptionsFrame, "CritterEmoteOptionsCheckButtonTemplate")
