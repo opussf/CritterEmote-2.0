@@ -73,10 +73,10 @@
 
 	<target name="changelog" description="Creates a changelog">
 		<mkdir dir="${working.dir}"/>
-		<echo file="${working.dir}/changelog-git.txt">Changes since ${git.tag}..${line.separator}${line.separator}</echo>
+		<echo file="${working.dir}/changelog.txt">Changes since ${git.tag}..${line.separator}${line.separator}</echo>
 		<exec executable="git" dir=".">
 			<arg line="log --graph --pretty=format:'%h %ci - %d %s &lt;%an&gt;' ${git.tag}~1.."/>
-			<redirector append="true" output="${working.dir}/changelog-git.txt"/>
+			<redirector append="true" output="${working.dir}/changelog.txt"/>
 		</exec>
 	</target>
 

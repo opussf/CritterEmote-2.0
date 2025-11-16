@@ -1,4 +1,29 @@
+# BP Critter Emote
+
 Welcome to Critter Emote.
+
+This addon will let your non-combat companion pets do fun and random emotes.
+
+When you have a pet out it will emote something fun every five (5) minutes or so as long as you aren't in combat.
+
+Your pets will also respond to in-game interaction.  Try /wave while targeting your pet.
+
+## Usage
+
+```
+/ce               - send a random emote now
+/ce <message>     - make the current pet emote <message>
+/ce help          - shows the help message
+/ce options       - options panel
+/ce verbose       - change the verbosity
+/ce on            - turns on Critter Emote
+/ce off           - turns off Critter Emote
+/ce info          - displays Critter Emote information
+/ce random on     - turns periodic random emotes on
+/ce random off    - turns periodic random emotes off
+```
+
+# Advanced
 
 You are probably reading this to figure out how to add your own emotes.
 If you are not, welcome to a light overview of the data structures used.
@@ -89,3 +114,4 @@ Again, keep the original in a safe place, copy it to the addon directory.
 I hope that you enjoy this addon.
 Many people have believed in this addon to keep it alive.
 
+Please feel free to submit any emotes you wish to see included in this addon.

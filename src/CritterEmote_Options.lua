@@ -35,7 +35,7 @@ function CritterEmote.AddCategoryOptions()
 		local displayName = CritterEmote[category.."_emotes"].name or category
 		local checkButton = CreateFrame("CheckButton", name, CritterEmoteOptionsFrame, "CritterEmoteOptionsCheckButtonTemplate")
 		checkButton:SetPoint("TOPLEFT", (lastName and lastName or "$parent_EmoteCategoriesHeader"), "BOTTOMLEFT")
-		checkButton.tooltip = string.format(CritterEmote.L["Toggle inclusion of %s emotes."], CritterEmote.L[category])
+		checkButton.tooltip = string.format(CritterEmote.L["Toggle inclusion of %s emotes."], displayName)
 		checkButton:SetScript("OnShow", function(self)
 			CritterEmote.OptionsPanel_CheckButton_OnLoad(
 				self,

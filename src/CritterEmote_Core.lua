@@ -320,25 +320,26 @@ function CritterEmote.ShowInfo()
 		CritterEmote.Print(CritterEmote.L["Critter Emote is now disabled. The critters are sad."])
 	end
 	for _, category in pairs(CritterEmote.Categories) do
+		local displayName = CritterEmote[category.."_emotes"].name or category
 		CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
-				category,
+				displayName,
 				(CritterEmote_Variables.Categories[category] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
 				(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or 0)
 		))
 	end
 end
-function CritterEmote.SetCategoryStatus(category, status)
-	for _, knownCategory in pairs(CritterEmote.Categories) do
-		if category == string.lower(knownCategory) then
-			CritterEmote_Variables.Categories[knownCategory] = status
-			CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
-						knownCategory,
-						(CritterEmote_Variables.Categories[knownCategory] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
-						(CritterEmote[knownCategory.."_emotes"] and #CritterEmote[knownCategory.."_emotes"] or 0)
-			))
-		end
-	end
-end
+-- function CritterEmote.SetCategoryStatus(category, status)
+-- 	for _, knownCategory in pairs(CritterEmote.Categories) do
+-- 		if category == string.lower(knownCategory) then
+-- 			CritterEmote_Variables.Categories[knownCategory] = status
+-- 			CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
+-- 						knownCategory,
+-- 						(CritterEmote_Variables.Categories[knownCategory] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
+-- 						(CritterEmote[knownCategory.."_emotes"] and #CritterEmote[knownCategory.."_emotes"] or 0)
+-- 			))
+-- 		end
+-- 	end
+-- end
 CritterEmote.commandList = {
 	["test"] = {  -- no help will keep it hidden.  Shows some test data.
 		["func"] = function()
@@ -423,12 +424,12 @@ CritterEmote.commandList = {
 			end
 		end,
 	},
-	[CritterEmote.L["enable"]] = {
-		["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Enable Category"]},
-		["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, true) end,
-	},
-	[CritterEmote.L["disable"]] = {
-		["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Disable Category"]},
-		["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, false) end,
-	},
+	-- [CritterEmote.L["enable"]] = {
+	-- 	["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Enable Category"]},
+	-- 	["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, true) end,
+	-- },
+	-- [CritterEmote.L["disable"]] = {
+	-- 	["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Disable Category"]},
+	-- 	["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, false) end,
+	-- },
 }
