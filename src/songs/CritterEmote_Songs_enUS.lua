@@ -79,5 +79,17 @@ CritterEmote.Song_emotes = {
     "sings, \"Here we are now, entertain us. A mulatto, an albino, a mosquito, my libido. Yeah, hey.\"",
     "sings, \"Stop running now, I'm already dead, yeah.\"",
     "sings, \"There's a Zombie on your lawn.\"",
+    ["Singing Sunflower"] =  {
+        "sings, \"There's a zombie on your lawn.\"",
+        "sings, \"Da da do do do do do oo.\"",
+    },
+    ["Elekk Plushie"] = {
+        "plays, I'm a Little Teapot",
+        "plays, Baa Baa Black Sheep",
+        "plays, Ding Dong Bell.",
+        "plays, Hey Diddle Diddle.",
+        "plays, Jack be Nimble",
+        "plays, Three Blind Mice",
+    },
 }
 end

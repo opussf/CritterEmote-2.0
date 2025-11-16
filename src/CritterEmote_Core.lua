@@ -101,7 +101,7 @@ function CritterEmote.OnLoad()
 	CritterEmote.updateInterval = CritterEmote.CreateUpdateInterval()
 	CritterEmote.lastUpdate = time()
 
-	for tblName in pairs(CritterEmote) do
+	for tblName in CritterEmote.Spairs(CritterEmote) do
 		local category = tblName:match("^([%a][%a]*)_emotes$")
 		-- print( category, tblName, type(CritterEmote[tblName]))
 		if category and type(CritterEmote[tblName]) == "table" then
@@ -225,13 +225,13 @@ function CritterEmote.GetRandomEmote(petID, petName, customName)
 	CritterEmote.Log(CritterEmote.Debug, "Call to GetRandomEmote( "..(petID or "nil")..", "..(petName or "nil")..", "..(customName or "nil")..")")
 	CritterEmote.RandomEmoteTable = {}   -- add this to the addon table to keep from making new tables all the time.
 	local categoryEmote = ""
-	for category, enabled in pairs(CritterEmote_Variables.Categories) do
+	for category, enabled in CritterEmote.Spairs(CritterEmote_Variables.Categories) do
 		CritterEmote.Log(CritterEmote.Debug, "Emote category: "..category.." is "..(enabled and "enabled." or "disabled."))
 		if enabled and CritterEmote[category.."_emotes"] then
 			CritterEmote.Log(CritterEmote.Debug, "Get a random emote from: "..category.."_emotes ("..#CritterEmote[category.."_emotes"]..")" )
 			local emoteTable = CritterEmote[category.."_emotes"]:PickTable() or {}
 			local categoryEmote = CritterEmote.GetRandomTableEntry(emoteTable)
-			CritterEmote.Log(CritterEmote.Debug, "categoryEmote: "..(categoryEmote or "nil"))
+			CritterEmote.Log(CritterEmote.Debug, category.." Emote: "..(categoryEmote or "nil"))
 			table.insert(CritterEmote.RandomEmoteTable, categoryEmote)
 
 			-- Look for and add a 'custom'
@@ -240,7 +240,7 @@ function CritterEmote.GetRandomEmote(petID, petName, customName)
 					(petID and emoteTable[CritterEmote.GetPetPersonality(petID)]) or
 					{}
 			categoryEmote = CritterEmote.GetRandomTableEntry(extraTable)
-			CritterEmote.Log(CritterEmote.Debug, "categoryEmote: "..(categoryEmote or "nil"))
+			CritterEmote.Log(CritterEmote.Debug, category.." Emote custom: "..(categoryEmote or "nil"))
 			table.insert(CritterEmote.RandomEmoteTable, categoryEmote)
 		else
 			CritterEmote.Log(CritterEmote.Debug, "No "..category.." emote added to list to choose from.")
@@ -320,25 +320,26 @@ function CritterEmote.ShowInfo()
 		CritterEmote.Print(CritterEmote.L["Critter Emote is now disabled. The critters are sad."])
 	end
 	for _, category in pairs(CritterEmote.Categories) do
+		local displayName = CritterEmote[category.."_emotes"].name or category
 		CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
-				category,
+				displayName,
 				(CritterEmote_Variables.Categories[category] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
 				(CritterEmote[category.."_emotes"] and #CritterEmote[category.."_emotes"] or 0)
 		))
 	end
 end
-function CritterEmote.SetCategoryStatus(category, status)
-	for _, knownCategory in pairs(CritterEmote.Categories) do
-		if category == string.lower(knownCategory) then
-			CritterEmote_Variables.Categories[knownCategory] = status
-			CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
-						knownCategory,
-						(CritterEmote_Variables.Categories[knownCategory] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
-						(CritterEmote[knownCategory.."_emotes"] and #CritterEmote[knownCategory.."_emotes"] or 0)
-			))
-		end
-	end
-end
+-- function CritterEmote.SetCategoryStatus(category, status)
+-- 	for _, knownCategory in pairs(CritterEmote.Categories) do
+-- 		if category == string.lower(knownCategory) then
+-- 			CritterEmote_Variables.Categories[knownCategory] = status
+-- 			CritterEmote.Print(string.format(CritterEmote.L["%s is %s with %i emotes."],
+-- 						knownCategory,
+-- 						(CritterEmote_Variables.Categories[knownCategory] and CritterEmote.L["ENABLED"] or CritterEmote.L["DISABLED"]),
+-- 						(CritterEmote[knownCategory.."_emotes"] and #CritterEmote[knownCategory.."_emotes"] or 0)
+-- 			))
+-- 		end
+-- 	end
+-- end
 CritterEmote.commandList = {
 	["test"] = {  -- no help will keep it hidden.  Shows some test data.
 		["func"] = function()
@@ -423,12 +424,12 @@ CritterEmote.commandList = {
 			end
 		end,
 	},
-	[CritterEmote.L["enable"]] = {
-		["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Enable Category"]},
-		["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, true) end,
-	},
-	[CritterEmote.L["disable"]] = {
-		["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Disable Category"]},
-		["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, false) end,
-	},
+	-- [CritterEmote.L["enable"]] = {
+	-- 	["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Enable Category"]},
+	-- 	["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, true) end,
+	-- },
+	-- [CritterEmote.L["disable"]] = {
+	-- 	["help"] = {"<"..CritterEmote.L["Emote Category"]..">", CritterEmote.L["Disable Category"]},
+	-- 	["func"] = function(msg) CritterEmote.SetCategoryStatus(msg, false) end,
+	-- },
 }
