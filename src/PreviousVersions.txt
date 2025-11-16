@@ -1,0 +1,205 @@
+﻿# BPCritterEmote
+version 1.11.2.05.01
+update to WoW version 11.2.5
+
+Version 1.11.2.00.01
+Update to WoW version 11.2
+added missing pet
+
+Version 1.11.1.07.01
+Update to WOW version 11.1.7
+Added new pets with personality
+
+Version 1.11.1.05.01
+updated to WOW Version 11.1.5
+Added new pets with personalities
+
+
+Version 1.11.02.01
+Updated to WOW vesion 11.0.2
+Added new pets with personalities
+Working on new revision. 
+
+Version 1.10.10.07
+Update to WOW version 10.1
+fixed issue with loading events so only CritterEmote is mod. 
+Added new pets
+
+Version 1.10.05.05
+Unable to get .pkgmeta to play well with Curseforge. Removed to get uploaded to Curseforge.
+
+
+Version 1.10.05.04
+Working to fix .pkgmeta to work with other addon managements.
+Update to 10.0.5
+
+version 1.10.02.03
+added .pkgmeta
+
+version 1.10.02.02
+updated to 10.0.2
+
+
+version 1.10.00.01
+update to 10.0.0
+Worked on issue with undead only emoting two songs
+Reviewed and added missing pets
+
+
+lightweight tag 05d8cb93aba85acee3aef08537636f8c68e6132f v1.10.00.01
+Author:	GitHub <noreply@github.com>
+Date:	Mon Nov 14 00:07:41 2022 -0800
+
+commit 05d8cb93aba85acee3aef08537636f8c68e6132f
+Author: Kris Springer <Acidfrost59@gmail.com>
+Date:   Mon Nov 14 00:07:41 2022 -0800
+
+    Update to WoW ver. 10.0.0
+    
+    Reviewed the issue with undead songs. Added missing pets.
+
+
+version 1.9.27.01
+update to 9.2.7
+Added and deleted emotes
+
+## [v9.1.5](https://github.com/Acidfrost59/WOWBPCritterEmote) (2021-11-14)
+
+Version 1.9.15.02
+updated to 9.1.5
+
+
+Version 1.9.10.01
+updated to 9.1.0
+
+Version 1.9.01.02
+Rollback to 1.7 and resubmitted file as it popped a bunch of errors. (Grabbed bad file for upload?)
+Coding error found by Starfighter7. 
+
+Version 1.9.01.01
+Updated to 9.0.1
+new naming convention for revisions  1 for CritterEmote v1. WOW Patch. WOW subpatch. # of addon revisions under current patch/subpatch
+
+Version 1.7
+Updated to 8.3
+
+Version 1.6
+Updated to 8.2
+Fixed error that pulled pet owner as a nil value (Thank you Fysker!)
+Updated with new pets added in 8.2
+Fixed the toggle system so individual emote tables can be off or on
+Added and deleted emotes.
+Added a "Special" area in the CritterEmote_Emote section for people to add their own emotes.
+Updated README document to reflect changes. 
+
+
+Version 1.5
+Updated to 8.1.5 with new pets
+
+Version 1.4e
+Fixed error in code
+
+Version 1.4d
+Created change log from the Readme.txt file. Changed TOC to 80100
+
+lightweight tag 014372f8757008234d568ac912fc023f35a01b32 v1.14c
+Author:    GitHub <noreply@github.com>
+Date:    Thu Dec 13 13:43:16 2018 -0800
+
+commit 014372f8757008234d568ac912fc023f35a01b32
+Author: Kris Springer <Acidfrost59@gmail.com>
+Date:   Thu Dec 13 13:43:16 2018 -0800
+
+    Update to Blizzard Patch 8.1.0
+
+    Added new pets. Changed output in chat from owner's to owner:
+
+lightweight tag 4ff92eba833ebc64f92c0c30c1cdc214fb414fdc v1.14b
+Author:	GitHub <noreply@github.com>
+Date:	Mon Nov 19 08:47:10 2018 -0800
+
+commit 4ff92eba833ebc64f92c0c30c1cdc214fb414fdc
+Author: Kris Springer <Acidfrost59@gmail.com>
+Date:   Mon Nov 19 08:47:10 2018 -0800
+
+    Version 1.14b
+    
+    Add 2 pets, general emote update.
+
+commit 9b69877c7f54c728d1c48d228a029e1d9a75824f
+Author: Kris Springer <Acidfrost59@gmail.com>
+Date:   Mon Nov 19 08:24:51 2018 -0800
+
+    Version 1.14b
+
+commit 082d996162bad9301af5d06650c2a49670b66376
+Author: Kris Springer <Acidfrost59@gmail.com>
+Date:   Mon Nov 19 08:06:20 2018 -0800
+
+    Update to 1.14b
+    
+    Add new pets. General emote maintenance.
+
+commit 4d10a301fb2e0e9d429460f9d5e65c7aeeb3987a
+Author: Kris Springer <Acidfrost59@gmail.com>
+Date:   Mon Nov 19 07:59:49 2018 -0800
+
+    Update CritterEmote.toc
+
+commit 4839d87ac26f368ceaf240bd6dbff7e6404dd49a
+Author: Kris Springer <Acidfrost59@gmail.com>
+Date:   Mon Nov 19 07:43:33 2018 -0800
+
+    Version 1.14b
+    
+    Added critters, general emote changes.
+
+Version 1.14a Fixed bug that caused addon to continuously emote
+
+Version 1.14 Updated to Battle for Azeroth Please note that I am working on toggles for Faction and turning on and off the Song, Location, Seasonal, and Silly emotes.
+
+Version 1.13a Updated to latest Legion patch (not published)
+
+Version 1.13 Updated to Legion Included updates from Acidfrost59 Big thanks to Acidfrost59 for adding many more emotes and fixing some minor issues!
+
+Version 1.11a Fixed some typos's added user requested emotes.
+
+Version 1.11 Works with 6.2
+
+Version 1.10a One can now just turn off/on random emotes via: /ce random_off or /ce random_on Fixed Typos
+
+Version 1.10 Works with 6.1.0
+
+Version 1.9b/c/d Fixed typos
+
+Version 1.9a Invaded by the old ones! (more emotes)
+
+Version 1.9 More emotes! (and corrections)
+
+Version 1.8a Now respects custom pet names.
+
+Version 1.8 Works with 6.0 Back again Chin is back Tell a friend
+
+Version 1.7b Works with 5.2.0
+
+Version 1.7a Fixed a bug where Critter Emote would crash if no pet was out.
+
+Version 1.7 Updated to MoP! Big Thanks to Liz.
+
+Version 1.6 Updated by Jî - Sylvanas Big Thanks! Spellchecked (might have missed a few, but did alot) added all currents pets into the roster. Gave lil' ragnaros and gregarious grell quite alot of custom emotes.
+
+Version 1.5b Updated for 4.3 version of the game.
+
+Version 1.5a Updated for 4.1 version of the game.
+
+Version 1.5 Rewrite of Emote Database. This makes it easier to add new types without having the file size grow too large. Also speeds things up slightly. Added a lot more responsive emotes.
+
+Version 1.4 Snake type creatures now have a full personality Now remembers your state between sessions Emotes now have a category. This way you can turn on and off certain types of emotes. silly, locations, jokes, songs /ce help for more info on this.
+
+Version 1.3 cat type creatures now have a full personality Fixed a bug where pet types and names were not correctly being called in the table.
+
+Version 1.2 Added more emotes. Fixed typos Random interval time is longer.
+
+Version 1.1 Added additional emotes. Removed some debugging info. Now seed the random a bit better.
+
+Version 1.0 Initial Version
