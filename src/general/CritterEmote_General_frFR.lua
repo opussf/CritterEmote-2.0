@@ -1,6 +1,7 @@
 local _, CritterEmote = ...
 if GetLocale() == "frFR" then
 CritterEmote.General_emotes = {
+	name="Général",
 	"fait une petite danse.",
 	"fait une petite danse.",
 	"est excité(e) de voir de nouveaux endroits.",

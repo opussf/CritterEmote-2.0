@@ -2351,6 +2351,16 @@ function C_Calendar.OpenCalendar()
 	--
 end
 
+----------
+-- C_Map
+----------
+C_Map = {}
+function C_Map.GetBestMapForUnit( unitStr )
+	return 5
+end
+function C_Map.GetMapInfo( mapID )
+	return { mapID=5, name="map name", parentMapID=0, mapType=1, flags=2 }
+end
 
 -----------------------------------------
 -- A SAX parser takes a content handler, which provides these methods:

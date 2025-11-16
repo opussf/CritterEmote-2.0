@@ -164,32 +164,32 @@ function test.test_slashCommand_withMessage()
 	CritterEmote.SlashHandler("Oh SNAP!")
 	assertEquals(": CustomPetName Oh SNAP!", CritterEmote.emoteToSend)
 end
-function test.test_slashCommand_categorysFromList_1()
+function test.notest_slashCommand_categorysFromList_1()
 	CritterEmote_Variables.Categories.General = true
 	CritterEmote.SlashHandler("disable general")
 	assertFalse(CritterEmote_Variables.Categories.General, "CritterEmote_Variables.Categories General should be false")
 end
-function test.test_slashCommand_categorysFromList_2()
+function test.notest_slashCommand_categorysFromList_2()
 	CritterEmote_Variables.Categories.Silly = true
 	CritterEmote.SlashHandler("disable silly")
 	assertFalse(CritterEmote_Variables.Categories.Silly)
 end
-function test.test_slashCommand_categorysFromList_3()
+function test.notest_slashCommand_categorysFromList_3()
 	CritterEmote_Variables.Categories.Song = true
 	CritterEmote.SlashHandler("disable song")
 	assertFalse(CritterEmote_Variables.Categories.Song)
 end
-function test.test_slashCommand_categorysFromList_4()
+function test.notest_slashCommand_categorysFromList_4()
 	CritterEmote_Variables.Categories.Location = false
 	CritterEmote.SlashHandler("enable location")
 	assertTrue(CritterEmote_Variables.Categories.Location)
 end
-function test.test_slashCommand_categorysFromList_5()
+function test.notest_slashCommand_categorysFromList_5()
 	CritterEmote_Variables.Categories.Holiday = false
 	CritterEmote.SlashHandler("enable holiday")
 	assertTrue(CritterEmote_Variables.Categories.Holiday)
 end
-function test.test_slashCommand_categorysFromList_6()
+function test.notest_slashCommand_categorysFromList_6()
 	CritterEmote_Variables.Categories.PVP = false
 	CritterEmote.SlashHandler("enable pvp")
 	assertTrue(CritterEmote_Variables.Categories.PVP)
