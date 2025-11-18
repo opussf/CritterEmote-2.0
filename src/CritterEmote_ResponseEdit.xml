@@ -37,8 +37,12 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 					<OnClick>self:GetParent():Hide()</OnClick>
 				</Scripts>
 			</Button>
+			<Frame name="$parent_GroupDropDown" inherits="UIDropDownMenuTemplate" parentKey="GroupDropDownMenu">
+				<Size x="60" y="16"/>
+				<Anchors><Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="TOPRIGHT" x="-8"/></Anchors>
+			</Frame>
 			<Frame name="$parent_EmoteDropDown" inherits="UIDropDownMenuTemplate" parentKey="EmoteDropDownMenu">
-				<Size x="50" y="16"/>
+				<Size x="60" y="16"/>
 				<Anchors><Anchor point="BOTTOMLEFT" relativeTo="$parent_Icon" relativePoint="BOTTOMRIGHT" x="-8"/></Anchors>
 				<Scripts>
 					<OnLoad>CritterEmote.Edit_InitEmoteDropDown(self)</OnLoad>

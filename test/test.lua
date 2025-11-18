@@ -8,6 +8,7 @@ test.coverageReportPercent = true
 -- myLocale = "esES"  -- wowStubs lets me set my locale
 
 ParseTOC( "../src/CritterEmote.toc" )
+CritterEmoteResponseEditFrame_EditScrollFrame_EditBox = CreateFrame()
 
 function test.before()
 	Units["target"] = nil
@@ -256,8 +257,12 @@ end
 function test.test_UI_01()
 	CritterEmote.SlashHandler("edit")
 end
+function test.test_UI_Edit_PopulateEditBox()
+	CritterEmote.Edit_PopulateEditBox()
+	test.dump(CritterEmoteResponseEditFrame_EditScrollFrame_EditBox)
+end
 function test.test_UI_OnLoad()
-	test.dump(_G)
+	-- test.dump(_G)
 	-- CritterEmote.Edit_OnHide()
 end
 

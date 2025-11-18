@@ -24,10 +24,46 @@ end
 function CritterEmote.Edit_UpdatePetInfo()
 	local petGUID = C_PetJournal.GetSummonedPetGUID()
 	if petGUID then  -- @TODO: What to do about no pet?
-		local petInfo = {C_PetJournal.GetPetInfoByPetID(petGUID)}
-		CritterEmoteResponseEditFrame_Icon:SetTexture(petInfo[9])
-		CritterEmoteResponseEditFrame_Name:SetText((petInfo[2] or petInfo[8]))
+		CritterEmoteResponseEditFrame.petInfo = {C_PetJournal.GetPetInfoByPetID(petGUID)}
+		-- 1=id, 2=custom, 8=name
+		CritterEmoteResponseEditFrame_Icon:SetTexture(CritterEmoteResponseEditFrame.petInfo[9])
+		CritterEmote.Edit_InitGroupDropDown(CritterEmoteResponseEditFrame_GroupDropDown)
+		CritterEmote.editGroup = CritterEmoteResponseEditFrame.petInfo[2] or CritterEmoteResponseEditFrame.petInfo[8]
+		UIDropDownMenu_SetSelectedName(CritterEmoteResponseEditFrame_GroupDropDown, CritterEmote.editGroup)
+
+		-- CritterEmoteResponseEditFrame_Name:SetText((petInfo[2] or petInfo[8]))
+		-- CritterEmoteResponseEditFrame_GroupDropDown:SetText(CritterEmoteResponseEditFrame.petInfo[2] )
 	end
+end
+function CritterEmote.Edit_InitGroupDropDown(self)
+	UIDropDownMenu_Initialize(self, function(self, level)
+			local info = UIDropDownMenu_CreateInfo()
+			info.func = CritterEmote.Edit_SetGroupForEdit
+			info.notCheckable = true
+			if CritterEmoteResponseEditFrame.petInfo[2] then
+				info.text = CritterEmoteResponseEditFrame.petInfo[2]
+				UIDropDownMenu_AddButton(info)
+			end
+			info.text = CritterEmoteResponseEditFrame.petInfo[8]
+			UIDropDownMenu_AddButton(info)
+			info.text = CritterEmote.GetPetPersonality(CritterEmoteResponseEditFrame.petInfo[1])
+			UIDropDownMenu_AddButton(info)
+			info.text = "default"
+			UIDropDownMenu_AddButton(info)
+		end)
+	UIDropDownMenu_JustifyText(self, "LEFT")
+end
+function CritterEmote.Edit_SetGroupForEdit(info)
+	print("Edit_SetGroupForEdit")
+	-- save editbox
+	CritterEmote.Edit_SaveEmotes()
+
+	-- update editGroup
+	CritterEmote.editGroup = info.value
+	-- populate Editbox
+	CritterEmote.Edit_PopulateEditBox()
+	UIDropDownMenu_SetText(CritterEmoteResponseEditFrame_GroupDropDown, CritterEmote.editGroup)
+	CloseDropDownMenus()
 end
 function CritterEmote.Edit_InitEmoteDropDown(self)
 	if not CritterEmote.knownEmotes then
@@ -104,8 +140,10 @@ end
 	-- end
 -- end
 function CritterEmote.Edit_PopulateEditBox()
-	local petName = CritterEmoteResponseEditFrame_Name:GetText()
+	print("Edit_PopulateEditBox")
+	local editGroup = CritterEmote.editGroup
 	local editEmote = CritterEmote.editEmote
+	print(editEmote, editGroup)
 	CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:SetText(
 			table.concat((CritterEmote_ResponseEmotesPatches[petName] and CritterEmote_ResponseEmotesPatches[petName][editEmote] or {}), "\n")
 		)
@@ -158,7 +196,7 @@ function CritterEmote.Edit_SaveEmotes()
 		end
 	end
 end
-function CritterEmote.Edit_DoAThing(emote, petName)
+function CritterEmote.Edit_DoAThing(emote, groupName)
 	-- still not sure how to do this exactly
 	local base = CritterEmote.EmoteResponses[emote][petName]
 	local patch = CritterEmote_ResponseEmotesPatches[editEmote][petName]

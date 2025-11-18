@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  November 10 2025
--- Revision:  9.7-1-g72afecc
+-- Date    :  November 17 2025
+-- Revision:  9.7-3-g229037e
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
@@ -2305,7 +2305,6 @@ C_PetJournal = {}
 C_PetJournal.data = {
 	["summoned"] = {
 		GUID = 12534
-
 	},
 }
 function C_PetJournal.GetSummonedPetGUID()
@@ -2343,7 +2342,7 @@ function C_Calendar.GetMonthInfo(monthOffset)
 	-- test.dump(out)
 	-- print("=====")
 	return out
-end
+/i end
 function C_Calendar.GetNumDayEvents(monthOffset, day)
 	return 0
 end
