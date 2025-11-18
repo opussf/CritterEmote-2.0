@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  November 10 2025
--- Revision:  9.7-1-g72afecc
+-- Date    :  November 17 2025
+-- Revision:  9.7.1
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
