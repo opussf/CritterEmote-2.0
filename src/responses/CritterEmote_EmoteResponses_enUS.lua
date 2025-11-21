@@ -969,6 +969,14 @@ CritterEmote.EmoteResponses = {
 		ooze = { "absorbs your hand into its gooey form.", },
 		reptile = { "coils closely around your hand, enjoying the warmth.", },
 	},
+	PICK = {
+		default = { "shakes their head at you.", }
+		humanoid = { "looks at you in disgust.", },
+		ooze = { "takes it off of your finger.", },
+		dog = { "sniffs your finger before licking it clean.", },
+		magic = { "zaps it off of your finger.", },
+		["Uuna"] = { "picks her nose and shows you.", },
+	}
 	PINCH = {
 		default = { "cries.", },
 		crab = { "snaps its pincers at you as a warning.", },
