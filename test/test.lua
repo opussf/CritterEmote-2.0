@@ -8,7 +8,7 @@ test.coverageReportPercent = true
 -- myLocale = "esES"  -- wowStubs lets me set my locale
 
 ParseTOC( "../src/CritterEmote.toc" )
-CritterEmoteResponseEditFrame_EditScrollFrame_EditBox = CreateFrame()
+CritterEmoteResponseEditFrame_EditScrollFrame_EditBox = CreateFrame( "EditBox" )
 
 function test.before()
 	Units["target"] = nil
@@ -48,6 +48,9 @@ function test.test_do_emote_target_critter()
 			}
 		}
 	}
+
+
+	-- CritterEmote_Variables.Categories = { Test = true }
 	CritterEmote.OnEmote("SING", "")
 	assertEquals( ": CustomPetName sings with you.", CritterEmote.emoteToSend )
 end
@@ -257,9 +260,92 @@ end
 function test.test_UI_01()
 	CritterEmote.SlashHandler("edit")
 end
-function test.test_UI_Edit_PopulateEditBox()
+function test.test_UI_Edit_PopulateEditBox_noPatchInfo()
+	CritterEmote.EmoteResponses["ABSENT"] = {
+		default = { "blinks at you.", },
+		["Frank"] = { "breaks into dance.", },
+	}
+	CritterEmote_ResponseEmotesPatches = {}
+	CritterEmote.editGroup = "default"
+	CritterEmote.editEmote = "ABSENT"
 	CritterEmote.Edit_PopulateEditBox()
-	test.dump(CritterEmoteResponseEditFrame_EditScrollFrame_EditBox)
+	assertEquals("blinks at you.", CritterEmoteResponseEditFrame_EditScrollFrame_EditBox.textValue)
+end
+function test.test_UI_Edit_PopulateEditBox_withPatchInfo_removeAll()
+	CritterEmote.EmoteResponses["ABSENT"] = {
+		default = { "blinks at you.", "stares at you." },
+		["Frank"] = { "breaks into dance.", },
+	}
+	CritterEmote_ResponseEmotesPatches = {
+		ABSENT = {
+			default = { remove = {"blinks at you.", "stares at you."}, },
+		},
+	}
+	CritterEmote.editGroup = "default"
+	CritterEmote.editEmote = "ABSENT"
+	CritterEmote.Edit_PopulateEditBox()
+	assertEquals("", CritterEmoteResponseEditFrame_EditScrollFrame_EditBox.textValue)
+end
+function test.test_UI_Edit_PopulateEditBox_withPatchInfo_removeOne()
+	CritterEmote.EmoteResponses["ABSENT"] = {
+		default = { "blinks at you.", "stares at you." },
+		["Frank"] = { "breaks into dance.", },
+	}
+	CritterEmote_ResponseEmotesPatches = {
+		ABSENT = {
+			default = {
+				remove = { "blinks at you.", },
+			},
+		},
+	}
+	CritterEmote.editGroup = "default"
+	CritterEmote.editEmote = "ABSENT"
+	CritterEmote.Edit_PopulateEditBox()
+	assertEquals("stares at you.", CritterEmoteResponseEditFrame_EditScrollFrame_EditBox.textValue)
+end
+function test.test_UI_Edit_PopulateEditBox_withPatchInfo_removeAll_addOne()
+	CritterEmote.EmoteResponses["ABSENT"] = {
+		default = { "blinks at you.", "stares at you." },
+		["Frank"] = { "breaks into dance.", },
+	}
+	CritterEmote_ResponseEmotesPatches = {
+		ABSENT = {
+			default = {
+				remove = { "blinks at you.", "stares at you.", },
+				add = { "studies for the test.", }
+			},
+		},
+	}
+	CritterEmote.editGroup = "default"
+	CritterEmote.editEmote = "ABSENT"
+	CritterEmote.Edit_PopulateEditBox()
+	assertEquals("studies for the test.", CritterEmoteResponseEditFrame_EditScrollFrame_EditBox.textValue)
+end
+function test.test_UI_Edit_SaveEditBox_newPatchInfo_extraEmote()
+	CritterEmote.EmoteResponses["ABSENT"] = {
+		default = { "blinks at you.", "stares at you." },
+		["Frank"] = { "breaks into dance.", },
+	}
+	CritterEmote.editGroup = "default"
+	CritterEmote.editEmote = "ABSENT"
+	CritterEmote_ResponseEmotesPatches = {}
+
+	CritterEmoteResponseEditFrame_EditScrollFrame_EditBox.textValue = "blinks at you.\nstares at you.\ntaps your shoulder."
+	CritterEmote.Edit_SaveEmotes()
+	assertEquals( "taps your shoulder.", CritterEmote_ResponseEmotesPatches.ABSENT.default.add[1] )
+end
+function test.test_UI_Edit_SaveEditBox_newPatchInfo_removeEmote()
+	CritterEmote.EmoteResponses["ABSENT"] = {
+		default = { "blinks at you.", "stares at you." },
+		["Frank"] = { "breaks into dance.", },
+	}
+	CritterEmote.editGroup = "default"
+	CritterEmote.editEmote = "ABSENT"
+	CritterEmote_ResponseEmotesPatches = {}
+
+	CritterEmoteResponseEditFrame_EditScrollFrame_EditBox.textValue = "stares at you."
+	CritterEmote.Edit_SaveEmotes()
+	assertEquals( "blinks at you.", CritterEmote_ResponseEmotesPatches.ABSENT.default.remove[1] )
 end
 function test.test_UI_OnLoad()
 	-- test.dump(_G)
