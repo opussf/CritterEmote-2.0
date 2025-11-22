@@ -172,7 +172,7 @@ function CritterEmote.Edit_SaveEmotes()
 end
 function CritterEmote.Edit_GetResponses(emote, groupName)
 	-- still not sure how to do this exactly
-	print("Edit_GetResponses( "..(emote or "nil")..", "..(groupName or "nil").." )")
+	CritterEmote.Log(CritterEmote.Debug, "Edit_GetResponses( "..(emote or "nil")..", "..(groupName or "nil").." )")
 	local base = CritterEmote.EmoteResponses[emote][groupName] or {}
 	local patch = CritterEmote_ResponseEmotesPatches[emote] and CritterEmote_ResponseEmotesPatches[emote][groupName] or {}
 	local listOut = {}

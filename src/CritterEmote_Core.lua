@@ -212,7 +212,6 @@ function CritterEmote.GetEmoteMessage(emoteIn, petID, petName, customName)
 				CritterEmote.Edit_GetResponses(emoteIn, petPersonality) or
 				CritterEmote.Edit_GetResponses(emoteIn, "default")
 	end
-	print("emoteList: ",emoteList)
 
 	if emoteList then
 		return CritterEmote.GetRandomTableEntry(emoteList)
