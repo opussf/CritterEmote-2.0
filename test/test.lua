@@ -347,6 +347,19 @@ function test.test_UI_Edit_SaveEditBox_newPatchInfo_removeEmote()
 	CritterEmote.Edit_SaveEmotes()
 	assertEquals( "blinks at you.", CritterEmote_ResponseEmotesPatches.ABSENT.default.remove[1] )
 end
+function test.test_GetEmoteMessage_withPatch()
+	CritterEmote_ResponseEmotesPatches = {
+		CHEER = {
+			default = {
+				remove = { "Celebrates!", },
+				add = { "nods.", },
+			}
+		}
+	}
+	local emoteToSend = CritterEmote.GetEmoteMessage("CHEER","petName","customName")
+	-- test.dump(chatLog)
+	assertEquals( "nods.", emoteToSend )
+end
 function test.test_UI_OnLoad()
 	-- test.dump(_G)
 	-- CritterEmote.Edit_OnHide()

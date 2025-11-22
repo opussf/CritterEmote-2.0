@@ -204,16 +204,17 @@ function CritterEmote.GetEmoteMessage(emoteIn, petID, petName, customName)
 	local petPersonality = CritterEmote.GetPetPersonality(petID)
 	emoteIn = CritterEmote.EmoteMap[emoteIn]
 
-	-- get the table
-	local emoteList = {}
-	local emoteTable = CritterEmote.EmoteResponses and CritterEmote.EmoteResponses[emoteIn]
-	test.dump(emoteTable)
-	if emoteTable then
+	local emoteList
+	if emoteIn then -- get the table for the emote
 		emoteList =
-				(emoteTable[customName] and CritterEmote.Edit_GetResponses(emoteIn, customName)) or
-				(emoteTable[petName] and CritterEmote.Edit_GetResponses(emoteIn, petName)) or
-				(emoteTable[petPersonality] and CritterEmote.Edit_GetResponses(emoteIn, petPersonality)) or
-				(emoteTable["default"] and CritterEmote.Edit_GetResponses(emoteIn, "default"))
+				CritterEmote.Edit_GetResponses(emoteIn, customName) or
+				CritterEmote.Edit_GetResponses(emoteIn, petName) or
+				CritterEmote.Edit_GetResponses(emoteIn, petPersonality) or
+				CritterEmote.Edit_GetResponses(emoteIn, "default")
+	end
+	print("emoteList: ",emoteList)
+
+	if emoteList then
 		return CritterEmote.GetRandomTableEntry(emoteList)
 	else
 		return CritterEmote.GetRandomEmote(petID, petName, customName)

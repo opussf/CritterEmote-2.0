@@ -120,7 +120,7 @@ function CritterEmote.Edit_SetEmoteForEdit(info)  -- takes the info table, calle
 end
 function CritterEmote.Edit_PopulateEditBox()
 	CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:SetText(
-			table.concat(CritterEmote.Edit_GetResponses(CritterEmote.editEmote, CritterEmote.editGroup))
+			table.concat(CritterEmote.Edit_GetResponses(CritterEmote.editEmote, CritterEmote.editGroup) or {})
 	)
 end
 --------------------------
@@ -172,8 +172,9 @@ function CritterEmote.Edit_SaveEmotes()
 end
 function CritterEmote.Edit_GetResponses(emote, groupName)
 	-- still not sure how to do this exactly
-	local base = CritterEmote.EmoteResponses[emote][groupName]
-	local patch = CritterEmote_ResponseEmotesPatches[emote] and CritterEmote_ResponseEmotesPatches[emote][groupName]
+	print("Edit_GetResponses( "..(emote or "nil")..", "..(groupName or "nil").." )")
+	local base = CritterEmote.EmoteResponses[emote][groupName] or {}
+	local patch = CritterEmote_ResponseEmotesPatches[emote] and CritterEmote_ResponseEmotesPatches[emote][groupName] or {}
 	local listOut = {}
 	for _, v in ipairs(base) do  -- copy from base list
 		table.insert(listOut, v)
@@ -197,7 +198,7 @@ function CritterEmote.Edit_GetResponses(emote, groupName)
 			end
 		end
 	end
-	return listOut
+	return (#listOut > 0) and listOut or nil
 end
 
 CritterEmote.commandList[CritterEmote.L["edit"]] = {
