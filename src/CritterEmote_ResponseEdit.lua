@@ -47,10 +47,9 @@ function CritterEmote.Edit_InitGroupDropDown(self)
 			info.text = "default"
 			UIDropDownMenu_AddButton(info)
 
-			if not UIDropDownMenu_GetSelectedName(self) then
-				UIDropDownMenu_SetSelectedName(self, CritterEmote.editGroup)
-				UIDropDownMenu_SetText(self, CritterEmote.editGroup)
-			end
+			UIDropDownMenu_SetSelectedName(self, CritterEmote.editGroup)
+			UIDropDownMenu_SetText(self, CritterEmote.editGroup)
+
 		end)
 	UIDropDownMenu_JustifyText(self, "LEFT")
 end
@@ -163,8 +162,8 @@ function CritterEmote.Edit_SaveEmotes()
 				table.insert(patch.remove, baseEmote)
 			end
 		end
+		CritterEmote_ResponseEmotesPatches[editEmote] = CritterEmote_ResponseEmotesPatches[editEmote] or {}
 		if patch.add or patch.remove then
-			CritterEmote_ResponseEmotesPatches[editEmote] = CritterEmote_ResponseEmotesPatches[editEmote] or {}
 			CritterEmote_ResponseEmotesPatches[editEmote][editGroup] = patch
 		else
 			CritterEmote_ResponseEmotesPatches[editEmote][editGroup] = nil
