@@ -131,7 +131,7 @@ function CritterEmote.Edit_SaveEmotes()
 	local editGroup = CritterEmote.editGroup
 	if editEmote and editGroup then
 		local patch = {}
-		local baseList = CritterEmote.EmoteResponses[editEmote][editGroup]
+		local baseList = CritterEmote.EmoteResponses[editEmote] and CritterEmote.EmoteResponses[editEmote][editGroup] or {}
 		local newList = {}
 
 		-- convert text block to newList
