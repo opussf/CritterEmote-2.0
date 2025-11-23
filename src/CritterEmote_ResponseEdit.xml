@@ -54,6 +54,13 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 					<Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="BOTTOMLEFT" x="0" y="-6"/>
 					<Anchor point="BOTTOMRIGHT" x="-22" y="20"/>
 				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_BG" setAllPoints="true">
+							<Color r="0" g="0" b="0" a="0.35"/>
+						</Texture>
+					</Layer>
+				</Layers>
 				<ScrollChild>
 					<EditBox name="$parent_EditBox" multiLine="true" letters="0" autoFocus="false" nonspacewrap="true">
 						<Size x="320" y="2000"/>
