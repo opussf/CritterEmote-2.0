@@ -4,7 +4,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\..\FrameXML\UI.xsd">
 	<Frame name="CritterEmoteResponseEditFrame" parent="UIParent" enableMouse="true" movable="true" hidden="true" resizable="false">
-		<Size x="350" y="300"/>
+		<Size x="350" y="600"/>
 		<Anchors>
 			<Anchor point="CENTER"/>
 		</Anchors>
@@ -49,14 +49,14 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 				</Scripts>
 			</Frame>
 			<ScrollFrame name="$parent_EditScrollFrame" inherits="UIPanelScrollFrameTemplate">
-				<Size x="300" y="270"/>
+				<Size x="320" y="570"/>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="BOTTOMLEFT" x="0" y="-6"/>
 					<Anchor point="BOTTOMRIGHT" x="-30" y="20"/>
 				</Anchors>
 				<ScrollChild>
 					<EditBox name="$parent_EditBox" multiLine="true" letters="0" autoFocus="false" nonspacewrap="true">
-						<Size x="300" y="1000"/>
+						<Size x="320" y="2000"/>
 						<FontString name="$parent_FontString" inherits="ChatFontNormal"/>
 						<TextInsets left="6" right="0" top="0" bottom="0"/>
 						<Scripts>

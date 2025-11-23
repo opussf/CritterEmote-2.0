@@ -27,12 +27,8 @@ function CritterEmote.Edit_UpdatePetInfo()
 		CritterEmoteResponseEditFrame.petInfo = {C_PetJournal.GetPetInfoByPetID(petGUID)}
 		-- 1=id, 2=custom, 8=name
 		CritterEmoteResponseEditFrame_Icon:SetTexture(CritterEmoteResponseEditFrame.petInfo[9])
-		CritterEmote.Edit_InitGroupDropDown(CritterEmoteResponseEditFrame_GroupDropDown)
 		CritterEmote.editGroup = CritterEmoteResponseEditFrame.petInfo[2] or CritterEmoteResponseEditFrame.petInfo[8]
-		UIDropDownMenu_SetSelectedName(CritterEmoteResponseEditFrame_GroupDropDown, CritterEmote.editGroup)
-
-		-- CritterEmoteResponseEditFrame_Name:SetText((petInfo[2] or petInfo[8]))
-		-- CritterEmoteResponseEditFrame_GroupDropDown:SetText(CritterEmoteResponseEditFrame.petInfo[2] )
+		CritterEmote.Edit_InitGroupDropDown(CritterEmoteResponseEditFrame_GroupDropDown)
 	end
 end
 function CritterEmote.Edit_InitGroupDropDown(self)
@@ -50,6 +46,10 @@ function CritterEmote.Edit_InitGroupDropDown(self)
 			UIDropDownMenu_AddButton(info)
 			info.text = "default"
 			UIDropDownMenu_AddButton(info)
+
+			print("set group name to "..CritterEmote.editGroup)
+			UIDropDownMenu_SetSelectedName(self, CritterEmote.editGroup)
+            UIDropDownMenu_SetText(self, CritterEmote.editGroup)
 		end)
 	UIDropDownMenu_JustifyText(self, "LEFT")
 end
@@ -173,7 +173,8 @@ end
 function CritterEmote.Edit_GetResponses(emote, groupName)
 	-- still not sure how to do this exactly
 	CritterEmote.Log(CritterEmote.Debug, "Edit_GetResponses( "..(emote or "nil")..", "..(groupName or "nil").." )")
-	local base = CritterEmote.EmoteResponses[emote][groupName] or {}
+	if emote == nil or groupName == nil then return end
+	local base = CritterEmote.EmoteResponses and CritterEmote.EmoteResponses[emote] and CritterEmote.EmoteResponses[emote][groupName] or {}
 	local patch = CritterEmote_ResponseEmotesPatches[emote] and CritterEmote_ResponseEmotesPatches[emote][groupName] or {}
 	local listOut = {}
 	for _, v in ipairs(base) do  -- copy from base list

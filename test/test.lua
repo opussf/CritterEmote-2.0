@@ -13,6 +13,7 @@ CritterEmoteResponseEditFrame_EditScrollFrame_EditBox = CreateFrame( "EditBox" )
 function test.before()
 	Units["target"] = nil
 	CritterEmote.Test_emotes = { "mutters something." }
+	CritterEmote_ResponseEmotesPatches = {}
 	chatLog = {}
 	CritterEmote.emoteToSend = nil
 	CritterEmote_Variables.enabled = true
@@ -48,8 +49,6 @@ function test.test_do_emote_target_critter()
 			}
 		}
 	}
-
-
 	-- CritterEmote_Variables.Categories = { Test = true }
 	CritterEmote.OnEmote("SING", "")
 	assertEquals( ": CustomPetName sings with you.", CritterEmote.emoteToSend )
