@@ -47,14 +47,14 @@ function CritterEmote.Edit_InitGroupDropDown(self)
 			info.text = "default"
 			UIDropDownMenu_AddButton(info)
 
-			print("set group name to "..CritterEmote.editGroup)
-			UIDropDownMenu_SetSelectedName(self, CritterEmote.editGroup)
-            UIDropDownMenu_SetText(self, CritterEmote.editGroup)
+			if not UIDropDownMenu_GetSelectedName(self) then
+				UIDropDownMenu_SetSelectedName(self, CritterEmote.editGroup)
+				UIDropDownMenu_SetText(self, CritterEmote.editGroup)
+			end
 		end)
 	UIDropDownMenu_JustifyText(self, "LEFT")
 end
 function CritterEmote.Edit_SetGroupForEdit(info)
-	print("Edit_SetGroupForEdit")
 	-- save editbox
 	CritterEmote.Edit_SaveEmotes()
 
@@ -128,45 +128,49 @@ end
 --------------------------
 function CritterEmote.Edit_SaveEmotes()
 	-- make and save a patch structure
-	local numLines = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetNumLines()
-	if numLines > 0 then
-		local editEmote = CritterEmote.editEmote
-		local editGroup = CritterEmote.editGroup
-		if editEmote and editGroup then
-			local patch = {}
-			local baseList = CritterEmote.EmoteResponses[editEmote][editGroup]
-			local newList = {}
+	local editEmote = CritterEmote.editEmote
+	local editGroup = CritterEmote.editGroup
+	if editEmote and editGroup then
+		local patch = {}
+		local baseList = CritterEmote.EmoteResponses[editEmote][editGroup]
+		local newList = {}
 
-			-- convert text block to newList
-			local text = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetText().."\n"  -- append a new line
-			for emote in text:gmatch("(.-)\n") do
-				if emote ~= "" then
-					table.insert(newList, emote)
-				end
+		-- convert text block to newList
+		local text = CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:GetText().."\n"  -- append a new line
+		for emote in text:gmatch("(.-)\n") do
+			if emote ~= "" then
+				table.insert(newList, emote)
 			end
+		end
 
-			-- make baseSet and newSet
-			local baseSet, newSet = {}, {}
-			for _, e in ipairs(baseList or {}) do baseSet[e] = true end
-			for _, e in ipairs(newList) do newSet[e] = true end
+		-- make baseSet and newSet
+		local baseSet, newSet = {}, {}
+		for _, e in ipairs(baseList or {}) do baseSet[e] = true end
+		for _, e in ipairs(newList) do newSet[e] = true end
 
-			-- create .add
-			for newEmote in pairs(newSet) do
-				if not baseSet[newEmote] then -- this line is not in the baseList
-					patch.add = patch.add or {}
-					table.insert(patch.add, newEmote)
-				end
+		-- create .add
+		for newEmote in pairs(newSet) do
+			if not baseSet[newEmote] then -- this line is not in the baseList
+				patch.add = patch.add or {}
+				table.insert(patch.add, newEmote)
 			end
+		end
 
-			-- create .remove
-			for baseEmote in pairs(baseSet) do
-				if not newSet[baseEmote] then
-					patch.remove = patch.remove or {}
-					table.insert(patch.remove, baseEmote)
-				end
+		-- create .remove
+		for baseEmote in pairs(baseSet) do
+			if not newSet[baseEmote] then
+				patch.remove = patch.remove or {}
+				table.insert(patch.remove, baseEmote)
 			end
+		end
+		if patch.add or patch.remove then
 			CritterEmote_ResponseEmotesPatches[editEmote] = CritterEmote_ResponseEmotesPatches[editEmote] or {}
 			CritterEmote_ResponseEmotesPatches[editEmote][editGroup] = patch
+		else
+			CritterEmote_ResponseEmotesPatches[editEmote][editGroup] = nil
+		end
+		if not next(CritterEmote_ResponseEmotesPatches[editEmote]) then
+			CritterEmote_ResponseEmotesPatches[editEmote] = nil
 		end
 	end
 end
