@@ -9,18 +9,18 @@ function CritterEmote.Edit_OnShow()
 	CritterEmote.Edit_UpdatePetInfo()
 	-- if drop down has emote - populate editbox
 	CritterEmote.Edit_PopulateEditBox()
-	CritterEmoteResponseEditFrame:RegisterEvent("COMPANION_UPDATE")
+	-- CritterEmoteResponseEditFrame:RegisterEvent("COMPANION_UPDATE")
 end
 function CritterEmote.Edit_OnHide()
 	-- save editbox
 	CritterEmote.Edit_SaveEmotes()
-	CritterEmoteResponseEditFrame:UnregisterEvent("COMPANION_UPDATE")
+	-- CritterEmoteResponseEditFrame:UnregisterEvent("COMPANION_UPDATE")
 end
-function CritterEmote.Edit_COMPANION_UPDATE()
+-- function CritterEmote.Edit_COMPANION_UPDATE()
 	-- this seems to fire a lot....
 	-- print("COMPANION_UPDATE")
 	-- CritterEmote.Edit_UpdatePetInfo()
-end
+-- end
 function CritterEmote.Edit_UpdatePetInfo()
 	local petGUID = C_PetJournal.GetSummonedPetGUID()
 	if petGUID then  -- @TODO: What to do about no pet?
