@@ -3,7 +3,7 @@ if GetLocale() == "enUS" then
 CritterEmote.Location_emotes = {
 	PickTable = function(self)
 		local mapInfo = { name="none", parentMapID = C_Map.GetBestMapForUnit("player") }
-		while mapInfo.parentMapID ~= 0 do
+		while mapInfo.parentMapID and mapInfo.parentMapID ~= 0 do
 			mapInfo = C_Map.GetMapInfo( mapInfo.parentMapID )
 			CritterEmote.Log(CritterEmote.Debug, "Location: "..mapInfo.name)
 			if self[mapInfo.name] then
