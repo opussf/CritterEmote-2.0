@@ -908,9 +908,15 @@ CritterEmote.EmoteResponses = {
 		bird = { "bobs its head.", },
 	},
 	NOSEPICK = {
-		default = nil,
+		default = { "shakes their head at you.", },
+		humanoid = { "looks at you in disgust.", },
 		evil = { "wonders if you're going to eat it next.", },
-		ooze = { "jumps onto your hand and wonders if it can jiggle, too. Ew!", },
+		ooze = {
+			"jumps onto your hand and wonders if it can jiggle, too. Ew!",
+			 "takes it off of your finger.", },
+		dog = { "sniffs your finger before licking it clean.", },
+		magic = { "zaps it off of your finger.", },
+		["Uuna"] = { "picks her nose and shows you.", },
 	},
 	OBJECT = {
 		default = nil,

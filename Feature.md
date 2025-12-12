@@ -1,5 +1,17 @@
 # Features
 
+## CustomResponseEmotes
+
+This is a rethink from DropDowns
+
+> Using dropdowns for pets, the user can custom configure each pet, or pet personality, for emote response emotes.
+
+> MENU_PET_COLLECTION_PET is the tag for the default UI
+
+Modifing the drop downs will be difficult because of how Rematch did their UI.
+
+Create a UI with a pet portrait, ad dropdown and a scrollable text box.
+
 ## FlexibleCategories
 
 This is to allow flexible categories.
