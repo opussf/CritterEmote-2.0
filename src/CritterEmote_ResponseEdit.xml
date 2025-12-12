@@ -1,0 +1,84 @@
+<!-- CritterEmote_ResponseEdit @VERSION@ -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<Frame name="CritterEmoteResponseEditFrame" parent="UIParent" enableMouse="true" movable="true" hidden="true" resizable="false" inherits="InsetFrameTemplate">
+		<Size x="350" y="600"/>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parent_BG" file="Interface\DialogFrame\UI-DialogBox-Background">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Title" inherits="GameFontNormalLarge">
+					<Anchors><Anchor point="TOP" x="0" y="-2"/></Anchors>
+				</FontString>
+				<Texture name="$parent_Icon">
+					<Size x="64" y="64"/>
+					<Anchors><Anchor point="TOPLEFT" x="0" y="-16"/></Anchors>
+				</Texture>
+				<FontString name="$parent_Name" inherits="GameFontNormal">
+					<Anchors><Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="TOPRIGHT" x="8"/></Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_Close" inherits="UIPanelCloseButton">
+				<Anchors><Anchor point="TOPRIGHT" x="0" y="0"/></Anchors>
+				<Scripts>
+					<OnClick>self:GetParent():Hide()</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="$parent_GroupDropDown" inherits="UIDropDownMenuTemplate" parentKey="GroupDropDownMenu">
+				<Size x="60" y="16"/>
+				<Anchors><Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="TOPRIGHT" x="-8"/></Anchors>
+			</Frame>
+			<Frame name="$parent_EmoteDropDown" inherits="UIDropDownMenuTemplate" parentKey="EmoteDropDownMenu">
+				<Size x="60" y="16"/>
+				<Anchors><Anchor point="BOTTOMLEFT" relativeTo="$parent_Icon" relativePoint="BOTTOMRIGHT" x="-8"/></Anchors>
+				<Scripts>
+					<OnLoad>CritterEmote.Edit_InitEmoteDropDown(self)</OnLoad>
+				</Scripts>
+			</Frame>
+			<ScrollFrame name="$parent_EditScrollFrame" inherits="UIPanelScrollFrameTemplate, InsetFrameTemplate">
+				<Size x="320" y="570"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="BOTTOMLEFT" x="0" y="-6"/>
+					<Anchor point="BOTTOMRIGHT" x="-22" y="20"/>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_BG" setAllPoints="true">
+							<Color r="0" g="0" b="0" a="0.35"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<ScrollChild>
+					<EditBox name="$parent_EditBox" multiLine="true" letters="0" autoFocus="false" nonspacewrap="true">
+						<Size x="320" y="2000"/>
+						<FontString name="$parent_FontString" inherits="ChatFontNormal"/>
+						<TextInsets left="6" right="0" top="0" bottom="0"/>
+						<Scripts>
+							<OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+							<OnTextChanged>self:GetParent():UpdateScrollChildRect()</OnTextChanged>
+						</Scripts>
+					</EditBox>
+				</ScrollChild>
+			</ScrollFrame>
+		</Frames>
+		<Scripts>
+			<OnLoad>CritterEmote.Edit_OnLoad()</OnLoad>
+			<OnShow>CritterEmote.Edit_OnShow()</OnShow>
+			<OnEvent>CritterEmote["Edit_"..event](...)</OnEvent>
+			<OnHide>CritterEmote.Edit_OnHide()</OnHide>
+		</Scripts>
+	</Frame>
+</Ui>
