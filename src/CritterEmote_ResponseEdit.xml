@@ -3,7 +3,7 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\..\FrameXML\UI.xsd">
-	<Frame name="CritterEmoteResponseEditFrame" parent="UIParent" enableMouse="true" movable="true" hidden="true" resizable="false">
+	<Frame name="CritterEmoteResponseEditFrame" parent="UIParent" enableMouse="true" movable="true" hidden="true" resizable="false" inherits="InsetFrameTemplate">
 		<Size x="350" y="600"/>
 		<Anchors>
 			<Anchor point="CENTER"/>
@@ -19,7 +19,7 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 			</Layer>
 			<Layer level="ARTWORK">
 				<FontString name="$parent_Title" inherits="GameFontNormalLarge">
-					<Anchors><Anchor point="TOP"/></Anchors>
+					<Anchors><Anchor point="TOP" x="0" y="-2"/></Anchors>
 				</FontString>
 				<Texture name="$parent_Icon">
 					<Size x="64" y="64"/>
@@ -48,7 +48,7 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 					<OnLoad>CritterEmote.Edit_InitEmoteDropDown(self)</OnLoad>
 				</Scripts>
 			</Frame>
-			<ScrollFrame name="$parent_EditScrollFrame" inherits="UIPanelScrollFrameTemplate">
+			<ScrollFrame name="$parent_EditScrollFrame" inherits="UIPanelScrollFrameTemplate, InsetFrameTemplate">
 				<Size x="320" y="570"/>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent_Icon" relativePoint="BOTTOMLEFT" x="0" y="-6"/>
