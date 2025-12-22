@@ -73,6 +73,12 @@ CritterEmote.Location_emotes = {
 		"wants to earn gold on the Isle of Quel'Danas, where adventurers gather to fight the forces of the Burning Legion.",
 		"wants to earn gold on the Isle of Quel'Danas, a favorite spot for hard working adventurers seeking fortune.",
 	},
+	["Founder's Point"] = {
+
+	},
+	["Razorwind Shores"] = {
+
+	},
 	"wants to explore all of Azeroth.",
 	"would like to explore most of the Eastern Kingdoms.",
 	"would like to explore all of Kalimdor.",
