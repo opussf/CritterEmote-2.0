@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  December 01 2025
--- Revision:  9.7.1-2-g52b7d63
+-- Date    :  January 01 2026
+-- Revision:  9.7.1-7-g327449e
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
@@ -124,8 +124,8 @@ Sell Price: 32 81 73
 Dropped by: Kargath Bladefist
 Drop Chance: 11.48%
 ]]
-    -- ^^ Need another head item for testing.
-    ["999999"] = {["name"] = "Finger Thing", ["link"] = "|cffffffff|Hitem:999999:0:0:0:0:0:0:0:90:0:0|h[Finger Thing|h|r", ["slotPrefix"] = "Finger", ["texture"] = ""},
+	-- ^^ Need another head item for testing.
+	["999999"] = {["name"] = "Finger Thing", ["link"] = "|cffffffff|Hitem:999999:0:0:0:0:0:0:0:90:0:0|h[Finger Thing|h|r", ["slotPrefix"] = "Finger", ["texture"] = ""},
 }
 
 -- simulate the data structure that is the flight map
@@ -371,6 +371,21 @@ end
 function bit.rshift( x, by )
 	return math.floor( x / 2 ^ by )
 end
+function bit.bxor(a, b)
+	local res = 0
+	local bitval = 1
+	while a > 0 or b > 0 do
+		local abit = a % 2
+		local bbit = b % 2
+		if abit ~= bbit then
+			res = res + bitval
+		end
+		a = math.floor(a / 2)
+		b = math.floor(b / 2)
+		bitval = bitval * 2
+	end
+	return res
+end
 function bit.bor( a, b )  -- bitwise or
 	local p,c=1,0
 	while a+b>0 do
@@ -518,19 +533,19 @@ FrameGameTooltip = {
 			_G[frameName.."TextLeft4"] = CreateFontString(frameName.."TextLeft4")
 		end,
 }
-        -- None = 0
-        -- Warrior = 1
-        -- Paladin = 2
-        -- Hunter = 3
-        -- Rogue = 4
-        -- Priest = 5
-        -- DeathKnight = 6
-        -- Shaman = 7
-        -- Mage = 8
-        -- Warlock = 9
-        -- Monk = 10
-        -- Druid = 11
-        -- Demon Hunter = 12
+-- None = 0
+-- Warrior = 1
+-- Paladin = 2
+-- Hunter = 3
+-- Rogue = 4
+-- Priest = 5
+-- DeathKnight = 6
+-- Shaman = 7
+-- Mage = 8
+-- Warlock = 9
+-- Monk = 10
+-- Druid = 11
+-- Demon Hunter = 12
 Units = {
 	["player"] = {
 		["class"] = "Warlock",
@@ -897,7 +912,7 @@ function GetAchievementInfo( id, index )
 	-- Returns:
 	-- id: The numeric ID of the achievement or statistic (number)
 	-- name: Name of the achievement or statistic (string)
-    -- points: Amount of achievement points awarded for completing the achievement (number)
+	-- points: Amount of achievement points awarded for completing the achievement (number)
 	-- completed: True if any toon on the account has completed the achievement; otherwise false (boolean)
 	-- month: Month in which the player completed the achievement (number)
 	-- day: Day of the month on which the player completed the achievement (number)
@@ -1183,7 +1198,7 @@ numRaces = GetNumArchaeologyRaces()
 
 Returns:
 
-    numRaces - The number of Archaeology races in the game (number)
+	numRaces - The number of Archaeology races in the game (number)
 ]]
 end
 function GetArchaeologyRaceInfo( index )
@@ -1193,16 +1208,16 @@ raceName, raceTexture, raceItemID, numFragmentsCollected, numFragmentsRequired, 
 
 Arguments:
 
-    raceIndex - nil (number, GetNumArchaeologyRaces())
+	raceIndex - nil (number, GetNumArchaeologyRaces())
 
 Returns:
 
-    raceName - Name of the race (string)
-    raceTexture - Path to the texture (icon) used by this race in the Archaeology UI (string)
-    raceItemID - The itemID for the Keystone this race uses (number)
-    numFragmentsCollected - Number of collected fragments for this race (number)
-    numFragmentsRequired - Number of fragments required to solve the current artifact (number)
-    maxFragments - Maximum number of fragments that can be carried (number)
+	raceName - Name of the race (string)
+	raceTexture - Path to the texture (icon) used by this race in the Archaeology UI (string)
+	raceItemID - The itemID for the Keystone this race uses (number)
+	numFragmentsCollected - Number of collected fragments for this race (number)
+	numFragmentsRequired - Number of fragments required to solve the current artifact (number)
+	maxFragments - Maximum number of fragments that can be carried (number)
 ]]
 	return "Dwarf", "", 384, 0, 100, 200
 end
@@ -1226,8 +1241,8 @@ ProfessionInfo = {
 function GetProfessionInfo( index )
 	--[[
 	name, icon, skillLevel, maxSkillLevel, numAbilities, spelloffset,
-    skillLine, skillModifier, specializationIndex,
-    specializationOffset = GetProfessionInfo(index)
+	skillLine, skillModifier, specializationIndex,
+	specializationOffset = GetProfessionInfo(index)
 	]]
 	return unpack( ProfessionInfo[index] )
 end
@@ -1503,8 +1518,8 @@ end
 function PickupInventoryItem( slotID )
 	-- http://www.wowwiki.com/API_PickupInventoryItem
 	-- If the cursor is empty, then it will attempt to pick up the item in the slotId.
-    -- If the cursor has an item, then it will attempt to equip the item to the slotId and place the previous slotId item (if any) where the item on cursor orginated.
-    -- If the cursor is in repair or spell-casting mode, it will attempt the action on the slotId.
+	-- If the cursor has an item, then it will attempt to equip the item to the slotId and place the previous slotId item (if any) where the item on cursor orginated.
+	-- If the cursor is in repair or spell-casting mode, it will attempt the action on the slotId.
 	if myGear[slotID] then -- There is an item in this slot.
 		onCursor['item'] = myGear[slotID]
 		onCursor['quantity'] = 1
@@ -2083,6 +2098,13 @@ end
 ----------
 C_Item = {}
 C_Item.GetItemCount = GetItemCount
+function C_Item.GetItemID( itemLocation )
+	return 7073
+end
+function C_Item.IsBound( itemLocation )
+	return false
+end
+
 
 ----------
 -- Menu
@@ -2218,12 +2240,6 @@ function C_GossipInfo.GetFriendshipReputation( idIn )
 end
 
 ----------
--- C_Item
-----------
-C_Item = {}
-C_Item.GetItemCount = GetItemCount
-
-----------
 -- Menu
 ----------
 Menu = {}
@@ -2351,7 +2367,7 @@ function C_Calendar.GetMonthInfo(monthOffset)
 	-- test.dump(out)
 	-- print("=====")
 	return out
-/i end
+end
 function C_Calendar.GetNumDayEvents(monthOffset, day)
 	return 0
 end
@@ -2368,6 +2384,17 @@ function C_Map.GetBestMapForUnit( unitStr )
 end
 function C_Map.GetMapInfo( mapID )
 	return { mapID=5, name="map name", parentMapID=0, mapType=1, flags=2 }
+end
+
+----------
+-- ItemLocation
+----------
+ItemLocation = {}
+function ItemLocation.CreateFromBagAndSlot( self, bagID, slotID )
+	return self
+end
+function ItemLocation.IsValid( self )
+	return true
 end
 
 -----------------------------------------
@@ -2618,21 +2645,21 @@ ChatFrame1 = CreateFrame( nil, "ChatFrame1" )
 
 After the addon code has been loaded, the loading process can be followed by registering for various events, listed here in order of firing.
 
-    ADDON_LOADED
-        This event fires whenever an AddOn has finished loading and the SavedVariables for that AddOn have been loaded from their file.
-    SPELLS_CHANGED
-        This event fires shortly before the PLAYER_LOGIN event and signals that information on the user's spells has been loaded and is available to the UI.
-    PLAYER_LOGIN
-        This event fires immediately before PLAYER_ENTERING_WORLD.
-        Most information about the game world should now be available to the UI.
-        All Sizing and Positioning of frames is supposed to be completed before this event fires.
-        AddOns that want to do one-time initialization procedures once the player has "entered the world" should use this event instead of PLAYER_ENTERING_WORLD.
-    PLAYER_ENTERING_WORLD
-        This event fires immediately after PLAYER_LOGIN
-        Most information about the game world should now be available to the UI. If this is an interface reload rather than a fresh log in, talent information should also be available.
-        All Sizing and Positioning of frames is supposed to be completed before this event fires.
-        This event also fires whenever the player enters/leaves an instance and generally whenever the player sees a loading screen
-    PLAYER_ALIVE
-        This event fires after PLAYER_ENTERING_WORLD
-        Quest and Talent information should now be available to the UI
+	ADDON_LOADED
+		This event fires whenever an AddOn has finished loading and the SavedVariables for that AddOn have been loaded from their file.
+	SPELLS_CHANGED
+		This event fires shortly before the PLAYER_LOGIN event and signals that information on the user's spells has been loaded and is available to the UI.
+	PLAYER_LOGIN
+		This event fires immediately before PLAYER_ENTERING_WORLD.
+		Most information about the game world should now be available to the UI.
+		All Sizing and Positioning of frames is supposed to be completed before this event fires.
+		AddOns that want to do one-time initialization procedures once the player has "entered the world" should use this event instead of PLAYER_ENTERING_WORLD.
+	PLAYER_ENTERING_WORLD
+		This event fires immediately after PLAYER_LOGIN
+		Most information about the game world should now be available to the UI. If this is an interface reload rather than a fresh log in, talent information should also be available.
+		All Sizing and Positioning of frames is supposed to be completed before this event fires.
+		This event also fires whenever the player enters/leaves an instance and generally whenever the player sees a loading screen
+	PLAYER_ALIVE
+		This event fires after PLAYER_ENTERING_WORLD
+		Quest and Talent information should now be available to the UI
 ]]
