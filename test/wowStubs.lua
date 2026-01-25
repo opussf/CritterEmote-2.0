@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  January 16 2026
--- Revision:  9.7.1-8-ge2587c6
+-- Date    :  January 24 2026
+-- Revision:  9.7.1-12-g7f74e77
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
@@ -821,10 +821,7 @@ function CursorHasItem()
 	end
 end
 function DoEmote( emote, target )
-	table.insert( actionLog,
-			"DoEmote( "..(emote or "nil")..", "..(target or "nil").." )"
-	)
-	-- not tested as the only side effect is the character doing an emote
+	error("Don't use this.")
 end
 function EquipItemByName( itemIn, slotIDIn )
 	-- http://www.wowwiki.com/API_EquipItemByName
@@ -1173,13 +1170,7 @@ function GetMerchantItemLink( index )
 	end
 end
 function GetMerchantItemInfo( index )
-	--local itemName, texture, price, quantity, numAvailable, isUsable = GetMerchantItemInfo( i )
-	if MerchantInventory[ index ] then
-		local item = Items[ MerchantInventory[ index ].id ]
-		return item.name, item.texture, MerchantInventory[ index ].cost, MerchantInventory[ index ].quantity, -1, MerchantInventory[ index ].isUsable
---		local item = MerchantInventory[ index ]
---		return item.name, "", item.cost, item.quantity, -1, item.isUsable
-	end
+	error("This is deprecated")
 end
 function GetMerchantItemMaxStack( index )
 	-- Max allowable amount per purchase.  Hard code to 20 for now
@@ -1635,17 +1626,7 @@ function SendAddonMessage( prefix, text, type, target )
 	-- all characters 1-255 can be used (no NULL)
 end
 function SendChatMessage( msg, chatType, language, channel )
-	-- http://www.wowwiki.com/API_SendChatMessage
-	-- This could simulate sending text to the channel, in the language, and raise the correct event.
-	-- returns nil
-	-- append the parameters to chatLog
-	-- @TODO: Expand this
-
-	table.insert( chatLog,
-			{ ["msg"] = msg, ["chatType"] = chatType, ["language"] = language, ["channel"] = channel }
-	)
-
-	--print( string.format( "%s: %s", chatType, msg ) )
+	error("Don't use this.")
 end
 function SetAchievementComparisonUnit( lookupStr )
 	-- mostly does nothing...  Just allows INSPECT_ACHIEVEMENT_READY to happen,
@@ -2042,6 +2023,16 @@ end
 function C_ChatInfo.SendAddonMessage()
 	return true
 end
+function C_ChatInfo.SendChatMessage( msg, chatType, language, channel )
+	table.insert( chatLog,
+		{ ["msg"] = msg, ["chatType"] = chatType, ["language"] = language, ["channel"] = channel }
+	)
+end
+function C_ChatInfo.PerformEmote( emote, target )
+	table.insert( actionLog,
+			"PerformEmote( "..(emote or "nil")..", "..(target or "nil").." )"
+	)
+end
 
 ----------
 -- Toy info
@@ -2405,6 +2396,34 @@ function ItemLocation.CreateFromBagAndSlot( self, bagID, slotID )
 end
 function ItemLocation.IsValid( self )
 	return true
+end
+
+----------
+-- C_MerchantFrame
+----------
+C_MerchantFrame = {}
+function C_MerchantFrame.GetItemInfo( index )
+	-- return: { hasExtendedCost -b, price -i, isUable -b, numAvailable -i (-1 = unlimited), name -s, isQuestStartItem -b,
+	--           stackCount -i, isPurchasable -b, texture -i }
+	if MerchantInventory[ index ] then
+		local itemInfo = Items[ MerchantInventory[ index ].id ]
+		return { hasExtededCost = MerchantInventory[ index ].currencies and true or false,
+				 price = MerchantInventory[ index ].cost,
+				 isUsable = MerchantInventory[ index ].isUsable and true or false,
+				 numAvailable = -1,
+				 name = itemInfo.name,
+				 isQuestStartItem = false,
+				 stackCount = MerchantInventory[ index ].quantity,
+				 isPurchasable = true,
+				 texture = itemInfo.texture
+		}
+	end
+end
+
+--------
+-- 12.0.0 stubs
+function issecretvalue( value )
+	return false  -- default to false for now.
 end
 
 -----------------------------------------
