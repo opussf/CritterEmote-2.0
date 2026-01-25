@@ -89,7 +89,7 @@ function CritterEmote.EventCallback( event, callback )
 	CritterEmoteFrame:RegisterEvent(event)
 end
 function CritterEmote.OnLoad()
-	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
+	hooksecurefunc(C_ChatInfo, "PerformEmote", CritterEmote.OnEmote)
 	-- CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
 
 	SLASH_CRITTEREMOTE1 = "/ce"
@@ -131,7 +131,7 @@ function CritterEmote.OnUpdate(elapsed)
 		if CritterEmote.emoteToSend then
 			CritterEmote.emoteTimer = CritterEmote.emoteTimer and CritterEmote.emoteTimer + elapsed or elapsed
 			if CritterEmote.emoteTimer > 0.5 then
-				SendChatMessage(CritterEmote.emoteToSend, "EMOTE")
+				C_ChatInfo.SendChatMessage(CritterEmote.emoteToSend, "EMOTE")
 				CritterEmote.emoteToSend = nil
 				CritterEmote.emoteTimer = nil
 			end
