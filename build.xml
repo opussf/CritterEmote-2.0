@@ -161,6 +161,9 @@
 		<exec executable="git" dir="${curse.dir}" failifexecutionfails="true" errorproperty="">
 			<arg line="reset --hard HEAD" />
 		</exec>
+		<exec executable="git" dir="${curse.dir}" failifexecutionfails="true" errorproperty="">
+			<arg line="rm -rf ." />
+		</exec>
 		<copy todir="${curse.dir}">
 			<fileset dir="${package.dir}"/>
 		</copy>

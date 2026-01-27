@@ -20,9 +20,7 @@ CritterEmote.LogNames = { CritterEmote.L["Error"],
 
 CritterEmote.Categories = {}  -- is now built later.
 CritterEmote.eventFunctions = {}
-
 CritterEmote_Variables = { Categories = {} }
-CritterEmote_CustomResponseEmotes = {}
 CritterEmote_CharacterVariables = {}
 -- for _,v in pairs(CritterEmote.Categories) do
 -- 	CritterEmote_Variables.Categories[v] = true
@@ -91,7 +89,7 @@ function CritterEmote.EventCallback( event, callback )
 	CritterEmoteFrame:RegisterEvent(event)
 end
 function CritterEmote.OnLoad()
-	hooksecurefunc("DoEmote", CritterEmote.OnEmote)
+	hooksecurefunc(C_ChatInfo, "PerformEmote", CritterEmote.OnEmote)
 	-- CritterEmoteFrame:RegisterEvent("LOADING_SCREEN_DISABLED")
 
 	SLASH_CRITTEREMOTE1 = "/ce"
@@ -133,7 +131,7 @@ function CritterEmote.OnUpdate(elapsed)
 		if CritterEmote.emoteToSend then
 			CritterEmote.emoteTimer = CritterEmote.emoteTimer and CritterEmote.emoteTimer + elapsed or elapsed
 			if CritterEmote.emoteTimer > 0.5 then
-				SendChatMessage(CritterEmote.emoteToSend, "EMOTE")
+				C_ChatInfo.SendChatMessage(CritterEmote.emoteToSend, "EMOTE")
 				CritterEmote.emoteToSend = nil
 				CritterEmote.emoteTimer = nil
 			end
@@ -206,14 +204,16 @@ function CritterEmote.GetEmoteMessage(emoteIn, petID, petName, customName)
 	local petPersonality = CritterEmote.GetPetPersonality(petID)
 	emoteIn = CritterEmote.EmoteMap[emoteIn]
 
-	-- get the table
-	local emoteList = {}
-	local emoteTable = CritterEmote.EmoteResponses and CritterEmote.EmoteResponses[emoteIn]
-	if emoteTable then
-		emoteList = emoteTable[customName] or
-				emoteTable[petName] or
-				emoteTable[petPersonality] or
-				emoteTable["default"]
+	local emoteList
+	if emoteIn then -- get the table for the emote
+		emoteList =
+				CritterEmote.Edit_GetResponses(emoteIn, customName) or
+				CritterEmote.Edit_GetResponses(emoteIn, petName) or
+				CritterEmote.Edit_GetResponses(emoteIn, petPersonality) or
+				CritterEmote.Edit_GetResponses(emoteIn, "default")
+	end
+
+	if emoteList then
 		return CritterEmote.GetRandomTableEntry(emoteList)
 	else
 		return CritterEmote.GetRandomEmote(petID, petName, customName)

@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  December 01 2025
--- Revision:  9.7.1-2-g52b7d63
+-- Date    :  January 24 2026
+-- Revision:  9.7.1-12-g7f74e77
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
@@ -124,8 +124,8 @@ Sell Price: 32 81 73
 Dropped by: Kargath Bladefist
 Drop Chance: 11.48%
 ]]
-    -- ^^ Need another head item for testing.
-    ["999999"] = {["name"] = "Finger Thing", ["link"] = "|cffffffff|Hitem:999999:0:0:0:0:0:0:0:90:0:0|h[Finger Thing|h|r", ["slotPrefix"] = "Finger", ["texture"] = ""},
+	-- ^^ Need another head item for testing.
+	["999999"] = {["name"] = "Finger Thing", ["link"] = "|cffffffff|Hitem:999999:0:0:0:0:0:0:0:90:0:0|h[Finger Thing|h|r", ["slotPrefix"] = "Finger", ["texture"] = ""},
 }
 
 -- simulate the data structure that is the flight map
@@ -371,6 +371,21 @@ end
 function bit.rshift( x, by )
 	return math.floor( x / 2 ^ by )
 end
+function bit.bxor(a, b)
+	local res = 0
+	local bitval = 1
+	while a > 0 or b > 0 do
+		local abit = a % 2
+		local bbit = b % 2
+		if abit ~= bbit then
+			res = res + bitval
+		end
+		a = math.floor(a / 2)
+		b = math.floor(b / 2)
+		bitval = bitval * 2
+	end
+	return res
+end
 function bit.bor( a, b )  -- bitwise or
 	local p,c=1,0
 	while a+b>0 do
@@ -494,6 +509,15 @@ Frame = {
 		["GetText"] = function(self) return( self.textValue ); end,
 		["SetFrameLevel"] = function(self) end,
 		["SetAlpha"] = function(self, value) end,
+		["GetNumLines"] = function(self)
+				if self.textValue == "" then return 0 end
+				local _, count = self.textValue:gsub("\n", "")
+				if self.textValue:sub(-1) == "\n" then
+					return count
+				else
+					return count + 1
+				end
+			end,
 }
 FrameGameTooltip = {
 		["HookScript"] = function( self, callback ) end,
@@ -509,19 +533,19 @@ FrameGameTooltip = {
 			_G[frameName.."TextLeft4"] = CreateFontString(frameName.."TextLeft4")
 		end,
 }
-        -- None = 0
-        -- Warrior = 1
-        -- Paladin = 2
-        -- Hunter = 3
-        -- Rogue = 4
-        -- Priest = 5
-        -- DeathKnight = 6
-        -- Shaman = 7
-        -- Mage = 8
-        -- Warlock = 9
-        -- Monk = 10
-        -- Druid = 11
-        -- Demon Hunter = 12
+-- None = 0
+-- Warrior = 1
+-- Paladin = 2
+-- Hunter = 3
+-- Rogue = 4
+-- Priest = 5
+-- DeathKnight = 6
+-- Shaman = 7
+-- Mage = 8
+-- Warlock = 9
+-- Monk = 10
+-- Druid = 11
+-- Demon Hunter = 12
 Units = {
 	["player"] = {
 		["class"] = "Warlock",
@@ -613,8 +637,8 @@ function CreateFontString( name, ... )
 		FontString[k] = v
 	end
 	FontString.text = ""
-	FontString["SetText"] = function(self,text) self.text=text; end
-	FontString["GetText"] = function(self) return(self.text); end
+	FontString["SetText"] = function(self,text) self.textValue=text; end
+	FontString["GetText"] = function(self) return(self.textValue); end
 	FontString.name=name
 	--print("FontString made?")
 	return FontString
@@ -649,15 +673,15 @@ function CreateCheckButton( name, ... )
 	me[name.."Text"] = CreateFontString(name.."Text")
 	return me
 end
-EditBox = {
-		["SetText"] = function(self,text) self.text=text; end,
+FrameEditBox = {
+		["SetText"] = function(self,text) self.textValue=text; end,
 		["SetCursorPosition"] = function(self,pos) self.cursorPosition=pos; end,
 		["HighlightText"] = function(self,start,last) end,
 		["IsNumeric"] = function() end,
 }
 function CreateEditBox( name, ... )
 	me = {}
-	for k,v in pairs(EditBox) do
+	for k,v in pairs(FrameEditBox) do
 		me[k] = v
 	end
 	me.name = name
@@ -797,10 +821,7 @@ function CursorHasItem()
 	end
 end
 function DoEmote( emote, target )
-	table.insert( actionLog,
-			"DoEmote( "..(emote or "nil")..", "..(target or "nil").." )"
-	)
-	-- not tested as the only side effect is the character doing an emote
+	error("Don't use this.")
 end
 function EquipItemByName( itemIn, slotIDIn )
 	-- http://www.wowwiki.com/API_EquipItemByName
@@ -888,7 +909,7 @@ function GetAchievementInfo( id, index )
 	-- Returns:
 	-- id: The numeric ID of the achievement or statistic (number)
 	-- name: Name of the achievement or statistic (string)
-    -- points: Amount of achievement points awarded for completing the achievement (number)
+	-- points: Amount of achievement points awarded for completing the achievement (number)
 	-- completed: True if any toon on the account has completed the achievement; otherwise false (boolean)
 	-- month: Month in which the player completed the achievement (number)
 	-- day: Day of the month on which the player completed the achievement (number)
@@ -959,6 +980,13 @@ function GetCategoryNumAchievements( catID )
 	-- numCompleted: Number of completed achievements (or 0 for stats)
 	-- numIncomplete: Number of incomplete achievements
 	return 5,0,5
+end
+CVars = { lastCharacterIndex = 2 }
+function GetCVar( cvarName )
+	return CVars[cvarName]
+end
+function SetCVar( cvarName, value )
+	CVars[cvarName] = value
 end
 
 C_AddOns = {}
@@ -1142,13 +1170,7 @@ function GetMerchantItemLink( index )
 	end
 end
 function GetMerchantItemInfo( index )
-	--local itemName, texture, price, quantity, numAvailable, isUsable = GetMerchantItemInfo( i )
-	if MerchantInventory[ index ] then
-		local item = Items[ MerchantInventory[ index ].id ]
-		return item.name, item.texture, MerchantInventory[ index ].cost, MerchantInventory[ index ].quantity, -1, MerchantInventory[ index ].isUsable
---		local item = MerchantInventory[ index ]
---		return item.name, "", item.cost, item.quantity, -1, item.isUsable
-	end
+	error("This is deprecated")
 end
 function GetMerchantItemMaxStack( index )
 	-- Max allowable amount per purchase.  Hard code to 20 for now
@@ -1174,7 +1196,7 @@ numRaces = GetNumArchaeologyRaces()
 
 Returns:
 
-    numRaces - The number of Archaeology races in the game (number)
+	numRaces - The number of Archaeology races in the game (number)
 ]]
 end
 function GetArchaeologyRaceInfo( index )
@@ -1184,16 +1206,16 @@ raceName, raceTexture, raceItemID, numFragmentsCollected, numFragmentsRequired, 
 
 Arguments:
 
-    raceIndex - nil (number, GetNumArchaeologyRaces())
+	raceIndex - nil (number, GetNumArchaeologyRaces())
 
 Returns:
 
-    raceName - Name of the race (string)
-    raceTexture - Path to the texture (icon) used by this race in the Archaeology UI (string)
-    raceItemID - The itemID for the Keystone this race uses (number)
-    numFragmentsCollected - Number of collected fragments for this race (number)
-    numFragmentsRequired - Number of fragments required to solve the current artifact (number)
-    maxFragments - Maximum number of fragments that can be carried (number)
+	raceName - Name of the race (string)
+	raceTexture - Path to the texture (icon) used by this race in the Archaeology UI (string)
+	raceItemID - The itemID for the Keystone this race uses (number)
+	numFragmentsCollected - Number of collected fragments for this race (number)
+	numFragmentsRequired - Number of fragments required to solve the current artifact (number)
+	maxFragments - Maximum number of fragments that can be carried (number)
 ]]
 	return "Dwarf", "", 384, 0, 100, 200
 end
@@ -1217,8 +1239,8 @@ ProfessionInfo = {
 function GetProfessionInfo( index )
 	--[[
 	name, icon, skillLevel, maxSkillLevel, numAbilities, spelloffset,
-    skillLine, skillModifier, specializationIndex,
-    specializationOffset = GetProfessionInfo(index)
+	skillLine, skillModifier, specializationIndex,
+	specializationOffset = GetProfessionInfo(index)
 	]]
 	return unpack( ProfessionInfo[index] )
 end
@@ -1494,8 +1516,8 @@ end
 function PickupInventoryItem( slotID )
 	-- http://www.wowwiki.com/API_PickupInventoryItem
 	-- If the cursor is empty, then it will attempt to pick up the item in the slotId.
-    -- If the cursor has an item, then it will attempt to equip the item to the slotId and place the previous slotId item (if any) where the item on cursor orginated.
-    -- If the cursor is in repair or spell-casting mode, it will attempt the action on the slotId.
+	-- If the cursor has an item, then it will attempt to equip the item to the slotId and place the previous slotId item (if any) where the item on cursor orginated.
+	-- If the cursor is in repair or spell-casting mode, it will attempt the action on the slotId.
 	if myGear[slotID] then -- There is an item in this slot.
 		onCursor['item'] = myGear[slotID]
 		onCursor['quantity'] = 1
@@ -1604,17 +1626,7 @@ function SendAddonMessage( prefix, text, type, target )
 	-- all characters 1-255 can be used (no NULL)
 end
 function SendChatMessage( msg, chatType, language, channel )
-	-- http://www.wowwiki.com/API_SendChatMessage
-	-- This could simulate sending text to the channel, in the language, and raise the correct event.
-	-- returns nil
-	-- append the parameters to chatLog
-	-- @TODO: Expand this
-
-	table.insert( chatLog,
-			{ ["msg"] = msg, ["chatType"] = chatType, ["language"] = language, ["channel"] = channel }
-	)
-
-	--print( string.format( "%s: %s", chatType, msg ) )
+	error("Don't use this.")
 end
 function SetAchievementComparisonUnit( lookupStr )
 	-- mostly does nothing...  Just allows INSPECT_ACHIEVEMENT_READY to happen,
@@ -1623,6 +1635,9 @@ function SetAchievementComparisonUnit( lookupStr )
 end
 function ClearAchievementComparisonUnit()
 	-- mostly does nothing...
+end
+function SetItemButtonTexture( frame, iconID )
+	frame.iconID = iconID
 end
 function SetRaidTarget( target, iconID )
 	-- sets the raid icon ID on target
@@ -2008,6 +2023,16 @@ end
 function C_ChatInfo.SendAddonMessage()
 	return true
 end
+function C_ChatInfo.SendChatMessage( msg, chatType, language, channel )
+	table.insert( chatLog,
+		{ ["msg"] = msg, ["chatType"] = chatType, ["language"] = language, ["channel"] = channel }
+	)
+end
+function C_ChatInfo.PerformEmote( emote, target )
+	table.insert( actionLog,
+			"PerformEmote( "..(emote or "nil")..", "..(target or "nil").." )"
+	)
+end
 
 ----------
 -- Toy info
@@ -2074,6 +2099,13 @@ end
 ----------
 C_Item = {}
 C_Item.GetItemCount = GetItemCount
+function C_Item.GetItemID( itemLocation )
+	return 7073
+end
+function C_Item.IsBound( itemLocation )
+	return false
+end
+
 
 ----------
 -- Menu
@@ -2209,12 +2241,6 @@ function C_GossipInfo.GetFriendshipReputation( idIn )
 end
 
 ----------
--- C_Item
-----------
-C_Item = {}
-C_Item.GetItemCount = GetItemCount
-
-----------
 -- Menu
 ----------
 Menu = {}
@@ -2305,7 +2331,6 @@ C_PetJournal = {}
 C_PetJournal.data = {
 	["summoned"] = {
 		GUID = 12534
-
 	},
 }
 function C_PetJournal.GetSummonedPetGUID()
@@ -2360,6 +2385,45 @@ function C_Map.GetBestMapForUnit( unitStr )
 end
 function C_Map.GetMapInfo( mapID )
 	return { mapID=5, name="map name", parentMapID=0, mapType=1, flags=2 }
+end
+
+----------
+-- ItemLocation
+----------
+ItemLocation = {}
+function ItemLocation.CreateFromBagAndSlot( self, bagID, slotID )
+	return self
+end
+function ItemLocation.IsValid( self )
+	return true
+end
+
+----------
+-- C_MerchantFrame
+----------
+C_MerchantFrame = {}
+function C_MerchantFrame.GetItemInfo( index )
+	-- return: { hasExtendedCost -b, price -i, isUable -b, numAvailable -i (-1 = unlimited), name -s, isQuestStartItem -b,
+	--           stackCount -i, isPurchasable -b, texture -i }
+	if MerchantInventory[ index ] then
+		local itemInfo = Items[ MerchantInventory[ index ].id ]
+		return { hasExtededCost = MerchantInventory[ index ].currencies and true or false,
+				 price = MerchantInventory[ index ].cost,
+				 isUsable = MerchantInventory[ index ].isUsable and true or false,
+				 numAvailable = -1,
+				 name = itemInfo.name,
+				 isQuestStartItem = false,
+				 stackCount = MerchantInventory[ index ].quantity,
+				 isPurchasable = true,
+				 texture = itemInfo.texture
+		}
+	end
+end
+
+--------
+-- 12.0.0 stubs
+function issecretvalue( value )
+	return false  -- default to false for now.
 end
 
 -----------------------------------------
@@ -2610,21 +2674,21 @@ ChatFrame1 = CreateFrame( nil, "ChatFrame1" )
 
 After the addon code has been loaded, the loading process can be followed by registering for various events, listed here in order of firing.
 
-    ADDON_LOADED
-        This event fires whenever an AddOn has finished loading and the SavedVariables for that AddOn have been loaded from their file.
-    SPELLS_CHANGED
-        This event fires shortly before the PLAYER_LOGIN event and signals that information on the user's spells has been loaded and is available to the UI.
-    PLAYER_LOGIN
-        This event fires immediately before PLAYER_ENTERING_WORLD.
-        Most information about the game world should now be available to the UI.
-        All Sizing and Positioning of frames is supposed to be completed before this event fires.
-        AddOns that want to do one-time initialization procedures once the player has "entered the world" should use this event instead of PLAYER_ENTERING_WORLD.
-    PLAYER_ENTERING_WORLD
-        This event fires immediately after PLAYER_LOGIN
-        Most information about the game world should now be available to the UI. If this is an interface reload rather than a fresh log in, talent information should also be available.
-        All Sizing and Positioning of frames is supposed to be completed before this event fires.
-        This event also fires whenever the player enters/leaves an instance and generally whenever the player sees a loading screen
-    PLAYER_ALIVE
-        This event fires after PLAYER_ENTERING_WORLD
-        Quest and Talent information should now be available to the UI
+	ADDON_LOADED
+		This event fires whenever an AddOn has finished loading and the SavedVariables for that AddOn have been loaded from their file.
+	SPELLS_CHANGED
+		This event fires shortly before the PLAYER_LOGIN event and signals that information on the user's spells has been loaded and is available to the UI.
+	PLAYER_LOGIN
+		This event fires immediately before PLAYER_ENTERING_WORLD.
+		Most information about the game world should now be available to the UI.
+		All Sizing and Positioning of frames is supposed to be completed before this event fires.
+		AddOns that want to do one-time initialization procedures once the player has "entered the world" should use this event instead of PLAYER_ENTERING_WORLD.
+	PLAYER_ENTERING_WORLD
+		This event fires immediately after PLAYER_LOGIN
+		Most information about the game world should now be available to the UI. If this is an interface reload rather than a fresh log in, talent information should also be available.
+		All Sizing and Positioning of frames is supposed to be completed before this event fires.
+		This event also fires whenever the player enters/leaves an instance and generally whenever the player sees a loading screen
+	PLAYER_ALIVE
+		This event fires after PLAYER_ENTERING_WORLD
+		Quest and Talent information should now be available to the UI
 ]]
