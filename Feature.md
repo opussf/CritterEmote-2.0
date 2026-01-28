@@ -1,5 +1,11 @@
 # Features
 
+## #2:  %t should be expanded to either the player, or player's target if NOT the pet.
+
+If you target a pet, and the pets does an emote with %t in it, the pet emotes itself.
+Change this to have the pet emote the player if the pet is targeted.
+
+
 ## CustomResponseEmotes
 
 This is a rethink from DropDowns
