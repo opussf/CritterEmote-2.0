@@ -22,9 +22,6 @@ CritterEmote.Categories = {}  -- is now built later.
 CritterEmote.eventFunctions = {}
 CritterEmote_Variables = { Categories = {} }
 CritterEmote_CharacterVariables = {}
--- for _,v in pairs(CritterEmote.Categories) do
--- 	CritterEmote_Variables.Categories[v] = true
--- end
 
 CritterEmote_Variables.enabled = true
 CritterEmote_Variables.randomEnabled = true
@@ -181,6 +178,10 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 			msg = CritterEmote.GetEmoteMessage(msg, petID, petName, customName)
 		end
 		if msg and petName then
+			if UnitName("target") == petName and string.find( msg, "%t" ) then
+				CritterEmote.Log(CritterEmote.Debug, "Pet target + %t token detected: substituting your name to prevent pet self-reference.")
+				msg = msg:gsub( "%%t", CritterEmote.playerName )
+			end
 			CritterEmote.DisplayEmote((customName or petName).." "..msg)
 		end
 	end

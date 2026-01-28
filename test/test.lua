@@ -359,9 +359,8 @@ function test.test_GetEmoteMessage_withPatch()
 	-- test.dump(chatLog)
 	assertEquals( "nods.", emoteToSend )
 end
-function test.test_UI_OnLoad()
-	-- test.dump(_G)
-	-- CritterEmote.Edit_OnHide()
+function test.test_player_targets_pet_with_target_expansion()
+
 end
 
 test.run()
