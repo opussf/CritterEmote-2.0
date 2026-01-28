@@ -1,5 +1,9 @@
 # Features
 
+## #2:  %t should be expanded to either the player, or player's target if NOT the pet.
+
+
+
 ## CustomResponseEmotes
 
 This is a rethink from DropDowns
