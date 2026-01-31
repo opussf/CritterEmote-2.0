@@ -2015,6 +2015,7 @@ CritterEmote.Personalities = {
 [ 4637] = "dino", -- Wavebreaker Mechasaur
 [ 4517] = "elemental", -- Waxwick
 [ 2580] = "undead", -- Wayward Spirit
+[ 4475] = nil, -- Webbers
 [ 1394] = "evil", -- Weebomination
 [ 4793] = "dog", -- Weechi
 [   84] = "chicken", -- Westfall Chicken
