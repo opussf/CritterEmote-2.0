@@ -179,7 +179,9 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 		end
 		if msg and petName then
 			local targetName = UnitName("target")
-			if not issecretvalue(targetName) and targetName == petName and string.find( msg, "%t" ) then
+			if not issecretvalue(targetName)
+					and (targetName == petName or targetName == customName)
+					and string.find( msg, "%t" ) then
 				CritterEmote.Log(CritterEmote.Debug, "Pet target + %t token detected: substituting your name to prevent pet self-reference.")
 				msg = msg:gsub( "%%t", CritterEmote.playerName )
 			end
