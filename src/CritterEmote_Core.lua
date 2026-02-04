@@ -149,7 +149,7 @@ function CritterEmote.GetTargetPetsOwner()
 	if UnitExists("target") and not UnitIsPlayer("target") then
 		local creatureType, creatureTypeCode = UnitCreatureType("target")
 		CritterEmote.Log(CritterEmote.Debug, "creatureType: "..creatureType.."("..creatureTypeCode..")==? 12 or 14")
-		if creatureTypeCode == 12 or creatureTypeCode == 14 then  -- https://warcraft.wiki.gg/wiki/API_UnitCreatureType
+		if not issecretvalue(creatureTypeCode) and (creatureTypeCode == 12 or creatureTypeCode == 14) then  -- https://warcraft.wiki.gg/wiki/API_UnitCreatureType
 			local tooltipData = C_TooltipInfo.GetUnit("target")
 			if tooltipData and tooltipData.lines then
 				for _, line in ipairs(tooltipData.lines) do
