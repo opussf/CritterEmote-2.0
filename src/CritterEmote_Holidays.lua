@@ -13,7 +13,7 @@ function CritterEmote.GetCurrentActiveHolidays()
             local numEvents = C_Calendar.GetNumDayEvents(monthOffset, day)
             for eventIndex = 1, numEvents do
                 local event = C_Calendar.GetDayEvent(monthOffset, day, eventIndex)
-                if event.calendarType == "HOLIDAY" then
+                if not issecretvalue(event.calendarType) and event.calendarType == "HOLIDAY" then
                     local start = event.startTime
                     local endt = event.endTime
                     -- print(monthOffset, day, event.title, event.calendarType, C_DateAndTime.CompareCalendarTime(now, start))
