@@ -37,6 +37,8 @@ CritterEmote.Location_emotes = {
 		"would not like to get stuck in a bog in the Swamp of Sorrows, where every step sinks deeper into the mire.",
 		"wants to see the Dark Portal in the Blasted Lands, where the very fabric of reality seems to tear at the edges.",
 		"wants to explore the grand city of Stormwind, where the streets hum with the bustle of adventurers.",
+		"wonders if the green canals of Undercity are supposed to smell like that.",
+		"would like to visit the great dwarven city of Ironforge and listen to the ringing of hammers at the mighty Great Forge.",
 	},
 	["Kalimdor"] = {
 		"wants to visit the peaceful Tauren tribes in Mulgore, where the plains stretch endlessly.",
