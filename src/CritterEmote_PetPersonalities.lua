@@ -1442,6 +1442,7 @@ CritterEmote.Personalities = {
 [ 2907] = "dog", -- Rocky
 [ 3557] = "snail", -- Roggy
 [ 3493] = "critter", -- Roland
+[ 4969] = "dog", -- Roofus
 [ 3133] = "humanoid", -- Rook
 [ 2401] = "mech", -- Rooter
 [ 4875] = "plant", -- Rootling Nester
