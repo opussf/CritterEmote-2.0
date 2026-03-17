@@ -1725,7 +1725,7 @@ CritterEmote.Personalities = {
 [ 1935] = "murloc", -- Squirky
 [  379] = "critter", -- Squirrel
 [ 3227] = "elemental", -- Stabilized Geomental
-[ 4943] = nil, -- Star the Lucky Dragon
+[ 4943] = "dragonkin", -- Star the Lucky Dragon
 [ 1969] = "magic", -- Stardust
 [ 4524] = "frog", -- Starkstripe Hopper
 [ 4841] = "flying", -- Starlight
@@ -2117,6 +2117,5 @@ CritterEmote.Personalities = {
 [  731] = "reptile", -- Zooey Snake
 [ 1903] = "snail", -- Zoom
 [ 2550] = "magic", -- Zur'aj the Depleted
-[ 4905] = nil, -- [DNT] Baby Amazard (Red)
 [ 3425] = nil, -- [DNT] Storm Pet Boss - Rare
 }
