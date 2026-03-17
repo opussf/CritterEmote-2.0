@@ -22,9 +22,6 @@ CritterEmote.Categories = {}  -- is now built later.
 CritterEmote.eventFunctions = {}
 CritterEmote_Variables = { Categories = {} }
 CritterEmote_CharacterVariables = {}
--- for _,v in pairs(CritterEmote.Categories) do
--- 	CritterEmote_Variables.Categories[v] = true
--- end
 
 CritterEmote_Variables.enabled = true
 CritterEmote_Variables.randomEnabled = true
@@ -152,7 +149,7 @@ function CritterEmote.GetTargetPetsOwner()
 	if UnitExists("target") and not UnitIsPlayer("target") then
 		local creatureType, creatureTypeCode = UnitCreatureType("target")
 		CritterEmote.Log(CritterEmote.Debug, "creatureType: "..creatureType.."("..creatureTypeCode..")==? 12 or 14")
-		if creatureTypeCode == 12 or creatureTypeCode == 14 then  -- https://warcraft.wiki.gg/wiki/API_UnitCreatureType
+		if not issecretvalue(creatureTypeCode) and (creatureTypeCode == 12 or creatureTypeCode == 14) then  -- https://warcraft.wiki.gg/wiki/API_UnitCreatureType
 			local tooltipData = C_TooltipInfo.GetUnit("target")
 			if tooltipData and tooltipData.lines then
 				for _, line in ipairs(tooltipData.lines) do
@@ -181,6 +178,13 @@ function CritterEmote.DoCritterEmote(msg, isEmote)
 			msg = CritterEmote.GetEmoteMessage(msg, petID, petName, customName)
 		end
 		if msg and petName then
+			local targetName = UnitName("target")
+			if not issecretvalue(targetName)
+					and (targetName == petName or targetName == customName)
+					and string.find( msg, "%t" ) then
+				CritterEmote.Log(CritterEmote.Debug, "Pet target + %t token detected: substituting your name to prevent pet self-reference.")
+				msg = msg:gsub( "%%t", CritterEmote.playerName )
+			end
 			CritterEmote.DisplayEmote((customName or petName).." "..msg)
 		end
 	end

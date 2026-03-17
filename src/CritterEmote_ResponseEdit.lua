@@ -119,7 +119,7 @@ function CritterEmote.Edit_SetEmoteForEdit(info)  -- takes the info table, calle
 end
 function CritterEmote.Edit_PopulateEditBox()
 	CritterEmoteResponseEditFrame_EditScrollFrame_EditBox:SetText(
-			table.concat(CritterEmote.Edit_GetResponses(CritterEmote.editEmote, CritterEmote.editGroup) or {})
+			table.concat(CritterEmote.Edit_GetResponses(CritterEmote.editEmote, CritterEmote.editGroup) or {}, "\n")
 	)
 end
 --------------------------
