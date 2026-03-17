@@ -1723,7 +1723,7 @@
  "1935": {"name": "Squirky", "personality": "murloc"},
  "379": {"name": "Squirrel", "personality": "critter"},
  "3227": {"name": "Stabilized Geomental", "personality": "elemental"},
- "4943": {"name": "Star the Lucky Dragon", "personality": ""},
+ "4943": {"name": "Star the Lucky Dragon", "personality": "dragonkin"},
  "1969": {"name": "Stardust", "personality": "magic"},
  "4524": {"name": "Starkstripe Hopper", "personality": "frog"},
  "4841": {"name": "Starlight", "personality": "flying"},
@@ -2115,5 +2115,4 @@
  "731": {"name": "Zooey Snake", "personality": "reptile"},
  "1903": {"name": "Zoom", "personality": "snail"},
  "2550": {"name": "Zur'aj the Depleted", "personality": "magic"},
- "4905": {"name": "[DNT] Baby Amazard (Red)", "personality": ""},
  "3425": {"name": "[DNT] Storm Pet Boss - Rare", "personality": ""}}
