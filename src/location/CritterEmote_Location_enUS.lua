@@ -81,12 +81,23 @@ CritterEmote.Location_emotes = {
 	["Razorwind Shores"] = {
 
 	},
+	["Eversong Woods"] = {
+		"does not miss the scar running through Eversong Woods.",
+		"thinks the forests of Eversong Woods feel peaceful.",
+	},
+	["Zul'Aman"] = {
+		"thinks the Amani Tribe are nice.",
+		"is fairly certain the trolls of Zul'Aman remember many battles.",
+	},
 	"wants to explore all of Azeroth.",
 	"would like to explore most of the Eastern Kingdoms.",
 	"would like to explore all of Kalimdor.",
 	"is interested in exploring Outlands.",
 	"would like to see the beautiful Pandaria.",
 	"wants to explore Northrend.",
+    "would like to visit Northrend.",
+    "mourns all the loss caused by the Cataclysm.",
+    "wants to build their own garrison in Draenor.",
 	"wants to stay home.",
 	"wants to explore all of Azeroth.",
 	"would like to visit the Eastern Kingdoms.",
@@ -216,5 +227,6 @@ CritterEmote.Location_emotes = {
 	"finds The Jailer in The Maw distasteful",
 	"wonders how the dracthyr were frozen in time.",
 	"flies with dragons on the Dragon Isles.",
+	"thinks every world should have battle pets.",
 }
 end
