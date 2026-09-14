@@ -86,6 +86,9 @@ CritterEmote.Holiday_emotes = {
 		"wants to ride the merry-go-round.",
 		"wants to watch the dance contest.",
 		"wants to be shot out of a cannon.",
+	},
+	["Trial of Style"] = {
+
 	}
 
 	-- Add more holidays here...
