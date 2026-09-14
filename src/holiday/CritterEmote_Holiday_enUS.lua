@@ -4,7 +4,7 @@ CritterEmote.Holiday_emotes = {
 	["Init"] = function(self)
 		if not C_AddOns.IsAddOnLoaded("Blizzard_Calendar") then
 			CritterEmote.Log(CritterEmote.Debug, "Blizzard_Calendar was not loaded.")
-			UIParentLoadAddOn("Blizzard_Calendar")
+			C_AddOns.LoadAddOn("Blizzard_Calendar")
 		end
 		C_Timer.After(10, function()
 			CritterEmote.Log(CritterEmote.Debug, "Requesting calendar data...")
@@ -86,6 +86,9 @@ CritterEmote.Holiday_emotes = {
 		"wants to ride the merry-go-round.",
 		"wants to watch the dance contest.",
 		"wants to be shot out of a cannon.",
+	},
+	["Trial of Style"] = {
+
 	}
 
 	-- Add more holidays here...

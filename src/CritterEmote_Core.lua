@@ -148,16 +148,18 @@ function CritterEmote.GetTargetPetsOwner()
 	CritterEmote.Log(CritterEmote.Debug, "Call to GetTargetPetsOwner()")
 	if UnitExists("target") and not UnitIsPlayer("target") then
 		local creatureType, creatureTypeCode = UnitCreatureType("target")
-		CritterEmote.Log(CritterEmote.Debug, "creatureType: "..creatureType.."("..creatureTypeCode..")==? 12 or 14")
-		if not issecretvalue(creatureTypeCode) and (creatureTypeCode == 12 or creatureTypeCode == 14) then  -- https://warcraft.wiki.gg/wiki/API_UnitCreatureType
-			local tooltipData = C_TooltipInfo.GetUnit("target")
-			if tooltipData and tooltipData.lines then
-				for _, line in ipairs(tooltipData.lines) do
-					if line.leftText then
-						if string.find(line.leftText, CritterEmote.playerName) then
-							-- this keeps it simple as a find, not a match, and keeps the text returned as the playername from GetUnitName
-							CritterEmote.Log(CritterEmote.Info, "Pet belongs to player.")
-							return CritterEmote.playerName
+		if creatureTypeCode then
+			CritterEmote.Log(CritterEmote.Debug, "creatureType: "..creatureType.."("..creatureTypeCode..")==? 12 or 14")
+			if not issecretvalue(creatureTypeCode) and (creatureTypeCode == 12 or creatureTypeCode == 14) then  -- https://warcraft.wiki.gg/wiki/API_UnitCreatureType
+				local tooltipData = C_TooltipInfo.GetUnit("target")
+				if tooltipData and tooltipData.lines then
+					for _, line in ipairs(tooltipData.lines) do
+						if line.leftText then
+							if string.find(line.leftText, CritterEmote.playerName) then
+								-- this keeps it simple as a find, not a match, and keeps the text returned as the playername from GetUnitName
+								CritterEmote.Log(CritterEmote.Info, "Pet belongs to player.")
+								return CritterEmote.playerName
+							end
 						end
 					end
 				end
