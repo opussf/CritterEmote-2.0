@@ -20,8 +20,8 @@ CritterEmote.Time_emotes = {
 	},
 	["10"] = {
 		"has a book picked out for National Book Month.",
-		"quotes Neil Gaiman, \“A book is a dream that you hold in your hand.\”",
-		"proudly states: \“Open a Book, Open Your Mind!\”",
+		"quotes Neil Gaiman, \"A book is a dream that you hold in your hand.\"",
+		"proudly states: \"Open a Book, Open Your Mind!\"",
 	},
 	["11"] = {
 		"starts to think about how to work this into their memoir.",
