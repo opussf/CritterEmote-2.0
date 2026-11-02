@@ -1,4 +1,23 @@
-﻿# BPCritterEmote
+﻿# BPCritterEmote 2
+
+version 2.2.14-wow120105
+Added and classified lots of pets from battlenet
+Added some protections around secret values
+More faction specific emotes.
+Moving some %t emotes to target set.
+Added time (month) based emotes.
+Reformatting this file from .txt to .md
+
+version 2.2-wow120000
+Cleaned up and changed how %t emotes worked.
+
+version 2.1.1-wow110207
+Added user's ability to edit custom response emotes ingame
+
+version 2.0-wow110205
+First release of rewrite, for 11.2.5
+
+# BPCritterEmote
 version 1.11.2.05.01
 update to WoW version 11.2.5
 
@@ -18,11 +37,11 @@ Added new pets with personalities
 Version 1.11.02.01
 Updated to WOW vesion 11.0.2
 Added new pets with personalities
-Working on new revision. 
+Working on new revision.
 
 Version 1.10.10.07
 Update to WOW version 10.1
-fixed issue with loading events so only CritterEmote is mod. 
+fixed issue with loading events so only CritterEmote is mod.
 Added new pets
 
 Version 1.10.05.05
@@ -47,15 +66,15 @@ Reviewed and added missing pets
 
 
 lightweight tag 05d8cb93aba85acee3aef08537636f8c68e6132f v1.10.00.01
-Author:	GitHub <noreply@github.com>
-Date:	Mon Nov 14 00:07:41 2022 -0800
+Author: GitHub <noreply@github.com>
+Date:   Mon Nov 14 00:07:41 2022 -0800
 
 commit 05d8cb93aba85acee3aef08537636f8c68e6132f
 Author: Kris Springer <Acidfrost59@gmail.com>
 Date:   Mon Nov 14 00:07:41 2022 -0800
 
     Update to WoW ver. 10.0.0
-    
+
     Reviewed the issue with undead songs. Added missing pets.
 
 
@@ -74,7 +93,7 @@ updated to 9.1.0
 
 Version 1.9.01.02
 Rollback to 1.7 and resubmitted file as it popped a bunch of errors. (Grabbed bad file for upload?)
-Coding error found by Starfighter7. 
+Coding error found by Starfighter7.
 
 Version 1.9.01.01
 Updated to 9.0.1
@@ -90,7 +109,7 @@ Updated with new pets added in 8.2
 Fixed the toggle system so individual emote tables can be off or on
 Added and deleted emotes.
 Added a "Special" area in the CritterEmote_Emote section for people to add their own emotes.
-Updated README document to reflect changes. 
+Updated README document to reflect changes.
 
 
 Version 1.5
@@ -115,15 +134,14 @@ Date:   Thu Dec 13 13:43:16 2018 -0800
     Added new pets. Changed output in chat from owner's to owner:
 
 lightweight tag 4ff92eba833ebc64f92c0c30c1cdc214fb414fdc v1.14b
-Author:	GitHub <noreply@github.com>
-Date:	Mon Nov 19 08:47:10 2018 -0800
+Author: GitHub <noreply@github.com>
+Date:   Mon Nov 19 08:47:10 2018 -0800
 
 commit 4ff92eba833ebc64f92c0c30c1cdc214fb414fdc
 Author: Kris Springer <Acidfrost59@gmail.com>
 Date:   Mon Nov 19 08:47:10 2018 -0800
 
     Version 1.14b
-    
     Add 2 pets, general emote update.
 
 commit 9b69877c7f54c728d1c48d228a029e1d9a75824f
@@ -137,7 +155,6 @@ Author: Kris Springer <Acidfrost59@gmail.com>
 Date:   Mon Nov 19 08:06:20 2018 -0800
 
     Update to 1.14b
-    
     Add new pets. General emote maintenance.
 
 commit 4d10a301fb2e0e9d429460f9d5e65c7aeeb3987a
@@ -150,9 +167,8 @@ commit 4839d87ac26f368ceaf240bd6dbff7e6404dd49a
 Author: Kris Springer <Acidfrost59@gmail.com>
 Date:   Mon Nov 19 07:43:33 2018 -0800
 
-    Version 1.14b
-    
-    Added critters, general emote changes.
+Version 1.14b
+Added critters, general emote changes.
 
 Version 1.14a Fixed bug that caused addon to continuously emote
 
