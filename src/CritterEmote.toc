@@ -62,6 +62,7 @@ silly/CritterEmote_Silly_enUS.lua
 silly/CritterEmote_Silly_esES.lua
 songs/CritterEmote_Songs_enUS.lua
 target/CritterEmote_Target_enUS.lua
+time/CritterEmote_Time_enUS.lua
 
 holiday/CritterEmote_Holiday_enUS.lua
 

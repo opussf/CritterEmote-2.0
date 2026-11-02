@@ -7,7 +7,20 @@ CritterEmote.Faction_emotes = {
 			table.insert(self, e)
 		end
 	end,
-	Horde = { "yells, \"FOR THE HORDE!\"", },
-	Alliance = { "yells, \"FOR THE ALLIANCE!\"", },
+	Horde = {
+		"yells, \"FOR THE HORDE!\"",
+		"yells, \"Lok'tar Ogar!\"",
+		"yells, \"The Horde endures!\"",
+		"yells, \"Zug zug!\"",
+		"yells, \"For the Warchief!\"",
+		"yells, \"Strength and honor!\"",
+	},
+	Alliance = {
+		"yells, \"FOR THE ALLIANCE!\"",
+		"yells, \"FOR AZEROTH!\"",
+		"yells, \"For Lordaeron!\"",
+		"yells, \"For Stormwind!\"",
+		"yells, \"For the King!\"",
+	},
 }
 end

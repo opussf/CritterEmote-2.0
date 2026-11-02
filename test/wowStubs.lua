@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  March 05 2026
--- Revision:  9.7.1-13-ge03bd6e
+-- Date    :  July 24 2026
+-- Revision:  9.7.1-15-g6904026
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
@@ -691,8 +691,10 @@ function CreateEditBox( name, ... )
 end
 Button = {
 	["enabled"] = true,
+	["points"] = {},
 	["SetEnabled"] = function(self,enabled) self.enabled = enabled; end,
 	["IsEnabled"] = function(self) return self.enabled; end,
+	["SetPoint"] = function(self, ... ) table.insert( self.points, {...} ); end,
 }
 function CreateButton( name, ... )
 	me = {}
@@ -739,6 +741,7 @@ UIErrorsFrame={ ["AddMessage"] = function( self, msg )
 	end, }
 WeeklyRewardsFrame = CreateFrame()
 BankFrame = CreateFrame()
+Minimap = CreateFrame()
 
 -- stub some external API functions (try to keep alphabetical)
 function BuyMerchantItem( index, quantity )
@@ -2431,11 +2434,25 @@ end
 -- C_Map
 ----------
 C_Map = {}
+C_Map.playerPositions = {["player"] = {582, 0.51, 0.51}}  -- ["player"] = {mapID, x, y}
+function C_Map.GetXY(this)
+	return C_Map.x, C_Map.y
+end
+function C_Map.SetPlayerMapPosition(mapID, x, y, player)
+	C_Map.playerPositions[player] = {mapID, x, y}
+end
 function C_Map.GetBestMapForUnit( unitStr )
-	return 5
+	return 582
 end
 function C_Map.GetMapInfo( mapID )
 	return { mapID=5, name="map name", parentMapID=0, mapType=1, flags=2 }
+end
+function C_Map.GetPlayerMapPosition(mapID, player)
+	if C_Map.playerPositions[player] and C_Map.playerPositions[player][1] == mapID then
+		C_Map.x = C_Map.playerPositions[player][2]
+		C_Map.y = C_Map.playerPositions[player][3]
+		return C_Map
+	end
 end
 
 ----------
@@ -2482,6 +2499,53 @@ end
 function C_EncodingUtil.DecompressString( strIn, method )
 	-- decompresses.  Return the same string, for testing.
 	return strIn
+end
+
+--------
+-- Garrison Work Order info
+--------
+myLootItems = {
+	-- {}    -- table of guid, and int
+}
+function AddLootItems( id )
+	table.insert(myLootItems, {id, 1})
+end
+function GetNumLootItems()
+	-- returns integer
+	return #myLootItems
+end
+function GetLootSourceInfo( index )
+	-- returns: guid (str), quantity (int)
+	return myLootItems[index][1], myLootItems[index][2]
+end
+
+---------
+-- C_Garrison
+---------
+C_Garrison = {}
+function C_Garrison.MakeTestData( buildingName, plotID, shipments )
+	-- this is probably handled with a few other methods.
+	C_Garrison.plotID = plotID
+	C_Garrison.testData = {}
+	C_Garrison.testData[plotID] = {}
+	C_Garrison.testData[plotID].buildingName = buildingName
+	C_Garrison.testData[plotID].shipments = shipments -- { array of expire times }
+end
+function C_Garrison.GetOwnedBuildingInfoAbbrev( plotID )
+	-- returns ? (int), buildingName (str)
+	return 16, C_Garrison.testData[plotID].buildingName
+end
+function C_Garrison.GetNumPendingShipments()
+	-- returns numPending (int)
+	return #C_Garrison.testData[C_Garrison.plotID].shipments
+end
+function C_Garrison.GetShipmentItemInfo()
+	-- returns name, texture, quality, itemID, followerID, duraation
+	return "", 0, 0, 0, 0, 14400
+end
+function C_Garrison.GetPendingShipmentInfo( index )
+	-- returns
+	return "herbs", 263455, 1, 238763, "nil", 14400, C_Garrison.testData[C_Garrison.plotID].shipments[index]
 end
 
 --------

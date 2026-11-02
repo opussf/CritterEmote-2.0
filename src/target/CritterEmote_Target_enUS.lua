@@ -234,6 +234,9 @@ CritterEmote.Target_emotes = {
 	"is very happy with %t!",
 	"nods at %t.",
 	"was happy to help %t. ",
+	"has a secret crush on %t",
+	"I am not a %t",
+	"throws down a board to play Hearthstone with %t.",
 	cat = {
 		"purrs at %t.",
 		"wraps itself around %t\'s leg.",
