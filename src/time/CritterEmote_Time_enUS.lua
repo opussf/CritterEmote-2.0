@@ -44,6 +44,12 @@ CritterEmote.Time_emotes = {
 		"is grateful for the people who show up, day after day, for the ones they love.",
 		"takes a deep breath and appreciates it.",
 		"reminds everyone that lung cancer can affect people who have never smoked.",
+		"is heading over for the 5k turkey-trot.",
+		"is thinking about all those thanksgiving leftovers.",
+	},
+	["12"] = {
+		"is wondering about all the dwarves with Santa in their name.",
+		"wishes all y'all a wonderful new year!",
 	},
 	"asks what is this month's national event?",
 }
