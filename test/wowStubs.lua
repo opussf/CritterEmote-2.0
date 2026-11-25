@@ -1,7 +1,7 @@
 -----------------------------------------
 -- Author  :  Opussf
--- Date    :  July 24 2026
--- Revision:  9.7.1-15-g6904026
+-- Date    :  November 17 2026
+-- Revision:  9.7.1-19-gcae33a0
 -----------------------------------------
 -- These are functions from wow that have been needed by addons so far
 -- Not a complete list of the functions.
@@ -359,6 +359,7 @@ strlower = string.lower
 strlen = string.len
 time = os.time
 date = os.date
+GetTime = os.clock
 max = math.max
 min = math.min
 abs = math.abs
@@ -420,6 +421,8 @@ SOUNDKIT = {
 	ALARM_CLOCK_WARNING_1 = 18871,
 }
 
+StaticPopupDialogs = {}
+
 -- WOW's functions
 function getglobal( globalStr )
 	-- set the globals table to return what is needed from the 'globals'
@@ -478,6 +481,7 @@ Frame = {
 		["Show"] = function( self ) self.__isShown = true; end,
 		["IsVisible"] = function( self ) return( self.__isShown ) end,
 		["RegisterEvent"] = function(self, event) self.Events[event] = true; end,
+		["RegisterUnitEvent"] = function(self, event, target) self.Events[event] = true; end,
 		["SetPoint"] = function(self, ... ) table.insert( self.points, {...} ); end,
 		["UnregisterEvent"] = function(self, event) self.Events[event] = nil; end,
 		["GetName"] = function(self) return self.framename end,
@@ -641,6 +645,8 @@ function CreateFontString( name, ... )
 	FontString.text = ""
 	FontString["SetText"] = function(self,text) self.textValue=text; end
 	FontString["GetText"] = function(self) return(self.textValue); end
+	FontString["SetTextColor"] = function(self, r, g, b); end
+	FontString["SetShadowOffset"] = function(self, x, y); end
 	FontString.name=name
 	--print("FontString made?")
 	return FontString
@@ -1124,14 +1130,6 @@ function GetItemCount( itemID, includeBank, includeUses, includeReagentBank, inc
 	-- print( itemID, myInventory[itemID] )
 	return myInventory[itemID] or 0
 end
-function GetItemInfo( itemIn )
-	-- itemID is number, link or 'item:#####'
-	-- returns name, itemLink
-	local itemID = __getItemID( itemIn )
-	if Items[itemID] then
-		return Items[itemID].name, Items[itemID].link
-	end
-end
 function GetLocale()
 	return myLocale
 end
@@ -1476,6 +1474,9 @@ end
 function IsResting()
 	return true
 end
+function NotifyInspect( who )
+	-- not sure what to do here.  Does not seem to return a value
+end
 function NumTaxiNodes()
 	-- http://www.wowwiki.com/API_NumTaxiNodes
 	local count = 0
@@ -1757,6 +1758,10 @@ function UnitXP( who )
 end
 function UnitXPMax( who )
 	return 1000
+end
+function CanInspect( who )
+	-- @TODO: Write this to reference data in the Units structure
+	return true
 end
 ---------  C_WowTokenPublic
 C_WowTokenPublic = {}
@@ -2115,6 +2120,14 @@ function C_Item.GetItemID( itemLocation )
 end
 function C_Item.IsBound( itemLocation )
 	return false
+end
+function C_Item.GetItemInfo( itemIn )
+	-- itemID is number, link or 'item:#####'
+	-- returns name, itemLink
+	local itemID = __getItemID( itemIn )
+	if Items[itemID] then
+		return Items[itemID].name, Items[itemID].link
+	end
 end
 
 ----------
@@ -2546,6 +2559,28 @@ end
 function C_Garrison.GetPendingShipmentInfo( index )
 	-- returns
 	return "herbs", 263455, 1, 238763, "nil", 14400, C_Garrison.testData[C_Garrison.plotID].shipments[index]
+end
+
+--------
+-- C_HousingCatalog
+--------
+C_HousingCatalog = {}
+function C_HousingCatalog.GetCatalogEntryInfoByItem( itemID )
+end
+
+---------
+-- C_TransmogCollection
+---------
+C_TransmogCollection = {}
+function C_TransmogCollection.GetInspectItemTransmogInfoList()
+	-- @ToDo: Write this better.  Return an empty table for now
+	return {}
+end
+function C_TransmogCollection.GetCustomSetHyperlinkFromItemTransmogInfoList(targetMogList)
+	return "|c89abcdef|Hcustomset:blahblah|r"
+end
+function C_TransmogCollection.GetItemTransmogInfoListFromCustomSetHyperlink(mogLink)
+	return {}
 end
 
 --------
