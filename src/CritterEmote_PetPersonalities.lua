@@ -613,6 +613,7 @@ CritterEmote.Personalities = {
 [ 1719] = "magic", -- Eye of Inquisition
 [ 1576] = "magic", -- Eye of Observation
 [  348] = "evil", -- Eye of the Legion
+[ 5173] = "magic", -- Eyestalker
 [ 2090] = "evil", -- Faceless Mindlasher
 [ 2083] = "evil", -- Faceless Minion
 [ 4596] = "dog", -- Faithful Dog
